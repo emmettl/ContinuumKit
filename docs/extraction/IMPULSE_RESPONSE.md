@@ -38,6 +38,20 @@ remain byte-identical to the source: this verifies interchange, not acoustic acc
 
 ## Release and adoption
 
-The authorized next prerelease is `0.1.0-alpha.2`. RoomCAD will use that exact tag and
-retain its own document, acoustic and audition integration tests. Standalone repository
-migration and removal of the nested application follow successful application parity.
+[ContinuumKit PR #2](https://github.com/emmettl/ContinuumKit/pull/2) is merged. The
+public [0.1.0-alpha.2 release](https://github.com/emmettl/ContinuumKit/releases/tag/0.1.0-alpha.2)
+points to `06841daecc26812706f8c686618aadb0cb6b7efa`. All 27 tests and the optimized
+Git consumer pass locally on M4 Max and in the [Mac mini candidate check](https://github.com/emmettl/ContinuumKit/actions/runs/37830563317).
+The [release workflow](https://github.com/emmettl/ContinuumKit/actions/runs/37830760444)
+passes exact-version verification before publication.
+
+[Standalone RoomCAD](https://github.com/emmettl/RoomCAD) pins this exact release and
+retains its own document, acoustic and audition integration tests. Its source hashes,
+rewritten commit map and historical release tag are retained. Application and CI
+parity evidence is recorded separately from this library's interchange checks.
+
+[Standalone Mac mini CI](https://github.com/emmettl/RoomCAD/actions/runs/37831881121)
+passes all 143 application tests, eight release-script checks, actual Metal work, release
+packaging, deep strict signature verification and the packaged snapshot. A separate
+[fixture reliability change](https://github.com/emmettl/RoomCAD/pull/1) fixes stochastic
+receiver UUID inputs without changing acoustic source or tolerances.

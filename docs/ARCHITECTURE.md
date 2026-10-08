@@ -25,15 +25,19 @@ Geometry and model loading must be usable without constructing a renderer.
 Platform-specific rendering and GPU implementations belong in explicit targets;
 CPU verification must not accidentally acquire a Metal-device requirement.
 
-## Existing candidate
+## Released products
 
-BombCAD's local `Packages/SimulationKit` already supplies `SceneModel`, `SceneView`,
-`SceneRender`, `GeometryImport` and `DocumentKit` to BombCAD and RoomCAD. Treat it as
-an extraction candidate, preserve attribution, and inspect its current tests and
-consumer behavior before moving anything. The first extraction candidate now contains
-these five products, retaining source bytes and shader resources. See
-[provenance](extraction/CAD_FOUNDATIONS.md). The original package stays in BombCAD until
-both CAD applications adopt a tested release.
+The five CAD foundations (`SceneModel`, `SceneView`, `SceneRender`, `GeometryImport`,
+`DocumentKit`) are independently verified in this repository and adopted by both CAD
+apps. Their original local copy is retired; see [CAD provenance](extraction/CAD_FOUNDATIONS.md).
+
+`ImpulseResponseKit` owns Foundation-only response metadata, float WAV interchange and
+common conditioning. Its implementation is unchanged from RoomCAD, with independent
+conformance and fetched-consumer checks; see [response provenance](extraction/IMPULSE_RESPONSE.md).
+
+RoomCAD, BombCAD and Edgerton have independent repositories. Applications pin tested
+releases and retain their integration checks. AcousticCore, audition, scenarios,
+measured fixtures and application policy remain with their applications.
 
 ## Extraction gates
 

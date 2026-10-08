@@ -18,6 +18,10 @@ Application development continues while candidates mature.
 - Complete: public `0.1.0-alpha.1` CAD foundations release, verified on the mini.
 - Complete: BombCAD and RoomCAD adopt the exact `0.1.0-alpha.1` release, including
   resolved dependencies and packaged shader-resource checks; the local copy is retired.
+- Complete: response interchange extracted with twelve independent tests and a fetched
+  public consumer, released as `0.1.0-alpha.2` and adopted by standalone RoomCAD.
+- Complete: RoomCAD repository split, relevant history/old tag preserved and dedicated
+  physical Mac mini CI with packaged rendering verification.
 - Pending: model-specific core suites and subsequent individual model extractions.
 - No numerical physics models have moved.
 

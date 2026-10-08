@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-08",
+  "source_repository": "https://github.com/emmettl/bombcad",
+  "source_revision": "285b620806418f39e4bc7a66be20191f2d366612",
+  "release_revision": "06841daecc26812706f8c686618aadb0cb6b7efa",
+  "version": "0.1.0-alpha.2",
+  "implementation_bytes_unchanged": true,
+  "existing_interchange_tests": 8,
+  "additional_independent_conformance_tests": 4,
+  "total_package_tests": 27,
+  "local_hardware": "Apple M4 Max",
+  "local_package_checks": "passed including optimized clean Git consumer and actual shader rendering",
+  "mini_candidate_workflow": "https://github.com/emmettl/ContinuumKit/actions/runs/37830563317",
+  "mini_release_workflow": "https://github.com/emmettl/ContinuumKit/actions/runs/37830760444",
+  "mini_result": "success",
+  "consumer": "all six products including response conditioning and WAV/JSON disk round trip",
+  "standalone_consumer_repository": "https://github.com/emmettl/RoomCAD",
+  "scope": "interchange conformance, not acoustic physical validation",
+  "standalone_consumer_verification": {
+    "workflow": "https://github.com/emmettl/RoomCAD/actions/runs/37831881121",
+    "result": "success",
+    "application_tests": 143,
+    "release_script_tests": 8,
+    "metal_outputs_checked": 256,
+    "release_packaging": "passed",
+    "deep_strict_signature": "passed",
+    "packaged_headless_snapshot": "passed",
+    "known_reliability_follow_up": "https://github.com/emmettl/RoomCAD/pull/1; canonical receiver IDs, no solver or tolerance changes"
+  }
+}

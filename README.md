@@ -1,9 +1,8 @@
 # ContinuumKit
 
-Shared Swift foundations for RoomCAD, BombCAD and Edgerton. The first release
-contains the existing CAD foundations from BombCAD's SimulationKit package.
-`0.1.0-alpha.1` is the first CAD foundations release. The next release also includes
-RoomCAD's application-independent impulse-response interchange product.
+Shared Swift foundations for RoomCAD, BombCAD and Edgerton. The package contains the existing CAD foundations from BombCAD's SimulationKit and
+RoomCAD's application-independent response interchange. `0.1.0-alpha.2` is the current
+prerelease; `0.1.0-alpha.1` remains available for its original CAD-only consumers.
 
 | Product / module | Contents | Dependencies |
 | --- | --- | --- |
@@ -34,14 +33,15 @@ compatibility, conditioning history and a disk round trip through the fetched pr
 
 The module implementations and shader are copied byte-for-byte. The rendering test
 now fails on missing Metal instead of returning early. Saved identifiers, including
-`dev.simulationkit.project`, are retained. See [extraction provenance](docs/extraction/CAD_FOUNDATIONS.md).
+`dev.simulationkit.project`, are retained. See [CAD provenance](docs/extraction/CAD_FOUNDATIONS.md) and
+[response provenance](docs/extraction/IMPULSE_RESPONSE.md).
 
 ## Consumption and ownership
 
 Consumers use an exact tag, add only needed products, and commit resolved dependencies:
 
 ```swift
-.package(url: "https://github.com/emmettl/ContinuumKit.git", exact: "0.1.0-alpha.1")
+.package(url: "https://github.com/emmettl/ContinuumKit.git", exact: "0.1.0-alpha.2")
 // In an application target's dependencies:
 .product(name: "SceneModel", package: "continuumkit")
 ```

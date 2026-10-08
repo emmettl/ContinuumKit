@@ -3,7 +3,9 @@
 All products share the repository's semantic version. Begin with prerelease tags
 such as `0.1.0-alpha.1`; tags have no `v` prefix. Treat published tags as immutable.
 The first CAD foundations prerelease is `0.1.0-alpha.1`. Its scope is geometry, scene,
-import and document helpers; do not describe it as a validated numerical model library.
+import and document helpers. `0.1.0-alpha.2` adds response interchange, with twelve
+independent tests and the expanded consumer. Neither release is a validated numerical
+physics model library.
 
 ## Candidate verification
 
