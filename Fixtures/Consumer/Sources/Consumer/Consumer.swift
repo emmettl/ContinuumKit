@@ -165,6 +165,8 @@ enum Consumer {
       acousticWall, cells: 192, spacingM: acousticWall.lengthM / 192)
     precondition(lattice.fields(timeS: 0).pressurePa.count == 192)
     print("PASS fetched acoustic reference contract, positive pressure image and fixed-lattice API")
+    let impedance = try BoundaryAcousticCase(id: "consumer", kind: .impedancePulse, impedance: 3)
+    try require(impedance.reflection == 0.5, "Fetched impedance golden failed")
     print("ContinuumKit clean Git consumer passed.")
   }
 }

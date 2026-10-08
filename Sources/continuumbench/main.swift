@@ -1,7 +1,9 @@
 import BenchmarkSupport
 import Foundation
 
-if CommandLine.arguments.contains("acoustic-reference") {
+if CommandLine.arguments.contains("boundary-reference") {
+  try BoundaryCommand.runReference()
+} else if CommandLine.arguments.contains("acoustic-reference") {
   try AcousticCommand.runReference()
 } else {
   try AdiabaticCommand.run(
