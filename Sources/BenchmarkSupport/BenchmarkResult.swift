@@ -7,13 +7,14 @@ public struct BenchmarkEnvironment: Codable, Equatable, Sendable {
   public let hardware: String
   public let toolchain: String
   public let operatingSystem: String
+  public let dependencies: [String: String]
   public let workingTreeDirty: Bool
   public let precision: String
 
   public init(
     repository: String, revision: String, sourceHashes: [String: String], hardware: String,
     toolchain: String, operatingSystem: String, precision: String = "Float64",
-    workingTreeDirty: Bool = false
+    workingTreeDirty: Bool = false, dependencies: [String: String] = [:]
   ) {
     self.repository = repository
     self.revision = revision
@@ -23,6 +24,7 @@ public struct BenchmarkEnvironment: Codable, Equatable, Sendable {
     self.operatingSystem = operatingSystem
     self.precision = precision
     self.workingTreeDirty = workingTreeDirty
+    self.dependencies = dependencies
   }
 }
 
@@ -136,7 +138,7 @@ public struct AdiabaticResult: Codable, Sendable {
   }
 
   private static let assumptions = [
-    "uniform-pressure", "fixed-mass", "no-heat-or-mass-exchange",
+    "uniform-pressure", "fixed-mass", "reversible-adiabatic-reference", "no-heat-or-mass-exchange",
     "constant-heat-capacity-ratio", "prescribed-volume", "no-net-momentum",
   ]
 

@@ -11,6 +11,7 @@ parser = argparse.ArgumentParser(description=__doc__)
 parser.add_argument('--root', required=True, type=Path)
 parser.add_argument('--repository', required=True)
 parser.add_argument('--output', required=True, type=Path)
+parser.add_argument('--dependency', action='append', default=[])
 parser.add_argument('sources', nargs='+')
 args = parser.parse_args()
 root = args.root.resolve()
@@ -22,6 +23,7 @@ except (OSError, subprocess.CalledProcessError):
     hardware = platform.machine()
 data = {
     'repository': args.repository, 'revision': revision,
+    'dependencies': dict(item.split('=', 1) for item in args.dependency),
     'sourceHashes': {p: hashlib.sha256((root / p).read_bytes()).hexdigest() for p in args.sources},
     'hardware': hardware, 'toolchain': subprocess.check_output(['swift', '--version'], text=True).strip(),
     'operatingSystem': platform.platform(), 'precision': 'Float64', 'workingTreeDirty': bool(changed),
