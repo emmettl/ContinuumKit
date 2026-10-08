@@ -2,7 +2,7 @@
 
 All products share the repository's semantic version. Begin with prerelease tags
 such as `0.1.0-alpha.1`; tags have no `v` prefix. Treat published tags as immutable.
-The CAD foundations candidate has no release tag yet. Its scope is geometry, scene,
+The first CAD foundations prerelease is `0.1.0-alpha.1`. Its scope is geometry, scene,
 import and document helpers; do not describe it as a validated numerical model library.
 
 ## Candidate verification

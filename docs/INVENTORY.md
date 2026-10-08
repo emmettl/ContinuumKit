@@ -107,7 +107,7 @@ record the source revision/digest.
 5. Check integration/builds, saved documents and resources before retiring the local
    package. Keep the AcousticCore full-suite discrepancy visible.
 
-**Access gate:** ContinuumKit is private; BombCAD, including RoomCAD, is public.
+**Access gate at collection (now resolved):** ContinuumKit was private; BombCAD, including RoomCAD, is public.
 Consumer resolution needs a public dependency or configured cross-repository read
 access. A repository's Actions token does not automatically read another private
 repository. Current clean-consumer checks use local Git and do not establish remote
@@ -171,3 +171,5 @@ python3 Scripts/inventory.py --bombcad /path/to/bombcad --edgerton /path/to/edge
 Use a new dated record; do not replace this baseline silently. The collector writes
 only its output and excludes Git/build caches. Review candidate hashes and pending
 edits before treating the pause as a source freeze.
+
+Publication follow-up: the user authorized a public core, and `0.1.0-alpha.1` is now released. Cross-repository private authentication is no longer an adoption gate.

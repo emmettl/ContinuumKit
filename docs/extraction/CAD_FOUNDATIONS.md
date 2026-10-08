@@ -43,3 +43,11 @@ and the required JSON payload names are deliberately unchanged.
 Before real adoption, decide public dependency availability or configure authenticated
 cross-repository read access. Do not create a release tag or alter repository visibility
 as part of this extraction candidate. RoomCAD's repository split remains separate.
+
+## Publication
+
+With user authorization, PR #1 was merged, ContinuumKit made public and the tested
+`0.1.0-alpha.1` tag published at commit `80f2db8e6c290b48c26a801082b459987ca2ba3c`.
+The [release workflow](https://github.com/emmettl/ContinuumKit/actions/runs/37826361790)
+passed exact-version verification on the mini and created the prerelease. The original
+candidate/access notes above record the state before authorization.

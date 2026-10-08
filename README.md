@@ -1,8 +1,8 @@
 # ContinuumKit
 
-Shared Swift foundations for RoomCAD, BombCAD and Edgerton. The first extraction
-candidate contains the existing CAD foundations from BombCAD's SimulationKit package.
-There are no release tags yet; application adoption is still pending.
+Shared Swift foundations for RoomCAD, BombCAD and Edgerton. The first release
+contains the existing CAD foundations from BombCAD's SimulationKit package.
+`0.1.0-alpha.1` is the first CAD foundations release.
 
 | Product / module | Contents | Dependencies |
 | --- | --- | --- |
@@ -35,8 +35,7 @@ now fails on missing Metal instead of returning early. Saved identifiers, includ
 
 ## Consumption and ownership
 
-After a release, consumers use an exact tag, add only needed products, and commit
-resolved dependencies. The following version is illustrative; it is not released:
+Consumers use an exact tag, add only needed products, and commit resolved dependencies:
 
 ```swift
 .package(url: "https://github.com/emmettl/ContinuumKit.git", exact: "0.1.0-alpha.1")
@@ -44,8 +43,8 @@ resolved dependencies. The following version is illustrative; it is not released
 .product(name: "SceneModel", package: "continuumkit")
 ```
 
-All products share a repository version. The private repository currently requires
-read access; local Git consumer verification does not prove cross-repository CI access.
+All products share a repository version. The repository is public; consumers can
+resolve its tagged Git source without cross-repository credentials.
 
 Applications own their schemas, semantic model conversion, scenarios, authored
 presentation, workflows and integration tests. Future independently verified models
