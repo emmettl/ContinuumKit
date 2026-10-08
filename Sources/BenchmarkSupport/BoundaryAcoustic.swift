@@ -107,6 +107,7 @@ public struct BoundaryResolution: Codable, Equatable, Sendable {
     let fine = count(512, 0.25)
     return [128, 256, 512].map { Self(axis: "space", nx: $0, ny: 4, steps: fine) }
       + [Self(axis: "time-sensitivity", nx: 512, ny: 4, steps: 2 * fine)]
+      + [0.6, 0.3, 0.15].map { Self(axis: "impedance-time", nx: 192, ny: 4, steps: count(192, $0)) }
   }
   public func captures(_ c: BoundaryAcousticCase) -> [Int] {
     let intervals = c.kind == .obliqueMode ? 8 : 24

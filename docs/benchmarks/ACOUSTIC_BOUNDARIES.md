@@ -59,7 +59,41 @@ no application or existing-suite tolerance was weakened.
 A second 512-cell run halves dt. It must meet the same accuracy bounds, with
 changes in L2 error and reflected coefficient below 1e-3. This is bounded timestep
 sensitivity, **not independent temporal-order verification of the impedance law**.
-A dissipative fixed-lattice temporal oracle remains a separate gate.
+
+## Independent dissipative time refinement
+
+An additional series holds 192×4 cells fixed and uses nominal Courant numbers
+0.6/0.3/0.15. The reference solves the continuous-time spatial operator, with
+state y=[p, w] and w=ρc·u on interior faces:
+
+- ṗ_i = (c/dx)(w_i − w_{i+1}), with the west flux zero;
+- ẇ_i = (c/dx)(p_{i−1} − p_i);
+- the east pressure cell additionally loses (c/(ξdx))p_last.
+
+Thus d||y||²/dt = −2c p_last²/(ξdx). Reference cumulative dissipation is the
+loss of synchronous lattice energy, dx·Ly·||y||²/(2ρc²), and is independent of
+the application's stepwise wall-work sum. Monotonic loss is enforced; only
+energy-subtraction jitter below 1e-11 of initial lattice energy is clamped. Initial pressure and face velocity
+sample the same physical pulse; reference velocity is evaluated at t−dt/2,
+including the negative initial half clock. The application retains its Taylor
+half kick. The east reference flux is p_last(t−dt/2)/(ρcξ).
+
+Matrix-exponential action uses scaled degree-20 Taylor polynomials with
+||A h||∞≤1/2, not a leapfrog or trapezoidal update. The per-subdivision truncation
+bound exp(1/2)(1/2)^21/21! <1.6e-26 leaves Float64 roundoff as the practical limit.
+The general scaling/Taylor approach is described by
+[Al-Mohy and Higham (2011)](https://epubs.siam.org/doi/10.1137/100788860);
+this implementation uses conservative fixed degree/scaling, without their adaptive
+norm estimation. Independent tests cover scalar exponential decay, a closed
+two-cell oscillator, integrated wall work, composition and the operator derivative.
+
+Require pressure-history and cumulative-loss refinement at order 1.7–2.3.
+Finest loss error must be <1e-3 of initial continuum energy; the existing field,
+closed-face and modified energy-budget bounds still apply. Continuum reflected
+coefficient and returned-energy accuracy remain gates of the spatial series,
+not of this fixed-grid time series. The old 512-cell half-dt sensitivity check
+also remains. This verifies temporal accuracy of the normal real-impedance law;
+it does not remove that law's first-order spatial boundary error.
 
 ## Capabilities, reporting and limits
 

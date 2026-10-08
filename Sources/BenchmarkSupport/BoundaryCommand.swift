@@ -5,6 +5,7 @@ public struct BoundaryErrors: Codable, Sendable {
     boundaryVelocity: Double
   public let reflectedCoefficient: Double?
   public let returnedEnergyFraction: Double
+  public let dissipationError: Double?
 }
 public struct BoundaryResult: Codable, Sendable {
   public let schemaVersion: Int
@@ -38,7 +39,12 @@ public struct BoundaryResult: Codable, Sendable {
     var lastEnergy = 0.0
     var lastLoss = 0.0
     var coefficient: Double?
-    for f in h.frames {
+    var dissipationError = 0.0
+    let temporal = r.axis == "impedance-time"
+    let oracle =
+      temporal
+      ? try BoundaryOracle.temporalHistory(c, r, dx: h.dx, dy: h.dy, dt: h.dt) : nil
+    for (index, f) in h.frames.enumerated() {
       guard f.p.count == r.nx * r.ny, f.u.count == (r.nx + 1) * r.ny,
         f.v.count == r.nx * (r.ny + 1),
         (f.p + f.u + f.v).allSatisfy(\.isFinite), f.dissipation.isFinite, f.dissipation >= lastLoss
@@ -51,7 +57,9 @@ public struct BoundaryResult: Codable, Sendable {
       }
       for j in 0..<r.ny {
         for i in 0..<r.nx {
-          let value = ref((Double(i) + 0.5) * h.dx, (Double(j) + 0.5) * h.dy, t).p
+          let value =
+            oracle?.frames[index].p[j * r.nx + i]
+            ?? ref((Double(i) + 0.5) * h.dx, (Double(j) + 0.5) * h.dy, t).p
           let d = f.p[j * r.nx + i] - value
           squared += d * d
           referenceSquared += value * value
@@ -62,7 +70,10 @@ public struct BoundaryResult: Codable, Sendable {
         for i in 0...r.nx {
           maxU = max(
             maxU,
-            abs(f.u[j * (r.nx + 1) + i] - ref(Double(i) * h.dx, (Double(j) + 0.5) * h.dy, half).u)
+            abs(
+              f.u[j * (r.nx + 1) + i]
+                - (oracle?.frames[index].u[j * (r.nx + 1) + i]
+                  ?? ref(Double(i) * h.dx, (Double(j) + 0.5) * h.dy, half).u))
               * c.density * c.speed / c.amplitude)
           if c.kind == .obliqueMode || i == 0 {
             if i == 0 || i == r.nx {
@@ -105,6 +116,10 @@ public struct BoundaryResult: Codable, Sendable {
       budget = max(budget, abs((energy + f.dissipation) / e0 - 1))
       lastEnergy = energy
       lastLoss = f.dissipation
+      if let oracle {
+        dissipationError = max(
+          dissipationError, abs(f.dissipation - oracle.frames[index].dissipation) / c.energy)
+      }
       if c.kind == .impedancePulse, f.step == r.steps {
         var numerator = 0.0
         var denominator = 0.0
@@ -124,13 +139,16 @@ public struct BoundaryResult: Codable, Sendable {
     }
     return Self(
       schemaVersion: 1, model: model, status: status,
-      reference: r.axis == "time" ? "exact-2D-spatial-eigenmode" : "continuum", reason: nil,
+      reference: temporal
+        ? "fixed-spatial-dissipative-matrix-exponential"
+        : (r.axis == "time" ? "exact-2D-spatial-eigenmode" : "continuum"), reason: nil,
       specification: c, resolution: r, environment: environment, runtime: runtime, history: h,
       errors: BoundaryErrors(
         pressureL2: sqrt(squared / referenceSquared), maxPressure: maxP, maxVelocity: maxU,
         energyBudget: budget,
         initialEnergyError: abs(e0 / c.energy - 1), boundaryVelocity: boundary,
-        reflectedCoefficient: coefficient, returnedEnergyFraction: lastEnergy / e0))
+        reflectedCoefficient: coefficient, returnedEnergyFraction: lastEnergy / e0,
+        dissipationError: temporal ? dissipationError : nil))
   }
 }
 public enum BoundaryCommand {
@@ -146,7 +164,9 @@ public enum BoundaryCommand {
         == BoundaryResolution.standard(c).filter({ $0.axis == series[0].resolution?.axis })
     else { throw BenchmarkFailure.failedConformance("Incomplete boundary series") }
     var orders: [Double] = []
-    let range = c.kind == .impedancePulse ? 0.8...2.3 : 1.7...2.3
+    let range =
+      c.kind == .impedancePulse && series[0].resolution?.axis == "space"
+      ? 0.8...2.3 : 1.7...2.3
     for (a, b) in zip(series, series.dropFirst()) {
       let ratio =
         a.resolution!.axis == "space"
@@ -158,17 +178,31 @@ public enum BoundaryCommand {
       }
       orders.append(order)
     }
+    if series[0].resolution?.axis == "impedance-time" {
+      for (a, b) in zip(series, series.dropFirst()) {
+        guard let ea = a.errors?.dissipationError, let eb = b.errors?.dissipationError else {
+          throw BenchmarkFailure.invalidSamples
+        }
+        let order = log(ea / eb) / log(a.history!.dt / b.history!.dt)
+        guard order.isFinite, (1.7...2.3).contains(order) else {
+          throw BenchmarkFailure.failedConformance("Dissipation refinement order \(order)")
+        }
+      }
+    }
     try bounds(series.last!)
     return orders
   }
   public static func bounds(_ r: BoundaryResult) throws {
     guard let e = r.errors else { throw BenchmarkFailure.invalidSamples }
     let impedance = r.specification.kind == .impedancePulse
+    let temporal = r.resolution?.axis == "impedance-time"
     guard e.pressureL2 < (impedance ? 0.02 : 0.01), e.maxPressure < 0.03, e.maxVelocity < 0.03,
       e.energyBudget < 1e-4,
       e.initialEnergyError < 0.01, e.boundaryVelocity < 1e-6,
-      e.reflectedCoefficient.map({ abs($0 - r.specification.reflection) < 0.01 }) ?? true,
-      !impedance
+      temporal
+        || (e.reflectedCoefficient.map({ abs($0 - r.specification.reflection) < 0.01 }) ?? true),
+      !temporal || (e.dissipationError.map { $0 < 1e-3 } ?? false),
+      !impedance || temporal
         || abs(e.returnedEnergyFraction - r.specification.reflection * r.specification.reflection)
           < 0.01
     else {
@@ -186,7 +220,10 @@ public enum BoundaryCommand {
   public static func runReference() throws {
     try execute(
       model: "ContinuumKit.boundary-reference", supportsImpedance: true, reference: true,
-      history: BoundaryOracle.history)
+      history: { c, r in
+        r.axis == "impedance-time"
+          ? try BoundaryOracle.temporalHistory(c, r) : BoundaryOracle.history(c, r)
+      })
   }
   private static func execute(
     model: String, supportsImpedance: Bool, reference: Bool,
@@ -247,13 +284,22 @@ public enum BoundaryCommand {
         }
       }
       all += series
-      for axis in (c.kind == .obliqueMode ? ["space", "time"] : ["space"]) {
+      for axis in (c.kind == .obliqueMode ? ["space", "time"] : ["space", "impedance-time"]) {
         do {
           let orders = reference ? [] : try check(series.filter { $0.resolution?.axis == axis })
-          conformance.append([
+          var report = [
             "case": c.id, "axis": axis, "status": reference ? "reference" : "passed",
             "orders": String(describing: orders),
-          ])
+          ]
+          if axis == "impedance-time" && !reference {
+            let runs = series.filter { $0.resolution?.axis == axis }
+            let lossOrders = zip(runs, runs.dropFirst()).map {
+              log($0.errors!.dissipationError! / $1.errors!.dissipationError!)
+                / log($0.history!.dt / $1.history!.dt)
+            }
+            report["dissipationOrders"] = String(describing: lossOrders)
+          }
+          conformance.append(report)
           print("\(reference ? "REFERENCE":"PASS") \(model) \(c.id) \(axis): \(orders)")
         } catch {
           failed = true
@@ -268,7 +314,8 @@ public enum BoundaryCommand {
           guard
             let fine = series.first(where: {
               $0.resolution?.nx == 512 && $0.resolution?.axis == "space"
-            }), let half = series.last, let a = fine.errors, let b = half.errors,
+            }), let half = series.first(where: { $0.resolution?.axis == "time-sensitivity" }),
+            let a = fine.errors, let b = half.errors,
             abs(a.pressureL2 - b.pressureL2) < 1e-3,
             abs(a.reflectedCoefficient! - b.reflectedCoefficient!) < 1e-3
           else { throw BenchmarkFailure.failedConformance("Impedance timestep sensitivity failed") }
@@ -291,7 +338,7 @@ public enum BoundaryCommand {
     try encoder.encode(all).write(to: output.appendingPathComponent("results.json"))
     try encoder.encode(conformance).write(to: output.appendingPathComponent("conformance.json"))
     var csv =
-      "model,case,status,axis,nx,ny,steps,pressure_relative_l2,max_pressure_over_amplitude,max_velocity_normalized,energy_budget_normalized,reflection_coefficient,returned_energy_fraction,reference,runtime_s\n"
+      "model,case,status,axis,nx,ny,steps,pressure_relative_l2,max_pressure_over_amplitude,max_velocity_normalized,energy_budget_normalized,reflection_coefficient,returned_energy_fraction,dissipation_error_normalized,reference,runtime_s\n"
     for result in all {
       let r = result.resolution
       let e = result.errors
@@ -308,6 +355,7 @@ public enum BoundaryCommand {
       values.append(number(e?.energyBudget))
       values.append(number(e?.reflectedCoefficient))
       values.append(number(e?.returnedEnergyFraction))
+      values.append(number(e?.dissipationError))
       values.append(result.reference)
       values.append(String(result.runtime))
       csv += values.joined(separator: ",") + "\n"
