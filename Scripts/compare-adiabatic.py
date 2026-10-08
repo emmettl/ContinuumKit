@@ -30,13 +30,14 @@ for report in args.reports:
         rows.append({'case': case['id'], 'model': finest['model'], 'steps': finest['steps'],
                      'revision': finest['environment']['revision'], 'hardware': finest['environment']['hardware'],
                      'working_tree_dirty': finest['environment']['workingTreeDirty'],
-                     'runtime_s': finest['runtimeS'], 'refinement_metric': summary['refinementMetric'],
+                     'runtime_s': finest['runtimeS'], 'mass_accounting': finest['massAccounting'], 'refinement_metric': summary['refinementMetric'],
                      'observed_orders': summary['observedOrders'], **finest['errors']})
 (args.output / 'comparison.json').write_text(json.dumps({'schemaVersion': 1, 'cases': expected_cases,
     'note': 'Errors use independent analytic references; cross-model agreement is not the accuracy oracle.',
     'results': rows}, indent=2) + '\n')
 with (args.output / 'comparison.csv').open('w', newline='') as stream:
-    writer = csv.DictWriter(stream, fieldnames=rows[0].keys())
+    columns = list(dict.fromkeys(key for row in rows for key in row))
+    writer = csv.DictWriter(stream, fieldnames=columns)
     writer.writeheader()
     writer.writerows(rows)
 for row in rows:
