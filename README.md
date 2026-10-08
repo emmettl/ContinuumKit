@@ -2,7 +2,7 @@
 
 Shared Swift foundations for RoomCAD, BombCAD and Edgerton. The package contains the existing CAD foundations from BombCAD's SimulationKit and
 RoomCAD's application-independent response interchange, and a checked adiabatic reservoir
-with independent conformance. [`0.1.0-alpha.3`](https://github.com/emmettl/ContinuumKit/releases/tag/0.1.0-alpha.3)
+with independent conformance. [`0.1.0-alpha.4`](https://github.com/emmettl/ContinuumKit/releases/tag/0.1.0-alpha.4)
 is the current prerelease; earlier tags remain available for existing consumers.
 
 | Product / module | Contents | Dependencies |
@@ -27,7 +27,7 @@ From a clean committed candidate:
 CONTINUUMKIT_REQUIRE_METAL=1 bash Scripts/check.sh
 ```
 
-Checks run 15 CAD foundation tests, 12 response interchange tests and 14 adiabatic and 9 axial and 5 boundary numerical/conformance tests and an isolated Git consumer in release
+Checks run 22 CAD foundation tests, 12 response interchange tests and 14 adiabatic and 9 axial and 5 boundary numerical/conformance tests and an isolated Git consumer in release
 configuration. That consumer imports all eight public libraries, round-trips an archive
 on disk, reads OBJ geometry, checks camera/grid/picking contracts and verifies actual
 offscreen pixels from the fetched package's shader. No path dependency or source alias

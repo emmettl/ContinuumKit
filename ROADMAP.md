@@ -16,6 +16,9 @@ Application development continues while candidates mature.
 - Complete: the five existing CAD foundation products are imported with their
   original tests and an external release consumer; see [provenance](docs/extraction/CAD_FOUNDATIONS.md).
 - Complete: public `0.1.0-alpha.1` CAD foundations release, verified on the mini.
+- Complete: closed-box ray/segment query contract and independent verification,
+  released as `0.1.0-alpha.4` after exact-tag Mac mini checks; see
+  [geometry provenance](docs/extraction/BOX_QUERIES.md).
 - Complete: BombCAD and RoomCAD adopt the exact `0.1.0-alpha.1` release, including
   resolved dependencies and packaged shader-resource checks; the local copy is retired.
 - Complete: response interchange extracted with twelve independent tests and a fetched
@@ -29,9 +32,11 @@ Application development continues while candidates mature.
   application-owned coupled integration/parity checks on the physical Mac mini.
 - Complete: bounded axial travelling-pulse and rigid-wall source comparison, with
   independent spatial/temporal references and actual Edgerton Metal / RoomCAD CPU/Metal
-  adapters. The benchmark API remains an unreleased candidate; no acoustic solver has moved.
-- Candidate: mixed-axis rigid modes and normal real-impedance reflection, with explicit
-  unsupported capabilities and independent accuracy/work references.
+  adapters. The axial reference/conformance API is included in `0.1.0-alpha.4`;
+  no acoustic solver has moved.
+- Complete: mixed-axis rigid modes and normal real-impedance source checks, with
+  explicit unsupported capabilities and independent accuracy/work references.
+  This additional boundary API remains an unreleased candidate.
 - Pending: oblique impedance, full 3D/masked cases and a dissipative temporal oracle,
   then independently verified solver extractions.
 

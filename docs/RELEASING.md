@@ -11,6 +11,15 @@ the physical Mac mini exact-tag release checks, including all 41 tests and the
 clean version-pinned consumer. Its scope is numerical verification of the declared
 idealized contracts, not empirical validation of application scenes.
 
+`0.1.0-alpha.4` adds the closed-box ray/segment query to `SceneModel`, with seven
+independent geometry tests and a fetched public consumer. It also includes the analytic
+acoustic reference/conformance APIs introduced after alpha.3; it extracts no acoustic
+solver. The release points to
+reviewed commit `d3c7367ba43940155f7e33da738e6f5058723fd5`. Its
+[exact-tag workflow](https://github.com/emmettl/ContinuumKit/actions/runs/37854603915)
+passed all 57 tests, actual Metal work and the version-pinned optimized consumer on
+the physical Mac mini before [publication](https://github.com/emmettl/ContinuumKit/releases/tag/0.1.0-alpha.4).
+
 ## Candidate verification
 
 Commit the candidate and run `bash Scripts/check.sh`. Review the public contract,
