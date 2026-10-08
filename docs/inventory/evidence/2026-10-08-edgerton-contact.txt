@@ -1,0 +1,2 @@
+contact_duration_s=0.00016913766283316325 max_compression_m=0.0004307055216465325 maximum_relative_energy_residual=2.710505431213761e-16 long_step_s=0.01
+PASS exact normal contact: independent entry/release, compression, flow composition, no attraction, impulse transfer and stiffness/state energy sweep

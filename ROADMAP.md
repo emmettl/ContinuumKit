@@ -9,8 +9,10 @@ Application development continues while candidates mature.
 - Complete: independent GitHub repository, SwiftPM bootstrap, MIT licence, contribution
   and ownership guidance, clean Git-consumer check and manual tagged-release workflow.
 - Complete: dedicated Mac mini runner and an actual Metal compute smoke check in CI.
-- Pending: extraction inventory, model-specific suites, first implemented library
-  products, first package release and application adoption.
+- Complete: [initial extraction inventory](docs/INVENTORY.md), source hashes and fresh
+  CAD-package/selected primitive baselines taken while other work is paused.
+- Pending: model-specific core suites, first implemented library products, first
+  package release and application adoption.
 - No application code has moved. The bootstrap product has no public model API.
 
 Follow the MotionStudies pattern: the shared repository owns reusable contracts,
@@ -149,5 +151,6 @@ adopted**. These are per-component states, not a requirement to finish the entir
 
 Keep architecture changes, numerical changes and application adoption reviewable as
 separate steps. Treat published tags as immutable; retain previous versions and evidence.
-Do not set calendar deadlines until a particular extraction is scheduled. The immediate
-next action is the Stage 1 inventory when active development offers a stable checkpoint.
+Do not set calendar deadlines until a particular extraction is scheduled. The
+[inventory](docs/INVENTORY.md) recommends the existing five SimulationKit products as
+the first bounded move, with compatibility, toolchain and dependency-access gates.

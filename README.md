@@ -31,6 +31,9 @@ documents, presets, interpretation, workflows, presentation and integration test
 See the [staged roadmap](ROADMAP.md), [architecture](docs/ARCHITECTURE.md), [verification](docs/VERIFICATION.md),
 [contributing](CONTRIBUTING.md) and [releases](docs/RELEASING.md).
 
+The [extraction inventory](docs/INVENTORY.md) records candidates, source hashes,
+fresh verification and a concrete first-move plan.
+
 ## Dependency policy
 
 Consumers adopt exact semantic-version tags and commit `Package.resolved`. No

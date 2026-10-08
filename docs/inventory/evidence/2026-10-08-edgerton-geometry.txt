@@ -1,0 +1,7 @@
+region_id,entry_m,exit_m,length_m
+0,0.06,0.061,0.0010000000000000009
+1,0.061,0.092,0.031
+2,0.092,0.108,0.016
+1,0.108,0.139,0.031000000000000014
+0,0.139,0.14,0.0010000000000000009
+PASS curved/layered paths, thin peel, central/off-centre/oblique/reverse/inside/miss/tangent, adjacent/gapped blocks, work/stopping, 100 offset budgets and invalid inputs

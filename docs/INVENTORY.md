@@ -1,0 +1,165 @@
+# Extraction inventory — 8 October 2026
+
+Inventory taken while application work is paused. It identifies a bounded first move
+and later candidates; no source code or application dependency has moved.
+See the [roadmap](../ROADMAP.md) for the longer sequence.
+
+## Source baselines
+
+| Source | Baseline | Working-tree qualification |
+| --- | --- | --- |
+| ContinuumKit | `9f781e0119dbf31fe9e5266ba4c5d2162c6d4520` | Clean before this inventory change |
+| BombCAD | `ad130448dc8a3d8b3181ad0107defcd38c29aef3` | Pending gas-study/geometry/demo/docs edits and untracked `GasQuadratureTests.swift`; preserve them |
+| SimulationKit | Same BombCAD revision, `Packages/SimulationKit` | Subtree clean and identical to archived commit |
+| RoomCAD | Same BombCAD revision, `RoomCAD` | Subtree clean and identical to archived commit |
+| Edgerton | No Git commit or origin in this checkout | Project content is untracked; hashes identify the inspected working tree |
+
+The [machine inventory](inventory/2026-10-08.json) records scoped file hashes,
+SwiftPM targets/dependencies, resources and lexical imports/test annotations. It is
+a source audit, not executed-test or physical-validation evidence. Scopes overlap:
+BombCAD includes SimulationKit; RoomCAD belongs to the same Git repository. Edgerton
+study movies/images are excluded; numerical source and verification text are included.
+This manifest identifies content but is not a backup of uncommitted work.
+
+| Scope | File records | SHA-256 content digest |
+| --- | ---: | --- |
+| SimulationKit | 15 | `4fc32fd0069e19106f464b30342e7c129228427a86913315a8d7ab0e7d17962f` |
+| RoomCAD | 97 | `75856ac49fa14f238e9c2828bf503f62b753857db0b706728c3f56665ac7552d` |
+| BombCAD selected code/tests/scripts | 214 | `2dc321495ebe93080b01efc08881e69ce7d67a2e1a8303f886cfa80f076a51d1` |
+| Edgerton selected code/studies/calibration | 958 | `0f804236fbd5a586fbc2cab569ccca6ab983fae4cbd2f9150210a70d7e1c115c` |
+
+All inspected application/package manifests declare Swift 6.4 and macOS 15.
+ContinuumKit still declares Swift 6.0. The first extraction should explicitly adopt
+6.4 unless compatibility with the lower minimum is actually demonstrated.
+
+## Fresh verification
+
+SimulationKit and RoomCAD were tested on a committed-source archive on the physical
+Mac mini, outside active application checkouts. Swift was 6.4; a direct device check
+reported Apple M4. See [CAD evidence](inventory/evidence/2026-10-08-cad-tests.txt).
+
+| Check | Result | Qualification |
+| --- | --- | --- |
+| SimulationKit | 15 tests in 4 suites passed | Includes offscreen cutaway/highlight rendering |
+| RoomDocumentTests | 16 tests passed | Current document integration baseline |
+| RoomCADTests | 27 tests passed | Application tests, not manual UI review |
+| ImpulseResponseKitTests | 8 tests passed | Independent second extraction candidate |
+| AuditionTests | 9 tests passed | Current consumer baseline; clips need not move |
+| AcousticCoreTests, full run | 91 tests reported, one issue | `AbsorptionCalibrationTests.swift:24` expected the unfitted result to differ from 1.2 s by more than 10%; that assertion failed |
+| AbsorptionCalibrationTests, isolated recheck | Both tests passed | Discrepancy unresolved; complete backend baseline is not green |
+| Edgerton geometry/path study, local optimized compile | Passed | [Layered paths, stopping/work, invalid inputs](inventory/evidence/2026-10-08-edgerton-geometry.txt) |
+| Edgerton scalar contact study, local optimized compile | Passed | [Analytic events, energy, composition, impulses](inventory/evidence/2026-10-08-edgerton-contact.txt) |
+
+No fresh BombCAD gas/structural suite, Edgerton full mechanics suite or measured validation
+was run. Tests/studies named below are inspected evidence unless listed above. No
+tolerances or source implementations were changed.
+
+## Recommended first move: shared CAD foundations
+
+Extract **all five SimulationKit products together**, retaining module names. This
+changes the package boundary without changing numerical behavior. Both CAD apps
+already consume these products.
+
+| Product | Implementation | Dependencies/resources | Existing checks |
+| --- | --- | --- | --- |
+| `SceneModel` | `Box.swift`, `Grid.swift` | simd | Codable bounds, indexing |
+| `SceneView` | `OrbitCamera.swift` | SceneModel, Foundation, simd | Framing, view rays, picking |
+| `SceneRender` | `SceneGeometry.swift`, `MeshRenderer.swift`, `OrbitControlView.swift` | SceneModel/View, Metal/MetalKit, AppKit/CoreGraphics; copied `Shaders/Scene.metal` | Normals, picking, offscreen cutaway/highlight |
+| `GeometryImport` | `MeshFile.swift` | Foundation, simd | Bounded OBJ and ASCII/binary STL, grouping, malformed inputs; 3 tests |
+| `DocumentKit` | `ProjectArchive.swift` | Foundation, CryptoKit | Archive integrity, bounds, paths/symlinks; 6 tests |
+
+This is eight Swift files, one shader and four test files, plus the manifest/README.
+The root BombCAD MIT licence covers the authored code. Preserve attribution and
+record the source revision/digest.
+
+### Compatibility constraints
+
+- Keep **`dev.simulationkit.project`**, its schema version, required `scene.json` and
+  `settings.json`, optional `view.json`, limits and checksums. Repository naming does
+  not authorize a saved-file migration.
+- Keep `BlastCore.Box`/`Grid` and `BlastRender.OrbitCamera` compatibility aliases,
+  Codable representations, units and camera conventions.
+- Preserve shader loading through `Bundle.module` and test it from an external Git
+  consumer. SceneRender is macOS/UI-dependent; CPU products must not acquire that
+  dependency. Apple simd does not imply Linux portability.
+- MeshFile is an OBJ/STL reader. Room/building interpretation and external IFC
+  conversion do not move with it.
+- Current render tests return early without Metal. Retain the required device
+  preflight and tighten that suite's device requirement during extraction.
+
+### Concrete extraction and adoption plan
+
+1. Recheck clean subtree hashes; copy the products, shader and tests into a focused
+   ContinuumKit branch with provenance. Keep app sources unchanged initially.
+2. Declare these products and Swift 6.4. Extend the clean consumer to exercise every
+   public product: archives, import, geometry/camera and offscreen rendering.
+3. Run independent debug tests and a release consumer on the mini, including resources.
+4. After review and release authorization, adopt an exact prerelease by changing
+   package identity/product references in BombCAD and RoomCAD. Keep module imports
+   and aliases unchanged; commit each app's resolved dependency.
+5. Check integration/builds, saved documents and resources before retiring the local
+   package. Keep the AcousticCore full-suite discrepancy visible.
+
+**Access gate:** ContinuumKit is private; BombCAD, including RoomCAD, is public.
+Consumer resolution needs a public dependency or configured cross-repository read
+access. A repository's Actions token does not automatically read another private
+repository. Current clean-consumer checks use local Git and do not establish remote
+private-repo access. Decide this before external adoption.
+
+RoomCAD's independent repository split is a separate step. BombCAD's pending gas
+changes and Edgerton's uncommitted tree are outside this first tranche.
+
+## Subsequent candidates
+
+Readiness is separate from physical accuracy. A standalone model can belong in core
+with one consumer when its assumptions and verification are explicit.
+
+| Candidate | Source and dependencies | Evidence / remaining gate | Recommendation |
+| --- | --- | --- | --- |
+| Response interchange | RoomCAD `ImpulseResponseKit`: 2 files, Foundation only | Fresh 8-test pass; preserve `dev.roomcad.impulse-response`, gains, timing and channels | **Next independent tranche** |
+| Acoustic backend | RoomCAD `AcousticCore`: 30 files; ImpulseResponseKit, Foundation/simd, Accelerate, Metal, Synchronization | Geometry, energy/decay, free-field/modes and CPU/GPU tests; calibration discrepancy; presets and validation scenes mixed with model code | Separate policy and resolve test reliability before moving the full backend |
+| Linear wave evolution | RoomCAD `WaveSolver`, `MetalWaveSolver`, `WaveAccuracy`; Edgerton `WaveSolver`/`Waves.metal` | RoomCAD has analytic mode/free-field/dispersion checks; room/response/band contracts remain attached. Edgerton is a self-contained 2D Metal solver, RoomCAD is 3D | Establish matched adapters first; preserve source/boundary/dimensional differences |
+| FFT/spectral helpers | RoomCAD `RealFFT` and band processing | Accelerate, internal API and normalization conventions; tested through acoustics | Add dedicated transform/normalization references before a numerical module |
+| Ideal-gas wall reference | BombCAD `IdealGasWallRiemann` | Foundation only, internal API; shock/rarefaction/vacuum tests exist | Small gas-model candidate with explicit API and migrated references |
+| Conservative gas packets/fluxes | BombCAD `FractionalGasTransport`, `FractionalEulerFlux`, `LimitedTubeFlux`, remap/piston helpers | simd/Foundation, internal types, caller-supplied geometry; transport/flux/wall/piston tests | Define a coherent reference module; distinct from the production GPU solver |
+| Connected/moving cut volumes | BombCAD `ConnectedGasGroups`, `FractionalBoxGeometry`, sweeps/remap and rigid-box coupling | Volume/geometry and budgets studied; modified/untracked source; coupled spatial convergence open | Hold for committed checkpoint and numerical gates |
+| Blast solver and spherical start | BombCAD `BlastSolver`, `SolverTypes`, `Refinement`, `SphericalBlast`, shaders | GPU state, masks, structure coupling, diagnostics and scenarios intertwined | Later backend extraction, separating gas evolution from orchestration |
+| Adiabatic reservoir law | Edgerton `SupportedCavityPressure` | Law embedded in a chosen bore/spring/support fixture; work/refinement studies exist | Extract law and references, not the fixture as a generic gas model |
+| Reservoir exchange/sinks | Edgerton `PressureEnergyMixing`/`PressureEnergyVenting` | Analytic exchange and energy sinks; VisualImpactError and breakthrough scheduling bind them to impact recordings | Separate pure operations from policy; do not imply mass/momentum transport |
+| Geometry/path probes | Edgerton `TargetGeometry`, fixtures, probe laws | Fresh independent geometry study passed; explicit region ordering/reduced resistance | Eligible after source/licence checkpoint; keep geometry and resistance distinct |
+| Scalar contact flow | Edgerton `TargetNormalContactSolver` | Foundation only; fresh analytic event/energy/impulse/composition pass | Strong primitive candidate after checkpoint; not general 3D collision |
+| Krylov iteration | Edgerton `TargetKrylov` | Internal SIMD3-vector GMRES; `TargetMatrixFreeStudy` includes a known nonsymmetric restarted-solve oracle | Migrate oracle; define vector, input and failure contracts |
+| Isotropic element law | Edgerton `TargetIsotropicTet` | Neo-Hookean/log-bulk kernel; TargetGeometryError and corrected gradient from TargetImplicitFaceContact; force/work/objectivity/isotropy studies | Separate helper/error contracts without changing material behavior |
+| Larger mechanics | Edgerton cell/matrix-free/peel/contact/fracture families; BombCAD structure/shell/bond-slip models | Specialized studies, topology/recording dependencies and spatial/contact sensitivity | Keep stabilizing; move bounded verified components individually |
+| Fitting mathematics | Edgerton `RelaxationCalibration`/`MaterialFit`; RoomCAD absorption fitting | Algorithms mixed with references, provenance and CSV/JSON or room policy | Separate algorithm, references and export; verify fitting contracts |
+
+Edgerton needs a deliberate source commit and attribution/licence record before import.
+No licence file was found in that checkout. The inventory does not stage its untracked
+assets or studies on the user's behalf.
+
+## Application-owned content
+
+Keep BombCAD charge/scenario presets, building semantics and structural orchestration;
+RoomCAD documents, authored presets/measured scenes, preview policy and credited dry
+clips; Edgerton calibre inputs, visual effects, footage matching, impact scheduling and
+native recording/export flows. Edgerton's cavity-union display surface depends on
+visual capsule state and is not mechanical excavation.
+
+External IFC conversion needs its own application/process and third-party licence audit.
+The generic mesh reader can move without that importer.
+
+## Reproducing the inventory
+
+Generate SwiftPM descriptions for SimulationKit, RoomCAD, BombCAD and Edgerton using
+`swift package --package-path ... describe --type json`. Name the outputs
+`simulationkit-package.json`, `roomcad-package.json`, `bombcad-package.json` and
+`edgerton-package.json`, then run:
+
+```sh
+python3 Scripts/inventory.py --bombcad /path/to/bombcad --edgerton /path/to/edgerton \
+  --descriptions /path/to/descriptions --output /path/to/new-inventory.json
+```
+
+Use a new dated record; do not replace this baseline silently. The collector writes
+only its output and excludes Git/build caches. Review candidate hashes and pending
+edits before treating the pause as a source freeze.
