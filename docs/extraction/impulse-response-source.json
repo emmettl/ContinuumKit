@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "source_repository": "https://github.com/emmettl/bombcad",
+  "source_revision": "285b620806418f39e4bc7a66be20191f2d366612",
+  "license": "MIT; Copyright (c) 2026 Louis Emmett",
+  "files": [
+    {
+      "source": "RoomCAD/Sources/ImpulseResponseKit/ImpulseResponse.swift",
+      "sha256": "2c8231c1675109ce54cedf92615bf905bfa6e4bf6f4a91ed0e001006fdd0f734"
+    },
+    {
+      "source": "RoomCAD/Sources/ImpulseResponseKit/WAVFile.swift",
+      "sha256": "ef4e2b0405e89cf0ff48acc74e94b14597ff30f52acb9a499971646c1455f214"
+    },
+    {
+      "source": "RoomCAD/Tests/ImpulseResponseKitTests/ImpulseResponseKitTests.swift",
+      "sha256": "a6e6a305cbb82665f97e106fb4e401aec825ea56e6c87390ded836b5e693a838"
+    }
+  ],
+  "implementation_bytes_unchanged": true
+}
