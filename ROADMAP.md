@@ -39,7 +39,9 @@ Application development continues while candidates mature.
   This additional boundary API remains an unreleased candidate.
 - Complete: independent fixed-lattice dissipative temporal reference and normal
   impedance time-refinement gates (unreleased benchmark candidate).
-- Pending: oblique impedance and full 3D/masked cases,
+- Complete: full 3D rigid-box modes with individual pressure/x/y/z velocity
+  spatial and temporal gates, including anisotropic grids (unreleased candidate).
+- Pending: oblique impedance and masked cases,
   then independently verified solver extractions.
 
 Follow the MotionStudies pattern: the shared repository owns reusable contracts,

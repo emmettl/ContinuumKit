@@ -167,6 +167,17 @@ enum Consumer {
     print("PASS fetched acoustic reference contract, positive pressure image and fixed-lattice API")
     let impedance = try BoundaryAcousticCase(id: "consumer", kind: .impedancePulse, impedance: 3)
     try require(impedance.reflection == 0.5, "Fetched impedance golden failed")
+    let diagonal = try RigidModeCase.standard()[0]
+    let quarter = diagonal.state([0.03125, 0.03125, 0.03125], time: diagonal.duration / 4)
+    try require(
+      quarter.dropFirst().allSatisfy { abs($0 - 1 / (sqrt(24.0) * 400)) < 1e-14 },
+      "Fetched 3D velocity contract failed")
+    let volumeResolution = RigidModeResolution(axis: "time", nx: 8, ny: 4, nz: 4, steps: 64)
+    let volumeHistory = RigidModeOracle.history(diagonal, volumeResolution)
+    try require(
+      volumeHistory.frames.count == 9 && volumeHistory.frames[0].w.count == 160,
+      "Fetched native z-face history failed")
+    print("PASS fetched three-dimensional rigid-mode reference and native z faces")
     print("ContinuumKit clean Git consumer passed.")
   }
 }

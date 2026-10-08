@@ -19,3 +19,5 @@ bash Scripts/check-adiabatic.sh
 bash Scripts/check-acoustics.sh
 
 bash Scripts/check-boundaries.sh
+
+bash Scripts/check-rigid-3d.sh
