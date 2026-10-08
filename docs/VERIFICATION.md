@@ -22,6 +22,8 @@ Reference solutions must be independent of the implementation under test.
 Current CI builds the CAD foundations, runs 15 CAD, 12 response interchange,
 14 adiabatic and 9 acoustic reference/conformance tests, and exercises all
 eight public libraries from an isolated Git consumer compiled in release configuration.
+Seven additional closed-box query checks cover analytic intersections, invalid input,
+transform invariance and 400 segment comparisons against an independent face-plane oracle.
 The consumer verifies archive disk round trips, OBJ reading, bounds/grid/camera/picking
 and shader loading with actual offscreen pixels, and response conditioning plus WAV/JSON
 disk round trips. Response conformance includes independently authored WAV bytes and

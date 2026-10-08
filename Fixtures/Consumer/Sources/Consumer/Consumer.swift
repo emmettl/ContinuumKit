@@ -28,6 +28,12 @@ enum Consumer {
     try require(box.size == SIMD3<Float>(4, 6, 7), "Saved bounds changed")
     let roundTrip = try JSONDecoder().decode(Box.self, from: JSONEncoder().encode(box))
     try require(roundTrip == box, "Bounds round trip changed")
+    try require(
+      box.intersection(origin: [0, 4, 5], direction: [10, 0, 0], parameters: 0...1) == 0.1...0.5,
+      "Fetched segment query changed its entry or exit")
+    try require(
+      box.intersection(origin: [0, 8, 10], direction: [1, 0, 0]) == 1...5,
+      "Fetched ray query changed its closed-boundary convention")
     let grid = Grid(nx: 7, ny: 5, nz: 3, cellSize: 0.25)
     let cell = grid.cell(containing: grid.cellCentre(3, 2, 1))
     try require(cell == (3, 2, 1) && grid.index(3, 2, 1) == 52, "Grid indexing changed")
