@@ -32,7 +32,8 @@ Application development continues while candidates mature.
   application-owned coupled integration/parity checks on the physical Mac mini.
 - Complete: bounded axial travelling-pulse and rigid-wall source comparison, with
   independent spatial/temporal references and actual Edgerton Metal / RoomCAD CPU/Metal
-  adapters. The benchmark API remains an unreleased candidate; no acoustic solver has moved.
+  adapters. The reference/conformance API is included in `0.1.0-alpha.4`;
+  no acoustic solver has moved.
 - Pending: oblique and impedance acoustic cases, then independently verified solver extractions.
 
 Follow the MotionStudies pattern: the shared repository owns reusable contracts,
