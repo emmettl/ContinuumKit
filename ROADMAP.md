@@ -37,7 +37,9 @@ Application development continues while candidates mature.
 - Complete: mixed-axis rigid modes and normal real-impedance source checks, with
   explicit unsupported capabilities and independent accuracy/work references.
   This additional boundary API remains an unreleased candidate.
-- Pending: oblique impedance, full 3D/masked cases and a dissipative temporal oracle,
+- Complete: independent fixed-lattice dissipative temporal reference and normal
+  impedance time-refinement gates (unreleased benchmark candidate).
+- Pending: oblique impedance and full 3D/masked cases,
   then independently verified solver extractions.
 
 Follow the MotionStudies pattern: the shared repository owns reusable contracts,
