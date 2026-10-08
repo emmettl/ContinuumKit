@@ -8,7 +8,8 @@ public struct AcousticConformance: Codable, Sendable {
 }
 public enum AcousticCommand {
   public static func check(_ results: [AcousticResult]) throws -> [Double] {
-    guard results.count == 3, results.allSatisfy({ $0.status == "supported" && $0.errors != nil }),
+    guard results.count == 3,
+      results.allSatisfy({ $0.status == "supported" && $0.errors != nil && $0.history != nil }),
       let first = results.first,
       results.allSatisfy({
         $0.caseSpecification == first.caseSpecification

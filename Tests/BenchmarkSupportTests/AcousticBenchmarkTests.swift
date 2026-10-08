@@ -153,6 +153,18 @@ struct AcousticBenchmarkTests {
         history: AcousticHistory(spacingM: h.spacingM, timeStepS: h.timeStepS * 2, frames: h.frames)
       )
     }
+    var overflowFrames = h.frames
+    var overflowPressure = overflowFrames[0].pressurePa
+    overflowPressure[0] = Double.greatestFiniteMagnitude
+    overflowFrames[0] = AcousticFrame(
+      step: 0, pressurePa: overflowPressure, normalVelocityMps: h.frames[0].normalVelocityMps)
+    #expect(throws: BenchmarkFailure.self) {
+      try AcousticResult.evaluate(
+        model: "overflow", caseSpecification: c, resolution: r, environment: environment,
+        runtimeS: 0,
+        history: AcousticHistory(
+          spacingM: h.spacingM, timeStepS: h.timeStepS, frames: overflowFrames))
+    }
     #expect(throws: BenchmarkFailure.self) {
       try AcousticCommand.check([
         AcousticResult.unavailable(

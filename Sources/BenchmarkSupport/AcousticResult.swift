@@ -149,6 +149,7 @@ public struct AcousticResult: Codable, Sendable {
         energy += c.densityKgM3 * dx * u[i] * plusHalf / 2
       }
       let mean = p.reduce(0, +) / Double(r.cells)
+      guard energy.isFinite, mean.isFinite else { throw BenchmarkFailure.invalidSamples }
       if initialEnergy == nil {
         initialEnergy = energy
         initialMean = mean
@@ -163,7 +164,9 @@ public struct AcousticResult: Codable, Sendable {
         wallRatio = (9 * p[r.cells - 1] - p[r.cells - 2]) / (8 * c.amplitudePa)
       }
     }
-    guard sumReference > 0, let e0 = initialEnergy else { throw BenchmarkFailure.invalidSamples }
+    guard sumReference.isFinite, sumReference > 0, sumError.isFinite, let e0 = initialEnergy else {
+      throw BenchmarkFailure.invalidSamples
+    }
     let errors = AcousticErrors(
       pressureRelativeL2: sqrt(sumError / sumReference),
       maximumPressureNormalized: maxPressure, maximumVelocityNormalized: maxVelocity,
