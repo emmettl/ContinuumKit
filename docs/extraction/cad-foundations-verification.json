@@ -29,8 +29,51 @@
     "manual_ui_review": false
   },
   "known_limits": [
-    "Original RoomCAD full-suite calibration discrepancy remains unresolved",
-    "Private remote library read access is not established for application CI",
-    "No library release or real application dependency adoption yet"
-  ]
+    "Original RoomCAD full-suite calibration discrepancy was unresolved at collection; no acoustic assertions or source changed",
+    "No manual UI review"
+  ],
+  "publication": {
+    "visibility": "public",
+    "version": "0.1.0-alpha.1",
+    "revision": "80f2db8e6c290b48c26a801082b459987ca2ba3c",
+    "release_url": "https://github.com/emmettl/ContinuumKit/releases/tag/0.1.0-alpha.1",
+    "mini_workflow": "https://github.com/emmettl/ContinuumKit/actions/runs/37826361790",
+    "result": "success"
+  },
+  "adoption": {
+    "pull_request": "https://github.com/emmettl/bombcad/pull/2",
+    "revision": "94cd41af7c9e63f78d6063b2a29e7538391fdd13",
+    "consumers": [
+      "BombCAD",
+      "RoomCAD"
+    ],
+    "dependency": "exact 0.1.0-alpha.1; both Package.resolved files committed",
+    "checks": {
+      "bombcad_release_package": "passed",
+      "roomcad_release_package": "passed",
+      "deep_strict_signatures": "passed for both",
+      "packaged_shader_hashes": "match released shader for both",
+      "packaged_roomcad_snapshot": "passed",
+      "room_document_tests": 16,
+      "roomcad_ui_tests": 27,
+      "bombcad_release_script_tests": 8,
+      "roomcad_release_script_tests": 8
+    },
+    "local_copy": "retired after both transitions",
+    "full_repository_ci": "https://github.com/emmettl/bombcad/actions/runs/37827888524",
+    "full_repository_result": "success",
+    "merged_revision": "5309b0606028f166c41b6bb33f872805b817fbe0",
+    "full_repository_tests": {
+      "BombDocument": 107,
+      "BlastCore": 374,
+      "RoomDocument": 16,
+      "RoomCAD": 27,
+      "ImpulseResponseKit": 8,
+      "Audition": 9,
+      "AcousticCore": 91,
+      "roomcad_release_scripts": 8,
+      "bombcad_release_scripts": 8,
+      "nightly_scripts": 3
+    }
+  }
 }

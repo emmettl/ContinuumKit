@@ -16,8 +16,10 @@ Application development continues while candidates mature.
 - Complete: the five existing CAD foundation products are imported with their
   original tests and an external release consumer; see [provenance](docs/extraction/CAD_FOUNDATIONS.md).
 - Complete: public `0.1.0-alpha.1` CAD foundations release, verified on the mini.
-- Pending: model-specific core suites and completing CAD application adoption.
-- Application dependencies remain unchanged. No numerical physics models have moved.
+- Complete: BombCAD and RoomCAD adopt the exact `0.1.0-alpha.1` release, including
+  resolved dependencies and packaged shader-resource checks; the local copy is retired.
+- Pending: model-specific core suites and subsequent individual model extractions.
+- No numerical physics models have moved.
 
 Follow the MotionStudies pattern: the shared repository owns reusable contracts,
 implementations and their independent verification; applications own their use and
@@ -76,9 +78,8 @@ external package loads shaders and other resources from its own bundle and that 
 behavior is preserved. Extend the clean consumer beyond the bootstrap import to
 exercise every released product.
 
-Reconcile toolchain requirements before adoption: the scaffold declares Swift 6.0,
-while SimulationKit currently declares 6.4. Either verify compatibility at the lower
-minimum or raise and document the minimum explicitly.
+The first extraction explicitly raises the package minimum to Swift 6.4, matching
+the original package and its applications.
 
 Release a reviewed prerelease only when authorized, then pin and verify each adopting
 app. RoomCAD can consume the external package while still nested in BombCAD; creating

@@ -1,7 +1,8 @@
 # Extraction inventory — 8 October 2026
 
 Inventory taken while application work is paused. It identifies a bounded first move
-and later candidates; no source code or application dependency has moved.
+and later candidates. The tables record the pre-extraction state; the subsequent
+CAD extraction and adoption are recorded in [provenance](extraction/CAD_FOUNDATIONS.md).
 See the [roadmap](../ROADMAP.md) for the longer sequence.
 
 ## Source baselines
@@ -35,9 +36,9 @@ This manifest identifies content but is not a backup of uncommitted work.
 | BombCAD selected code/tests/scripts | 214 | `2dc321495ebe93080b01efc08881e69ce7d67a2e1a8303f886cfa80f076a51d1` |
 | Edgerton selected code/studies/calibration | 958 | `0f804236fbd5a586fbc2cab569ccca6ab983fae4cbd2f9150210a70d7e1c115c` |
 
-All inspected application/package manifests declare Swift 6.4 and macOS 15.
-ContinuumKit still declares Swift 6.0. The first extraction should explicitly adopt
-6.4 unless compatibility with the lower minimum is actually demonstrated.
+At collection, all inspected application/package manifests declared Swift 6.4 and
+macOS 15, while ContinuumKit declared Swift 6.0. The first extraction explicitly
+adopted Swift 6.4.
 
 ## Fresh verification
 
