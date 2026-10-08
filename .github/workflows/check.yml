@@ -27,6 +27,7 @@ jobs:
       - name: Build and clean consumer
         env:
           CONTINUUMKIT_REQUIRE_METAL: "1"
+          CONTINUUMKIT_ACOUSTIC_OUTPUT: ${{ runner.temp }}/acoustic-${{ github.run_id }}-${{ github.run_attempt }}
           CONTINUUMKIT_BENCHMARK_OUTPUT: ${{ runner.temp }}/adiabatic-${{ github.run_id }}-${{ github.run_attempt }}
         run: bash Scripts/check.sh
       - name: Retain adiabatic conformance histories
@@ -35,5 +36,16 @@ jobs:
         with:
           name: adiabatic-${{ github.run_id }}-${{ github.run_attempt }}
           path: ${{ runner.temp }}/adiabatic-${{ github.run_id }}-${{ github.run_attempt }}
+          if-no-files-found: warn
+          retention-days: 14
+
+      - name: Require complete analytic acoustic reference reports
+        run: python3 Scripts/verify-acoustic-output.py "${{ runner.temp }}/acoustic-${{ github.run_id }}-${{ github.run_attempt }}" --reference
+      - name: Retain acoustic references and staggered fields
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: acoustic-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/acoustic-${{ github.run_id }}-${{ github.run_attempt }}
           if-no-files-found: warn
           retention-days: 14

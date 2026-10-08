@@ -150,6 +150,15 @@ enum Consumer {
       openedResult.caseSpecification == specification && openedResult.schemaVersion == 1,
       "Benchmark result contract changed")
     print("PASS Thermodynamics / BenchmarkSupport fetched public APIs and work refinement")
+    let acousticWall = try AcousticCase.standard()[1]
+    let reflectedPressure = AcousticOracle.continuum(
+      acousticWall, xM: acousticWall.lengthM, timeS: acousticWall.wallHitTimeS)
+    precondition(
+      abs(reflectedPressure.pressurePa - 2) < 1e-14 && reflectedPressure.velocityMps == 0)
+    let lattice = try AcousticOracle.SpatialLattice(
+      acousticWall, cells: 192, spacingM: acousticWall.lengthM / 192)
+    precondition(lattice.fields(timeS: 0).pressurePa.count == 192)
+    print("PASS fetched acoustic reference contract, positive pressure image and fixed-lattice API")
     print("ContinuumKit clean Git consumer passed.")
   }
 }
