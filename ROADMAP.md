@@ -25,7 +25,10 @@ Application development continues while candidates mature.
 - Complete: first numerical tranche — a checked adiabatic potential, analytic/reference
   conformance, versioned reports and source-based Edgerton/BombCAD comparison.
 - Complete: `0.1.0-alpha.3` numerical release, verified from its exact tag on the Mac mini.
-- Pending: application adoption of the reservoir and subsequent individual model extractions.
+- Complete: Edgerton adopts the exact `0.1.0-alpha.3` uniform reservoir law, with
+  application-owned coupled integration/parity checks on the physical Mac mini.
+- Pending: travelling-pulse and rigid-wall acoustic comparison cases, then subsequent
+  independently verified model extractions.
 
 Follow the MotionStudies pattern: the shared repository owns reusable contracts,
 implementations and their independent verification; applications own their use and
