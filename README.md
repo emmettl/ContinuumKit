@@ -14,7 +14,7 @@ is the current prerelease; earlier tags remain available for existing consumers.
 | `DocumentKit` | Versioned project containers, assets, integrity and bounded readers | Foundation, CryptoKit |
 | `ImpulseResponseKit` | Response metadata, float WAV I/O and common channel conditioning | Foundation |
 | `Thermodynamics` | Checked uniform adiabatic reservoir potential and signed work | Foundation |
-| `BenchmarkSupport` | Versioned adiabatic cases, complete-history errors and reports | Thermodynamics, Foundation |
+| `BenchmarkSupport` | Versioned adiabatic/acoustic cases, analytic references and complete-field reports | Thermodynamics, Foundation |
 
 Requires Swift 6.4 and macOS 15 or later. CPU products do not depend on SceneRender.
 The full test suite and clean render consumer require a Metal device.
@@ -64,3 +64,7 @@ The first numerical tranche is released in `0.1.0-alpha.3`, with a `continuumben
 command and [adiabatic contract/reference cases](docs/benchmarks/ADIABATIC.md). Existing
 application releases remain pinned independently. Benchmark source adapters exercise the
 current Edgerton calculation and BombCAD's single-volume work reference.
+
+The next committed benchmark candidate adds [axial travelling-pulse and rigid-wall
+conformance](docs/benchmarks/ACOUSTICS.md), with independent spatial/temporal references.
+It does not move an acoustic solver or change the current release tag.

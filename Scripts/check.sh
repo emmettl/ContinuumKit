@@ -15,3 +15,5 @@ fi
 bash Scripts/check-consumer.sh "${1:-}"
 
 bash Scripts/check-adiabatic.sh
+
+bash Scripts/check-acoustics.sh
