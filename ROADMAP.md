@@ -27,8 +27,9 @@ Application development continues while candidates mature.
 - Complete: `0.1.0-alpha.3` numerical release, verified from its exact tag on the Mac mini.
 - Complete: Edgerton adopts the exact `0.1.0-alpha.3` uniform reservoir law, with
   application-owned coupled integration/parity checks on the physical Mac mini.
-- Candidate: axial travelling-pulse and rigid-wall acoustic comparison, with independent
-  spatial/temporal references; application source adapters are being verified.
+- Complete: bounded axial travelling-pulse and rigid-wall source comparison, with
+  independent spatial/temporal references and actual Edgerton Metal / RoomCAD CPU/Metal
+  adapters. The benchmark API remains an unreleased candidate; no acoustic solver has moved.
 - Pending: oblique and impedance acoustic cases, then independently verified solver extractions.
 
 Follow the MotionStudies pattern: the shared repository owns reusable contracts,
