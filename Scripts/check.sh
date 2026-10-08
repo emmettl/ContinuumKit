@@ -5,6 +5,9 @@ cd "$root"
 
 for script in Scripts/*.sh; do bash -n "$script"; done
 git diff --check
+if test "${CONTINUUMKIT_REQUIRE_METAL:-0}" = 1; then
+    swift Scripts/check-metal.swift
+fi
 swift build -Xswiftc -warnings-as-errors
 if test -d Tests; then
     swift test -Xswiftc -warnings-as-errors

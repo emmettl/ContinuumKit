@@ -22,5 +22,7 @@ Reference solutions must be independent of the implementation under test.
 Current CI checks the bootstrap build and a separate consumer of the committed
 package. It contains no numerical or measured validation and does not fabricate
 passing model tests. When test targets arrive, `Scripts/check.sh` runs `swift test`.
-GPU suites need a declared device-capable runner; hosted scaffold CI proves builds,
-not availability of a Metal device.
+CI uses the dedicated physical Mac mini runner. With `CONTINUUMKIT_REQUIRE_METAL=1`,
+the check script compiles and dispatches a Metal kernel and verifies all 256 outputs.
+This proves device access in the CI service session, not numerical model validity.
+Future GPU suites run on that same declared device-capable runner.

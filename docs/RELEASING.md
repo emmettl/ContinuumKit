@@ -15,7 +15,8 @@ tag pointing to the reviewed commit.
 Run the manual **Release** GitHub Actions workflow with that existing tag. It:
 
 1. Validates the version format and checks out exactly that tag.
-2. Builds and verifies a clean consumer using an exact version requirement.
+2. Runs the Metal smoke check on the physical Mac mini, then builds and verifies a
+   clean consumer using an exact version requirement.
 3. Creates a GitHub release only after the checks pass, marking prereleases.
 
 The workflow does not invent a version, create a tag, or publish on an ordinary

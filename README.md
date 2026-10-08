@@ -18,6 +18,10 @@ Checks build the package and compile/run a separate consumer against its committ
 Git revision. The working-tree build also catches uncommitted source errors. There
 are no numerical tests yet; each extracted model must bring its own verification.
 
+CI runs on the physical Mac mini and requires a successful Metal compute dispatch.
+To include that runner check locally, use `CONTINUUMKIT_REQUIRE_METAL=1 bash Scripts/check.sh`.
+See [CI operations](docs/CI.md).
+
 ## Package ownership
 
 The bootstrap `ContinuumKit` product has no public API. Add focused products when
