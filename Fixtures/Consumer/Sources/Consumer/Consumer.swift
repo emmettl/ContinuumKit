@@ -68,7 +68,7 @@ enum Consumer {
         renderer.setGeometry(scene)
         let camera = OrbitCamera(target: [2, 1.5, 0], distance: 9, azimuth: -2.2, elevation: 0.7)
         func pixel() throws -> SIMD3<Float> {
-            guard let image = try renderer.snapshot(commandQueue: queue, width: 64, height: 48, camera: camera),
+            guard let image = renderer.snapshot(commandQueue: queue, width: 64, height: 48, camera: camera),
                   let data = image.dataProvider?.data as Data? else {
                 throw NSError(domain: "ContinuumConsumer", code: 3)
             }
