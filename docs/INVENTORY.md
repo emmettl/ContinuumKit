@@ -124,7 +124,7 @@ with one consumer when its assumptions and verification are explicit.
 
 | Candidate | Source and dependencies | Evidence / remaining gate | Recommendation |
 | --- | --- | --- | --- |
-| Response interchange | RoomCAD `ImpulseResponseKit`: 2 files, Foundation only | Fresh 8-test pass; preserve `dev.roomcad.impulse-response`, gains, timing and channels | **Next independent tranche** |
+| Response interchange | RoomCAD `ImpulseResponseKit`: 2 files, Foundation only | Fresh 8-test pass; preserve `dev.roomcad.impulse-response`, gains, timing and channels | **Released as `0.1.0-alpha.2`; adopted by standalone RoomCAD** |
 | Acoustic backend | RoomCAD `AcousticCore`: 30 files; ImpulseResponseKit, Foundation/simd, Accelerate, Metal, Synchronization | Geometry, energy/decay, free-field/modes and CPU/GPU tests; calibration discrepancy; presets and validation scenes mixed with model code | Separate policy and resolve test reliability before moving the full backend |
 | Linear wave evolution | RoomCAD `WaveSolver`, `MetalWaveSolver`, `WaveAccuracy`; Edgerton `WaveSolver`/`Waves.metal` | RoomCAD has analytic mode/free-field/dispersion checks; room/response/band contracts remain attached. Edgerton is a self-contained 2D Metal solver, RoomCAD is 3D | Establish matched adapters first; preserve source/boundary/dimensional differences |
 | FFT/spectral helpers | RoomCAD `RealFFT` and band processing | Accelerate, internal API and normalization conventions; tested through acoustics | Add dedicated transform/normalization references before a numerical module |
@@ -174,3 +174,19 @@ only its output and excludes Git/build caches. Review candidate hashes and pendi
 edits before treating the pause as a source freeze.
 
 Publication follow-up: the user authorized a public core, and `0.1.0-alpha.1` is now released. Cross-repository private authentication is no longer an adoption gate.
+
+
+Repository follow-up, 8 October: response interchange is extracted and released;
+[provenance and verification](extraction/IMPULSE_RESPONSE.md) record its independent
+suite and actual Git consumer. [RoomCAD](https://github.com/emmettl/RoomCAD) is now
+standalone, with its own physical Mac mini CI, source hashes and history map. Its
+acoustic source and measured fixtures retain their bytes. The calibration and fitted-zone
+reference fixtures use canonical receiver UUIDs after a stochastic full-suite failure;
+[the separate test change](https://github.com/emmettl/RoomCAD/pull/1) preserves tolerances.
+
+BombCAD's previously pending gas work is committed at
+`bfc4f5f6ec16629ad390ebfc7017137c7b46a0ed`, pushed, and its full 377-test core suite
+passes in [the checkpoint CI](https://github.com/emmettl/bombcad/actions/runs/37829822956).
+The initial source/hash tables remain collection-time evidence. Committing that work
+resolves its source-control gate; moving-geometry numerical readiness still needs its
+separate convergence and contract checks.
