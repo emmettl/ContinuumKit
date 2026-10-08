@@ -26,6 +26,17 @@
     "release_packaging": "passed",
     "deep_strict_signature": "passed",
     "packaged_headless_snapshot": "passed",
-    "known_reliability_follow_up": "https://github.com/emmettl/RoomCAD/pull/1; canonical receiver IDs, no solver or tolerance changes"
+    "known_reliability_follow_up": "https://github.com/emmettl/RoomCAD/pull/1; canonical receiver IDs, no solver or tolerance changes",
+    "merged_fixture_revision": "e95dd669b5fabe4f8d21919c1550c88e6d3ad930",
+    "merged_main_workflow": "https://github.com/emmettl/RoomCAD/actions/runs/37833069677"
+  },
+  "nested_retirement": {
+    "pull_request": "https://github.com/emmettl/bombcad/pull/3",
+    "merged_revision": "e7b8759c2e80112f8c3c97c98edadb8f41296f68",
+    "full_bombcad_verification": "https://github.com/emmettl/bombcad/actions/runs/37832607012",
+    "result": "success",
+    "document_tests": 107,
+    "core_tests": 377,
+    "follow_up_after_tested_revision": "Only the original .cache/ ignore rule was restored, verified with git check-ignore; no runtime or test code changes."
   }
 }
