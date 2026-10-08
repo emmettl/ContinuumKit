@@ -27,7 +27,7 @@ From a clean committed candidate:
 CONTINUUMKIT_REQUIRE_METAL=1 bash Scripts/check.sh
 ```
 
-Checks run 15 CAD foundation tests, 12 response interchange tests and 14 adiabatic and 9 acoustic numerical/conformance tests and an isolated Git consumer in release
+Checks run 15 CAD foundation tests, 12 response interchange tests and 14 adiabatic and 9 axial and 5 boundary numerical/conformance tests and an isolated Git consumer in release
 configuration. That consumer imports all eight public libraries, round-trips an archive
 on disk, reads OBJ geometry, checks camera/grid/picking contracts and verifies actual
 offscreen pixels from the fetched package's shader. No path dependency or source alias
@@ -68,3 +68,5 @@ current Edgerton calculation and BombCAD's single-volume work reference.
 The next committed benchmark candidate adds [axial travelling-pulse and rigid-wall
 conformance](docs/benchmarks/ACOUSTICS.md), with independent spatial/temporal references.
 It does not move an acoustic solver or change the current release tag.
+
+The next boundary candidate adds [mixed-axis modes and real impedance](docs/benchmarks/ACOUSTIC_BOUNDARIES.md), with explicit unsupported capabilities.
