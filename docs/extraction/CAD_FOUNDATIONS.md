@@ -24,7 +24,16 @@ No algorithms, public model/view APIs, saved-file identifiers or shader behavior
 
 `Scripts/check.sh` checks the working tree, existing debug tests, Metal compute and
 the committed release consumer. Consumer checks are independent of application targets.
-Candidate and final evidence will be recorded after actual execution.
+[Verification evidence](cad-foundations-verification.json) records 15 passing tests
+and the optimized Git consumer on both the development host and physical mini.
+The consumer also passed an exact-version resolution check in a disposable tagged
+clone; no release tag was created in this repository.
+
+In isolated BombCAD source clones, manifest-only adapters to the candidate passed a
+BombCAD release build and RoomCAD's 16 document plus 27 UI tests. Their module/shader
+bytes match the final candidate. No full BombCAD or AcousticCore suite or manual UI
+review was repeated. The previously observed acoustic calibration discrepancy remains
+in the inventory; this extraction does not claim to resolve it.
 
 BombCAD and RoomCAD retain their current local package dependency. Their compatibility
 aliases (`BlastCore.Box`/`Grid`, `BlastRender.OrbitCamera`) and original shared package
