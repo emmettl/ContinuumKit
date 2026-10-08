@@ -295,16 +295,21 @@ public enum BoundaryCommand {
     for result in all {
       let r = result.resolution
       let e = result.errors
-      let values = [
+      func number(_ value: Double?) -> String { value.map { String($0) } ?? "" }
+      var values: [String] = [
         result.model, result.specification.id, result.status, r?.axis ?? "unsupported",
-        r.map { String($0.nx) } ?? "", r.map { String($0.ny) } ?? "",
-        r.map { String($0.steps) } ?? "",
-        e.map { String($0.pressureL2) } ?? "", e.map { String($0.maxPressure) } ?? "",
-        e.map { String($0.maxVelocity) } ?? "",
-        e.map { String($0.energyBudget) } ?? "", e?.reflectedCoefficient.map { String($0) } ?? "",
-        e.map { String($0.returnedEnergyFraction) } ?? "",
-        result.reference, String(result.runtime),
       ]
+      values.append(r.map { String($0.nx) } ?? "")
+      values.append(r.map { String($0.ny) } ?? "")
+      values.append(r.map { String($0.steps) } ?? "")
+      values.append(number(e?.pressureL2))
+      values.append(number(e?.maxPressure))
+      values.append(number(e?.maxVelocity))
+      values.append(number(e?.energyBudget))
+      values.append(number(e?.reflectedCoefficient))
+      values.append(number(e?.returnedEnergyFraction))
+      values.append(result.reference)
+      values.append(String(result.runtime))
       csv += values.joined(separator: ",") + "\n"
     }
     try csv.write(
