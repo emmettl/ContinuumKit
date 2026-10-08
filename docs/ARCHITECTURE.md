@@ -4,6 +4,9 @@ ContinuumKit follows the MotionStudies ownership pattern: a shared package with
 explicit contracts and independent verification, consumed by independently released
 applications. A clean consumer checks the distributable package boundary.
 
+The [roadmap](../ROADMAP.md) sets out candidate products, extraction order and readiness
+gates. It does not authorize migration now or create target/API commitments.
+
 ## Candidate areas
 
 These are areas of responsibility, not empty targets or promised public APIs:

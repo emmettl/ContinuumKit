@@ -28,7 +28,7 @@ The bootstrap `ContinuumKit` product has no public API. Add focused products whe
 their implementation and independent tests are ready. Applications own their
 documents, presets, interpretation, workflows, presentation and integration tests.
 
-See [architecture](docs/ARCHITECTURE.md), [verification](docs/VERIFICATION.md),
+See the [staged roadmap](ROADMAP.md), [architecture](docs/ARCHITECTURE.md), [verification](docs/VERIFICATION.md),
 [contributing](CONTRIBUTING.md) and [releases](docs/RELEASING.md).
 
 ## Dependency policy
