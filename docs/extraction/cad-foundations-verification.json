@@ -1,0 +1,36 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-08",
+  "candidate_code_revision": "9be3a6f665721c944907a71af44c5d4bad4ef38a",
+  "source_revision": "ad130448dc8a3d8b3181ad0107defcd38c29aef3",
+  "original_implementation_and_shader_bytes_unchanged": true,
+  "local": {
+    "hardware": "Apple M4 Max",
+    "cad_foundations_tests": 15,
+    "release_git_consumer": "passed",
+    "exact_version_consumer": "passed using disposable 0.0.0-extraction-test tag; no repository release tag created"
+  },
+  "mini": {
+    "runner": "mac-mini-continuumkit",
+    "hardware": "Apple M4",
+    "workflow_run": "https://github.com/emmettl/ContinuumKit/actions/runs/37823554738",
+    "result": "success",
+    "cad_foundations_tests": 15,
+    "release_git_consumer": "passed including actual offscreen shader pixels"
+  },
+  "application_parity": {
+    "scope": "isolated committed-source clones; manifest adapters only; original workspaces unchanged",
+    "library_implementation_revision": "3ba34508866281910b2a237083f7c515c8c2b802",
+    "bombcad_release_build": "passed",
+    "room_document_tests": 16,
+    "roomcad_ui_tests": 27,
+    "full_acoustic_suite_repeated": false,
+    "full_bombcad_suite_repeated": false,
+    "manual_ui_review": false
+  },
+  "known_limits": [
+    "Original RoomCAD full-suite calibration discrepancy remains unresolved",
+    "Private remote library read access is not established for application CI",
+    "No library release or real application dependency adoption yet"
+  ]
+}

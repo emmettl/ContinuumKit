@@ -1,0 +1,87 @@
+{
+  "schema_version": 1,
+  "source_repository": "https://github.com/emmettl/bombcad",
+  "source_revision": "ad130448dc8a3d8b3181ad0107defcd38c29aef3",
+  "licence": "MIT",
+  "copyright": "2026 Louis Emmett",
+  "files": [
+    {
+      "source_path": "Packages/SimulationKit/Sources/DocumentKit/ProjectArchive.swift",
+      "destination_path": "Sources/DocumentKit/ProjectArchive.swift",
+      "sha256": "7d4d85b7c1226f3796512e20c456e6e6f5e61716d2230997d2364091be88c818",
+      "unchanged": true
+    },
+    {
+      "source_path": "Packages/SimulationKit/Sources/GeometryImport/MeshFile.swift",
+      "destination_path": "Sources/GeometryImport/MeshFile.swift",
+      "sha256": "4f86a8efd42e605ed74e746fe19e89a83d2f5cb8ff885d8953982f292e662564",
+      "unchanged": true
+    },
+    {
+      "source_path": "Packages/SimulationKit/Sources/SceneModel/Box.swift",
+      "destination_path": "Sources/SceneModel/Box.swift",
+      "sha256": "9ecac8f24e82dd4c6f280d07899d83b60cc65d55658e69bf05a005c17f8a5778",
+      "unchanged": true
+    },
+    {
+      "source_path": "Packages/SimulationKit/Sources/SceneModel/Grid.swift",
+      "destination_path": "Sources/SceneModel/Grid.swift",
+      "sha256": "875a8f3d03b13566e27853f55453625737f00e4b1a97cdca590ccbe492be2084",
+      "unchanged": true
+    },
+    {
+      "source_path": "Packages/SimulationKit/Sources/SceneRender/MeshRenderer.swift",
+      "destination_path": "Sources/SceneRender/MeshRenderer.swift",
+      "sha256": "a236480a29611a923535f9c51b6198b02ebb1a49fba0b355e8c611d41232bddc",
+      "unchanged": true
+    },
+    {
+      "source_path": "Packages/SimulationKit/Sources/SceneRender/OrbitControlView.swift",
+      "destination_path": "Sources/SceneRender/OrbitControlView.swift",
+      "sha256": "d9d1c39663ce823f945b2c7df2d425db58cf076a1f4a4f327d7b655af42fcba3",
+      "unchanged": true
+    },
+    {
+      "source_path": "Packages/SimulationKit/Sources/SceneRender/SceneGeometry.swift",
+      "destination_path": "Sources/SceneRender/SceneGeometry.swift",
+      "sha256": "fa405c4aa141bf94e2e16f5a84238d3f46e8730ceaf2f6abf7b187bfb760da93",
+      "unchanged": true
+    },
+    {
+      "source_path": "Packages/SimulationKit/Sources/SceneRender/Shaders/Scene.metal",
+      "destination_path": "Sources/SceneRender/Shaders/Scene.metal",
+      "sha256": "fce74c787f047f573563454bfca3fbe56a58c55245503b4770eb9c14964c86d9",
+      "unchanged": true
+    },
+    {
+      "source_path": "Packages/SimulationKit/Sources/SceneView/OrbitCamera.swift",
+      "destination_path": "Sources/SceneView/OrbitCamera.swift",
+      "sha256": "c14339217f5032c55f5e2e31636160bd9d980a9d81d21124b7de06882a9684ca",
+      "unchanged": true
+    },
+    {
+      "source_path": "Packages/SimulationKit/Tests/SimulationKitTests/GeometryTests.swift",
+      "destination_path": "Tests/CADFoundationsTests/GeometryTests.swift",
+      "original_sha256": "14cce6be68da9d60a75008dc2e01c0588a374f1f1873e4120afafde6c146349d",
+      "unchanged": true
+    },
+    {
+      "source_path": "Packages/SimulationKit/Tests/SimulationKitTests/MeshFileTests.swift",
+      "destination_path": "Tests/CADFoundationsTests/MeshFileTests.swift",
+      "original_sha256": "4b1dad15bb23e18d14bc187f5f3fee82c799191f8d4249d36ebd97d59a5cf1c4",
+      "unchanged": true
+    },
+    {
+      "source_path": "Packages/SimulationKit/Tests/SimulationKitTests/ProjectArchiveTests.swift",
+      "destination_path": "Tests/CADFoundationsTests/ProjectArchiveTests.swift",
+      "original_sha256": "afb9bf66c43b20da5dee35f4dd9099fdfbca140fa3ca3b84f08248ca0c876b67",
+      "unchanged": true
+    },
+    {
+      "source_path": "Packages/SimulationKit/Tests/SimulationKitTests/SceneRenderTests.swift",
+      "destination_path": "Tests/CADFoundationsTests/SceneRenderTests.swift",
+      "original_sha256": "87081636db9bf7b330a33910ad0d2f4aaf4031e5da03f71b9950e3eaf6ecd99d",
+      "unchanged": false
+    }
+  ]
+}
