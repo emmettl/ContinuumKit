@@ -11,6 +11,8 @@ Application development continues while candidates mature.
 - Complete: dedicated Mac mini runner and an actual Metal compute smoke check in CI.
 - Complete: [initial extraction inventory](docs/INVENTORY.md), source hashes and fresh
   CAD-package/selected primitive baselines taken while other work is paused.
+- Complete: Edgerton's initial source commit, private GitHub remote and authored-code
+  MIT licence; inventoried source hashes remain unchanged.
 - Pending: model-specific core suites, first implemented library products, first
   package release and application adoption.
 - No application code has moved. The bootstrap product has no public model API.

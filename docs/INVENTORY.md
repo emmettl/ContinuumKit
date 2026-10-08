@@ -14,6 +14,13 @@ See the [roadmap](../ROADMAP.md) for the longer sequence.
 | RoomCAD | Same BombCAD revision, `RoomCAD` | Subtree clean and identical to archived commit |
 | Edgerton | No Git commit or origin in this checkout | Project content is untracked; hashes identify the inspected working tree |
 
+**Follow-up checkpoint, 8 October:** Edgerton now has initial commit
+`b810ca2054da9b44d15342d665c65954386e26a3`, a private
+[GitHub remote](https://github.com/emmettl/edgerton) and an MIT licence for authored
+code. The working tree is clean and every file hash in the original Edgerton inventory
+still matches. See the [checkpoint record](inventory/2026-10-08-edgerton-checkpoint.json).
+The table above remains the historical state at initial collection.
+
 The [machine inventory](inventory/2026-10-08.json) records scoped file hashes,
 SwiftPM targets/dependencies, resources and lexical imports/test annotations. It is
 a source audit, not executed-test or physical-validation evidence. Scopes overlap:
@@ -133,9 +140,10 @@ with one consumer when its assumptions and verification are explicit.
 | Larger mechanics | Edgerton cell/matrix-free/peel/contact/fracture families; BombCAD structure/shell/bond-slip models | Specialized studies, topology/recording dependencies and spatial/contact sensitivity | Keep stabilizing; move bounded verified components individually |
 | Fitting mathematics | Edgerton `RelaxationCalibration`/`MaterialFit`; RoomCAD absorption fitting | Algorithms mixed with references, provenance and CSV/JSON or room policy | Separate algorithm, references and export; verify fitting contracts |
 
-Edgerton needs a deliberate source commit and attribution/licence record before import.
-No licence file was found in that checkout. The inventory does not stage its untracked
-assets or studies on the user's behalf.
+At initial collection, Edgerton lacked a source commit and licence record. That gate
+is now resolved by the checkpoint above. Third-party reference excerpts retain their
+attribution; the MIT licence covers authored code. Bulky generated exports remain
+local with a size/hash catalogue, and are not required for the application build.
 
 ## Application-owned content
 

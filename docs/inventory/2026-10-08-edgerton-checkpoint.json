@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "checkpoint_date": "2026-10-08",
+  "repository": "https://github.com/emmettl/edgerton",
+  "visibility": "private",
+  "branch": "main",
+  "commit": "b810ca2054da9b44d15342d665c65954386e26a3",
+  "committed_files": 2662,
+  "authored_code_licence": "MIT",
+  "original_inventory": "2026-10-08.json",
+  "original_edgerton_snapshot_sha256": "0f804236fbd5a586fbc2cab569ccca6ab983fae4cbd2f9150210a70d7e1c115c",
+  "all_original_inventoried_file_hashes_match": true,
+  "application_or_model_source_rewritten": false,
+  "working_tree_clean": true,
+  "verification": {
+    "release_build": "swift build -c release --product Edgerton: passed",
+    "material_calibration": "python3 Scripts/test-material-calibration.py: 7 tests passed",
+    "remote_main": "Matches the local initial commit",
+    "retained_artifacts": "All 138 ignored artifacts remain present and match their catalogue"
+  },
+  "artifact_policy": {
+    "catalogue": "edgerton/docs/LOCAL_ARTIFACTS.json",
+    "ignored_generated_files": 138,
+    "ignored_payload_bytes": 203558515,
+    "categories": ["Study movies", "Dense *-field.csv study exports"],
+    "payloads_deleted": false,
+    "catalogue_is_backup": false
+  }
+}
