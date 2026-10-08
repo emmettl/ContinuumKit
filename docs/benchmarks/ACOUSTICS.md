@@ -64,7 +64,9 @@ The leapfrog quadratic energy, with u⁻·u⁺ rather than u² at the pressure c
 must drift less than 1e-4; initial error versus continuum energy <1%; normalized
 mean-pressure drift <1e-5; boundary normal velocity <1e-6. Small invariant residuals
 cannot substitute for accuracy: a wrong-speed pulse and missing/unsupported cases
-are explicit negative tests. Native Float32 fields are evaluated in Float64.
+are explicit negative tests. Native Float32 fields are evaluated in Float64. RoomCAD captures transverse means
+from its N×4×4 grid and requires row-pressure variation below 1e-4 of amplitude;
+the invariant is evaluated on that declared axial projection.
 Performance under concurrent mini load is diagnostic, not a pass criterion.
 
 ## Application boundaries and reports

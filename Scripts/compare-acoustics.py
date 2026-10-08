@@ -24,5 +24,5 @@ for report in a.reports:
 a.output.mkdir(parents=True,exist_ok=True)
 (a.output/'comparison.json').write_text(json.dumps({'schemaVersion':1,'cases':cases,'results':rows},indent=2)+'\n')
 with (a.output/'comparison.csv').open('w',newline='') as f:
- w=csv.DictWriter(f,fieldnames=list(rows[0]));w.writeheader();w.writerows(rows)
+ w=csv.DictWriter(f,fieldnames=list(dict.fromkeys(key for row in rows for key in row)));w.writeheader();w.writerows(rows)
 print(f'PASS matched acoustic comparison: {len(models)} real backends, {len(rows)} independently scored runs')

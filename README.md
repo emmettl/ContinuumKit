@@ -27,7 +27,7 @@ From a clean committed candidate:
 CONTINUUMKIT_REQUIRE_METAL=1 bash Scripts/check.sh
 ```
 
-Checks run 15 CAD foundation tests, 12 response interchange tests and 14 numerical/conformance tests and an isolated Git consumer in release
+Checks run 15 CAD foundation tests, 12 response interchange tests and 14 adiabatic and 9 acoustic numerical/conformance tests and an isolated Git consumer in release
 configuration. That consumer imports all eight public libraries, round-trips an archive
 on disk, reads OBJ geometry, checks camera/grid/picking contracts and verifies actual
 offscreen pixels from the fetched package's shader. No path dependency or source alias

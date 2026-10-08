@@ -19,14 +19,17 @@ solver configuration, units, device/toolchain, resolution, errors, budget residu
 and runtime in JSON, with CSV histories and reproducible comparison reports.
 Reference solutions must be independent of the implementation under test.
 
-Current CI builds the CAD foundations, runs 15 CAD and 12 response interchange tests and exercises all
-six public products from an isolated Git consumer compiled in release configuration.
+Current CI builds the CAD foundations, runs 15 CAD, 12 response interchange,
+14 adiabatic and 9 acoustic reference/conformance tests, and exercises all
+eight public libraries from an isolated Git consumer compiled in release configuration.
 The consumer verifies archive disk round trips, OBJ reading, bounds/grid/camera/picking
 and shader loading with actual offscreen pixels, and response conditioning plus WAV/JSON
 disk round trips. Response conformance includes independently authored WAV bytes and
 metadata/version/dimension rejection. Rendering requires a real device;
 the imported render test no longer returns early on unavailable Metal.
-These checks are not numerical-physics or measured-impact validation.
+The independent adiabatic and acoustic contracts are numerical verification.
+The acoustic command emits analytic references; application source adapters own
+solver conformance. These checks do not establish measured application accuracy.
 CI uses the dedicated physical Mac mini runner. With `CONTINUUMKIT_REQUIRE_METAL=1`,
 the check script compiles and dispatches a Metal kernel and verifies all 256 outputs.
 This proves device access in the CI service session, not numerical model validity.
