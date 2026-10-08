@@ -1,6 +1,6 @@
 # Closed box queries
 
-This candidate adds `Box.intersection` to `SceneModel`, with no new product or renderer
+This extraction adds `Box.intersection` to `SceneModel`, with no new product or renderer
 dependency. It consolidates the slab intersection used by BombCAD's source picking
 and one-way fragment segment tests. Application object IDs, selection priority,
 opening subtraction and impact interpretation remain with BombCAD.
@@ -40,7 +40,7 @@ Source repository: `https://github.com/emmettl/bombcad`, commit
 
 The shared implementation is adapted, not byte-identical: it exposes both clipped
 endpoints, unifies input checks, and makes parallel classification explicit. BombCAD's
-adoption candidate retains the original picking and segment thresholds (strictly below
+adoption retains the original picking and segment thresholds (strictly below
 `1e-8` and `1e-12`, respectively), and handles stationary fragment segments in its own
 adapter. Historical selection policy and impact naming remain application-owned.
 
@@ -57,5 +57,15 @@ an application or renderer. No spatial discretization or time integration is inv
 The clean fetched Git consumer also checks a segment's entry/exit and a closed-edge
 ray using the public product. Run `Scripts/check.sh` from the committed candidate.
 BombCAD retains source picking, fragment, multiple-object and persistence integration
-checks. Candidate and release checks remain separate; application adoption should pin
-a tested release after it is explicitly authorized.
+checks.
+
+## Release and adoption
+
+[PR #7](https://github.com/emmettl/ContinuumKit/pull/7) is merged. The
+[`0.1.0-alpha.4` release](https://github.com/emmettl/ContinuumKit/releases/tag/0.1.0-alpha.4)
+points to `d3c7367ba43940155f7e33da738e6f5058723fd5`. The
+[exact-tag release check](https://github.com/emmettl/ContinuumKit/actions/runs/37854603915)
+passed all 57 tests, Metal compute/rendering and the version-pinned optimized Git
+consumer on the physical Mac mini before publishing. BombCAD's
+[adoption PR #5](https://github.com/emmettl/bombcad/pull/5) pins this release exactly
+and retains its application geometry, ownership, import/document and fragment checks.

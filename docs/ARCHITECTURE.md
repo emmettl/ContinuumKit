@@ -31,7 +31,7 @@ The five CAD foundations (`SceneModel`, `SceneView`, `SceneRender`, `GeometryImp
 `DocumentKit`) are independently verified in this repository and adopted by both CAD
 apps. Their original local copy is retired; see [CAD provenance](extraction/CAD_FOUNDATIONS.md).
 
-`SceneModel` also has a candidate closed-box ray/segment query with independent
+`SceneModel` also has a released closed-box ray/segment query with independent
 analytic and face-plane checks; see [contract and provenance](extraction/BOX_QUERIES.md).
 Scene selection, ownership and overlap policy remain application responsibilities.
 

@@ -16,6 +16,9 @@ Application development continues while candidates mature.
 - Complete: the five existing CAD foundation products are imported with their
   original tests and an external release consumer; see [provenance](docs/extraction/CAD_FOUNDATIONS.md).
 - Complete: public `0.1.0-alpha.1` CAD foundations release, verified on the mini.
+- Complete: closed-box ray/segment query contract and independent verification,
+  released as `0.1.0-alpha.4` after exact-tag Mac mini checks; see
+  [geometry provenance](docs/extraction/BOX_QUERIES.md).
 - Complete: BombCAD and RoomCAD adopt the exact `0.1.0-alpha.1` release, including
   resolved dependencies and packaged shader-resource checks; the local copy is retired.
 - Complete: response interchange extracted with twelve independent tests and a fetched
