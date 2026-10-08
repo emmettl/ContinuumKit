@@ -30,7 +30,10 @@ Application development continues while candidates mature.
 - Complete: bounded axial travelling-pulse and rigid-wall source comparison, with
   independent spatial/temporal references and actual Edgerton Metal / RoomCAD CPU/Metal
   adapters. The benchmark API remains an unreleased candidate; no acoustic solver has moved.
-- Pending: oblique and impedance acoustic cases, then independently verified solver extractions.
+- Candidate: mixed-axis rigid modes and normal real-impedance reflection, with explicit
+  unsupported capabilities and independent accuracy/work references.
+- Pending: oblique impedance, full 3D/masked cases and a dissipative temporal oracle,
+  then independently verified solver extractions.
 
 Follow the MotionStudies pattern: the shared repository owns reusable contracts,
 implementations and their independent verification; applications own their use and
