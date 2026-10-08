@@ -5,7 +5,11 @@ such as `0.1.0-alpha.1`; tags have no `v` prefix. Treat published tags as immuta
 The first CAD foundations prerelease is `0.1.0-alpha.1`. Its scope is geometry, scene,
 import and document helpers. `0.1.0-alpha.2` adds response interchange, with twelve
 independent tests and the expanded consumer. Neither release is a validated numerical
-physics model library.
+physics model library. `0.1.0-alpha.3` adds the uniform adiabatic reservoir, versioned
+benchmark reports and fourteen independent numerical/conformance tests. It passed
+the physical Mac mini exact-tag release checks, including all 41 tests and the
+clean version-pinned consumer. Its scope is numerical verification of the declared
+idealized contracts, not empirical validation of application scenes.
 
 ## Candidate verification
 

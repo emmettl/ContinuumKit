@@ -1,8 +1,9 @@
 # ContinuumKit
 
 Shared Swift foundations for RoomCAD, BombCAD and Edgerton. The package contains the existing CAD foundations from BombCAD's SimulationKit and
-RoomCAD's application-independent response interchange. `0.1.0-alpha.2` is the current
-prerelease; `0.1.0-alpha.1` remains available for its original CAD-only consumers.
+RoomCAD's application-independent response interchange, and a checked adiabatic reservoir
+with independent conformance. [`0.1.0-alpha.3`](https://github.com/emmettl/ContinuumKit/releases/tag/0.1.0-alpha.3)
+is the current prerelease; earlier tags remain available for existing consumers.
 
 | Product / module | Contents | Dependencies |
 | --- | --- | --- |
@@ -43,7 +44,7 @@ now fails on missing Metal instead of returning early. Saved identifiers, includ
 Consumers use an exact tag, add only needed products, and commit resolved dependencies:
 
 ```swift
-.package(url: "https://github.com/emmettl/ContinuumKit.git", exact: "0.1.0-alpha.2")
+.package(url: "https://github.com/emmettl/ContinuumKit.git", exact: "0.1.0-alpha.3")
 // In an application target's dependencies:
 .product(name: "SceneModel", package: "continuumkit")
 ```
@@ -59,7 +60,7 @@ See the [roadmap](ROADMAP.md), [inventory](docs/INVENTORY.md), [architecture](do
 [verification policy](docs/VERIFICATION.md), [contributing](CONTRIBUTING.md) and
 [release procedure](docs/RELEASING.md). MIT licensed, with original attribution retained.
 
-The current numerical addition is a committed extraction candidate, with a `continuumbench`
+The first numerical tranche is released in `0.1.0-alpha.3`, with a `continuumbench`
 command and [adiabatic contract/reference cases](docs/benchmarks/ADIABATIC.md). Existing
 application releases remain pinned independently. Benchmark source adapters exercise the
 current Edgerton calculation and BombCAD's single-volume work reference.
