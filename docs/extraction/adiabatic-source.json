@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "source_repository": "https://github.com/emmettl/edgerton",
+  "source_revision": "99fcee6856895c8c25141185428dd770f737f692",
+  "source_path": "Sources/EdgertonCore/SupportedCavityPressure.swift",
+  "source_file_sha256": "07c3bcbe7cb325d883840aefa0c5966d0391d7be3aa82dc02615203013171444",
+  "reservoir_method_sha256": "0260127c161ee7a6b74974fcb52a680948db4f4303f0969086e8e2ca7aa614b4",
+  "source_gamma": 1.4,
+  "license": "MIT, Copyright (c) 2026 Louis Emmett",
+  "ported_scope": "energy and pressure expressions, with original evaluation order",
+  "new_scope": "checked scalar references/volumes, parameterized constant gamma and stable signed boundary work",
+  "excluded": "bore, geometry, spring/bulk forces, support, injection, mixing, venting, recording and UI"
+}

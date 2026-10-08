@@ -32,6 +32,8 @@ let package = Package(
         .product(name: "GeometryImport", package: "continuumkit"),
         .product(name: "DocumentKit", package: "continuumkit"),
         .product(name: "ImpulseResponseKit", package: "continuumkit"),
+        .product(name: "Thermodynamics", package: "continuumkit"),
+        .product(name: "BenchmarkSupport", package: "continuumkit"),
       ]
     )
   ],
