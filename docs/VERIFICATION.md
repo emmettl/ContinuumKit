@@ -19,9 +19,12 @@ solver configuration, units, device/toolchain, resolution, errors, budget residu
 and runtime in JSON, with CSV histories and reproducible comparison reports.
 Reference solutions must be independent of the implementation under test.
 
-Current CI checks the bootstrap build and a separate consumer of the committed
-package. It contains no numerical or measured validation and does not fabricate
-passing model tests. When test targets arrive, `Scripts/check.sh` runs `swift test`.
+Current CI builds the CAD foundations, runs their 15 existing tests and exercises all
+five public products from an isolated Git consumer compiled in release configuration.
+The consumer verifies archive disk round trips, OBJ reading, bounds/grid/camera/picking
+and shader loading with actual offscreen pixels. Rendering requires a real device;
+the imported render test no longer returns early on unavailable Metal.
+These checks are not numerical-physics or measured-impact validation.
 CI uses the dedicated physical Mac mini runner. With `CONTINUUMKIT_REQUIRE_METAL=1`,
 the check script compiles and dispatches a Metal kernel and verifies all 256 outputs.
 This proves device access in the CI service session, not numerical model validity.

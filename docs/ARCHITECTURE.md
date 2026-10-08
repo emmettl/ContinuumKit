@@ -30,7 +30,10 @@ CPU verification must not accidentally acquire a Metal-device requirement.
 BombCAD's local `Packages/SimulationKit` already supplies `SceneModel`, `SceneView`,
 `SceneRender`, `GeometryImport` and `DocumentKit` to BombCAD and RoomCAD. Treat it as
 an extraction candidate, preserve attribution, and inspect its current tests and
-consumer behavior before moving anything. Nothing has been copied into this scaffold.
+consumer behavior before moving anything. The first extraction candidate now contains
+these five products, retaining source bytes and shader resources. See
+[provenance](extraction/CAD_FOUNDATIONS.md). The original package stays in BombCAD until
+both CAD applications adopt a tested release.
 
 ## Extraction gates
 

@@ -13,9 +13,10 @@ Application development continues while candidates mature.
   CAD-package/selected primitive baselines taken while other work is paused.
 - Complete: Edgerton's initial source commit, private GitHub remote and authored-code
   MIT licence; inventoried source hashes remain unchanged.
-- Pending: model-specific core suites, first implemented library products, first
-  package release and application adoption.
-- No application code has moved. The bootstrap product has no public model API.
+- Candidate: the five existing CAD foundation products are imported with their
+  original tests and an external release consumer; see [provenance](docs/extraction/CAD_FOUNDATIONS.md).
+- Pending: model-specific core suites, first package release and application adoption.
+- Application dependencies remain unchanged. No numerical physics models have moved.
 
 Follow the MotionStudies pattern: the shared repository owns reusable contracts,
 implementations and their independent verification; applications own their use and

@@ -1,49 +1,56 @@
 # ContinuumKit
 
-Shared Swift foundations for RoomCAD, BombCAD and Edgerton: independently verifiable
-models, numerical primitives, geometry, model loading and scene helpers.
+Shared Swift foundations for RoomCAD, BombCAD and Edgerton. The first extraction
+candidate contains the existing CAD foundations from BombCAD's SimulationKit package.
+There are no release tags yet; application adoption is still pending.
 
-This repository currently provides package and release scaffolding. No application
-code or physics models have been extracted, and no physical validation is claimed.
+| Product / module | Contents | Dependencies |
+| --- | --- | --- |
+| `SceneModel` | Codable bounds and Cartesian grids, metres with z up | Apple simd |
+| `SceneView` | Orbit camera, framing, rays and picking helpers | SceneModel, Foundation, simd |
+| `SceneRender` | Scene geometry, Metal rendering, snapshots and orbit-control view | SceneModel/View, Metal/MetalKit, AppKit/CoreGraphics |
+| `GeometryImport` | Bounded OBJ and ASCII/binary STL reading | Foundation, simd |
+| `DocumentKit` | Versioned project containers, assets, integrity and bounded readers | Foundation, CryptoKit |
 
-## Build and verify
+Requires Swift 6.4 and macOS 15 or later. CPU products do not depend on SceneRender.
+The full test suite and clean render consumer require a Metal device.
 
-Swift 6.0 or later; macOS 15 or later. From a committed checkout:
+## Verification
+
+From a clean committed candidate:
 
 ```sh
-bash Scripts/check.sh
+CONTINUUMKIT_REQUIRE_METAL=1 bash Scripts/check.sh
 ```
 
-Checks build the package and compile/run a separate consumer against its committed
-Git revision. The working-tree build also catches uncommitted source errors. There
-are no numerical tests yet; each extracted model must bring its own verification.
+Checks run the existing 15 CAD foundation tests and an isolated Git consumer in release
+configuration. That consumer imports all five public products, round-trips an archive
+on disk, reads OBJ geometry, checks camera/grid/picking contracts and verifies actual
+offscreen pixels from the fetched package's shader. No path dependency or source alias
+is used. CI runs on the physical Mac mini; see [CI operations](docs/CI.md).
 
-CI runs on the physical Mac mini and requires a successful Metal compute dispatch.
-To include that runner check locally, use `CONTINUUMKIT_REQUIRE_METAL=1 bash Scripts/check.sh`.
-See [CI operations](docs/CI.md).
+The module implementations and shader are copied byte-for-byte. The rendering test
+now fails on missing Metal instead of returning early. Saved identifiers, including
+`dev.simulationkit.project`, are retained. See [extraction provenance](docs/extraction/CAD_FOUNDATIONS.md).
 
-## Package ownership
+## Consumption and ownership
 
-The bootstrap `ContinuumKit` product has no public API. Add focused products when
-their implementation and independent tests are ready. Applications own their
-documents, presets, interpretation, workflows, presentation and integration tests.
-
-See the [staged roadmap](ROADMAP.md), [architecture](docs/ARCHITECTURE.md), [verification](docs/VERIFICATION.md),
-[contributing](CONTRIBUTING.md) and [releases](docs/RELEASING.md).
-
-The [extraction inventory](docs/INVENTORY.md) records candidates, source hashes,
-fresh verification and a concrete first-move plan.
-
-## Dependency policy
-
-Consumers adopt exact semantic-version tags and commit `Package.resolved`. No
-release exists yet. After a release, a dependency would look like:
+After a release, consumers use an exact tag, add only needed products, and commit
+resolved dependencies. The following version is illustrative; it is not released:
 
 ```swift
 .package(url: "https://github.com/emmettl/ContinuumKit.git", exact: "0.1.0-alpha.1")
+// In an application target's dependencies:
+.product(name: "SceneModel", package: "continuumkit")
 ```
 
-Library products in this repository share one release version. Local development
-may use a path dependency; application release checks must use the Git dependency.
+All products share a repository version. The private repository currently requires
+read access; local Git consumer verification does not prove cross-repository CI access.
 
-MIT licensed. Extraction candidates retain their original attribution.
+Applications own their schemas, semantic model conversion, scenarios, authored
+presentation, workflows and integration tests. Future independently verified models
+bring their own conformance and benchmark suites; no speculative targets are added.
+
+See the [roadmap](ROADMAP.md), [inventory](docs/INVENTORY.md), [architecture](docs/ARCHITECTURE.md),
+[verification policy](docs/VERIFICATION.md), [contributing](CONTRIBUTING.md) and
+[release procedure](docs/RELEASING.md). MIT licensed, with original attribution retained.
