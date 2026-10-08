@@ -108,4 +108,40 @@ import Testing
     #expect(throws: BenchmarkFailure.self) { try RigidModeCommand.check([result, result, result]) }
     #expect(throws: BenchmarkFailure.self) { try RigidModeCommand.check([]) }
   }
+  @Test("Malformed decoded refinement reports fail explicitly without indexing")
+  func malformedReports() throws {
+    let c = try RigidModeCase.standard()[0]
+    let r = RigidModeResolution(axis: "time", nx: 8, ny: 4, nz: 4, steps: 64)
+    let result = try RigidModeResult.evaluate(
+      model: "decoded", c: c, r: r, environment: env,
+      runtime: 0, h: RigidModeOracle.history(c, r))
+    let original =
+      try JSONSerialization.jsonObject(with: JSONEncoder().encode(result)) as! [String: Any]
+    var truncated = original
+    var errors = truncated["errors"] as! [String: Any]
+    errors["fieldL2"] = []
+    truncated["errors"] = errors
+    let missing = try JSONDecoder().decode(
+      RigidModeResult.self, from: JSONSerialization.data(withJSONObject: truncated))
+    #expect(throws: BenchmarkFailure.self) {
+      try RigidModeCommand.check([missing, missing, missing])
+    }
+    var invalid = original
+    var specification = invalid["specification"] as! [String: Any]
+    specification["modes"] = []
+    invalid["specification"] = specification
+    let badCase = try JSONDecoder().decode(
+      RigidModeResult.self, from: JSONSerialization.data(withJSONObject: invalid))
+    #expect(throws: BenchmarkFailure.self) {
+      try RigidModeCommand.check([badCase, badCase, badCase])
+    }
+    errors = original["errors"] as! [String: Any]
+    errors["energyBudget"] = -1
+    invalid = original
+    invalid["errors"] = errors
+    let negativeBudget = try JSONDecoder().decode(
+      RigidModeResult.self, from: JSONSerialization.data(withJSONObject: invalid))
+    #expect(throws: BenchmarkFailure.self) { try RigidModeCommand.bounds(negativeBudget) }
+  }
+
 }

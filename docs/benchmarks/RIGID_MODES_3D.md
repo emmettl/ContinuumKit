@@ -45,7 +45,8 @@ Roundoff/device differences are reported, not used as performance pass criteria.
 Independent checks include quarter-period vector golden states, a discrete-frequency
 golden oscillator, Simpson integration of continuum energy, native z-face coordinates,
 Taylor initialization, missing-field/clock rejection and a pressure-correct but
-reversed-z-velocity negative case. The fetched Git consumer exercises the public
+reversed-z-velocity negative case. Malformed decoded refinement metrics and
+case dimensions reject explicitly before indexing; negative budget metrics fail. The fetched Git consumer exercises the public
 3D reference and native z faces.
 
 RoomCAD adapters compile verbatim current CPU update blocks and the exact embedded

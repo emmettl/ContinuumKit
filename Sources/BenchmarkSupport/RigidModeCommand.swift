@@ -98,6 +98,8 @@ public struct RigidModeResult: Codable, Sendable {
 public enum RigidModeCommand {
   public static func bounds(_ r: RigidModeResult) throws {
     guard let e = r.errors, e.fieldL2.count == 4,
+      [e.maxPressure, e.maxVelocity, e.energyBudget, e.initialEnergyError, e.boundaryVelocity]
+        .allSatisfy({ $0.isFinite && $0 >= 0 }),
       e.fieldL2.allSatisfy({ $0.isFinite && $0 >= 0 && $0 < 0.01 }),
       e.maxPressure < 0.03, e.maxVelocity < 0.03, e.energyBudget < 1e-4,
       e.initialEnergyError < 0.01, e.boundaryVelocity < 1e-6
@@ -106,9 +108,12 @@ public enum RigidModeCommand {
     }
   }
   public static func check(_ series: [RigidModeResult]) throws -> [[Double]] {
+    if let first = series.first { try first.specification.validate() }
     guard series.count == 3, let first = series.first, let axis = first.resolution?.axis,
       series.allSatisfy({
-        $0.status == "supported" && $0.errors != nil && $0.history != nil
+        $0.status == "supported" && $0.errors?.fieldL2.count == 4
+          && ($0.errors?.fieldL2.allSatisfy { $0.isFinite && $0 >= 0 } ?? false)
+          && ($0.history?.dt.isFinite ?? false) && ($0.history?.dt ?? 0) > 0
           && $0.specification == first.specification && $0.model == first.model
       }),
       series.compactMap(\.resolution)
