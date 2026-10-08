@@ -12,6 +12,8 @@ prerelease; `0.1.0-alpha.1` remains available for its original CAD-only consumer
 | `GeometryImport` | Bounded OBJ and ASCII/binary STL reading | Foundation, simd |
 | `DocumentKit` | Versioned project containers, assets, integrity and bounded readers | Foundation, CryptoKit |
 | `ImpulseResponseKit` | Response metadata, float WAV I/O and common channel conditioning | Foundation |
+| `Thermodynamics` | Checked uniform adiabatic reservoir potential and signed work | Foundation |
+| `BenchmarkSupport` | Versioned adiabatic cases, complete-history errors and reports | Thermodynamics, Foundation |
 
 Requires Swift 6.4 and macOS 15 or later. CPU products do not depend on SceneRender.
 The full test suite and clean render consumer require a Metal device.
@@ -24,8 +26,8 @@ From a clean committed candidate:
 CONTINUUMKIT_REQUIRE_METAL=1 bash Scripts/check.sh
 ```
 
-Checks run 15 CAD foundation tests, 12 response interchange tests and an isolated Git consumer in release
-configuration. That consumer imports all six public products, round-trips an archive
+Checks run 15 CAD foundation tests, 12 response interchange tests and 14 numerical/conformance tests and an isolated Git consumer in release
+configuration. That consumer imports all eight public libraries, round-trips an archive
 on disk, reads OBJ geometry, checks camera/grid/picking contracts and verifies actual
 offscreen pixels from the fetched package's shader. No path dependency or source alias
 is used. The response checks include independently authored WAV bytes, format/dimension
@@ -56,3 +58,8 @@ bring their own conformance and benchmark suites; no speculative targets are add
 See the [roadmap](ROADMAP.md), [inventory](docs/INVENTORY.md), [architecture](docs/ARCHITECTURE.md),
 [verification policy](docs/VERIFICATION.md), [contributing](CONTRIBUTING.md) and
 [release procedure](docs/RELEASING.md). MIT licensed, with original attribution retained.
+
+The current numerical addition is a committed extraction candidate, with a `continuumbench`
+command and [adiabatic contract/reference cases](docs/benchmarks/ADIABATIC.md). Existing
+application releases remain pinned independently. Benchmark source adapters exercise the
+current Edgerton calculation and BombCAD's single-volume work reference.

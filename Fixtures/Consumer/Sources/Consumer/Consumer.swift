@@ -1,3 +1,4 @@
+import BenchmarkSupport
 import CoreGraphics
 import DocumentKit
 import Foundation
@@ -7,6 +8,7 @@ import Metal
 import SceneModel
 import SceneRender
 import SceneView
+import Thermodynamics
 import simd
 
 @main
@@ -123,6 +125,31 @@ enum Consumer {
     let highlighted = try pixel()
     try require(highlighted.x > plain.x + 0.2, "Fetched renderer highlight changed")
     print("PASS SceneRender fetched shader, picking and offscreen pixels on \(device.name)")
+    let reservoir = try AdiabaticReservoir(
+      referenceVolume: 2, referenceEnergy: 5, heatCapacityRatio: 2)
+    let expanded = try reservoir.state(atVolume: 4)
+    try require(
+      expanded.energy == 2.5 && expanded.pressure == 0.625, "Reservoir golden state changed")
+    try require(
+      abs(try reservoir.work(fromVolume: 2, toVolume: 4) - 2.5) < 1e-14, "Signed work changed")
+    let specification = try AdiabaticCase.standard()[0]
+    let metadataEnvironment = BenchmarkEnvironment(
+      repository: "consumer", revision: "fixture", sourceHashes: [:],
+      hardware: device.name, toolchain: "consumer", operatingSystem: "macOS")
+    let series = try AdiabaticBenchmark.resolutions.map { steps in
+      try AdiabaticResult.evaluate(
+        model: "consumer", caseSpecification: specification,
+        environment: metadataEnvironment, steps: steps, runtimeS: 0,
+        samples: AdiabaticBenchmark.reservoirSamples(caseSpecification: specification, steps: steps)
+      )
+    }
+    _ = try AdiabaticBenchmark.checkRefinement(series, metric: "work", expectedOrder: 1.8...2.2)
+    let savedResult = try JSONEncoder().encode(series.last!)
+    let openedResult = try JSONDecoder().decode(AdiabaticResult.self, from: savedResult)
+    try require(
+      openedResult.caseSpecification == specification && openedResult.schemaVersion == 1,
+      "Benchmark result contract changed")
+    print("PASS Thermodynamics / BenchmarkSupport fetched public APIs and work refinement")
     print("ContinuumKit clean Git consumer passed.")
   }
 }

@@ -22,7 +22,9 @@ Application development continues while candidates mature.
   public consumer, released as `0.1.0-alpha.2` and adopted by standalone RoomCAD.
 - Complete: RoomCAD repository split, relevant history/old tag preserved and dedicated
   physical Mac mini CI with packaged rendering verification.
-- Pending: model-specific core suites and subsequent individual model extractions.
+- Complete: first numerical tranche — a checked adiabatic potential, analytic/reference
+  conformance, versioned reports and source-based Edgerton/BombCAD comparison.
+- Pending: numerical release/application adoption and subsequent individual model extractions.
 - No numerical physics models have moved.
 
 Follow the MotionStudies pattern: the shared repository owns reusable contracts,

@@ -11,6 +11,9 @@ let package = Package(
     .library(name: "GeometryImport", targets: ["GeometryImport"]),
     .library(name: "DocumentKit", targets: ["DocumentKit"]),
     .library(name: "ImpulseResponseKit", targets: ["ImpulseResponseKit"]),
+    .library(name: "Thermodynamics", targets: ["Thermodynamics"]),
+    .library(name: "BenchmarkSupport", targets: ["BenchmarkSupport"]),
+    .executable(name: "continuumbench", targets: ["continuumbench"]),
   ],
   targets: [
     .target(name: "SceneModel"),
@@ -22,6 +25,11 @@ let package = Package(
     .target(name: "GeometryImport"),
     .target(name: "DocumentKit"),
     .target(name: "ImpulseResponseKit"),
+    .target(name: "Thermodynamics"),
+    .target(name: "BenchmarkSupport", dependencies: ["Thermodynamics"]),
+    .executableTarget(name: "continuumbench", dependencies: ["BenchmarkSupport"]),
+    .testTarget(name: "ThermodynamicsTests", dependencies: ["Thermodynamics"]),
+    .testTarget(name: "BenchmarkSupportTests", dependencies: ["BenchmarkSupport"]),
     .testTarget(name: "ImpulseResponseKitTests", dependencies: ["ImpulseResponseKit"]),
     .testTarget(
       name: "CADFoundationsTests",
