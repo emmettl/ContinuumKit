@@ -146,7 +146,7 @@ public enum BoundaryCommand {
         == BoundaryResolution.standard(c).filter({ $0.axis == series[0].resolution?.axis })
     else { throw BenchmarkFailure.failedConformance("Incomplete boundary series") }
     var orders: [Double] = []
-    let range = c.kind == .impedancePulse ? 0.8...1.2 : 1.7...2.3
+    let range = c.kind == .impedancePulse ? 0.8...2.3 : 1.7...2.3
     for (a, b) in zip(series, series.dropFirst()) {
       let ratio =
         a.resolution!.axis == "space"
@@ -290,6 +290,25 @@ public enum BoundaryCommand {
     }
     try encoder.encode(all).write(to: output.appendingPathComponent("results.json"))
     try encoder.encode(conformance).write(to: output.appendingPathComponent("conformance.json"))
+    var csv =
+      "model,case,status,axis,nx,ny,steps,pressure_relative_l2,max_pressure_over_amplitude,max_velocity_normalized,energy_budget_normalized,reflection_coefficient,returned_energy_fraction,reference,runtime_s\n"
+    for result in all {
+      let r = result.resolution
+      let e = result.errors
+      let values = [
+        result.model, result.specification.id, result.status, r?.axis ?? "unsupported",
+        r.map { String($0.nx) } ?? "", r.map { String($0.ny) } ?? "",
+        r.map { String($0.steps) } ?? "",
+        e.map { String($0.pressureL2) } ?? "", e.map { String($0.maxPressure) } ?? "",
+        e.map { String($0.maxVelocity) } ?? "",
+        e.map { String($0.energyBudget) } ?? "", e?.reflectedCoefficient.map { String($0) } ?? "",
+        e.map { String($0.returnedEnergyFraction) } ?? "",
+        result.reference, String(result.runtime),
+      ]
+      csv += values.joined(separator: ",") + "\n"
+    }
+    try csv.write(
+      to: output.appendingPathComponent("summary.csv"), atomically: true, encoding: .utf8)
     if failed {
       throw BenchmarkFailure.failedConformance("Boundary suite failed; full reports retained")
     }

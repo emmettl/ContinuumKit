@@ -69,4 +69,11 @@ import Testing
       BoundaryAcousticCase.self, from: JSONSerialization.data(withJSONObject: dict))
     #expect(throws: BenchmarkFailure.self) { try decoded.validate() }
   }
+  @Test("First-order boundary plus second-order interior error has mixed full-field orders")
+  func mixedError() {
+    let errors = [0.1, 0.05, 0.025].map { $0 + 32 * $0 * $0 }
+    let orders = zip(errors, errors.dropFirst()).map { log($0.0 / $0.1) / log(2) }
+    #expect(orders.allSatisfy { $0 > 1.2 && $0 < 2 })
+  }
+
 }

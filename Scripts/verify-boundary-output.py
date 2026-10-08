@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Require all cases, native staggered grids, refinement reports and explicit unsupported capability."""
-import argparse,json,math
+import argparse,csv,json,math
 from pathlib import Path
 p=argparse.ArgumentParser(description=__doc__);p.add_argument('output',type=Path);p.add_argument('--reference',action='store_true');p.add_argument('--rigid-only',action='store_true');a=p.parse_args()
 root=a.output;cases=json.loads((root/'cases.json').read_text());results=json.loads((root/'results.json').read_text());conformance=json.loads((root/'conformance.json').read_text())
@@ -28,4 +28,11 @@ for c in cases:
  for axis in (['space','time'] if c['kind']=='obliqueMode' else ['space','time-sensitivity']):
   checks=[r for r in conformance if r['case']==c['id'] and r['axis']==axis]
   assert len(checks)==1 and checks[0]['status']==('reference' if a.reference else 'passed')
+with (root/'summary.csv').open() as f: rows=list(csv.DictReader(f))
+assert len(rows)==len(results)
+for row,result in zip(rows,results):
+ assert row['case']==result['specification']['id'] and row['status']==result['status']
+ if result.get('errors'):
+  assert float(row['pressure_relative_l2'])==result['errors']['pressureL2']
+  assert float(row['energy_budget_normalized'])==result['errors']['energyBudget']
 print(f'PASS complete boundary reports: {len(results)} records; unsupported cases are not passes')
