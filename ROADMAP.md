@@ -188,3 +188,6 @@ the first bounded move, with compatibility, toolchain and dependency-access gate
 Masked-domain candidate: exact aligned boxes and disconnected chambers now have independent
 contracts; real application source conformance is required before extraction. Curved/staircase
 geometry, absorbing masked walls and isolated oblique pulse reflection remain separate gaps.
+
+Curved-boundary candidate: rigid cylinder geometry and all-field spatial/time contracts
+are bounded separately; absorbing masked walls and isolated oblique pulses remain gaps.
