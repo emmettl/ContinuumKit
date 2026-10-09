@@ -52,3 +52,27 @@ The bounded follow-up is directed wall selection in actual gridLayout, preservin
 occupancy and local area weights, followed by strict regression checks here and the
 existing actual CPU/Metal wave, reflection and work suites. AcousticCore extraction
 is still gated; raw app-derived layouts are retained in private Edgerton evidence.
+
+## Directed material assignment candidate
+
+[RoomCAD #14](https://github.com/emmettl/RoomCAD/pull/14) selects wall material and
+open-face air impedance at the first active-to-inactive neighbour segment crossing.
+The original 18-case independent oracle and coefficient tolerances are unchanged;
+the app adapter now requires all 36 layouts to conform and every crossing to resolve.
+Material-face and normal-sample identities are retained separately.
+
+Constant-height vertical extrusions between flat caps keep the existing closest-side
+in-plane normal quadrature, excluding caps from that measure. Other meshes use the
+crossed-face normal. This distinction preserves the floor-plan measure and the
+unchanged coarse cylinder area gate; sampling crossed normals everywhere changed
+that quadrature and failed its 0.5% bound. Recognition uses only side/cap geometry.
+No named case, material value or grid resolution selects the area rule.
+
+Local controls pass for thin plan/mesh parity, open-side air, storage-order
+invariance and an independently scored rotated thin slab with six materials.
+Full physical-mini run [37938336795](https://github.com/emmettl/RoomCAD/actions/runs/37938336795)
+passes 167 Swift tests, eight release checks, application packaging/signature/snapshot,
+every existing CPU/Metal field/reflection/work suite and all 36 strict geometry layouts. Unresolved edge/degenerate queries still use the legacy midpoint fallback;
+none of the declared extrusions does. General imported-mesh convergence is not
+established by these bounded controls. After this gate, a matching thin-mesh pulse
+is the next transient conformance case. No release or production extraction occurs.
