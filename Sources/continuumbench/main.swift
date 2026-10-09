@@ -1,7 +1,9 @@
 import BenchmarkSupport
 import Foundation
 
-if CommandLine.arguments.contains("oblique-reference") {
+if CommandLine.arguments.contains("masked-reference") {
+  try MaskedModeCommand.runReference()
+} else if CommandLine.arguments.contains("oblique-reference") {
   try ObliqueModeCommand.runReference()
 } else if CommandLine.arguments.contains("rigid-3d-reference") {
   try RigidModeCommand.runReference()

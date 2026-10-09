@@ -36,3 +36,6 @@ CI uses the dedicated physical Mac mini runner. With `CONTINUUMKIT_REQUIRE_METAL
 the check script compiles and dispatches a Metal kernel and verifies all 256 outputs.
 This proves device access in the CI service session, not numerical model validity.
 Future GPU suites run on that same declared device-capable runner.
+
+See [masked domains](benchmarks/MASKED_DOMAINS.md) for independent geometry, connectivity,
+active-only field/energy and leakage contracts. This candidate does not alter release tags.
