@@ -1,0 +1,725 @@
+{
+  "schemaVersion": 1,
+  "cases": [
+    {
+      "id": "aligned-nx32-h0.00390625",
+      "corners": [
+        [
+          0,
+          0
+        ],
+        [
+          0.4,
+          0
+        ],
+        [
+          0.4,
+          0.37
+        ],
+        [
+          0,
+          0.37
+        ]
+      ],
+      "lengths": [
+        0.5,
+        0.37,
+        0.00390625
+      ],
+      "dimensions": [
+        32,
+        24,
+        2
+      ],
+      "impedances": [
+        null,
+        3,
+        null,
+        null,
+        null,
+        null
+      ],
+      "speed": 320
+    },
+    {
+      "id": "aligned-nx32-h0.031",
+      "corners": [
+        [
+          0,
+          0
+        ],
+        [
+          0.4,
+          0
+        ],
+        [
+          0.4,
+          0.37
+        ],
+        [
+          0,
+          0.37
+        ]
+      ],
+      "lengths": [
+        0.5,
+        0.37,
+        0.031
+      ],
+      "dimensions": [
+        32,
+        24,
+        2
+      ],
+      "impedances": [
+        null,
+        3,
+        null,
+        null,
+        null,
+        null
+      ],
+      "speed": 320
+    },
+    {
+      "id": "aligned-nx32-h0.123",
+      "corners": [
+        [
+          0,
+          0
+        ],
+        [
+          0.4,
+          0
+        ],
+        [
+          0.4,
+          0.37
+        ],
+        [
+          0,
+          0.37
+        ]
+      ],
+      "lengths": [
+        0.5,
+        0.37,
+        0.123
+      ],
+      "dimensions": [
+        32,
+        24,
+        8
+      ],
+      "impedances": [
+        null,
+        3,
+        null,
+        null,
+        null,
+        null
+      ],
+      "speed": 320
+    },
+    {
+      "id": "aligned-nx64-h0.00390625",
+      "corners": [
+        [
+          0,
+          0
+        ],
+        [
+          0.4,
+          0
+        ],
+        [
+          0.4,
+          0.37
+        ],
+        [
+          0,
+          0.37
+        ]
+      ],
+      "lengths": [
+        0.5,
+        0.37,
+        0.00390625
+      ],
+      "dimensions": [
+        64,
+        48,
+        2
+      ],
+      "impedances": [
+        null,
+        3,
+        null,
+        null,
+        null,
+        null
+      ],
+      "speed": 320
+    },
+    {
+      "id": "aligned-nx64-h0.031",
+      "corners": [
+        [
+          0,
+          0
+        ],
+        [
+          0.4,
+          0
+        ],
+        [
+          0.4,
+          0.37
+        ],
+        [
+          0,
+          0.37
+        ]
+      ],
+      "lengths": [
+        0.5,
+        0.37,
+        0.031
+      ],
+      "dimensions": [
+        64,
+        48,
+        4
+      ],
+      "impedances": [
+        null,
+        3,
+        null,
+        null,
+        null,
+        null
+      ],
+      "speed": 320
+    },
+    {
+      "id": "aligned-nx64-h0.123",
+      "corners": [
+        [
+          0,
+          0
+        ],
+        [
+          0.4,
+          0
+        ],
+        [
+          0.4,
+          0.37
+        ],
+        [
+          0,
+          0.37
+        ]
+      ],
+      "lengths": [
+        0.5,
+        0.37,
+        0.123
+      ],
+      "dimensions": [
+        64,
+        48,
+        16
+      ],
+      "impedances": [
+        null,
+        3,
+        null,
+        null,
+        null,
+        null
+      ],
+      "speed": 320
+    },
+    {
+      "id": "tilted-nx32-h0.00390625",
+      "corners": [
+        [
+          0,
+          0
+        ],
+        [
+          0.45,
+          0
+        ],
+        [
+          0.265,
+          0.37
+        ],
+        [
+          0,
+          0.37
+        ]
+      ],
+      "lengths": [
+        0.5,
+        0.37,
+        0.00390625
+      ],
+      "dimensions": [
+        32,
+        24,
+        2
+      ],
+      "impedances": [
+        null,
+        3,
+        null,
+        null,
+        null,
+        null
+      ],
+      "speed": 320
+    },
+    {
+      "id": "tilted-nx32-h0.031",
+      "corners": [
+        [
+          0,
+          0
+        ],
+        [
+          0.45,
+          0
+        ],
+        [
+          0.265,
+          0.37
+        ],
+        [
+          0,
+          0.37
+        ]
+      ],
+      "lengths": [
+        0.5,
+        0.37,
+        0.031
+      ],
+      "dimensions": [
+        32,
+        24,
+        2
+      ],
+      "impedances": [
+        null,
+        3,
+        null,
+        null,
+        null,
+        null
+      ],
+      "speed": 320
+    },
+    {
+      "id": "tilted-nx32-h0.123",
+      "corners": [
+        [
+          0,
+          0
+        ],
+        [
+          0.45,
+          0
+        ],
+        [
+          0.265,
+          0.37
+        ],
+        [
+          0,
+          0.37
+        ]
+      ],
+      "lengths": [
+        0.5,
+        0.37,
+        0.123
+      ],
+      "dimensions": [
+        32,
+        24,
+        8
+      ],
+      "impedances": [
+        null,
+        3,
+        null,
+        null,
+        null,
+        null
+      ],
+      "speed": 320
+    },
+    {
+      "id": "tilted-nx64-h0.00390625",
+      "corners": [
+        [
+          0,
+          0
+        ],
+        [
+          0.45,
+          0
+        ],
+        [
+          0.265,
+          0.37
+        ],
+        [
+          0,
+          0.37
+        ]
+      ],
+      "lengths": [
+        0.5,
+        0.37,
+        0.00390625
+      ],
+      "dimensions": [
+        64,
+        48,
+        2
+      ],
+      "impedances": [
+        null,
+        3,
+        null,
+        null,
+        null,
+        null
+      ],
+      "speed": 320
+    },
+    {
+      "id": "tilted-nx64-h0.031",
+      "corners": [
+        [
+          0,
+          0
+        ],
+        [
+          0.45,
+          0
+        ],
+        [
+          0.265,
+          0.37
+        ],
+        [
+          0,
+          0.37
+        ]
+      ],
+      "lengths": [
+        0.5,
+        0.37,
+        0.031
+      ],
+      "dimensions": [
+        64,
+        48,
+        4
+      ],
+      "impedances": [
+        null,
+        3,
+        null,
+        null,
+        null,
+        null
+      ],
+      "speed": 320
+    },
+    {
+      "id": "tilted-nx64-h0.123",
+      "corners": [
+        [
+          0,
+          0
+        ],
+        [
+          0.45,
+          0
+        ],
+        [
+          0.265,
+          0.37
+        ],
+        [
+          0,
+          0.37
+        ]
+      ],
+      "lengths": [
+        0.5,
+        0.37,
+        0.123
+      ],
+      "dimensions": [
+        64,
+        48,
+        16
+      ],
+      "impedances": [
+        null,
+        3,
+        null,
+        null,
+        null,
+        null
+      ],
+      "speed": 320
+    },
+    {
+      "id": "tilted-mixed-nx32-h0.00390625",
+      "corners": [
+        [
+          0,
+          0
+        ],
+        [
+          0.45,
+          0
+        ],
+        [
+          0.265,
+          0.37
+        ],
+        [
+          0,
+          0.37
+        ]
+      ],
+      "lengths": [
+        0.5,
+        0.37,
+        0.00390625
+      ],
+      "dimensions": [
+        32,
+        24,
+        2
+      ],
+      "impedances": [
+        5,
+        3,
+        7,
+        11,
+        null,
+        null
+      ],
+      "speed": 320
+    },
+    {
+      "id": "tilted-mixed-nx32-h0.031",
+      "corners": [
+        [
+          0,
+          0
+        ],
+        [
+          0.45,
+          0
+        ],
+        [
+          0.265,
+          0.37
+        ],
+        [
+          0,
+          0.37
+        ]
+      ],
+      "lengths": [
+        0.5,
+        0.37,
+        0.031
+      ],
+      "dimensions": [
+        32,
+        24,
+        2
+      ],
+      "impedances": [
+        5,
+        3,
+        7,
+        11,
+        null,
+        null
+      ],
+      "speed": 320
+    },
+    {
+      "id": "tilted-mixed-nx32-h0.123",
+      "corners": [
+        [
+          0,
+          0
+        ],
+        [
+          0.45,
+          0
+        ],
+        [
+          0.265,
+          0.37
+        ],
+        [
+          0,
+          0.37
+        ]
+      ],
+      "lengths": [
+        0.5,
+        0.37,
+        0.123
+      ],
+      "dimensions": [
+        32,
+        24,
+        8
+      ],
+      "impedances": [
+        5,
+        3,
+        7,
+        11,
+        null,
+        null
+      ],
+      "speed": 320
+    },
+    {
+      "id": "tilted-mixed-nx64-h0.00390625",
+      "corners": [
+        [
+          0,
+          0
+        ],
+        [
+          0.45,
+          0
+        ],
+        [
+          0.265,
+          0.37
+        ],
+        [
+          0,
+          0.37
+        ]
+      ],
+      "lengths": [
+        0.5,
+        0.37,
+        0.00390625
+      ],
+      "dimensions": [
+        64,
+        48,
+        2
+      ],
+      "impedances": [
+        5,
+        3,
+        7,
+        11,
+        null,
+        null
+      ],
+      "speed": 320
+    },
+    {
+      "id": "tilted-mixed-nx64-h0.031",
+      "corners": [
+        [
+          0,
+          0
+        ],
+        [
+          0.45,
+          0
+        ],
+        [
+          0.265,
+          0.37
+        ],
+        [
+          0,
+          0.37
+        ]
+      ],
+      "lengths": [
+        0.5,
+        0.37,
+        0.031
+      ],
+      "dimensions": [
+        64,
+        48,
+        4
+      ],
+      "impedances": [
+        5,
+        3,
+        7,
+        11,
+        null,
+        null
+      ],
+      "speed": 320
+    },
+    {
+      "id": "tilted-mixed-nx64-h0.123",
+      "corners": [
+        [
+          0,
+          0
+        ],
+        [
+          0.45,
+          0
+        ],
+        [
+          0.265,
+          0.37
+        ],
+        [
+          0,
+          0.37
+        ]
+      ],
+      "lengths": [
+        0.5,
+        0.37,
+        0.123
+      ],
+      "dimensions": [
+        64,
+        48,
+        16
+      ],
+      "impedances": [
+        5,
+        3,
+        7,
+        11,
+        null,
+        null
+      ],
+      "speed": 320
+    }
+  ]
+}

@@ -53,3 +53,7 @@ requires actual CPU/Metal histories and all-step source wall pressures.
 The [tilted pulse candidate](benchmarks/TILTED_PULSE.md) adds twelve independent
 controls and explicitly separates causal plane-region accuracy from finite-domain
 graph time/energy verification. Spatial gaps are never physical passes.
+
+The [equivalent extrusion audit](benchmarks/EXTRUDED_LAYOUT.md) adds eight independent
+Python geometry controls and a complete native layout contract. Assignment gaps
+remain explicit; this audit does not run a wave update or publish a model release.

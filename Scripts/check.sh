@@ -33,3 +33,5 @@ bash Scripts/check-admittance.sh
 bash Scripts/check-absorbing-cylinder.sh
 
 bash Scripts/check-tilted-pulse.sh
+
+bash Scripts/check-extruded-layout.sh

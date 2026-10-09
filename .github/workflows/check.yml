@@ -27,6 +27,7 @@ jobs:
       - name: Build and clean consumer
         env:
           CONTINUUMKIT_REQUIRE_METAL: "1"
+          CONTINUUMKIT_EXTRUDED_LAYOUT_OUTPUT: ${{ runner.temp }}/extruded-layout-${{ github.run_id }}-${{ github.run_attempt }}
           CONTINUUMKIT_TILTED_PULSE_OUTPUT: ${{ runner.temp }}/tilted-pulse-${{ github.run_id }}-${{ github.run_attempt }}
           CONTINUUMKIT_ABSORBING_CYLINDER_OUTPUT: ${{ runner.temp }}/absorbing-cylinder-${{ github.run_id }}-${{ github.run_attempt }}
           CONTINUUMKIT_ADMITTANCE_OUTPUT: ${{ runner.temp }}/admittance-${{ github.run_id }}-${{ github.run_attempt }}
@@ -143,5 +144,16 @@ jobs:
         with:
           name: tilted-pulse-${{ github.run_id }}-${{ github.run_attempt }}
           path: ${{ runner.temp }}/tilted-pulse-${{ github.run_id }}-${{ github.run_attempt }}
+          if-no-files-found: warn
+          retention-days: 14
+
+      - name: Require complete independent extrusion references
+        run: python3 Scripts/extruded_layout.py verify "${{ runner.temp }}/extruded-layout-${{ github.run_id }}-${{ github.run_attempt }}"
+      - name: Retain complete independent geometry layouts
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: extruded-layout-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/extruded-layout-${{ github.run_id }}-${{ github.run_attempt }}
           if-no-files-found: warn
           retention-days: 14

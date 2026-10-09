@@ -214,3 +214,5 @@ Tilted pulse candidate: [causally isolated plane reflection and central patch wo
 separate angular coefficient/arrival, spatial geometry and fixed-graph time checks.
 Spatial failures remain explicit gaps; actual source evidence is required before
 shared production extraction.
+
+The [equivalent floor-plan and mesh extrusion audit](docs/benchmarks/EXTRUDED_LAYOUT.md) now isolates five thin-mesh wall-selection gaps under anisotropic spacing, with all floor plans and thicker controls conforming. The next bounded step is a directed selection fix plus strict geometry and existing actual CPU/Metal regressions before extending the tilted pulse to thin meshes. AcousticCore remains app-owned.
