@@ -43,3 +43,12 @@ production code extraction or release in this audit. Nonconvex rooms, openings,
 sloping caps, arbitrary imported meshes and multi-face corner policy remain separate
 contracts. A production selection change needs its own bounded fix and regression
 checks against the existing physical-Metal acoustic suites.
+
+## Actual-source audit, 9 October 2026
+
+RoomCAD's focused physical-mini run [37932031460](https://github.com/emmettl/RoomCAD/actions/runs/37932031460) reproduces 36 complete native layouts. All 18 floor plans and 13 extruded meshes conform. Five thin meshes select rigid caps in place of absorbing side walls. For the aligned nx=64 case, all 96 absorbing east faces become rigid. Tilted nx=32/64 cases retain 69.58%/66.17% of expected finite-grid admittance; mixed-wall cases retain 85.99%/84.46% overall. All thicker controls pass. Source masks, spacing and clocks agree exactly between the representations.
+
+The bounded follow-up is directed wall selection in actual gridLayout, preserving
+occupancy and local area weights, followed by strict regression checks here and the
+existing actual CPU/Metal wave, reflection and work suites. AcousticCore extraction
+is still gated; raw app-derived layouts are retained in private Edgerton evidence.

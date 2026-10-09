@@ -215,4 +215,4 @@ separate angular coefficient/arrival, spatial geometry and fixed-graph time chec
 Spatial failures remain explicit gaps; actual source evidence is required before
 shared production extraction.
 
-The next bounded geometry check is [equivalent floor-plan and mesh extrusion](docs/benchmarks/EXTRUDED_LAYOUT.md): compare occupancy and directed boundary/material assignment under anisotropic spacing before extending the tilted pulse to thin meshes. This is an audit candidate; AcousticCore remains app-owned.
+The [equivalent floor-plan and mesh extrusion audit](docs/benchmarks/EXTRUDED_LAYOUT.md) now isolates five thin-mesh wall-selection gaps under anisotropic spacing, with all floor plans and thicker controls conforming. The next bounded step is a directed selection fix plus strict geometry and existing actual CPU/Metal regressions before extending the tilted pulse to thin meshes. AcousticCore remains app-owned.
