@@ -91,3 +91,13 @@ beside the retained RoomCAD benchmark adapters. Actual curved/dissipative/tilted
 application conformance, safe source/receiver interfaces and full application checks
 precede production adoption. Keep RoomCAD's optimized box path and Edgerton's forced,
 damped 2D solver under their existing contracts. No source is retired by this tranche.
+
+## Verified candidate checkpoint
+
+Candidate `cb206cb2ae6ffd2198b6ad204564314716829cca` passes [physical-mini full checks](https://github.com/emmettl/ContinuumKit/actions/runs/37988973765):
+158 tests, actual M4 Metal compute, all-product/CPU-only optimized Git consumers and
+all unchanged independent reference suites. Debug and optimized pinned source
+comparison has zero Float32 bit mismatches at all 260 complete captures in each
+configuration. The [aggregate proof](linear-wave-cpu-verification.json) records
+identities/counts; complete application-derived histories and source binding remain
+in private Edgerton. This is an unreleased CPU candidate, not application adoption.
