@@ -76,3 +76,28 @@ reflection and patch-energy identities. Run `bash Scripts/check-tilted-pulse.sh 
 Actual source adapters own CPU/Metal conformance; complete raw source evidence stays
 private in Edgerton. General meshes, other angles/materials and measured acoustics
 remain separate verification/validation work.
+
+## Matched thin-mesh source checkpoint
+
+[RoomCAD #15](https://github.com/emmettl/RoomCAD/pull/15) binds the same case to a
+closed RoomMesh.extruding input as well as the original floor plan. The independent
+physical/graph reference, case identity, resolutions and tolerances remain immutable.
+Both actual backends must pass every axis and twelve complete plan/mesh history,
+layout, error and work pairs must be exact. Independent directed physical planes
+check every material and normal-sample identity; unresolved mesh queries fail.
+Five hand-derived/rejection controls cover that extra source audit.
+
+This extension adds source conformance evidence, not a public solver product or
+new release. Production source hashes must match the preceding full RoomCAD
+checkpoint. General imported-mesh geometry, other pulse directions and measured
+acoustics remain separate contracts. Raw application fields stay private.
+
+Focused actual-source [mini run 37948058999](https://github.com/emmettl/RoomCAD/actions/runs/37948058999)
+passes five independent identity/rejection controls and all 24 source histories.
+Twelve plan/mesh pairs have exact fields, every wall pressure, layouts, work and
+errors, with no fallback queries. Finest pressure/velocity errors and reflection
+remain those of the verified plan pulse; time remains second order. All 31 production
+source hashes match the preceding full application checkpoint. Direct normalized
+CPU/Metal differences across full fields, wall traces and work stay below 2.09e-6.
+Raw source data and reconstruction provenance remain private. This closes the
+declared thin-extrusion pulse gate without changing the reference or production code.
