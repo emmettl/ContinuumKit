@@ -19,7 +19,7 @@ solver configuration, units, device/toolchain, resolution, errors, budget residu
 and runtime in JSON, with CSV histories and reproducible comparison reports.
 Reference solutions must be independent of the implementation under test.
 
-Current CI builds the CAD foundations, runs 136 tests across CAD foundations, response
+Current CI builds the CAD foundations, runs 141 tests across CAD foundations, response
 interchange, thermodynamics and numerical benchmark contracts, and exercises all
 eight public libraries from an isolated Git consumer compiled in release configuration.
 Seven additional closed-box query checks cover analytic intersections, invalid input,
@@ -44,6 +44,12 @@ payload filename; failed reads preserve the on-disk bytes. Valid JSON arrays, nu
 booleans and strings are rejected with an object-shape error. Payloads still require JSON
 objects, and application codecs retain ownership of field and value validation. This change
 does not alter the package schema or publish a new release.
+
+Manifest diagnostics cover all six required fields, incorrect types, null metadata,
+invalid asset identifiers, non-object roots, malformed JSON and invalid UTF-8 through both
+native wrappers and bounded disk reads. Errors identify `manifest.json` and the coding path, including array
+indices. Existing semantic messages and unsupported-version precedence remain covered;
+an incomplete newer manifest reports its unsupported version before decoding other fields.
 
 See [masked domains](benchmarks/MASKED_DOMAINS.md) for independent geometry, connectivity,
 active-only field/energy and leakage contracts. This candidate does not alter release tags.
