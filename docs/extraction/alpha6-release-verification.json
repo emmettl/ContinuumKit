@@ -1,0 +1,14 @@
+{
+  "actualBenchmarkPairs": 96,
+  "actualMetal": true,
+  "benchmarkRun": "https://github.com/emmettl/RoomCAD/actions/runs/38001607985",
+  "exactVersionConsumers": 3,
+  "release": "https://github.com/emmettl/ContinuumKit/releases/tag/0.1.0-alpha.6",
+  "schemaVersion": 1,
+  "scope": "source-free CPU and resident Metal initial-value wave updates; production forcing/receiver integration remains separate",
+  "status": "published",
+  "tagCommit": "56210bf1aae4046224597128f0a286e55585a521",
+  "tests": 169,
+  "verification": "https://github.com/emmettl/ContinuumKit/actions/runs/38003236841",
+  "version": "0.1.0-alpha.6"
+}
