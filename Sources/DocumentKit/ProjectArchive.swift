@@ -86,8 +86,14 @@ public struct ProjectArchive: Sendable, Equatable {
         try Self.validateFiles(files)
         // Require parseable JSON objects; application codecs validate their own semantics.
         for path in ["scene.json", "settings.json", "view.json"] where files[path] != nil {
-            guard let data = files[path], (try JSONSerialization.jsonObject(with: data)) is [String: Any]
-            else {
+            guard let data = files[path] else { continue }
+            let value: Any
+            do {
+                value = try JSONSerialization.jsonObject(with: data, options: .fragmentsAllowed)
+            } catch {
+                throw ProjectFileError.invalid("\(path) is not valid JSON.")
+            }
+            guard value is [String: Any] else {
                 throw ProjectFileError.invalid("\(path) must contain a JSON object.")
             }
         }
