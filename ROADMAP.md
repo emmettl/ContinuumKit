@@ -202,3 +202,9 @@ Local wall-area correction candidate: [RoomCAD #10](https://github.com/emmettl/R
 normalizes mesh/plan admittance using local normals against the unchanged core area
 contract. Coupled absorbing-cylinder continuum convergence is the next independent
 gate; area/substep conformance alone does not make the solver ready for extraction.
+
+
+Coupled absorbing-cylinder candidate: [independent continuum Bessel and damped-graph
+contracts](docs/benchmarks/ABSORBING_CYLINDER.md) separate geometry, timestep and full
+wall-work histories. Actual source conformance is required; this adds no production
+solver extraction or release tag.

@@ -208,6 +208,12 @@ enum Consumer {
     let wallHistory = try AdmittanceOracle.reference(wallCalibration,auditResolution)
     let wallAudit = try AdmittanceResult.evaluate(model:"consumer",c:wallCalibration,r:auditResolution,environment:BenchmarkEnvironment(repository:"consumer",revision:"test",sourceHashes:[:],hardware:"test",toolchain:"test",operatingSystem:"test"),h:wallHistory,runtime:0,reference:true)
     try require(wallAudit.physicalStatus=="gap","Fetched geometry gap was concealed")
+    let absorbing = try AbsorbingCylinderReference(AbsorbingCylinderCase())
+    try require(abs(absorbing.root.real-3.821751618059804487)<1e-13,"Fetched Robin Bessel root failed")
+    try require(abs((absorbing.energy(time:absorbing.duration)+absorbing.dissipated(time:absorbing.duration))/absorbing.energy(time:0)-1)<1e-13,"Fetched coupled wall energy failed")
+    let damped = try MaskedLattice(dimensions:[2,1,1],spacing:[1,1,1],inside:[1,1],speed:3,wallRates:[2,2])
+    let decay = try damped.evolve([1,1,0],time:0.3)
+    try require(abs(decay[0]-exp(-0.6))<1e-14 && decay[2]==0,"Fetched damped graph failed")
     print("ContinuumKit clean Git consumer passed.")
   }
 }
