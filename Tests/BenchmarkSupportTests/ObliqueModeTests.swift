@@ -95,6 +95,30 @@ import Testing
     let h = try ObliqueModeOracle.history(c, r)
     let fit = try ObliqueModeResult.fitReflection(ref, r, h)
     #expect((fit.value - ref.reflection).magnitude < 1e-12 && fit.residual < 1e-12)
+    let incoming = ObliqueComplex(1, 0.2)
+    let chosen = ObliqueComplex(0.2, 0.1)
+    let outgoing = incoming * chosen
+    let different = BoundaryHistory(
+      dx: h.dx, dy: h.dy, dt: h.dt,
+      frames: h.frames.map { frame in
+        let pressure = frame.p.indices.map { index in
+          let x = (Double(index % r.nx) + 0.5) * h.dx - c.lengthX
+          let y = (Double(index / r.nx) + 0.5) * h.dy
+          let time = Double(frame.step) * h.dt
+          let incident =
+            (ObliqueComplex.i * ref.kx * ObliqueComplex(x) + ref.rate * ObliqueComplex(time)).exp
+          let reflected =
+            (-ObliqueComplex.i * ref.kx * ObliqueComplex(x) + ref.rate * ObliqueComplex(time)).exp
+          return (incoming * incident + outgoing * reflected).real * cos(ref.ky * y)
+        }
+        return BoundaryFrame(
+          step: frame.step, p: pressure, u: frame.u, v: frame.v,
+          dissipation: frame.dissipation)
+      })
+    let independent = try ObliqueModeResult.fitReflection(ref, r, different)
+    #expect((independent.value - chosen).magnitude < 1e-12)
+    #expect((independent.value - ref.reflection).magnitude > 0.1)
+
   }
   @Test("Correct pressure cannot conceal reversed transverse velocity or missing work")
   func negative() throws {

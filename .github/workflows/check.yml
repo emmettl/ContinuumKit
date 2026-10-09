@@ -27,6 +27,7 @@ jobs:
       - name: Build and clean consumer
         env:
           CONTINUUMKIT_REQUIRE_METAL: "1"
+          CONTINUUMKIT_OBLIQUE_OUTPUT: ${{ runner.temp }}/oblique-${{ github.run_id }}-${{ github.run_attempt }}
           CONTINUUMKIT_RIGID_3D_OUTPUT: ${{ runner.temp }}/rigid-3d-${{ github.run_id }}-${{ github.run_attempt }}
           CONTINUUMKIT_BOUNDARY_OUTPUT: ${{ runner.temp }}/boundary-${{ github.run_id }}-${{ github.run_attempt }}
           CONTINUUMKIT_ACOUSTIC_OUTPUT: ${{ runner.temp }}/acoustic-${{ github.run_id }}-${{ github.run_attempt }}
@@ -71,5 +72,16 @@ jobs:
         with:
           name: rigid-3d-${{ github.run_id }}-${{ github.run_attempt }}
           path: ${{ runner.temp }}/rigid-3d-${{ github.run_id }}-${{ github.run_attempt }}
+          if-no-files-found: warn
+          retention-days: 14
+
+      - name: Require complete damped oblique reference fields
+        run: python3 Scripts/verify-oblique-output.py "${{ runner.temp }}/oblique-${{ github.run_id }}-${{ github.run_attempt }}" --reference
+      - name: Retain complete oblique fields, reflection and work reports
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: oblique-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/oblique-${{ github.run_id }}-${{ github.run_attempt }}
           if-no-files-found: warn
           retention-days: 14

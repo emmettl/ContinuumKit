@@ -178,6 +178,16 @@ enum Consumer {
       volumeHistory.frames.count == 9 && volumeHistory.frames[0].w.count == 160,
       "Fetched native z-face history failed")
     print("PASS fetched three-dimensional rigid-mode reference and native z faces")
+    let obliqueCase = try ObliqueModeCase(id: "consumer", impedance: 3)
+    let oblique = try ObliqueModeReference(obliqueCase)
+    let wall = oblique.state(x: 0.25, y: 0.03125, time: oblique.duration / 4)
+    try require(
+      abs(wall.p - 1200 * wall.u) < 1e-12,
+      "Fetched oblique wall condition failed")
+    try require(
+      abs(oblique.reflection.real - 0.36160025261824914) < 1e-12,
+      "Fetched complex reflection failed")
+    print("PASS fetched damped oblique mode and complex reflection reference")
     print("ContinuumKit clean Git consumer passed.")
   }
 }
