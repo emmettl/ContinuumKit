@@ -27,6 +27,7 @@ jobs:
       - name: Build and clean consumer
         env:
           CONTINUUMKIT_REQUIRE_METAL: "1"
+          CONTINUUMKIT_ABSORBING_CYLINDER_OUTPUT: ${{ runner.temp }}/absorbing-cylinder-${{ github.run_id }}-${{ github.run_attempt }}
           CONTINUUMKIT_ADMITTANCE_OUTPUT: ${{ runner.temp }}/admittance-${{ github.run_id }}-${{ github.run_attempt }}
           CONTINUUMKIT_CYLINDER_OUTPUT: ${{ runner.temp }}/cylinder-${{ github.run_id }}-${{ github.run_attempt }}
           CONTINUUMKIT_MASKED_OUTPUT: ${{ runner.temp }}/masked-${{ github.run_id }}-${{ github.run_attempt }}
@@ -119,5 +120,16 @@ jobs:
         with:
           name: admittance-${{ github.run_id }}-${{ github.run_attempt }}
           path: ${{ runner.temp }}/admittance-${{ github.run_id }}-${{ github.run_attempt }}
+          if-no-files-found: warn
+          retention-days: 14
+
+      - name: Require complete coupled absorbing-cylinder references
+        run: python3 Scripts/verify-absorbing-cylinder-output.py "${{ runner.temp }}/absorbing-cylinder-${{ github.run_id }}-${{ github.run_attempt }}" --reference
+      - name: Retain complete absorbing-cylinder reference fields and work
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: absorbing-cylinder-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/absorbing-cylinder-${{ github.run_id }}-${{ github.run_attempt }}
           if-no-files-found: warn
           retention-days: 14

@@ -152,13 +152,21 @@ public struct MaskedLattice: Sendable {
   }
   public let dimensions: [Int], inside: [UInt8], cells: [Int], edges: [Edge]
   public let normBound: Double
+  public let wallRates: [Double]
   public var stateCount: Int { cells.count + edges.count }
-  public init(dimensions: [Int], spacing: [Double], inside: [UInt8], speed: Double) throws {
+  public init(
+    dimensions: [Int], spacing: [Double], inside: [UInt8], speed: Double,
+    wallRates: [Double]? = nil
+  ) throws {
     guard dimensions.count == 3, dimensions.allSatisfy({ $0 > 0 && $0 <= 128 }),
       dimensions.reduce(1, *) <= 65536,
       spacing.count == 3, spacing.allSatisfy({ $0.isFinite && $0 > 0 }),
       inside.count == dimensions.reduce(1, *), inside.allSatisfy({ $0 <= 1 }), speed.isFinite,
       speed > 0
+    else { throw BenchmarkFailure.invalidCase }
+    let losses = wallRates ?? [Double](repeating: 0, count: inside.count)
+    guard losses.count == inside.count, losses.allSatisfy({ $0.isFinite && $0 >= 0 }),
+      inside.indices.allSatisfy({ inside[$0] == 1 || losses[$0] == 0 })
     else { throw BenchmarkFailure.invalidCase }
     self.dimensions = dimensions
     self.inside = inside
@@ -182,11 +190,13 @@ public struct MaskedLattice: Sendable {
       }
     }
     edges = all
-    normBound = 2 * spacing.reduce(0) { $0 + speed / $1 }
+    self.wallRates = cells.map { losses[$0] }
+    normBound = 2 * spacing.reduce(0) { $0 + speed / $1 } + (losses.max() ?? 0)
     guard normBound.isFinite else { throw BenchmarkFailure.invalidCase }
   }
   private func action(_ y: [Double]) -> [Double] {
     var z = [Double](repeating: 0, count: stateCount)
+    for i in cells.indices { z[i] = -wallRates[i] * y[i] }
     for (i, e) in edges.enumerated() {
       let velocity = y[cells.count + i] * e.rate
       z[e.left] -= velocity

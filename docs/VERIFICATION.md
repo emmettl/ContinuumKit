@@ -19,7 +19,7 @@ solver configuration, units, device/toolchain, resolution, errors, budget residu
 and runtime in JSON, with CSV histories and reproducible comparison reports.
 Reference solutions must be independent of the implementation under test.
 
-Current CI builds the CAD foundations, runs 112 tests across CAD foundations, response
+Current CI builds the CAD foundations, runs 122 tests across CAD foundations, response
 interchange, thermodynamics and numerical benchmark contracts, and exercises all
 eight public libraries from an isolated Git consumer compiled in release configuration.
 Seven additional closed-box query checks cover analytic intersections, invalid input,
@@ -45,3 +45,7 @@ from continuous-time graph-reference checks, with ten independent tests and geom
 
 The [curved admittance audit](benchmarks/CURVED_ADMITTANCE.md) has ten independent tests
 and reports physical geometry gaps separately from numerical substep verification.
+
+The [coupled absorbing cylinder](benchmarks/ABSORBING_CYLINDER.md) has ten independent
+complex-mode, physical-work and dissipative-graph checks. Application conformance
+requires actual CPU/Metal histories and all-step source wall pressures.

@@ -29,3 +29,5 @@ bash Scripts/check-masked.sh
 bash Scripts/check-cylinder.sh
 
 bash Scripts/check-admittance.sh
+
+bash Scripts/check-absorbing-cylinder.sh
