@@ -70,3 +70,5 @@ conformance](docs/benchmarks/ACOUSTICS.md), with independent spatial/temporal re
 It does not move an acoustic solver or change the current release tag.
 
 The next boundary candidate adds [mixed-axis modes and real impedance](docs/benchmarks/ACOUSTIC_BOUNDARIES.md), with explicit unsupported capabilities.
+
+Masked acoustic geometry contracts: [scope and checks](docs/benchmarks/MASKED_DOMAINS.md).

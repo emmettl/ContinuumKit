@@ -23,3 +23,5 @@ bash Scripts/check-boundaries.sh
 bash Scripts/check-rigid-3d.sh
 
 bash Scripts/check-oblique.sh
+
+bash Scripts/check-masked.sh

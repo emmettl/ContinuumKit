@@ -188,6 +188,15 @@ enum Consumer {
       abs(oblique.reflection.real - 0.36160025261824914) < 1e-12,
       "Fetched complex reflection failed")
     print("PASS fetched damped oblique mode and complex reflection reference")
+    let masked = try MaskedModeCase.standard()[1]
+    let maskedResolution = MaskedModeResolution(axis: "time", nx: 16, ny: 8, nz: 8, steps: 64)
+    let maskedGrid = try MaskedGrid(masked, maskedResolution)
+    precondition(maskedGrid.labels.filter { $0 >= 0 }.count == 360)
+    precondition(maskedGrid.label([7,3,3]) == -1)
+    let maskedHistory = try MaskedModeOracle.history(masked, maskedResolution)
+    precondition(maskedHistory.frames[0].p[0] == 100)
+    precondition(maskedHistory.frames[0].w.count == 16 * 8 * 9)
+    print("PASS fetched masked-domain occupancy and native fields")
     print("ContinuumKit clean Git consumer passed.")
   }
 }

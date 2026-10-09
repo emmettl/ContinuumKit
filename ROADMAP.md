@@ -184,3 +184,7 @@ separate steps. Treat published tags as immutable; retain previous versions and 
 Do not set calendar deadlines until a particular extraction is scheduled. The
 [inventory](docs/INVENTORY.md) recommends the existing five SimulationKit products as
 the first bounded move, with compatibility, toolchain and dependency-access gates.
+
+Masked-domain candidate: exact aligned boxes and disconnected chambers now have independent
+contracts; real application source conformance is required before extraction. Curved/staircase
+geometry, absorbing masked walls and isolated oblique pulse reflection remain separate gaps.
