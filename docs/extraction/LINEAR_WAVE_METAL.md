@@ -82,3 +82,13 @@ Safe source writes, receiver encoding, cancellation and application lifetimes ne
 separate integration contracts before replacing production loops. Preserve the
 optimized box CPU path and Edgerton's forced/damped 2D assumptions. Release and
 application pins follow verified adoption/readiness gates; existing tags are immutable.
+
+## Verified checkpoint
+
+Candidate `4716913afee578f8476f13371fa2ee45b55be2bd` passes [full physical-mini checks](https://github.com/emmettl/ContinuumKit/actions/runs/37996475411):
+169 tests, actual M4 compute/wave ABI/reference work, all three optimized Git
+consumers and unchanged reference/report guards. Both source-comparison builds on
+M4 Max and M4 mini match the pinned kernels bit-for-bit at all 1040 captures overall;
+complete reports also match across device/configuration. The [aggregate proof](linear-wave-metal-verification.json)
+records identities/counts; full source histories, producer and lossless logs remain
+private in Edgerton. Release and actual RoomCAD benchmark/adoption gates remain open.
