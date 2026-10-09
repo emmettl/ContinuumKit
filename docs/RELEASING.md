@@ -52,3 +52,18 @@ artifact is required. The workflow refuses to overwrite an existing GitHub relea
 
 Applications update their exact dependency and committed `Package.resolved`, then
 run their integration checks. Keep previous releases available for reproducibility.
+
+## Source-free wave release preparation
+
+The next wave prerelease is bounded to the checked source-free masked CPU product
+and explicit resident Metal product. Their independent Core suites, exact pinned
+source comparisons and actual original/shared RoomCAD geometry/wall-work benchmark
+consumers must pass before tagging. It does not claim production source/receiver
+integration or measured acoustic validation; those are separate application gates.
+
+All three fetched release consumers must use the exact version requirement, including
+the CPU-only framework-link guard and the actual-device wave resource/multiple-batch
+consumer. Check scripts reject a tag that does not identify their candidate HEAD.
+Existing tags remain immutable. A new prerelease is published only through the
+successful exact-tag workflow; release authorization comes from the active model-gap
+instruction to commit, push and release as needed.

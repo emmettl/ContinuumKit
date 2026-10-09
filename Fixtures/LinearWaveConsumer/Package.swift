@@ -8,9 +8,17 @@ guard let source = environment["CONTINUUMKIT_CONSUMER_SOURCE"],
 else {
   fatalError("Run Scripts/check-linear-wave-consumer.sh")
 }
+let version = environment["CONTINUUMKIT_CONSUMER_VERSION"] ?? ""
+let dependency: Package.Dependency
+if version.isEmpty {
+  dependency = .package(url: URL(fileURLWithPath: source).absoluteString, revision: revision)
+} else {
+  guard let semanticVersion = Version(version) else { fatalError("Invalid semantic version") }
+  dependency = .package(url: URL(fileURLWithPath: source).absoluteString, exact: semanticVersion)
+}
 let package = Package(
   name: "WaveConsumer", platforms: [.macOS(.v15)],
-  dependencies: [.package(url: URL(fileURLWithPath: source).absoluteString, revision: revision)],
+  dependencies: [dependency],
   targets: [
     .executableTarget(
       name: "WaveConsumer",
