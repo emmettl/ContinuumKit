@@ -214,6 +214,10 @@ enum Consumer {
     let damped = try MaskedLattice(dimensions:[2,1,1],spacing:[1,1,1],inside:[1,1],speed:3,wallRates:[2,2])
     let decay = try damped.evolve([1,1,0],time:0.3)
     try require(abs(decay[0]-exp(-0.6))<1e-14 && decay[2]==0,"Fetched damped graph failed")
+    let tilted = TiltedPulseCase()
+    try require(abs(tilted.reflection-0.4570059441936298)<1e-15,"Fetched tilted reflection failed")
+    try require(tilted.travel<tilted.cornerArrivalTravel,"Fetched plane region is not causal")
+    try require(abs(tilted.patchWork(time:tilted.duration)/tilted.patchEnergy-(1-tilted.reflection*tilted.reflection))<1e-13,"Fetched tilted patch work failed")
     print("ContinuumKit clean Git consumer passed.")
   }
 }
