@@ -1,0 +1,73 @@
+{
+  "candidate": "cb206cb2ae6ffd2198b6ad204564314716829cca",
+  "configurations": {
+    "debug": [
+      {
+        "Float32BitMismatches": 0,
+        "captures": 65,
+        "fieldValuesCompared": 15600,
+        "name": "all-active-rigid"
+      },
+      {
+        "Float32BitMismatches": 0,
+        "captures": 65,
+        "fieldValuesCompared": 15600,
+        "name": "all-active-lossy"
+      },
+      {
+        "Float32BitMismatches": 0,
+        "captures": 65,
+        "fieldValuesCompared": 15600,
+        "name": "masked-lossy"
+      },
+      {
+        "Float32BitMismatches": 0,
+        "captures": 65,
+        "fieldValuesCompared": 10920,
+        "name": "split-chambers"
+      }
+    ],
+    "release": [
+      {
+        "Float32BitMismatches": 0,
+        "captures": 65,
+        "fieldValuesCompared": 15600,
+        "name": "all-active-rigid"
+      },
+      {
+        "Float32BitMismatches": 0,
+        "captures": 65,
+        "fieldValuesCompared": 15600,
+        "name": "all-active-lossy"
+      },
+      {
+        "Float32BitMismatches": 0,
+        "captures": 65,
+        "fieldValuesCompared": 15600,
+        "name": "masked-lossy"
+      },
+      {
+        "Float32BitMismatches": 0,
+        "captures": 65,
+        "fieldValuesCompared": 10920,
+        "name": "split-chambers"
+      }
+    ]
+  },
+  "finalCPUConsumer": "optimized Git revision; no Metal/UI binary links",
+  "finalFocusedTests": 17,
+  "localFullCheckRevision": "9f82e904d7974d4e9ea0a31ebee208ab0a715d96",
+  "physicalMini": {
+    "CPUOnlyConsumer": "passed, optimized exact-Git dependency and binary framework guard",
+    "candidate": "cb206cb2ae6ffd2198b6ad204564314716829cca",
+    "fullPackageCheck": "all existing independent suites and all-product consumer passed",
+    "metal": "Apple M4, 256 checked compute outputs",
+    "run": "https://github.com/emmettl/ContinuumKit/actions/runs/37988973765",
+    "status": "passed",
+    "tests": 158
+  },
+  "schemaVersion": 1,
+  "scope": "source-free CPU only; no application adoption",
+  "sourceRevision": "f2f6465d0d845af9adda596c004b18ca15a77edd",
+  "status": "passed"
+}

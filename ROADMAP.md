@@ -46,9 +46,10 @@ Application development continues while candidates mature.
 - Complete: independent masked/curved/dissipative and tilted-pulse source contracts,
   directed wall-selection correction and exact thin plan/mesh history comparisons.
 - Complete: [proposed wave-update API and pinned source map](docs/extraction/LINEAR_WAVE_UPDATE.md).
-- Next: implement the serial source-free masked CPU update with independent Core
-  tests and a committed clean Git consumer. Metal, source/receiver integration and
-  application adoption are separate later gates; heterogeneous fluids remain open.
+- Candidate: [serial source-free masked CPU update](docs/extraction/LINEAR_WAVE_CPU.md)
+  with independent Core tests and a committed CPU-only Git consumer. Metal,
+  source/receiver integration and application adoption remain separate gates;
+  heterogeneous fluids remain open.
 
 Follow the MotionStudies pattern: the shared repository owns reusable contracts,
 implementations and their independent verification; applications own their use and
