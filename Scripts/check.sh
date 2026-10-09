@@ -27,3 +27,5 @@ bash Scripts/check-oblique.sh
 bash Scripts/check-masked.sh
 
 bash Scripts/check-cylinder.sh
+
+bash Scripts/check-admittance.sh

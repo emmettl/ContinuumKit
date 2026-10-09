@@ -1,7 +1,9 @@
 import BenchmarkSupport
 import Foundation
 
-if CommandLine.arguments.contains("cylinder-reference") {
+if CommandLine.arguments.contains("admittance-reference") {
+  try AdmittanceCommand.runReference()
+} else if CommandLine.arguments.contains("cylinder-reference") {
   try CylinderCommand.runReference()
 } else if CommandLine.arguments.contains("masked-reference") {
   try MaskedModeCommand.runReference()

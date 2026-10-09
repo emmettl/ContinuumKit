@@ -49,3 +49,5 @@ This is bounded numerical verification of an ideal rigid cylinder. It does not e
 arbitrary curved mesh, absorbing-wall, source/probe policy or measured-room accuracy.
 Complete app-derived vectors remain private in Edgerton. Production solvers and release
 tags are unchanged; numerical contracts remain candidates before extraction.
+
+[Absorbing wall admittance audit](CURVED_ADMITTANCE.md) separates physical area from isolated wall-flow integration.

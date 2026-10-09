@@ -19,7 +19,7 @@ solver configuration, units, device/toolchain, resolution, errors, budget residu
 and runtime in JSON, with CSV histories and reproducible comparison reports.
 Reference solutions must be independent of the implementation under test.
 
-Current CI builds the CAD foundations, runs 102 tests across CAD foundations, response
+Current CI builds the CAD foundations, runs 112 tests across CAD foundations, response
 interchange, thermodynamics and numerical benchmark contracts, and exercises all
 eight public libraries from an isolated Git consumer compiled in release configuration.
 Seven additional closed-box query checks cover analytic intersections, invalid input,
@@ -42,3 +42,6 @@ active-only field/energy and leakage contracts. This candidate does not alter re
 
 The [rigid cylinder candidate](benchmarks/CYLINDER.md) separates staircase spatial error
 from continuous-time graph-reference checks, with ten independent tests and geometry gates.
+
+The [curved admittance audit](benchmarks/CURVED_ADMITTANCE.md) has ten independent tests
+and reports physical geometry gaps separately from numerical substep verification.

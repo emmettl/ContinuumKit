@@ -191,3 +191,8 @@ geometry, absorbing masked walls and isolated oblique pulse reflection remain se
 
 Curved-boundary candidate: rigid cylinder geometry and all-field spatial/time contracts
 are bounded separately; absorbing masked walls and isolated oblique pulses remain gaps.
+
+Absorbing curved-wall gate: audit prescribed-load physical admittance separately from
+isolated numerical wall flow. Full Cartesian stair-face area predicts a persistent 4/π
+bias for the cylindrical side; geometry-aware admittance and coupled transient continuum
+verification must precede production extraction. Diagnostic gap reports are not passes.
