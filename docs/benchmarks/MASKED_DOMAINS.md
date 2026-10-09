@@ -35,3 +35,5 @@ openings, absorbing masked walls, material selection and measured-room accuracy 
 separate gaps. No production wave implementation is extracted, and no release tag changes.
 Complete application-derived evidence is retained in private Edgerton; public core owns
 only independently authored references, contracts and guards.
+
+The [rigid cylinder candidate](CYLINDER.md) adds a separate curved/staircase contract.

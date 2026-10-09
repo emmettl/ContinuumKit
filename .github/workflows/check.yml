@@ -27,6 +27,7 @@ jobs:
       - name: Build and clean consumer
         env:
           CONTINUUMKIT_REQUIRE_METAL: "1"
+          CONTINUUMKIT_CYLINDER_OUTPUT: ${{ runner.temp }}/cylinder-${{ github.run_id }}-${{ github.run_attempt }}
           CONTINUUMKIT_MASKED_OUTPUT: ${{ runner.temp }}/masked-${{ github.run_id }}-${{ github.run_attempt }}
           CONTINUUMKIT_OBLIQUE_OUTPUT: ${{ runner.temp }}/oblique-${{ github.run_id }}-${{ github.run_attempt }}
           CONTINUUMKIT_RIGID_3D_OUTPUT: ${{ runner.temp }}/rigid-3d-${{ github.run_id }}-${{ github.run_attempt }}
@@ -95,5 +96,16 @@ jobs:
         with:
           name: masked-${{ github.run_id }}-${{ github.run_attempt }}
           path: ${{ runner.temp }}/masked-${{ github.run_id }}-${{ github.run_attempt }}
+          if-no-files-found: warn
+          retention-days: 14
+
+      - name: Require complete cylinder-domain reference fields
+        run: python3 Scripts/verify-cylinder-output.py "${{ runner.temp }}/cylinder-${{ github.run_id }}-${{ github.run_attempt }}" --reference
+      - name: Retain complete cylinder fields, occupancy and connectivity reports
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: cylinder-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/cylinder-${{ github.run_id }}-${{ github.run_attempt }}
           if-no-files-found: warn
           retention-days: 14

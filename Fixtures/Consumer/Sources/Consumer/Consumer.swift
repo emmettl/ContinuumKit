@@ -197,6 +197,11 @@ enum Consumer {
     precondition(maskedHistory.frames[0].p[0] == 100)
     precondition(maskedHistory.frames[0].w.count == 16 * 8 * 9)
     print("PASS fetched masked-domain occupancy and native fields")
+    let cylinder = CylinderCase()
+    try require(abs(cylinder.energy/1.0935127186193479175e-9-1)<1e-14,"Fetched cylinder energy failed")
+    let graph = try MaskedLattice(dimensions:[2,1,1],spacing:[1,1,1],inside:[1,1],speed:3)
+    let graphQuarter = try graph.evolve([1,-1,0],time:Double.pi/(6*sqrt(2)))
+    try require(abs(graphQuarter[2]-sqrt(2))<1e-14,"Fetched masked graph oscillator failed")
     print("ContinuumKit clean Git consumer passed.")
   }
 }
