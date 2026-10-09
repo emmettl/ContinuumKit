@@ -113,6 +113,8 @@ summary value. Complete dense JSON fields are retained as lossless gzip payloads
 in private Edgerton; raw outputs remain in temporary directories and CI artifacts.
 Analytic core artifacts are labelled reference, not backend passes.
 
-Still outside scope: oblique-incidence impedance reflection, body-diagonal 3D modes,
+Separate suites now verify [full 3D rigid modes](RIGID_MODES_3D.md) and
+[damped oblique impedance modes](OBLIQUE_IMPEDANCE.md). Still outside scope here:
+isolated oblique pulses,
 masked/curved boundaries, frequency-dependent impedance and measured validation.
 No new release or acoustic solver extraction is included.

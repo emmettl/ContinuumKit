@@ -41,7 +41,9 @@ Application development continues while candidates mature.
   impedance time-refinement gates (unreleased benchmark candidate).
 - Complete: full 3D rigid-box modes with individual pressure/x/y/z velocity
   spatial and temporal gates, including anisotropic grids (unreleased candidate).
-- Pending: oblique impedance and masked cases,
+- Complete: damped oblique impedance box modes with independent complex roots,
+  reflection fits, work and spatial/temporal gates (unreleased candidate).
+- Pending: isolated oblique pulses, masked and heterogeneous cases,
   then independently verified solver extractions.
 
 Follow the MotionStudies pattern: the shared repository owns reusable contracts,
