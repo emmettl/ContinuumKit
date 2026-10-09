@@ -38,9 +38,9 @@ starts with sampled continuum pressure and Taylor half kick. Time orders must be
 for all fields, finest L2 <1%, maxima <3%, and initial energy error <2%; fixed-grid volume
 error <2% is recorded separately, with the same energy and inactive/blocked gates.
 
-Eight tests include independent Bessel/field goldens, volume integration, a golden two-cell
+Ten tests include independent Bessel/field goldens, volume integration, a golden two-cell
 oscillator, a disconnected graph, energy/composition/reversal, agreement with an independent
-rectangular masked eigenmode, incorrect masks/z velocity and invalid states/cases.
+rectangular masked eigenmode, incorrect masks/z velocity, padding corruption, missing fields/clocks/metrics and invalid states/cases.
 Run `bash Scripts/check-cylinder.sh [output]` and `python3 Scripts/verify-cylinder-output.py
 output --reference`; omit the flag for source results, use `--unsupported` for capability
 records. The clean Git consumer exercises the cylinder and graph reference.

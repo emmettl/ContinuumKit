@@ -19,8 +19,8 @@ solver configuration, units, device/toolchain, resolution, errors, budget residu
 and runtime in JSON, with CSV histories and reproducible comparison reports.
 Reference solutions must be independent of the implementation under test.
 
-Current CI builds the CAD foundations, runs 22 CAD, 12 response interchange,
-14 adiabatic and 9 axial and 12 boundary and 8 three-dimensional and 7 oblique reference/conformance tests, and exercises all
+Current CI builds the CAD foundations, runs 102 tests across CAD foundations, response
+interchange, thermodynamics and numerical benchmark contracts, and exercises all
 eight public libraries from an isolated Git consumer compiled in release configuration.
 Seven additional closed-box query checks cover analytic intersections, invalid input,
 transform invariance and 400 segment comparisons against an independent face-plane oracle.
@@ -39,3 +39,6 @@ Future GPU suites run on that same declared device-capable runner.
 
 See [masked domains](benchmarks/MASKED_DOMAINS.md) for independent geometry, connectivity,
 active-only field/energy and leakage contracts. This candidate does not alter release tags.
+
+The [rigid cylinder candidate](benchmarks/CYLINDER.md) separates staircase spatial error
+from continuous-time graph-reference checks, with ten independent tests and geometry gates.

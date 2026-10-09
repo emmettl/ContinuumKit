@@ -128,4 +128,56 @@ import Testing
     #expect(throws: BenchmarkFailure.self) { try bad.validate() }
     #expect(throws: BenchmarkFailure.self) { try CylinderCommand.check([]) }
   }
+  @Test("Padding corruption cannot dilute active field errors or energy") func padding() throws {
+    let c = CylinderCase()
+    let r = CylinderResolution(axis: "space", nx: 16, ny: 16, nz: 8, steps: 256)
+    let grid = try CylinderGrid(c, r)
+    let h = try CylinderOracle.history(c, r)
+    let corrupted = RigidModeHistory(
+      spacing: h.spacing, dt: h.dt,
+      frames: h.frames.map {
+        var p = $0.p
+        p[0] -= 1
+        return RigidModeFrame(step: $0.step, p: p, u: $0.u, v: $0.v, w: $0.w)
+      })
+    let result = try CylinderResult.evaluate(
+      model: "padding", c: c, r: r, environment: env, runtime: 0,
+      h: CylinderHistory(fields: corrupted, inside: grid.inside, faces: grid.faces))
+    #expect(result.errors!.fieldL2 == [0, 0, 0, 0])
+    #expect(result.errors!.inactivePreservationError == 1)
+    #expect(throws: BenchmarkFailure.self) { try CylinderCommand.bounds(result) }
+  }
+  @Test("Missing native fields, wrong clock and decoded malformed metrics reject") func malformed()
+    throws
+  {
+    let c = CylinderCase()
+    let r = CylinderResolution(axis: "space", nx: 16, ny: 16, nz: 8, steps: 256)
+    let grid = try CylinderGrid(c, r)
+    let h = try CylinderOracle.history(c, r)
+    for fields in [
+      RigidModeHistory(spacing: h.spacing, dt: 2 * h.dt, frames: h.frames),
+      RigidModeHistory(
+        spacing: h.spacing, dt: h.dt,
+        frames: h.frames.map { RigidModeFrame(step: $0.step, p: $0.p, u: $0.u, v: $0.v, w: []) }),
+    ] {
+      #expect(throws: BenchmarkFailure.self) {
+        try CylinderResult.evaluate(
+          model: "invalid", c: c, r: r, environment: env, runtime: 0,
+          h: CylinderHistory(fields: fields, inside: grid.inside, faces: grid.faces))
+      }
+    }
+    let result = try CylinderResult.evaluate(
+      model: "decoded", c: c, r: r, environment: env, runtime: 0,
+      h: CylinderHistory(fields: h, inside: grid.inside, faces: grid.faces))
+    var dict =
+      try JSONSerialization.jsonObject(with: JSONEncoder().encode(result)) as! [String: Any]
+    var errors = dict["errors"] as! [String: Any]
+    errors["fieldL2"] = []
+    dict["errors"] = errors
+    let broken = try JSONDecoder().decode(
+      CylinderResult.self, from: JSONSerialization.data(withJSONObject: dict))
+    #expect(throws: BenchmarkFailure.self) { try CylinderCommand.check([broken, broken, broken]) }
+    #expect(throws: BenchmarkFailure.self) { try CylinderCommand.bounds(broken) }
+  }
+
 }
