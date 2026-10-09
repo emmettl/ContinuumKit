@@ -11,6 +11,24 @@ public struct WaveInitialFields: Sendable {
     self.velocityY = velocityY
     self.velocityZ = velocityZ
   }
+
+  /// Validate finite native fields and zero closed/unused velocities before backend allocation.
+  public func validate(for grid: PreparedWaveGrid) throws {
+    let fields = [pressureOverDensity, velocityX, velocityY, velocityZ]
+    for (field, values) in fields.enumerated() {
+      try PreparedWaveGrid.requireCount(values.count, grid.cellCount, "field\(field)")
+      guard values.allSatisfy(\.isFinite) else { throw WaveError.invalidInitialFields }
+      if field > 0 {
+        // Positive face is open exactly when its prepared coefficient is -1 on an active cell.
+        for at in values.indices
+        where grid.activeCells[at] == 0
+          || grid.boundaryTerms[(2 * field - 1) * grid.cellCount + at] != -1
+        {
+          guard values[at] == 0 else { throw WaveError.closedFaceVelocity(field: field, cell: at) }
+        }
+      }
+    }
+  }
 }
 
 /// All fields have the native N-slot layout. Relative clocks preserve staggering.
@@ -18,6 +36,18 @@ public struct WaveSnapshot: Sendable {
   public let pressureStepIndex: Int
   public let timeStep: Double
   public let pressureOverDensity, velocityX, velocityY, velocityZ: [Float]
+  /// Value constructor for backend results. Steppers validate fields and clocks before returning them.
+  public init(
+    pressureStepIndex: Int, timeStep: Double, pressureOverDensity: [Float],
+    velocityX: [Float], velocityY: [Float], velocityZ: [Float]
+  ) {
+    self.pressureStepIndex = pressureStepIndex
+    self.timeStep = timeStep
+    self.pressureOverDensity = pressureOverDensity
+    self.velocityX = velocityX
+    self.velocityY = velocityY
+    self.velocityZ = velocityZ
+  }
   public var pressureTime: Double { Double(pressureStepIndex) * timeStep }
   public var velocityTime: Double { (Double(pressureStepIndex) - 0.5) * timeStep }
 }
@@ -36,19 +66,7 @@ public final class CPUWaveStepper {
       initialFields.pressureOverDensity, initialFields.velocityX, initialFields.velocityY,
       initialFields.velocityZ,
     ]
-    for (field, values) in fields.enumerated() {
-      try PreparedWaveGrid.requireCount(values.count, grid.cellCount, "field\(field)")
-      guard values.allSatisfy(\.isFinite) else { throw WaveError.invalidInitialFields }
-      if field > 0 {
-        // Positive face is open exactly when its prepared coefficient is -1 on an active cell.
-        for at in values.indices
-        where grid.activeCells[at] == 0
-          || grid.boundaryTerms[(2 * field - 1) * grid.cellCount + at] != -1
-        {
-          guard values[at] == 0 else { throw WaveError.closedFaceVelocity(field: field, cell: at) }
-        }
-      }
-    }
+    try initialFields.validate(for: grid)
     func copy(_ values: [Float]) -> UnsafeMutablePointer<Float> {
       let buffer = UnsafeMutablePointer<Float>.allocate(capacity: values.count)
       values.withUnsafeBufferPointer {

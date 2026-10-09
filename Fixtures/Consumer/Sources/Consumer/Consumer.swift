@@ -5,6 +5,7 @@ import Foundation
 import GeometryImport
 import ImpulseResponseKit
 import LinearAcoustics
+import LinearAcousticsMetal
 import Metal
 import SceneModel
 import SceneRender
@@ -24,17 +25,37 @@ enum Consumer {
 
   @MainActor
   static func main() throws {
-    let isolatedMask: [UInt8] = [1,0,0,0,0,0,0,0]
+    let isolatedMask: [UInt8] = [1, 0, 0, 0, 0, 0, 0, 0]
     var waveFaces = [Float](repeating: -1, count: 48)
-    for side in 0..<6 { waveFaces[side*8] = 0 }
-    let waveGrid = try PreparedWaveGrid(dimensions: [2,2,2], spacing: [1,1,1],
-      soundSpeed: 1, density: 1, timeStep: 0.125, activeCells: isolatedMask, boundaryTerms: waveFaces)
+    for side in 0..<6 { waveFaces[side * 8] = 0 }
+    let waveGrid = try PreparedWaveGrid(
+      dimensions: [2, 2, 2], spacing: [1, 1, 1],
+      soundSpeed: 1, density: 1, timeStep: 0.125, activeCells: isolatedMask,
+      boundaryTerms: waveFaces)
     let waveZero = [Float](repeating: 0, count: 8)
-    let wave = try CPUWaveStepper(grid: waveGrid, initialFields: WaveInitialFields(
-      pressureOverDensity: [1,100,100,100,100,100,100,100], velocityX: waveZero, velocityY: waveZero, velocityZ: waveZero))
+    let wave = try CPUWaveStepper(
+      grid: waveGrid,
+      initialFields: WaveInitialFields(
+        pressureOverDensity: [1, 100, 100, 100, 100, 100, 100, 100], velocityX: waveZero,
+        velocityY: waveZero, velocityZ: waveZero))
     try wave.advance(steps: 3)
-    try require(try wave.snapshot().pressureOverDensity == [1,100,100,100,100,100,100,100], "Fetched rigid wave changed")
+    try require(
+      try wave.snapshot().pressureOverDensity == [1, 100, 100, 100, 100, 100, 100, 100],
+      "Fetched rigid wave changed")
     print("PASS LinearAcoustics public product")
+    guard let waveDevice = MTLCreateSystemDefaultDevice() else {
+      throw NSError(domain: "ContinuumConsumer", code: 2)
+    }
+    let gpuWave = try MetalWaveStepper(
+      device: waveDevice, grid: waveGrid,
+      initialFields: WaveInitialFields(
+        pressureOverDensity: [1, 100, 100, 100, 100, 100, 100, 100], velocityX: waveZero,
+        velocityY: waveZero, velocityZ: waveZero))
+    try gpuWave.advance(steps: 3)
+    try require(
+      try gpuWave.snapshot().pressureOverDensity == [1, 100, 100, 100, 100, 100, 100, 100],
+      "Fetched Metal wave changed")
+    print("PASS LinearAcousticsMetal packaged kernels")
 
     let savedBounds = Data(#"{"min":[1,2,3],"max":[5,8,10]}"#.utf8)
     let box = try JSONDecoder().decode(Box.self, from: savedBounds)
@@ -205,32 +226,49 @@ enum Consumer {
     let maskedResolution = MaskedModeResolution(axis: "time", nx: 16, ny: 8, nz: 8, steps: 64)
     let maskedGrid = try MaskedGrid(masked, maskedResolution)
     precondition(maskedGrid.labels.filter { $0 >= 0 }.count == 360)
-    precondition(maskedGrid.label([7,3,3]) == -1)
+    precondition(maskedGrid.label([7, 3, 3]) == -1)
     let maskedHistory = try MaskedModeOracle.history(masked, maskedResolution)
     precondition(maskedHistory.frames[0].p[0] == 100)
     precondition(maskedHistory.frames[0].w.count == 16 * 8 * 9)
     print("PASS fetched masked-domain occupancy and native fields")
     let cylinder = CylinderCase()
-    try require(abs(cylinder.energy/1.0935127186193479175e-9-1)<1e-14,"Fetched cylinder energy failed")
-    let graph = try MaskedLattice(dimensions:[2,1,1],spacing:[1,1,1],inside:[1,1],speed:3)
-    let graphQuarter = try graph.evolve([1,-1,0],time:Double.pi/(6*sqrt(2)))
-    try require(abs(graphQuarter[2]-sqrt(2))<1e-14,"Fetched masked graph oscillator failed")
-    let wallCalibration = AdmittanceCase(kind:.cylinder)
-    try require(abs(wallCalibration.sideArea-0.07363107781851078)<1e-15,"Fetched wall area failed")
-    let auditResolution = AdmittanceResolution(axis:"space",nx:16,courant:0.2)
-    let wallHistory = try AdmittanceOracle.reference(wallCalibration,auditResolution)
-    let wallAudit = try AdmittanceResult.evaluate(model:"consumer",c:wallCalibration,r:auditResolution,environment:BenchmarkEnvironment(repository:"consumer",revision:"test",sourceHashes:[:],hardware:"test",toolchain:"test",operatingSystem:"test"),h:wallHistory,runtime:0,reference:true)
-    try require(wallAudit.physicalStatus=="gap","Fetched geometry gap was concealed")
+    try require(
+      abs(cylinder.energy / 1.0935127186193479175e-9 - 1) < 1e-14, "Fetched cylinder energy failed")
+    let graph = try MaskedLattice(
+      dimensions: [2, 1, 1], spacing: [1, 1, 1], inside: [1, 1], speed: 3)
+    let graphQuarter = try graph.evolve([1, -1, 0], time: Double.pi / (6 * sqrt(2)))
+    try require(abs(graphQuarter[2] - sqrt(2)) < 1e-14, "Fetched masked graph oscillator failed")
+    let wallCalibration = AdmittanceCase(kind: .cylinder)
+    try require(
+      abs(wallCalibration.sideArea - 0.07363107781851078) < 1e-15, "Fetched wall area failed")
+    let auditResolution = AdmittanceResolution(axis: "space", nx: 16, courant: 0.2)
+    let wallHistory = try AdmittanceOracle.reference(wallCalibration, auditResolution)
+    let wallAudit = try AdmittanceResult.evaluate(
+      model: "consumer", c: wallCalibration, r: auditResolution,
+      environment: BenchmarkEnvironment(
+        repository: "consumer", revision: "test", sourceHashes: [:], hardware: "test",
+        toolchain: "test", operatingSystem: "test"), h: wallHistory, runtime: 0, reference: true)
+    try require(wallAudit.physicalStatus == "gap", "Fetched geometry gap was concealed")
     let absorbing = try AbsorbingCylinderReference(AbsorbingCylinderCase())
-    try require(abs(absorbing.root.real-3.821751618059804487)<1e-13,"Fetched Robin Bessel root failed")
-    try require(abs((absorbing.energy(time:absorbing.duration)+absorbing.dissipated(time:absorbing.duration))/absorbing.energy(time:0)-1)<1e-13,"Fetched coupled wall energy failed")
-    let damped = try MaskedLattice(dimensions:[2,1,1],spacing:[1,1,1],inside:[1,1],speed:3,wallRates:[2,2])
-    let decay = try damped.evolve([1,1,0],time:0.3)
-    try require(abs(decay[0]-exp(-0.6))<1e-14 && decay[2]==0,"Fetched damped graph failed")
+    try require(
+      abs(absorbing.root.real - 3.821751618059804487) < 1e-13, "Fetched Robin Bessel root failed")
+    try require(
+      abs(
+        (absorbing.energy(time: absorbing.duration) + absorbing.dissipated(time: absorbing.duration))
+          / absorbing.energy(time: 0) - 1) < 1e-13, "Fetched coupled wall energy failed")
+    let damped = try MaskedLattice(
+      dimensions: [2, 1, 1], spacing: [1, 1, 1], inside: [1, 1], speed: 3, wallRates: [2, 2])
+    let decay = try damped.evolve([1, 1, 0], time: 0.3)
+    try require(abs(decay[0] - exp(-0.6)) < 1e-14 && decay[2] == 0, "Fetched damped graph failed")
     let tilted = TiltedPulseCase()
-    try require(abs(tilted.reflection-0.4570059441936298)<1e-15,"Fetched tilted reflection failed")
-    try require(tilted.travel<tilted.cornerArrivalTravel,"Fetched plane region is not causal")
-    try require(abs(tilted.patchWork(time:tilted.duration)/tilted.patchEnergy-(1-tilted.reflection*tilted.reflection))<1e-13,"Fetched tilted patch work failed")
+    try require(
+      abs(tilted.reflection - 0.4570059441936298) < 1e-15, "Fetched tilted reflection failed")
+    try require(tilted.travel < tilted.cornerArrivalTravel, "Fetched plane region is not causal")
+    try require(
+      abs(
+        tilted.patchWork(time: tilted.duration) / tilted.patchEnergy
+          - (1 - tilted.reflection * tilted.reflection)) < 1e-13, "Fetched tilted patch work failed"
+    )
     print("ContinuumKit clean Git consumer passed.")
   }
 }

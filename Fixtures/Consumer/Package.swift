@@ -34,6 +34,7 @@ let package = Package(
         .product(name: "ImpulseResponseKit", package: "continuumkit"),
         .product(name: "Thermodynamics", package: "continuumkit"),
         .product(name: "LinearAcoustics", package: "continuumkit"),
+        .product(name: "LinearAcousticsMetal", package: "continuumkit"),
         .product(name: "BenchmarkSupport", package: "continuumkit"),
       ]
     )
