@@ -67,3 +67,9 @@ consumer. Check scripts reject a tag that does not identify their candidate HEAD
 Existing tags remain immutable. A new prerelease is published only through the
 successful exact-tag workflow; release authorization comes from the active model-gap
 instruction to commit, push and release as needed.
+
+The [source-free readiness audit](extraction/SHARED_WAVE_READINESS.md) now records
+all 96 exact actual RoomCAD pairs and their unchanged original reference identities.
+`0.1.0-alpha.6` is the next candidate, adding LinearAcoustics/LinearAcousticsMetal;
+publication still requires its exact-tag workflow. Production app integration remains
+separate and is not claimed by a source-free model release.
