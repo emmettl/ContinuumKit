@@ -15,6 +15,7 @@ is the current prerelease; earlier tags remain available for existing consumers.
 | `ImpulseResponseKit` | Response metadata, float WAV I/O and common channel conditioning | Foundation |
 | `Thermodynamics` | Checked uniform adiabatic reservoir potential and signed work | Foundation |
 | `LinearAcoustics` (unreleased candidate) | Checked source-free serial masked wave update | Swift standard library only |
+| `LinearAcousticsMetal` (unreleased candidate) | Resident source-free GPU wave stepper and bundled kernels | LinearAcoustics, Foundation, Metal |
 | `BenchmarkSupport` | Versioned adiabatic/acoustic cases, analytic references and complete-field reports | Thermodynamics, Foundation |
 
 Requires Swift 6.4 and macOS 15 or later. CPU products do not depend on SceneRender.
@@ -29,7 +30,7 @@ CONTINUUMKIT_REQUIRE_METAL=1 bash Scripts/check.sh
 ```
 
 Checks run 22 CAD foundation tests, 12 response interchange tests and 14 adiabatic and 9 axial and 12 boundary and 8 three-dimensional and 7 oblique numerical/conformance tests and an isolated Git consumer in release
-configuration. That consumer imports all nine public libraries, round-trips an archive
+configuration. That consumer imports all ten public libraries, round-trips an archive
 on disk, reads OBJ geometry, checks camera/grid/picking contracts and verifies actual
 offscreen pixels from the fetched package's shader. No path dependency or source alias
 is used. The response checks include independently authored WAV bytes, format/dimension
@@ -78,3 +79,7 @@ The [serial CPU wave candidate](docs/extraction/LINEAR_WAVE_CPU.md) has seventee
 independent contract/reference tests, exact-block source comparison and an optimized
 Git consumer that requires no Metal or UI framework. It is present on main and is
 not included in `alpha.5`; Metal and app integration remain later gates.
+
+The [resident Metal wave candidate](docs/extraction/LINEAR_WAVE_METAL.md) has eleven
+actual-device contract/reference tests, exact packaged kernel provenance and its own
+optimized Git consumer. CPU and GPU requirements remain explicit.

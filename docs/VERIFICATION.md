@@ -77,3 +77,8 @@ seventeen independent contract/reference tests and a committed optimized consume
 that depends only on the CPU product and checks absence of Metal/UI binary links.
 The existing all-product consumer also imports it; the total is now nine libraries.
 Exact-block RoomCAD comparison is a separate read-only source-provenance gate.
+
+The [Metal wave candidate](extraction/LINEAR_WAVE_METAL.md) adds eleven required
+actual-device tests using the same independent all-field/time/work bounds as CPU,
+an independent packaged-grid ABI probe, residency/multi-batch and injected failure
+checks, plus a fetched optimized GPU consumer. CPU consumer linkage remains guarded.

@@ -1,0 +1,130 @@
+{
+  "actualDeviceTests": 11,
+  "candidate": "4716913afee578f8476f13371fa2ee45b55be2bd",
+  "crossDeviceAndConfigurationHistories": "all complete native reports identical",
+  "devices": {
+    "m4-max": {
+      "debug": [
+        {
+          "Float32BitMismatches": 0,
+          "captures": 65,
+          "fieldValuesCompared": 15600,
+          "name": "all-active-rigid"
+        },
+        {
+          "Float32BitMismatches": 0,
+          "captures": 65,
+          "fieldValuesCompared": 15600,
+          "name": "all-active-lossy"
+        },
+        {
+          "Float32BitMismatches": 0,
+          "captures": 65,
+          "fieldValuesCompared": 15600,
+          "name": "masked-lossy"
+        },
+        {
+          "Float32BitMismatches": 0,
+          "captures": 65,
+          "fieldValuesCompared": 10920,
+          "name": "split-chambers"
+        }
+      ],
+      "release": [
+        {
+          "Float32BitMismatches": 0,
+          "captures": 65,
+          "fieldValuesCompared": 15600,
+          "name": "all-active-rigid"
+        },
+        {
+          "Float32BitMismatches": 0,
+          "captures": 65,
+          "fieldValuesCompared": 15600,
+          "name": "all-active-lossy"
+        },
+        {
+          "Float32BitMismatches": 0,
+          "captures": 65,
+          "fieldValuesCompared": 15600,
+          "name": "masked-lossy"
+        },
+        {
+          "Float32BitMismatches": 0,
+          "captures": 65,
+          "fieldValuesCompared": 10920,
+          "name": "split-chambers"
+        }
+      ]
+    },
+    "m4-mini": {
+      "debug": [
+        {
+          "Float32BitMismatches": 0,
+          "captures": 65,
+          "fieldValuesCompared": 15600,
+          "name": "all-active-rigid"
+        },
+        {
+          "Float32BitMismatches": 0,
+          "captures": 65,
+          "fieldValuesCompared": 15600,
+          "name": "all-active-lossy"
+        },
+        {
+          "Float32BitMismatches": 0,
+          "captures": 65,
+          "fieldValuesCompared": 15600,
+          "name": "masked-lossy"
+        },
+        {
+          "Float32BitMismatches": 0,
+          "captures": 65,
+          "fieldValuesCompared": 10920,
+          "name": "split-chambers"
+        }
+      ],
+      "release": [
+        {
+          "Float32BitMismatches": 0,
+          "captures": 65,
+          "fieldValuesCompared": 15600,
+          "name": "all-active-rigid"
+        },
+        {
+          "Float32BitMismatches": 0,
+          "captures": 65,
+          "fieldValuesCompared": 15600,
+          "name": "all-active-lossy"
+        },
+        {
+          "Float32BitMismatches": 0,
+          "captures": 65,
+          "fieldValuesCompared": 15600,
+          "name": "masked-lossy"
+        },
+        {
+          "Float32BitMismatches": 0,
+          "captures": 65,
+          "fieldValuesCompared": 10920,
+          "name": "split-chambers"
+        }
+      ]
+    }
+  },
+  "kernelPort": "three exact pinned blocks",
+  "physicalMini": {
+    "candidate": "4716913afee578f8476f13371fa2ee45b55be2bd",
+    "consumers": "optimized CPU-only, resident GPU and all-product Git consumers passed",
+    "fullPackageCheck": "all unchanged independent reference suites and complete-report guards passed",
+    "metal": "Apple M4, 256 checked smoke outputs plus wave/device ABI/reference tests",
+    "run": "https://github.com/emmettl/ContinuumKit/actions/runs/37996475411",
+    "status": "passed",
+    "tests": 169
+  },
+  "schemaVersion": 1,
+  "scope": "source-free resident Metal only; application adoption/release gates pending",
+  "snapshots": "completed batch clocks; finiteness certified on explicit snapshot",
+  "sourceRevision": "f2f6465d0d845af9adda596c004b18ca15a77edd",
+  "status": "passed"
+}

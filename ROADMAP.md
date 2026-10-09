@@ -231,3 +231,8 @@ parity. The [wave-update design](docs/extraction/LINEAR_WAVE_UPDATE.md) now reco
 units, clocks, owned state, source blocks and staged acceptance gates. It authorizes
 no move or release by itself. Geometry, source/receiver and band/response policy
 remain app-owned; AcousticCore remains app-owned.
+
+Resident Metal candidate: [two exact pinned kernels and owned GPU state](docs/extraction/LINEAR_WAVE_METAL.md)
+now have actual-device ABI, complete-field/reference, residency and failure-clock tests.
+The next gap is exact candidate RoomCAD benchmark binding across its real geometry
+and wall-work suites; source/receiver application integration and release follow.

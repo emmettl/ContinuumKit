@@ -70,3 +70,7 @@ this design checkpoint.
 The first [serial CPU implementation](extraction/LINEAR_WAVE_CPU.md) is now an
 unreleased `LinearAcoustics` candidate, with no framework/target dependencies.
 Metal and application adoption remain subsequent tranches.
+
+The separate [Metal wave backend](extraction/LINEAR_WAVE_METAL.md) owns resident
+tracked buffers, synchronous complete-batch clocks and packaged source-free kernels.
+Shared initial-field validation remains in the framework-free CPU module.
