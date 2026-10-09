@@ -20,6 +20,18 @@ reviewed commit `d3c7367ba43940155f7e33da738e6f5058723fd5`. Its
 passed all 57 tests, actual Metal work and the version-pinned optimized consumer on
 the physical Mac mini before [publication](https://github.com/emmettl/ContinuumKit/releases/tag/0.1.0-alpha.4).
 
+`0.1.0-alpha.5` improves project container and manifest diagnostics and adds the independent
+acoustic reference/conformance contracts merged since alpha.4: mixed boundaries, dissipative
+time refinement, three-dimensional modes, oblique impedance, masked and curved domains,
+admittance and causal tilted pulses. Geometry extrusion audits and the linear-wave extraction
+design/provenance checkpoint are included; no shared wave-update solver is extracted.
+The app-linked CAD foundations retain alpha.4's source except DocumentKit.
+The release points to reviewed commit `7d5ef9d0ca7b415d3fef86b5400017bb43111a3c`.
+Its [exact-tag workflow](https://github.com/emmettl/ContinuumKit/actions/runs/37974874568)
+passed 141 tests, actual Metal compute and the version-pinned optimized consumer on the
+physical Mac mini before [publication](https://github.com/emmettl/ContinuumKit/releases/tag/0.1.0-alpha.5).
+Reference conformance does not establish empirical validation of application scenes.
+
 ## Candidate verification
 
 Commit the candidate and run `bash Scripts/check.sh`. Review the public contract,
