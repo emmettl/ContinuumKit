@@ -73,3 +73,17 @@ all 96 exact actual RoomCAD pairs and their unchanged original reference identit
 `0.1.0-alpha.6` is the next candidate, adding LinearAcoustics/LinearAcousticsMetal;
 publication still requires its exact-tag workflow. Production app integration remains
 separate and is not claimed by a source-free model release.
+
+## Published source-free wave prerelease
+
+`0.1.0-alpha.6` is published from reviewed commit
+`56210bf1aae4046224597128f0a286e55585a521`. Its [exact-tag workflow](https://github.com/emmettl/ContinuumKit/actions/runs/38003236841)
+passed all 169 tests, actual Metal work, unchanged references and three optimized
+consumers resolving the exact semantic version before publication. The CPU consumer
+retains its no-Metal/UI linkage guard; the GPU consumer loads packaged kernels and
+checks native fields/clocks over multiple command batches. [Publication proof](extraction/alpha6-release-verification.json)
+records scope/identities. Existing tags are unchanged.
+
+The release follows all 96 complete exact actual RoomCAD original/shared records
+and original frozen reference bounds. It releases independently useful source-free
+steppers, not production forcing/receiver integration or empirical acoustic accuracy.

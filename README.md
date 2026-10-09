@@ -2,7 +2,7 @@
 
 Shared Swift foundations for RoomCAD, BombCAD and Edgerton. The package contains the existing CAD foundations from BombCAD's SimulationKit and
 RoomCAD's application-independent response interchange, and a checked adiabatic reservoir
-with independent conformance. [`0.1.0-alpha.5`](https://github.com/emmettl/ContinuumKit/releases/tag/0.1.0-alpha.5)
+with independent conformance. [`0.1.0-alpha.6`](https://github.com/emmettl/ContinuumKit/releases/tag/0.1.0-alpha.6)
 is the current prerelease; earlier tags remain available for existing consumers.
 
 | Product / module | Contents | Dependencies |
@@ -14,8 +14,8 @@ is the current prerelease; earlier tags remain available for existing consumers.
 | `DocumentKit` | Versioned project containers, assets, integrity and bounded readers | Foundation, CryptoKit |
 | `ImpulseResponseKit` | Response metadata, float WAV I/O and common channel conditioning | Foundation |
 | `Thermodynamics` | Checked uniform adiabatic reservoir potential and signed work | Foundation |
-| `LinearAcoustics` (unreleased candidate) | Checked source-free serial masked wave update | Swift standard library only |
-| `LinearAcousticsMetal` (unreleased candidate) | Resident source-free GPU wave stepper and bundled kernels | LinearAcoustics, Foundation, Metal |
+| `LinearAcoustics` | Checked source-free serial masked wave update | Swift standard library only |
+| `LinearAcousticsMetal` | Resident source-free GPU wave stepper and bundled kernels | LinearAcoustics, Foundation, Metal |
 | `BenchmarkSupport` | Versioned adiabatic/acoustic cases, analytic references and complete-field reports | Thermodynamics, Foundation |
 
 Requires Swift 6.4 and macOS 15 or later. CPU products do not depend on SceneRender.
@@ -83,3 +83,9 @@ not included in `alpha.5`; Metal and app integration remain later gates.
 The [resident Metal wave candidate](docs/extraction/LINEAR_WAVE_METAL.md) has eleven
 actual-device contract/reference tests, exact packaged kernel provenance and its own
 optimized Git consumer. CPU and GPU requirements remain explicit.
+
+`0.1.0-alpha.6` releases the source-free CPU/Metal wave products after [exact-tag
+mini verification](https://github.com/emmettl/ContinuumKit/actions/runs/38003236841):
+169 tests and all three consumers resolve the exact version. [Actual benchmark
+readiness](docs/extraction/SHARED_WAVE_READINESS.md) includes 96 complete exact
+original/shared records. Production source/receiver integration is separate.

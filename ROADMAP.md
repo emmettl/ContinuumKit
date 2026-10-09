@@ -242,3 +242,8 @@ now has all 96 actual RoomCAD original/shared records passing unchanged frozen
 oracles with exact whole histories/work/errors. CPU-only and explicit Metal products
 are ready for a reviewed prerelease and exact-tag verification. Production source,
 receiver and lifetime integration remain the next application/model-interface gap.
+
+Published: `0.1.0-alpha.6` includes source-free LinearAcoustics and its explicit
+resident Metal backend, verified from its exact tag on the mini. The next model
+interface gap is safe forcing/source-write and receiver/clock/lifetime integration;
+application adoption should preserve existing source scaling and energy ledgers.
