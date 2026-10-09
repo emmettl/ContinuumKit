@@ -71,3 +71,9 @@ graph time/energy verification. Spatial gaps are never physical passes.
 The [equivalent extrusion audit](benchmarks/EXTRUDED_LAYOUT.md) adds eight independent
 Python geometry controls and a complete native layout contract. Assignment gaps
 remain explicit; this audit does not run a wave update or publish a model release.
+
+The unreleased [LinearAcoustics CPU candidate](extraction/LINEAR_WAVE_CPU.md) adds
+sixteen independent contract/reference tests and a committed optimized consumer
+that depends only on the CPU product and checks absence of Metal/UI binary links.
+The existing all-product consumer also imports it; the total is now nine libraries.
+Exact-block RoomCAD comparison is a separate read-only source-provenance gate.

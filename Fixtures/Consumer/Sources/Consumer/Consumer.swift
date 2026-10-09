@@ -4,6 +4,7 @@ import DocumentKit
 import Foundation
 import GeometryImport
 import ImpulseResponseKit
+import LinearAcoustics
 import Metal
 import SceneModel
 import SceneRender
@@ -23,6 +24,18 @@ enum Consumer {
 
   @MainActor
   static func main() throws {
+    let isolatedMask: [UInt8] = [1,0,0,0,0,0,0,0]
+    var waveFaces = [Float](repeating: -1, count: 48)
+    for side in 0..<6 { waveFaces[side*8] = 0 }
+    let waveGrid = try PreparedWaveGrid(dimensions: [2,2,2], spacing: [1,1,1],
+      soundSpeed: 1, density: 1, timeStep: 0.125, activeCells: isolatedMask, boundaryTerms: waveFaces)
+    let waveZero = [Float](repeating: 0, count: 8)
+    let wave = try CPUWaveStepper(grid: waveGrid, initialFields: WaveInitialFields(
+      pressureOverDensity: [1,100,100,100,100,100,100,100], velocityX: waveZero, velocityY: waveZero, velocityZ: waveZero))
+    try wave.advance(steps: 3)
+    try require(try wave.snapshot().pressureOverDensity == [1,100,100,100,100,100,100,100], "Fetched rigid wave changed")
+    print("PASS LinearAcoustics public product")
+
     let savedBounds = Data(#"{"min":[1,2,3],"max":[5,8,10]}"#.utf8)
     let box = try JSONDecoder().decode(Box.self, from: savedBounds)
     try require(box.size == SIMD3<Float>(4, 6, 7), "Saved bounds changed")

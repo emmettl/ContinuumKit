@@ -66,3 +66,7 @@ masked-path evidence. Geometry/material preparation, injection/sampling, respons
 policy and application scheduling stay in RoomCAD. Edgerton's 2D physical-pressure,
 force/damping model needs a separate adapter. No products or releases are added by
 this design checkpoint.
+
+The first [serial CPU implementation](extraction/LINEAR_WAVE_CPU.md) is now an
+unreleased `LinearAcoustics` candidate, with no framework/target dependencies.
+Metal and application adoption remain subsequent tranches.
