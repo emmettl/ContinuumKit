@@ -53,7 +53,26 @@ reports with `python3 Scripts/verify-admittance-output.py output --reference` (o
 flag for source audits; `--unsupported` requires capability records). CI may pass report
 integrity and numerical substep checks while the physical geometry gate remains `gap`.
 
-Production solvers, prior benchmark gates, measured fixtures and release tags are
-unchanged. Full app-derived histories/layouts are retained privately in Edgerton.
+The original audit changed no production solver, prior benchmark gate, measured
+fixture or release tag. Full app-derived histories/layouts are retained privately in Edgerton.
 Geometry-aware boundary admittance and coupled absorbing-cylinder continuum convergence
 remain gates before extracting that implementation into a shared production model.
+
+## Application correction checkpoint
+
+[RoomCAD's bounded correction](https://github.com/emmettl/RoomCAD/pull/10) applies
+local physical-area normalization to mesh/plan wall coefficients. For a locally planar
+surface with unit normal n, Cartesian staircase face areas sum to
+A (|n_x| + |n_y| + |n_z|); weighting each local coefficient by the reciprocal restores
+A in the resolved-plane limit. Axis-aligned coefficients remain exact. This is a local
+normal rule, not a global cylinder multiplier or a cut-cell volume scheme.
+
+The independent core cases, references, tolerances and immutable adapter pin remain
+unchanged. Application CI additionally requires physical-area passes for current
+source, rather than accepting a complete diagnostic gap report. The original gap
+checkpoint remains retained. Independent prescribed-load application tests also cover
+non-uniform pressure, two materials, openings, rotated polygons and a tilted cube.
+
+This addresses the admittance-area gate only. Coupled absorbing-cylinder continuum
+spatial/time convergence, staircase boundary location and reflection remain gates
+before shared production extraction. Complete app-derived evidence stays private.
