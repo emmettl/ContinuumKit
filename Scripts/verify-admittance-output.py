@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-import argparse,ast,csv,gzip,json,math
+import argparse,ast,csv,gzip,json,math,struct
 from pathlib import Path
 p=argparse.ArgumentParser();p.add_argument('output',type=Path);p.add_argument('--reference',action='store_true');p.add_argument('--unsupported',action='store_true');a=p.parse_args()
 def read(name):
@@ -17,7 +17,7 @@ for c in cases:
  expected=[('space',n,n,n//2,.2) for n in [16,32,64]]+[('time',32,32,16,cfl) for cfl in [.8,.4,.2]]
  assert [(r['resolution']['axis'],r['resolution']['nx'],r['resolution']['ny'],r['resolution']['nz'],r['resolution']['courant']) for r in runs]==expected
  for r in runs:
-  cfg=r['resolution'];raw=r['history'];h=raw['fields'];ds=[cfg[k] for k in ['nx','ny','nz']];count=math.prod(ds)
+  cfg=r['resolution'];raw=r['history'];raw['faces']=[struct.unpack('f',struct.pack('f',x))[0] for x in raw['faces']];raw['layoutFaces']=[struct.unpack('f',struct.pack('f',x))[0] for x in raw['layoutFaces']];h=raw['fields'];ds=[cfg[k] for k in ['nx','ny','nz']];count=math.prod(ds)
   assert r['schemaVersion']==1 and r['numericalStatus']==('reference' if a.reference else 'passed')
   dt=cfg['courant']*.25/cfg['nx']/(320*math.sqrt(3));assert abs(h['dt']/dt-1)<1e-6
   assert len(h['spacing'])==3 and all(abs(s*n/l-1)<1e-6 for s,n,l in zip(h['spacing'],ds,c['lengths']))
