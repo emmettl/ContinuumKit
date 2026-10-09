@@ -19,7 +19,7 @@ solver configuration, units, device/toolchain, resolution, errors, budget residu
 and runtime in JSON, with CSV histories and reproducible comparison reports.
 Reference solutions must be independent of the implementation under test.
 
-Current CI builds the CAD foundations, runs 134 tests across CAD foundations, response
+Current CI builds the CAD foundations, runs 136 tests across CAD foundations, response
 interchange, thermodynamics and numerical benchmark contracts, and exercises all
 eight public libraries from an isolated Git consumer compiled in release configuration.
 Seven additional closed-box query checks cover analytic intersections, invalid input,
@@ -36,6 +36,14 @@ CI uses the dedicated physical Mac mini runner. With `CONTINUUMKIT_REQUIRE_METAL
 the check script compiles and dispatches a Metal kernel and verifies all 256 outputs.
 This proves device access in the CI service session, not numerical model validity.
 Future GPU suites run on that same declared device-capable runner.
+
+Project-container diagnostics independently check malformed syntax and invalid UTF-8 in
+`scene.json`, `settings.json` and `view.json` through validation, construction, native file
+wrappers and bounded disk reads. Those failures use `ProjectFileError` and identify the
+payload filename; failed reads preserve the on-disk bytes. Valid JSON arrays, nulls, numbers,
+booleans and strings are rejected with an object-shape error. Payloads still require JSON
+objects, and application codecs retain ownership of field and value validation. This change
+does not alter the package schema or publish a new release.
 
 See [masked domains](benchmarks/MASKED_DOMAINS.md) for independent geometry, connectivity,
 active-only field/energy and leakage contracts. This candidate does not alter release tags.
