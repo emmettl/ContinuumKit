@@ -196,3 +196,9 @@ Absorbing curved-wall gate: audit prescribed-load physical admittance separately
 isolated numerical wall flow. Full Cartesian stair-face area predicts a persistent 4/π
 bias for the cylindrical side; geometry-aware admittance and coupled transient continuum
 verification must precede production extraction. Diagnostic gap reports are not passes.
+
+
+Local wall-area correction candidate: [RoomCAD #10](https://github.com/emmettl/RoomCAD/pull/10)
+normalizes mesh/plan admittance using local normals against the unchanged core area
+contract. Coupled absorbing-cylinder continuum convergence is the next independent
+gate; area/substep conformance alone does not make the solver ready for extraction.
