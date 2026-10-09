@@ -237,3 +237,16 @@ func arrays(_ s: WaveSnapshot) -> [[Float]] {
     #expect(throws: WaveError.invalidatedState) { try s.advance(steps: 0) }
   }
 }
+
+@Suite("Finite wave clocks") struct WaveClockTests {
+  @Test("Finite input parameters cannot silently overflow completed pressure/velocity times")
+  func finiteClocks() throws {
+    let g = try waveGrid(dt: 1e308, spacing: [1e308, 1e308, 1e308], speed: 1e-20)
+    let s = try CPUWaveStepper(grid: g, initialFields: waveFields(Array(repeating: 1, count: 8)))
+    try s.advance()
+    let saved = try s.snapshot()
+    #expect(saved.pressureTime.isFinite && saved.velocityTime.isFinite)
+    #expect(throws: WaveError.stepClockOverflow) { try s.advance() }
+    #expect(arrays(try s.snapshot()) == arrays(saved) && s.pressureStepIndex == 1)
+  }
+}

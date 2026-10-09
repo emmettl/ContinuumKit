@@ -64,7 +64,10 @@ for (name, d) in [
     let h = try candidate.snapshot()
     let actual = [h.pressureOverDensity, h.velocityX, h.velocityY, h.velocityZ]
     let original = source.fields()
-    guard h.pressureStepIndex == source.pressureStepIndex, actual == original else {
+    let sameBits = zip(actual.joined(), original.joined()).allSatisfy {
+      $0.bitPattern == $1.bitPattern
+    }
+    guard h.pressureStepIndex == source.pressureStepIndex, sameBits else {
       throw ParityError.mismatch(name, step)
     }
     captures.append(Capture(step: step, candidate: actual, source: original))

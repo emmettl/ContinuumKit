@@ -81,7 +81,7 @@ public struct PreparedWaveGrid: Sendable {
         }
       }
       guard wall.isFinite, (1 + wall).isFinite else {
-        throw WaveError.invalidBoundaryTerms(cell: at, face: 6)
+        throw WaveError.invalidWallSum(cell: at)
       }
     }
     self.dimensions = dimensions
@@ -108,7 +108,8 @@ public enum WaveError: Error, Equatable, Sendable {
   case unstableTimeStep, invalidMask, emptyDomain
   case invalidArrayLength(field: String, expected: Int, actual: Int)
   case invalidBoundaryTerms(cell: Int, face: Int)
+  case invalidWallSum(cell: Int)
   case invalidInitialFields
   case closedFaceVelocity(field: Int, cell: Int)
-  case invalidStepCount, stepIndexOverflow, nonfiniteOutput, invalidatedState
+  case invalidStepCount, stepIndexOverflow, stepClockOverflow, nonfiniteOutput, invalidatedState
 }

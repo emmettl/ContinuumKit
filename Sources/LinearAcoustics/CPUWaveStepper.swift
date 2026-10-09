@@ -73,8 +73,11 @@ public final class CPUWaveStepper {
   public func advance(steps: Int = 1) throws {
     guard !invalidated else { throw WaveError.invalidatedState }
     guard steps >= 0 else { throw WaveError.invalidStepCount }
-    let (_, overflow) = pressureStepIndex.addingReportingOverflow(steps)
+    let (finalIndex, overflow) = pressureStepIndex.addingReportingOverflow(steps)
     guard !overflow else { throw WaveError.stepIndexOverflow }
+    guard (Double(finalIndex) * grid.timeStep).isFinite,
+      ((Double(finalIndex) - 0.5) * grid.timeStep).isFinite
+    else { throw WaveError.stepClockOverflow }
     let nx = grid.dimensions.x
     let ny = grid.dimensions.y
     let nz = grid.dimensions.z

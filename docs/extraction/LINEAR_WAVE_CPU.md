@@ -29,7 +29,8 @@ Pressure is ψ = pressure/density, m²/s²; velocities are m/s at each cell's po
 face. Relative pressure time is nΔt; velocity time is (n−1/2)Δt. Initial half-step
 preparation, absolute epoch, source injection and physical-pressure conversion stay
 with the caller. Density is metadata and does not alter normalized arithmetic.
-Zero steps is identity; negative counts and index overflow fail before mutation.
+Zero steps is identity; negative counts, index overflow and nonfinite derived clocks
+fail before mutation.
 Steppers are synchronous single-owner objects without concurrent access support.
 
 Topology accepts fixed masks with active-neighbour links marked reciprocally −1;
@@ -42,7 +43,7 @@ coefficients. Changing dt requires a new grid and newly prepared β.
 
 ## Independent verification
 
-Sixteen tests verify hand-derived steps, all native fields/clocks, construction
+Seventeen tests verify hand-derived steps, all native fields/clocks, construction
 rejection, isolation, snapshot ownership, zero/split-step composition, coefficient
 rounding/density independence, overflow/failure semantics and wall-work accounting.
 The independent numerical gates use existing BenchmarkSupport oracles without
@@ -68,7 +69,7 @@ production LinearAcoustics has no target or framework dependencies.
 reads the pinned Git object and checks whole-file/block hashes before creating a
 throwaway consumer. It binds the original three blocks without changing their text.
 `Fixtures/WaveSourceParity.swift` supplies independent control inputs and compares
-all four native fields and complete-step indices at all 65 captures for four cases:
+all four native fields by Float32 bit pattern and complete-step indices at all 65 captures for four cases:
 all-active rigid, all-active lossy, irregular masked lossy and split chambers.
 Both implementations receive identical masks, wall terms, parameters and fields.
 Compile this consumer against a cloned **committed** candidate using the same
