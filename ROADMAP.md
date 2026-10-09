@@ -247,3 +247,8 @@ Published: `0.1.0-alpha.6` includes source-free LinearAcoustics and its explicit
 resident Metal backend, verified from its exact tag on the mini. The next model
 interface gap is safe forcing/source-write and receiver/clock/lifetime integration;
 application adoption should preserve existing source scaling and energy ledgers.
+
+The [forcing and observation outline](docs/extraction/WAVE_FORCING_AND_OBSERVATION.md)
+bounds the next CPU sparse-injection tranche, then actual resident Metal and receiver
+gates. The audit preserves source scaling, backend-specific observation precision and
+directional-microphone lookahead before any production loop replacement.
