@@ -13,8 +13,8 @@ if test -d Tests; then
     swift test -Xswiftc -warnings-as-errors
 fi
 bash Scripts/check-consumer.sh "${1:-}"
-bash Scripts/check-linear-wave-consumer.sh
-bash Scripts/check-metal-wave-consumer.sh
+bash Scripts/check-linear-wave-consumer.sh "${1:-}"
+bash Scripts/check-metal-wave-consumer.sh "${1:-}"
 python3 Scripts/verify-wave-metal-port.py
 
 bash Scripts/check-adiabatic.sh
