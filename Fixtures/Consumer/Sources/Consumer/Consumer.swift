@@ -202,6 +202,12 @@ enum Consumer {
     let graph = try MaskedLattice(dimensions:[2,1,1],spacing:[1,1,1],inside:[1,1],speed:3)
     let graphQuarter = try graph.evolve([1,-1,0],time:Double.pi/(6*sqrt(2)))
     try require(abs(graphQuarter[2]-sqrt(2))<1e-14,"Fetched masked graph oscillator failed")
+    let wallCalibration = AdmittanceCase(kind:.cylinder)
+    try require(abs(wallCalibration.sideArea-0.07363107781851078)<1e-15,"Fetched wall area failed")
+    let auditResolution = AdmittanceResolution(axis:"space",nx:16,courant:0.2)
+    let wallHistory = try AdmittanceOracle.reference(wallCalibration,auditResolution)
+    let wallAudit = try AdmittanceResult.evaluate(model:"consumer",c:wallCalibration,r:auditResolution,environment:BenchmarkEnvironment(repository:"consumer",revision:"test",sourceHashes:[:],hardware:"test",toolchain:"test",operatingSystem:"test"),h:wallHistory,runtime:0,reference:true)
+    try require(wallAudit.physicalStatus=="gap","Fetched geometry gap was concealed")
     print("ContinuumKit clean Git consumer passed.")
   }
 }
