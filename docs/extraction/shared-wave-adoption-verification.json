@@ -1,0 +1,43 @@
+{
+  "coreImplementation": "12eb14f5b9aea798bac33a35a506a4c429a21369",
+  "rawEvidence": "private Edgerton complete lossless outputs and reconstruction",
+  "records": 96,
+  "roomcadProducer": "9aaa91410e82d63ee9e7ceb73afc701bd3e7f068",
+  "run": "https://github.com/emmettl/RoomCAD/actions/runs/38001607985",
+  "schemaVersion": 1,
+  "scope": "all complete original/shared fields, clocks, layouts, wall traces, work and errors; unchanged original reference source",
+  "sourceFreeOnly": true,
+  "status": "passed",
+  "suites": {
+    "absorbing-cylinder": {
+      "records": 12,
+      "referenceRevisions": [
+        "2c8a6dc7723316ab137bd2e57047147111b0591a"
+      ]
+    },
+    "admittance": {
+      "records": 24,
+      "referenceRevisions": [
+        "ed52cd3d6fd9a62d5b5b36efa050a4be0fc9d6ef"
+      ]
+    },
+    "cylinder": {
+      "records": 12,
+      "referenceRevisions": [
+        "f19b1d4266b93c135c492524697437ea599fa664"
+      ]
+    },
+    "masked": {
+      "records": 24,
+      "referenceRevisions": [
+        "1597e163057ba165722ba71f409ee242c83f7116"
+      ]
+    },
+    "tilted-pulse": {
+      "records": 24,
+      "referenceRevisions": [
+        "da03ce3624777661d0cc35178cf8a49d2b40b109"
+      ]
+    }
+  }
+}

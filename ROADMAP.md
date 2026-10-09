@@ -236,3 +236,9 @@ Resident Metal candidate: [two exact pinned kernels and owned GPU state](docs/ex
 now have actual-device ABI, complete-field/reference, residency and failure-clock tests.
 The next gap is exact candidate RoomCAD benchmark binding across its real geometry
 and wall-work suites; source/receiver application integration and release follow.
+
+Source-free wave release readiness: [the audited component boundary](docs/extraction/SHARED_WAVE_READINESS.md)
+now has all 96 actual RoomCAD original/shared records passing unchanged frozen
+oracles with exact whole histories/work/errors. CPU-only and explicit Metal products
+are ready for a reviewed prerelease and exact-tag verification. Production source,
+receiver and lifetime integration remain the next application/model-interface gap.
