@@ -231,17 +231,53 @@ public struct ProjectArchive: Sendable, Equatable {
             var format: String
             var schemaVersion: Int
         }
-        let header = try JSONDecoder().decode(Header.self, from: data)
+        let header = try Self.decodeManifest(Header.self, from: data)
         guard header.format == ProjectManifest.formatIdentifier else {
             throw ProjectFileError.invalid("Unknown project format.")
         }
         guard header.schemaVersion == ProjectManifest.currentVersion else {
             throw ProjectFileError.unsupportedVersion(header.schemaVersion)
         }
-        let manifest = try JSONDecoder().decode(ProjectManifest.self, from: data)
+        let manifest = try Self.decodeManifest(ProjectManifest.self, from: data)
         var payloads = allFiles
         payloads.removeValue(forKey: "manifest.json")
         try self.init(manifest: manifest, files: payloads)
+    }
+
+    private static func decodeManifest<T: Decodable>(_ type: T.Type, from data: Data) throws -> T {
+        do {
+            return try JSONDecoder().decode(type, from: data)
+        } catch let error as DecodingError {
+            throw ProjectFileError.invalid(manifestDecodingMessage(error))
+        }
+    }
+
+    private static func manifestDecodingMessage(_ error: DecodingError) -> String {
+        func path(_ keys: [any CodingKey]) -> String {
+            var result = ""
+            for key in keys {
+                if let index = key.intValue {
+                    result += "[\(index)]"
+                } else {
+                    result += (result.isEmpty ? "" : ".") + key.stringValue
+                }
+            }
+            return result.isEmpty ? "root" : result
+        }
+        switch error {
+        case .keyNotFound(let key, let context):
+            return "manifest.json is missing the required field \"\(path(context.codingPath + [key]))\"."
+        case .typeMismatch(_, let context):
+            return "manifest.json has the wrong value type at \"\(path(context.codingPath))\"."
+        case .valueNotFound(_, let context):
+            return "manifest.json requires a non-null value at \"\(path(context.codingPath))\"."
+        case .dataCorrupted(let context):
+            return context.codingPath.isEmpty
+                ? "manifest.json is not valid JSON."
+                : "manifest.json contains an invalid value at \"\(path(context.codingPath))\"."
+        @unknown default:
+            return "manifest.json could not be decoded. Check its format."
+        }
     }
 
     private static func validatePath(_ path: String) throws {
