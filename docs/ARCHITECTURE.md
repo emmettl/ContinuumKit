@@ -55,3 +55,14 @@ measured fixtures and application policy remain with their applications.
 Specialized gel, concrete and room-acoustic policies remain with their applications
 until a concrete reusable contract is established. Shared location alone does not
 make different physical assumptions interchangeable.
+
+## Linear-wave candidate boundary
+
+The [proposed complete-step contract](extraction/LINEAR_WAVE_UPDATE.md) bounds the
+next extraction to RoomCAD's source-free masked update. An owned serial CPU stepper
+comes first; an explicit Metal backend follows after its own device/resource gates.
+The source map pins the exact blocks and distinguishes optimized-box evidence from
+masked-path evidence. Geometry/material preparation, injection/sampling, response
+policy and application scheduling stay in RoomCAD. Edgerton's 2D physical-pressure,
+force/damping model needs a separate adapter. No products or releases are added by
+this design checkpoint.

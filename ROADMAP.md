@@ -43,8 +43,12 @@ Application development continues while candidates mature.
   spatial and temporal gates, including anisotropic grids (unreleased candidate).
 - Complete: damped oblique impedance box modes with independent complex roots,
   reflection fits, work and spatial/temporal gates (unreleased candidate).
-- Pending: isolated oblique pulses, masked and heterogeneous cases,
-  then independently verified solver extractions.
+- Complete: independent masked/curved/dissipative and tilted-pulse source contracts,
+  directed wall-selection correction and exact thin plan/mesh history comparisons.
+- Complete: [proposed wave-update API and pinned source map](docs/extraction/LINEAR_WAVE_UPDATE.md).
+- Next: implement the serial source-free masked CPU update with independent Core
+  tests and a committed clean Git consumer. Metal, source/receiver integration and
+  application adoption are separate later gates; heterogeneous fluids remain open.
 
 Follow the MotionStudies pattern: the shared repository owns reusable contracts,
 implementations and their independent verification; applications own their use and
@@ -65,7 +69,7 @@ version but can be adopted independently by an application's targets.
 | `DocumentKit` | Generic archive/container integrity and bounded readers | Existing SimulationKit; application schemas remain in app repos |
 | `Numerics` | Integration, interpolation, linear operators and error estimation | Stable routines from solver work; avoid assuming identical algorithms |
 | `Thermodynamics` | Independently specified equations of state and adiabatic reservoir laws | Edgerton cavity reservoirs and BombCAD gas models |
-| `LinearAcoustics` | Wave evolution, source/probe contracts and supported boundary laws | Edgerton waves and RoomCAD CPU/Metal wave solvers |
+| `LinearAcoustics`, later `LinearAcousticsMetal` | Initially the checked source-free masked complete-step update; explicit GPU backend later | RoomCAD masked path first; Edgerton needs a separate 2D/force/damping adapter |
 | `CompressibleFlow` | Conservative gas transport, wall fluxes and moving-volume operations | BombCAD reference experiments, then fuller flow solvers if ready |
 | `SolidMechanics` | Independently verified material, contact or fracture components | Edgerton/BombCAD candidates; specialized laws may stay separate |
 | `BenchmarkSupport` and benchmark executables | Case descriptions, reference solutions, conformance, convergence and result reporting | Shared suite infrastructure plus model-owned cases |
@@ -215,4 +219,14 @@ separate angular coefficient/arrival, spatial geometry and fixed-graph time chec
 Spatial failures remain explicit gaps; actual source evidence is required before
 shared production extraction.
 
-The [equivalent floor-plan and mesh extrusion audit](docs/benchmarks/EXTRUDED_LAYOUT.md) now isolates five thin-mesh wall-selection gaps under anisotropic spacing, with all floor plans and thicker controls conforming. The directed material-selection fix in [RoomCAD #14](https://github.com/emmettl/RoomCAD/pull/14) closes those gaps with strict geometry regression and the established extrusion area quadrature. Full application and actual CPU/Metal regressions pass on the mini. The matching thin-mesh tilted pulse in [RoomCAD #15](https://github.com/emmettl/RoomCAD/pull/15) now passes on both actual backends under the unchanged independent case, with exact full plan/mesh history/work parity. The next extraction preparation is a bounded application-free linear-wave update API and source/provenance map; geometry, source/receiver and band/response policy remain app-owned. AcousticCore remains app-owned.
+The [equivalent floor-plan and mesh extrusion audit](docs/benchmarks/EXTRUDED_LAYOUT.md)
+isolated five thin-mesh wall-selection gaps under anisotropic spacing. The directed
+material-selection fix in [RoomCAD #14](https://github.com/emmettl/RoomCAD/pull/14)
+closes them with strict geometry regression and the established extrusion area
+quadrature. Full application and actual CPU/Metal regressions pass on the mini.
+The matching thin-mesh tilted pulse in [RoomCAD #15](https://github.com/emmettl/RoomCAD/pull/15)
+passes under the unchanged independent case with exact full plan/mesh field/work
+parity. The [wave-update design](docs/extraction/LINEAR_WAVE_UPDATE.md) now records
+units, clocks, owned state, source blocks and staged acceptance gates. It authorizes
+no move or release by itself. Geometry, source/receiver and band/response policy
+remain app-owned; AcousticCore remains app-owned.
