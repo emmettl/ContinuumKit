@@ -1,0 +1,199 @@
+{
+  "blocks": [
+    {
+      "bytes": 399,
+      "endLine": 622,
+      "id": "cpu-masked-coefficients",
+      "path": "Sources/AcousticCore/WaveSolver.swift",
+      "repository": "roomcad",
+      "selector": {
+        "anchor": "    func simulateMasked(",
+        "endMarker": "        for n in 0..<steps {",
+        "startMarker": "        let kx = Float(dt / spacing.x)",
+        "startOccurrence": 0
+      },
+      "sha256": "6536d572d85b8f252b47705eb7e1dac2ebcefd00e49d12d4e4ddcfdfa56f64a2",
+      "startLine": 613
+    },
+    {
+      "bytes": 783,
+      "endLine": 638,
+      "id": "cpu-masked-velocity",
+      "path": "Sources/AcousticCore/WaveSolver.swift",
+      "repository": "roomcad",
+      "selector": {
+        "anchor": "    func simulateMasked(",
+        "endMarker": "            forEachSlab { slab in",
+        "endOccurrence": 1,
+        "startMarker": "            // Velocity on faces between two simulated cells; others stay zero and are walls.",
+        "startOccurrence": 0
+      },
+      "sha256": "b066aa725a71261a355f6e3f09d38f7d3049dbc284b929d39bc88ee4cb725c85",
+      "startLine": 625
+    },
+    {
+      "bytes": 1202,
+      "endLine": 657,
+      "id": "cpu-masked-pressure",
+      "path": "Sources/AcousticCore/WaveSolver.swift",
+      "repository": "roomcad",
+      "selector": {
+        "anchor": "    func simulateMasked(",
+        "endMarker": "            let q = pulse(",
+        "startMarker": "            forEachSlab { slab in",
+        "startOccurrence": 1
+      },
+      "sha256": "3140154002086ffe4dc0dd75c75886c14df282ea55d2af6bd37a93ed5da6ed56",
+      "startLine": 639
+    },
+    {
+      "bytes": 116,
+      "endLine": 48,
+      "id": "metal-swift-grid-abi",
+      "path": "Sources/AcousticCore/MetalWaveSolver.swift",
+      "repository": "roomcad",
+      "selector": {
+        "anchor": "    struct Grid {",
+        "endMarker": "    /// Simulates like",
+        "startMarker": "    struct Grid {",
+        "startOccurrence": 0
+      },
+      "sha256": "4a7bf9c9b5c7d3fdb9a7f6fef2ae484ee5d37b7353ae8be366f08b44f1764994",
+      "startLine": 43
+    },
+    {
+      "bytes": 79,
+      "endLine": 180,
+      "id": "metal-grid-abi",
+      "path": "Sources/AcousticCore/MetalWaveSolver.swift",
+      "repository": "roomcad",
+      "selector": {
+        "anchor": "    static let source =",
+        "endMarker": "        // Velocity on faces",
+        "startMarker": "        struct Grid {",
+        "startOccurrence": 0
+      },
+      "sha256": "02aef10c355b00f44d57885cd66236d4352a3101831d6f1524e31edfa6009cbc",
+      "startLine": 179
+    },
+    {
+      "bytes": 902,
+      "endLine": 195,
+      "id": "metal-velocity",
+      "path": "Sources/AcousticCore/MetalWaveSolver.swift",
+      "repository": "roomcad",
+      "selector": {
+        "anchor": "    static let source =",
+        "endMarker": "        // Pressure from the divergence",
+        "startMarker": "        kernel void waveVelocity",
+        "startOccurrence": 0
+      },
+      "sha256": "102f84b4810c5584c0f6a7946aa56fbd53c0da0093f1ba5f1964751a7253dfbd",
+      "startLine": 182
+    },
+    {
+      "bytes": 1453,
+      "endLine": 218,
+      "id": "metal-pressure",
+      "path": "Sources/AcousticCore/MetalWaveSolver.swift",
+      "repository": "roomcad",
+      "selector": {
+        "anchor": "    static let source =",
+        "endMarker": "        // Volume velocity at the source",
+        "startMarker": "        kernel void wavePressure",
+        "startOccurrence": 0
+      },
+      "sha256": "c2a759bb6d6b0c6636b34e7dbcbb90ce7dba03b8ef06dfff5fe2bb85c33505e1",
+      "startLine": 198
+    }
+  ],
+  "evidence": {
+    "coreReferenceOwnership": "unchanged app-independent BenchmarkSupport contracts",
+    "existingHistories": 222,
+    "fullRoomCADRun": "https://github.com/emmettl/RoomCAD/actions/runs/37938336795",
+    "fullRoomCADSource": "fc9052528706c688ad8b2c22040ed09e5ee7351e",
+    "matchedPlanMeshPairs": 12,
+    "matchedThinMeshHistories": 24,
+    "matchedThinMeshRun": "https://github.com/emmettl/RoomCAD/actions/runs/37948058999",
+    "matchedThinMeshSource": "56b227d9738f36257c5b8ee617d3f26fb7fee4b5",
+    "rawEvidenceOwnership": "private Edgerton immutable full payloads plus checked reconstruction headers"
+  },
+  "excluded": [
+    "optimized unmasked box CPU path",
+    "gridLayout and geometry/material/impedance interpretation",
+    "waveInject and waveSample",
+    "pulse/trilinear source and receiver/microphone policy",
+    "response bands FFT decay calibration and engine selection",
+    "Edgerton moving force bulk damping probe and colour"
+  ],
+  "existingProductsUnchanged": true,
+  "files": [
+    {
+      "bytes": 36114,
+      "path": "Sources/AcousticCore/WaveSolver.swift",
+      "repository": "roomcad",
+      "role": "candidate-and-retained-wrapper",
+      "sha256": "4c6996a9db9b5a09220cc6ca8ccf8ee6d817be21371c63c733a770918b08a0b9"
+    },
+    {
+      "bytes": 23680,
+      "path": "Sources/AcousticCore/MetalWaveSolver.swift",
+      "repository": "roomcad",
+      "role": "candidate-and-retained-wrapper",
+      "sha256": "9c8c55d2bf68f7d7c2aec02807c77a8f0c39fc82891f25b3ed792eed216cde6c"
+    },
+    {
+      "bytes": 26379,
+      "path": "Sources/AcousticCore/RoomMesh.swift",
+      "repository": "roomcad",
+      "role": "retained-policy-or-attribution",
+      "sha256": "b9431f76533d7ee0562e890db18d6d07ec7c1701bd00639fe0f6d2fa24ef6d83"
+    },
+    {
+      "bytes": 1069,
+      "path": "LICENSE",
+      "repository": "roomcad",
+      "role": "retained-policy-or-attribution",
+      "sha256": "f30569d10a2bc23bff8d5a4bc0aa158b9a65fc00097f594af4bb0bd24f73ddc1"
+    },
+    {
+      "bytes": 5576,
+      "path": "Sources/EdgertonCore/WaveSolver.swift",
+      "repository": "edgerton",
+      "role": "comparison-only",
+      "sha256": "5183721d2d4c5b9b10683bd6205ee11e3b124511319e47396cfb60f78e732026"
+    },
+    {
+      "bytes": 3110,
+      "path": "Sources/EdgertonCore/Shaders/Waves.metal",
+      "repository": "edgerton",
+      "role": "comparison-only",
+      "sha256": "f0507f231170ccf17199ea5820cc76762ae548957aee9ab0805561ae3b6332c6"
+    },
+    {
+      "bytes": 1069,
+      "path": "LICENSE",
+      "repository": "edgerton",
+      "role": "comparison-only",
+      "sha256": "f30569d10a2bc23bff8d5a4bc0aa158b9a65fc00097f594af4bb0bd24f73ddc1"
+    }
+  ],
+  "firstSlice": "RoomCAD serial masked source-free complete-step CPU update; Metal two update kernels in a separate second tranche",
+  "license": "MIT, Copyright (c) 2026 Louis Emmett",
+  "proposedProducts": [
+    "LinearAcoustics",
+    "LinearAcousticsMetal"
+  ],
+  "repositories": {
+    "edgerton": {
+      "revision": "8d52a8d66200de4109163cad734921de7c974f74",
+      "url": "https://github.com/emmettl/edgerton"
+    },
+    "roomcad": {
+      "revision": "f2f6465d0d845af9adda596c004b18ca15a77edd",
+      "url": "https://github.com/emmettl/RoomCAD"
+    }
+  },
+  "schemaVersion": 1,
+  "status": "proposed-contract-not-an-extraction"
+}

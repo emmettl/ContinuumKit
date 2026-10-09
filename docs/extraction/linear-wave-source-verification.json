@@ -1,0 +1,18 @@
+{
+  "blocks": 7,
+  "files": 7,
+  "manifestSHA256": "cce64407437429127df2a6e4be13ef68a4165f632c05c0e5414ff54314aba59a",
+  "repositories": {
+    "edgerton": {
+      "revision": "8d52a8d66200de4109163cad734921de7c974f74",
+      "url": "https://github.com/emmettl/edgerton"
+    },
+    "roomcad": {
+      "revision": "f2f6465d0d845af9adda596c004b18ca15a77edd",
+      "url": "https://github.com/emmettl/RoomCAD"
+    }
+  },
+  "schemaVersion": 1,
+  "scope": "read-only source-map verification; no implementation or numerical rerun",
+  "status": "passed"
+}
