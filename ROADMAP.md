@@ -208,3 +208,9 @@ Coupled absorbing-cylinder candidate: [independent continuum Bessel and damped-g
 contracts](docs/benchmarks/ABSORBING_CYLINDER.md) separate geometry, timestep and full
 wall-work histories. Actual source conformance is required; this adds no production
 solver extraction or release tag.
+
+
+Tilted pulse candidate: [causally isolated plane reflection and central patch work](docs/benchmarks/TILTED_PULSE.md)
+separate angular coefficient/arrival, spatial geometry and fixed-graph time checks.
+Spatial failures remain explicit gaps; actual source evidence is required before
+shared production extraction.

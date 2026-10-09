@@ -1,7 +1,9 @@
 import BenchmarkSupport
 import Foundation
 
-if CommandLine.arguments.contains("absorbing-cylinder-reference") {
+if CommandLine.arguments.contains("tilted-pulse-reference") {
+  try TiltedPulseCommand.runReference()
+} else if CommandLine.arguments.contains("absorbing-cylinder-reference") {
   try AbsorbingCylinderCommand.runReference()
 } else if CommandLine.arguments.contains("admittance-reference") {
   try AdmittanceCommand.runReference()

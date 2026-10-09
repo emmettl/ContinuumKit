@@ -27,6 +27,7 @@ jobs:
       - name: Build and clean consumer
         env:
           CONTINUUMKIT_REQUIRE_METAL: "1"
+          CONTINUUMKIT_TILTED_PULSE_OUTPUT: ${{ runner.temp }}/tilted-pulse-${{ github.run_id }}-${{ github.run_attempt }}
           CONTINUUMKIT_ABSORBING_CYLINDER_OUTPUT: ${{ runner.temp }}/absorbing-cylinder-${{ github.run_id }}-${{ github.run_attempt }}
           CONTINUUMKIT_ADMITTANCE_OUTPUT: ${{ runner.temp }}/admittance-${{ github.run_id }}-${{ github.run_attempt }}
           CONTINUUMKIT_CYLINDER_OUTPUT: ${{ runner.temp }}/cylinder-${{ github.run_id }}-${{ github.run_attempt }}
@@ -131,5 +132,16 @@ jobs:
         with:
           name: absorbing-cylinder-${{ github.run_id }}-${{ github.run_attempt }}
           path: ${{ runner.temp }}/absorbing-cylinder-${{ github.run_id }}-${{ github.run_attempt }}
+          if-no-files-found: warn
+          retention-days: 14
+
+      - name: Require complete tilted-pulse reference fields and patch work
+        run: python3 Scripts/verify-tilted-pulse-output.py "${{ runner.temp }}/tilted-pulse-${{ github.run_id }}-${{ github.run_attempt }}" --reference
+      - name: Retain complete tilted pulse references
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: tilted-pulse-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/tilted-pulse-${{ github.run_id }}-${{ github.run_attempt }}
           if-no-files-found: warn
           retention-days: 14
