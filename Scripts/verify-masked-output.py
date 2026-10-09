@@ -14,17 +14,17 @@ expected_boxes=[[[.03125,.015625,.015625],[.21875,.109375,.109375],[2,1,1],True]
 assert len(results)==(2 if a.unsupported else 12)
 for c in cases:
  assert c['version']==1 and c['lengths']==[.25,.125,.125] and (c['density'],c['speed'],c['amplitude'])==(1.25,320,1)
+ assert c['inactivePressure']==100
+ boxes=c['boxes'];b=boxes[0]
+ assert [b['minimum'],b['maximum'],b['modes'],b['driven']]==expected_boxes[0 if c['kind']=='interiorBox' else 1]
+ assert len(boxes)==(1 if c['kind']=='interiorBox' else 2)
+ if len(boxes)==2:assert boxes[1]==dict(minimum=[.140625,.015625,.015625],maximum=[.21875,.109375,.109375],modes=[1,1,1],driven=False)
  runs=[r for r in results if r['specification']==c]
  if a.unsupported:
   assert len(runs)==1 and runs[0]['status']=='unsupported' and runs[0]['reason'] and runs[0].get('history') is None and runs[0].get('errors') is None and runs[0].get('resolution') is None
   report=[q for q in checks if q['case']==c['id']];assert len(report)==1 and report[0]['status']=='unsupported' and report[0]['reason']
   continue
  assert len(runs)==6
- assert c['inactivePressure']==100
- boxes=c['boxes'];b=boxes[0]
- assert [b['minimum'],b['maximum'],b['modes'],b['driven']]==expected_boxes[0 if c['kind']=='interiorBox' else 1]
- assert len(boxes)==(1 if c['kind']=='interiorBox' else 2)
- if len(boxes)==2:assert boxes[1]==dict(minimum=[.140625,.015625,.015625],maximum=[.21875,.109375,.109375],modes=[1,1,1],driven=False)
  duration=2*math.pi/(320*math.sqrt(sum((math.pi*m/(hi-lo))**2 for m,lo,hi in zip(b['modes'],b['minimum'],b['maximum']))))
  def dims(n):return (n,n//2,n//2)
  def steps(n,cfl):return 8*math.ceil(duration*320*math.sqrt(sum((d/l)**2 for d,l in zip(dims(n),c['lengths'])))/cfl/8)
@@ -58,6 +58,10 @@ for c in cases:
    for field,offset in zip(['p','u','v','w'],[-1,0,1,2]):
     shape=[d+(axis==offset) for axis,d in enumerate(ds)]
     assert len(frame[field])==math.prod(shape) and all(math.isfinite(x) for x in frame[field])
+  for frame in h['frames']:
+   for index,label in enumerate(labels):
+    if label<0:assert abs(frame['p'][index]-100)<1e-6
+    elif not boxes[label]['driven']:assert abs(frame['p'][index])<1e-6
   e=r['errors'];assert len(e['fieldL2'])==4 and all(math.isfinite(x) and x>=0 for x in e['fieldL2'])
   assert all(math.isfinite(v) and v>=0 for k,v in e.items() if k!='fieldL2')
  for axis in ['space','time']:
