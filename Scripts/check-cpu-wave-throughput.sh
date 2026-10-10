@@ -26,4 +26,5 @@ cp "$scratch/consumer/Package.resolved" "$output/consumer-Package.resolved"
 cp "$scratch/consumer/baseline-source-provenance.json" "$output/baseline-source-provenance.json"
 cp "$scratch/consumer/Sources/CPUWaveThroughput/Alpha8CPUWaveStepper.swift" "$output/Alpha8CPUWaveStepper.swift"
 python3 Scripts/verify-cpu-wave-throughput.py "$output"
+python3 Scripts/test-cpu-wave-throughput-gate.py "$output"
 task_completed=1
