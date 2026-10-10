@@ -23,6 +23,7 @@ public final class MetalWaveStepper {
   public let grid: PreparedWaveGrid
   public let deviceName: String
   public private(set) var pressureStepIndex = 0
+  private let context: MetalWaveContext
   private let device: any MTLDevice
   private let queue: any MTLCommandQueue
   private let velocity, pressure, injection, sampling, pressureSampling: any MTLComputePipelineState
@@ -64,8 +65,17 @@ public final class MetalWaveStepper {
   public convenience init(
     device: any MTLDevice, grid: PreparedWaveGrid, initialFields: WaveInitialFields
   ) throws {
+    try initialFields.validate(for: grid)
     try self.init(
-      device: device, grid: grid, initialFields: initialFields,
+      context: MetalWaveContext(device: device), grid: grid, initialFields: initialFields)
+  }
+
+  /// Reuse immutable device pipelines; each stepper allocates its own queue and run storage.
+  public convenience init(
+    context: MetalWaveContext, grid: PreparedWaveGrid, initialFields: WaveInitialFields
+  ) throws {
+    try self.init(
+      context: context, grid: grid, initialFields: initialFields,
       completion: { commands in
         commands.commit()
         commands.waitUntilCompleted()
@@ -77,40 +87,40 @@ public final class MetalWaveStepper {
   }
 
   // Internal submission seam permits deterministic failure-path tests without provoking GPU faults.
-  init(
+  convenience init(
     device: any MTLDevice, grid: PreparedWaveGrid, initialFields: WaveInitialFields,
     completion: @escaping (any MTLCommandBuffer) throws -> Void
   ) throws {
+    try initialFields.validate(for: grid)
+    try self.init(
+      context: MetalWaveContext(device: device), grid: grid, initialFields: initialFields,
+      completion: completion)
+  }
+
+  init(
+    context: MetalWaveContext, grid: PreparedWaveGrid, initialFields: WaveInitialFields,
+    completion: @escaping (any MTLCommandBuffer) throws -> Void
+  ) throws {
+    let device = context.device
     try initialFields.validate(for: grid)
     guard MemoryLayout<Grid>.size == 36, MemoryLayout<Grid>.stride == 36,
       MemoryLayout<Grid>.alignment == 4
     else { throw MetalWaveError.invalidGridABI }
     guard let queue = device.makeCommandQueue() else { throw MetalWaveError.commandEncodingFailed }
-    let library: any MTLLibrary
-    do { library = try device.makeLibrary(source: Self.shaderSource(), options: nil) } catch let
-      error as MetalWaveError
-    { throw error } catch { throw MetalWaveError.shaderCompilation(error.localizedDescription) }
-    func pipeline(_ name: String) throws -> any MTLComputePipelineState {
-      guard let function = library.makeFunction(name: name) else {
-        throw MetalWaveError.pipelineCreation(name)
-      }
-      do { return try device.makeComputePipelineState(function: function) } catch {
-        throw MetalWaveError.pipelineCreation(name + ": " + error.localizedDescription)
-      }
-    }
     func buffer<T>(_ values: [T]) throws -> any MTLBuffer {
       try Self.makeBuffer(device: device, values: values)
     }
+    self.context = context
     self.device = device
     self.grid = grid
     deviceName = device.name
     self.queue = queue
     complete = completion
-    velocity = try pipeline("waveVelocity")
-    pressure = try pipeline("wavePressure")
-    injection = try pipeline("waveInject")
-    sampling = try pipeline("waveSample")
-    pressureSampling = try pipeline("waveSamplePressure")
+    velocity = context.velocity
+    pressure = context.pressure
+    injection = context.injection
+    sampling = context.sampling
+    pressureSampling = context.pressureSampling
     p = try buffer(initialFields.pressureOverDensity)
     ux = try buffer(initialFields.velocityX)
     uy = try buffer(initialFields.velocityY)
@@ -143,6 +153,10 @@ public final class MetalWaveStepper {
   }
 
   var sourceStagingBufferIdentity: ObjectIdentifier? { amplitudeBuffer.map(ObjectIdentifier.init) }
+
+  var pipelineIdentities: [ObjectIdentifier] { context.pipelineIdentities }
+
+  var queueIdentity: ObjectIdentifier { ObjectIdentifier(queue) }
 
   var fieldBufferIdentities: [ObjectIdentifier] { [p, ux, uy, uz].map(ObjectIdentifier.init) }
 

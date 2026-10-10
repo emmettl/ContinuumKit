@@ -304,3 +304,15 @@ certification. RoomCAD's exact-tag comparison reduces the mini's largest-grid
 shared/original wall ratio from 4.13 to about 1.09 with unchanged complete outputs.
 Its remaining thin directional-grid policy and default-adoption gate precede
 retiring the duplicated masked loop; Metal production/pipeline reuse follows.
+
+RoomCAD has now verified and adopted the shared masked CPU default, with full
+original/shared/actual-default output and saved-response continuity on M4 Max and M4.
+The separately verified minimal-grid directional rule closes the thin-address gate.
+The optimized unmasked box contract and production Metal path remain application-owned.
+
+Metal pipeline candidate: [explicit immutable device context](docs/extraction/METAL_WAVE_CONTEXT.md)
+allows reuse of compiled packaged pipelines with checked Sendable ownership. Every
+run retains independent queues, fields, staging/output, completion and invalidation.
+Independent two-cell forcing, failure isolation, concurrent full-field/history parity
+and clean public consumer gates precede release. RoomCAD Metal binding, nonterminal
+abandonment/fresh CPU restart and representative device timing remain subsequent gates.

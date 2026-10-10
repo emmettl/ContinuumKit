@@ -1,0 +1,22 @@
+{
+  "candidate": "c38cba59358f0ba5c9bd84ae08218122412f34d4",
+  "checks": "complete package, three optimized Git consumers, CPU no-Metal/UI link guard and existing numerical/topology report references passed on both hosts",
+  "completeFieldAndObservationBitParity": "exact against independent convenience-created pipelines",
+  "concurrentRuns": 4,
+  "cpuTests": 46,
+  "failureIsolation": "failed second completed command keeps acknowledged clock 128, sibling and fresh runs valid",
+  "framesPerConcurrentRun": 257,
+  "independentOracle": "two-cell two-step signed source recurrence",
+  "metalTests": 31,
+  "newContextTests": 3,
+  "physicalMini": "https://github.com/emmettl/ContinuumKit/actions/runs/38024135039",
+  "pinnedKernelHashes": "unchanged and passed",
+  "publicConsumer": "optimized fetched explicit reuse and compatible initializer passed on Apple M4 Max and Apple M4",
+  "receiversPerFrame": 3,
+  "remaining": "exact-tag publication, RoomCAD production Metal binding/lifetime and device timing; no empirical accuracy claim",
+  "schemaVersion": 1,
+  "scope": "immutable checked Sendable pipeline context; single-owner per-run mutable state; no equation or application policy change",
+  "status": "passed",
+  "swiftTests": 218,
+  "unchangedEvolutionTailSHA256": "c218376b816a9b778296c269e74b1089412bdf1711a84d61302654b7c0fcfe0f"
+}

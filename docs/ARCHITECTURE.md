@@ -83,3 +83,9 @@ Metal mappings also bind to the physical device; mutable output/field state stay
 stepper-owned. Bounded histories retain backend arithmetic and complete native clocks.
 Geometry, microphone patterns/mixing, longer history, cancellation and GPU abandonment
 remain application-owned. See [alpha.8 publication proof](extraction/alpha8-release-verification.json).
+
+The [explicit Metal wave context](extraction/METAL_WAVE_CONTEXT.md) separates immutable
+compiled device pipelines from each single-owner run's queue, resident fields, staging
+and clock. Callers can reuse pipelines across independent runs without global caching
+or application scheduling inside the model. Production Metal adoption remains a
+separate application gate.
