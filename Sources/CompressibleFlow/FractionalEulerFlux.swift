@@ -51,6 +51,15 @@ public enum FractionalEulerFlux {
     public let wallImpulses: [SIMD3<Double>]
     /// Work delivered to each prescribed wall, opposite to gas energy change.
     public let wallWork: [Double]
+    /// Unchecked value assembly for caller-owned multi-stage integration.
+    /// The caller owns state validity, wall ordering and matching impulse/work counts.
+    public init(
+      cells: [PrescribedGasTransport.Cell], wallImpulses: [SIMD3<Double>], wallWork: [Double]
+    ) {
+      self.cells = cells
+      self.wallImpulses = wallImpulses
+      self.wallWork = wallWork
+    }
   }
   private static let gamma = 1.4
 

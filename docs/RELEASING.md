@@ -168,3 +168,15 @@ annotated tag/commit identity. Mixed sets use one guarded sampling dispatch; hom
 paths, exact Float arithmetic, field/injection dependencies and owned completed clocks
 retain their contracts. Actual application/default and empirical accuracy gates remain
 separate. Existing tags stay unchanged.
+
+## Published prescribed Euler reference
+
+Alpha.15 publishes `FractionalEulerFlux` from reviewed merge
+`5e784115a08aebb6b3380dbf0b51fe9f7c34f71e` after its
+[exact-tag physical-mini workflow](https://github.com/emmettl/ContinuumKit/actions/runs/38055152719)
+passes 260 tests, actual Metal and six optimized exact-version consumers. Complete
+751-case source/refinement reports retain 105,149 returned cells and 1,974 intervals.
+[Publication proof](extraction/euler-flux-release.json) records scope and identity.
+The verified direct-step release remains unchanged. Application-owned SSPRK2
+additionally requires a public Result initializer; that correction prepares
+alpha.16 after complete two-host and separate exact-tag verification.

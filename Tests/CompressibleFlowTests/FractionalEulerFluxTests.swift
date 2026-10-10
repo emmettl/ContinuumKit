@@ -168,6 +168,29 @@ struct FractionalEulerFluxTests {
     #expect(cells[0].amount[0] == 1 && cells[1].amount[0] == 1)
   }
 
+  @Test("Caller-owned two-stage assembly preserves the matching extensive wall ledger")
+  func twoStageAssembly() throws {
+    let old = Cell(volume: 1, density: 1, velocity: SIMD3(0.1, 0, 0), pressure: 1)
+    let wall = Flux.Wall(cell: 0, normal: SIMD3(1, 0, 0), area: 1, velocity: SIMD3(0.1, 0, 0))
+    let first = try Flux.advanceWithWalls([old], faces: [], walls: [wall], duration: 0.001)
+    let second = try Flux.advanceWithWalls(first.cells, faces: [], walls: [wall], duration: 0.001)
+    let trial = Cell(
+      volume: (old.volume + second.cells[0].volume) / 2,
+      amount: (old.amount + second.cells[0].amount) / 2)
+    let checked = try PrescribedGasTransport.advance(
+      [trial], newVolumes: [trial.volume], transfers: [])
+    let combined = Flux.Result(
+      cells: checked,
+      wallImpulses: [(first.wallImpulses[0] + second.wallImpulses[0]) / 2],
+      wallWork: [(first.wallWork[0] + second.wallWork[0]) / 2])
+    near(combined.cells[0].volume, 1.0001)
+    near(combined.cells[0].amount[0], old.amount[0])
+    near(combined.cells[0].amount[1] - old.amount[1], -combined.wallImpulses[0].x)
+    near(combined.cells[0].amount[4] - old.amount[4], -combined.wallWork[0])
+    near(combined.wallWork[0], 0.1 * combined.wallImpulses[0].x)
+    #expect(combined.cells[0].pressure() > 0)
+  }
+
   @Test("Invalid geometry, clocks and traces retain distinct transactional failures")
   func failureContracts() throws {
     let cells = [Cell](repeating: .init(volume: 1, density: 1, pressure: 1), count: 2)

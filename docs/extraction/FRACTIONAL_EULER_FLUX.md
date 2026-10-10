@@ -54,11 +54,11 @@ volumes. Packet and wall errors remain distinct from `invalidFace`, `invalidWall
 
 ## Independent acceptance and complete source conformance
 
-Thirteen focused tests cover literal oblique SI flux, a stationary discontinuity's
+Fourteen focused tests cover literal oblique SI flux, a stationary discontinuity's
 characteristic dissipation, intensive traces, volume/characteristic clocks, face
 reversal, independent Mach-two wall shock and rarefaction/vacuum loads, extensive
 wall ledgers, unsupported trace positivity, supplied wall trace ownership, invalid clocks/geometry, inactive dry
-states and characteristic representability. The first oblique test run exposed an
+states characteristic representability and caller-owned two-stage extensive/load assembly. The first oblique test run exposed an
 incorrect hand-calculated momentum expectation; the expectation was corrected to
 rho u (u.n) + p n, without changing source arithmetic or tolerances.
 
@@ -117,3 +117,23 @@ six optimized fetched consumers and all existing reference/topology checks.
 Fourteen corruption controls reject per host. Separate temporal error halves at
 fixed grid size. Exact-tag verification precedes publication; application adoption
 remains a separate bounded task.
+
+The public `Result(cells:wallImpulses:wallWork:)` initializer performs unchecked
+stored-field assembly for caller-owned multi-stage methods. It does not validate
+states, wall ordering, count agreement or budgets; callers validate their combined
+states and supply matching loads. Results returned by `advanceWithWalls` remain
+checked as before. The separate fetched consumer exercises this public constructor.
+
+Publication correction: alpha.15 passed its exact-tag gate and published at
+2026-10-10T13:22:47Z before an attempted cancellation could take effect. It remains
+unchanged and verified for direct steps. Inspection found that BombCAD's tube/group
+SSPRK2 callers additionally need a public Result initializer. Numerical operator bodies and earlier native evidence
+remain unchanged. Alpha.16 is the corrected API candidate and requires complete
+two-host and exact-tag gates before publication and adoption.
+
+The [result assembly acceptance](euler-result-assembly-verification.json) now passes
+261 package tests, six optimized public consumers and all existing reference gates
+on both hosts. All 751 complete native cases remain byte-identical to alpha.15.
+The [alpha.15 publication record](euler-flux-release.json) retains the completed
+release and compatibility follow-up. Alpha.16 exact-tag verification precedes use
+by the app-owned SSPRK2 wrappers.
