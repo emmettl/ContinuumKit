@@ -114,3 +114,16 @@ identities. Each backend's dual-host source gate retains 4,128 complete captures
 lookahead and bounded owned histories are released; production loop adoption,
 performance acceptance and empirical acoustic validation remain separate gates.
 Existing tags are unchanged.
+
+## Published synchronous CPU execution prerelease
+
+`0.1.0-alpha.9` is published from reviewed merge commit
+`0170d394e9cfa40c3034f9dd8cf29d3f8dcb92d1`. Its [exact-tag release](https://github.com/emmettl/ContinuumKit/actions/runs/38019570607)
+passed 215 tests (46 CPU, 28 actual Metal), all three optimized exact-version
+consumers, packaged parallel CPU and no-Metal/UI linkage before publication.
+[Publication proof](extraction/alpha9-release-verification.json) records the annotated
+tag and commit. Existing tags remain immutable. Complete crossed alpha.8/current
+serial/current parallel fields and raw receiver reports are byte-identical; sanitizer
+and failure/certificate checks pass. Serial remains the API default and callers
+choose synchronous slabs; CPU execution now links system Dispatch. Application
+throughput/default acceptance and empirical model validation remain separate gates.

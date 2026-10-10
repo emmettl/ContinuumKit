@@ -1,0 +1,17 @@
+{
+  "actualMetalTests": 28,
+  "annotatedTagObject": "59e303bd606c18f42bdcf01f3915e0a8f8112946",
+  "completeComparison": "cpu-wave-execution-verification.json",
+  "cpuNoMetalUIGuard": "passed",
+  "cpuTests": 46,
+  "exactVersionConsumers": 3,
+  "fetchedParallelCPU": "passed",
+  "release": "https://github.com/emmettl/ContinuumKit/releases/tag/0.1.0-alpha.9",
+  "schemaVersion": 1,
+  "scope": "explicit synchronous CPU slabs and fused complete-field finite certification; numerical arithmetic/clocks unchanged; application default and empirical validation remain separate",
+  "status": "published",
+  "tagCommit": "0170d394e9cfa40c3034f9dd8cf29d3f8dcb92d1",
+  "tests": 215,
+  "verification": "https://github.com/emmettl/ContinuumKit/actions/runs/38019570607",
+  "version": "0.1.0-alpha.9"
+}

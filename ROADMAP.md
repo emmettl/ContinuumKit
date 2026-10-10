@@ -298,3 +298,9 @@ address the measured shared CPU throughput gap without relaxing fields, source w
 readout or completion semantics. Independent serial/parallel references, sanitizer,
 fetched CPU-only linkage and complete alpha.8 comparisons precede merge/release.
 Application throughput/default acceptance and Metal pipeline reuse remain later gates.
+
+Published: `0.1.0-alpha.9` exposes verified explicit CPU execution and fused finite
+certification. RoomCAD's exact-tag comparison reduces the mini's largest-grid
+shared/original wall ratio from 4.13 to about 1.09 with unchanged complete outputs.
+Its remaining thin directional-grid policy and default-adoption gate precede
+retiring the duplicated masked loop; Metal production/pipeline reuse follows.

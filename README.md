@@ -2,7 +2,7 @@
 
 Shared Swift foundations for RoomCAD, BombCAD and Edgerton. The package contains the existing CAD foundations from BombCAD's SimulationKit and
 RoomCAD's application-independent response interchange, and a checked adiabatic reservoir
-with independent conformance. [`0.1.0-alpha.8`](https://github.com/emmettl/ContinuumKit/releases/tag/0.1.0-alpha.8)
+with independent conformance. [`0.1.0-alpha.9`](https://github.com/emmettl/ContinuumKit/releases/tag/0.1.0-alpha.9)
 is the current prerelease; earlier tags remain available for existing consumers.
 
 | Product / module | Contents | Dependencies |
@@ -106,3 +106,11 @@ one-frame lookahead/final-half-step policy. Its [exact-tag mini check](https://g
 passed 207 tests and all three optimized exact-version consumers. [Publication proof](docs/extraction/alpha8-release-verification.json)
 records scope and identities. Source/receiver geometry, microphone mixing, cancellation
 and production application adoption remain caller-owned.
+
+`0.1.0-alpha.9` releases [explicit synchronous CPU slabs and fused finite certification](docs/extraction/CPU_WAVE_EXECUTION.md).
+Serial remains the API default; callers choose parallel counts and small-grid policy.
+The [exact-tag mini release](https://github.com/emmettl/ContinuumKit/actions/runs/38019570607)
+passed 215 tests and all three exact-version consumers, including actual packaged
+parallel CPU and CPU-only linkage. [Publication proof](docs/extraction/alpha9-release-verification.json)
+records identities. Complete model reports remain identical to alpha.8 across both
+Macs; application throughput/default and measured acoustic accuracy remain separate.
