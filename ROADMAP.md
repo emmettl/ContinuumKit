@@ -447,3 +447,11 @@ alias, then verifies complete affected limiter/group/tube/moving-gas/piston
 histories and separate full-app/package checks. Geometry, reconstruction, higher-order
 time/body policy and broader heterogeneous-wave/FFT/fitting/mechanics gaps remain
 independent tasks. Earlier alpha.15 remains available unchanged.
+
+Next independent numerical-primitives candidate: the [real FFT plan](docs/extraction/REAL_FFT_PLAN.md)
+freezes RoomCAD's implemented transform/filter/convolution helper and identifies
+packing/normalization and unchecked inverse-dimension gaps. A scalar DFT, Parseval,
+analytical mode gains and direct convolution references precede any public API or
+module. This planning checkpoint moves no code and does not replace the pending
+complete BombCAD Euler adoption gate or the separate heterogeneous-wave/fitting/
+changing-mechanics work.
