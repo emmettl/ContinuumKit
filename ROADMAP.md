@@ -373,3 +373,10 @@ A [standalone planar ideal-gas wall reference](docs/extraction/IDEAL_GAS_WALL.md
 CompressibleFlow candidate, with independent gas-law/representability tests and an
 optimized public CPU-only consumer. It adds no bulk transport, moving geometry or
 production blast backend. Full source/consumer/mini gates precede release/adoption.
+
+Published, 10 October 2026: `0.1.0-alpha.13` exposes the independently verified
+planar ideal-gas wall reference in CompressibleFlow. The exact-tag physical-mini
+release gate passed 233 tests and four fetched consumers before publication.
+[BombCAD PR #22](https://github.com/emmettl/bombcad/pull/22) is the separate
+application adoption gate; its complete coupled comparisons and app/package
+checks remain in progress. The release does not move bulk transport or geometry.
