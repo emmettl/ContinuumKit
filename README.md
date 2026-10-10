@@ -146,3 +146,8 @@ BombCAD now consumes alpha.16's Euler reference after [complete application
 adoption](https://github.com/emmettl/bombcad/pull/24), including app-owned multistage
 result assembly. Geometry, reconstruction, time/body policy and production air
 remain separate. The next independent primitive is the [real FFT verification plan](docs/extraction/REAL_FFT_PLAN.md).
+
+The implemented [checked real FFT candidate](docs/extraction/REAL_FFT.md) adds
+`SpectralTransforms` with explicit Accelerate capability, independent DFT/inverse
+and direct convolution references, protected original/shared native conformance
+and safe public boundaries. It is not released or adopted by RoomCAD yet.
