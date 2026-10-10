@@ -119,3 +119,10 @@ application, Foundation, Accelerate, UI or Metal modules. Acoustic window/noise
 selection, statistical acceptance and material/weighted reconstruction policy stay
 with callers; [RoomCAD adoption](extraction/ROOMCAD_AFFINE_ADOPTION_PLAN.md) is a
 separate bounded integration task.
+
+`Numerics.PivotedQR` adds immutable small tall-matrix Householder factors with
+column pivoting, lossless power-of-two normalization, checked rank/dimensions and
+reusable RHS solves. Scaled Q/R/permutation and reciprocal triangular condition
+diagnostics are explicit. Row multipliers, basis construction, reconstruction
+fallback and admissibility remain caller-owned. Its declared conditioning-dependent
+contract is documented in [Pivoted QR](extraction/PIVOTED_QR.md).

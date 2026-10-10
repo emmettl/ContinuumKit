@@ -179,3 +179,9 @@ The next fitting tranche is a [protected weighted QR source audit](Fixtures/Weig
 and [bounded stabilization plan](docs/extraction/WEIGHTED_QR_PLAN.md). It records
 complete native factors and independent exact references before deciding the
 shared solver contract; gas reconstruction and admissibility remain model-owned.
+
+
+A [PivotedQR candidate](docs/extraction/PIVOTED_QR.md) now adds reusable small-matrix
+Householder factors to Numerics with explicit scaling, rank/conditioning and RHS
+contracts. The complete 741-case optimized public consumer and independent native
+references precede release and a separate gas reconstruction migration.

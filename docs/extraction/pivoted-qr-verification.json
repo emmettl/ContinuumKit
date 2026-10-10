@@ -1,0 +1,100 @@
+{
+  "actualMetalBothHosts": true,
+  "applicationAdoption": false,
+  "archivePayloads": 558,
+  "candidateRevision": "24a17f086b58e9255bc1eb9f403fc55c9e07839f",
+  "cases": 741,
+  "completeNativeBytesPerHost": 26510779,
+  "completeNativeSHA256": "7a7f55ed289e5b7905772853bce26c75a3014dfc3d110b89625d136dce0aa03b",
+  "completeReferenceSHA256": "adde4a91eb502ccfd2b6558fbf25ec76dfac0799942f63d0b445fbce207fdf51",
+  "completeTwoHostNativeIdentity": true,
+  "completeTwoHostReferenceIdentity": true,
+  "corePR": "https://github.com/emmettl/ContinuumKit/pull/69",
+  "corruptionControls": 24,
+  "empiricalValidation": false,
+  "evidencePath": "docs/benchmarks/evidence/2026-10-10-pivoted-qr-candidate",
+  "hosts": {
+    "m4max": {
+      "candidateRevision": "24a17f086b58e9255bc1eb9f403fc55c9e07839f",
+      "candidateVersion": "",
+      "flags": [
+        "-c",
+        "release",
+        "-Xswiftc",
+        "-warnings-as-errors"
+      ],
+      "hardware": "Apple M4 Max",
+      "os": "macOS-27.0.1-arm64-arm-64bit",
+      "schemaVersion": 1,
+      "sourceHashes": {
+        "Fixtures/PivotedQRConsumer/Package.swift": "71a85ba892c3e11042f446e45dbb11da63fbe88bb4779ac3c67d42962c15c36b",
+        "Fixtures/PivotedQRConsumer/README.md": "1a3e84677e9500576c64916ce535acb385ae8767866dd2840fdd8b7f532cd3a0",
+        "Fixtures/PivotedQRConsumer/Sources/PivotedQRConsumer/main.swift": "6bc46ec6686fd0dadbd7d788e32016bea28bfd7508cb2f29e153469c18b49483",
+        "Scripts/check-pivoted-qr-consumer.sh": "2b3710c52a9e332bbb2e4047187ed94c2f95e4c732e56461f2d28f0b13b8c76d",
+        "Scripts/test-pivoted-qr-gate.py": "a0d3ca5c7918b6e7a2ed44aa5139b344cb4c9ac7e1c046f2dcf64aa6a67b9f1d",
+        "Scripts/verify-pivoted-qr-output.py": "6ae04659c96687a353a3a0640667d51854a951bfceefacb25635d060ff0f44bc",
+        "Scripts/verify-weighted-qr-audit.py": "8a62066c57b6fa980a84ba847db699e46e2203865665c375a47162999baffaf6",
+        "Sources/Numerics/AffineLeastSquares.swift": "11faf53e14f78c3961773b53075d2d268450d95c3fcfc0e1ba87b26bfa08e948",
+        "Sources/Numerics/PivotedQR.swift": "317f90060f4eae59d561b9dadd691f7f4981999d3b0ce33d43804579352c4623",
+        "Tests/NumericsTests/AffineLeastSquaresTests.swift": "0259cac68add853675c6efe2430fb6434bcd5749cfc54c36ad856b5f244d7b1e",
+        "Tests/NumericsTests/PivotedQRTests.swift": "499a0f8d88b332640a2fdc24307346869c1898647d29d9d18deaaa9089476c03"
+      },
+      "swift": "Apple Swift version 6.4 (swiftlang-6.4.0.34.1 clang-2100.3.34.1)\nTarget: arm64-apple-macosx27.0.0",
+      "workingTreeDirty": false
+    },
+    "mini": {
+      "candidateRevision": "24a17f086b58e9255bc1eb9f403fc55c9e07839f",
+      "candidateVersion": "",
+      "flags": [
+        "-c",
+        "release",
+        "-Xswiftc",
+        "-warnings-as-errors"
+      ],
+      "hardware": "Apple M4",
+      "os": "macOS-27.0.1-arm64-arm-64bit",
+      "schemaVersion": 1,
+      "sourceHashes": {
+        "Fixtures/PivotedQRConsumer/Package.swift": "71a85ba892c3e11042f446e45dbb11da63fbe88bb4779ac3c67d42962c15c36b",
+        "Fixtures/PivotedQRConsumer/README.md": "1a3e84677e9500576c64916ce535acb385ae8767866dd2840fdd8b7f532cd3a0",
+        "Fixtures/PivotedQRConsumer/Sources/PivotedQRConsumer/main.swift": "6bc46ec6686fd0dadbd7d788e32016bea28bfd7508cb2f29e153469c18b49483",
+        "Scripts/check-pivoted-qr-consumer.sh": "2b3710c52a9e332bbb2e4047187ed94c2f95e4c732e56461f2d28f0b13b8c76d",
+        "Scripts/test-pivoted-qr-gate.py": "a0d3ca5c7918b6e7a2ed44aa5139b344cb4c9ac7e1c046f2dcf64aa6a67b9f1d",
+        "Scripts/verify-pivoted-qr-output.py": "6ae04659c96687a353a3a0640667d51854a951bfceefacb25635d060ff0f44bc",
+        "Scripts/verify-weighted-qr-audit.py": "8a62066c57b6fa980a84ba847db699e46e2203865665c375a47162999baffaf6",
+        "Sources/Numerics/AffineLeastSquares.swift": "11faf53e14f78c3961773b53075d2d268450d95c3fcfc0e1ba87b26bfa08e948",
+        "Sources/Numerics/PivotedQR.swift": "317f90060f4eae59d561b9dadd691f7f4981999d3b0ce33d43804579352c4623",
+        "Tests/NumericsTests/AffineLeastSquaresTests.swift": "0259cac68add853675c6efe2430fb6434bcd5749cfc54c36ad856b5f244d7b1e",
+        "Tests/NumericsTests/PivotedQRTests.swift": "499a0f8d88b332640a2fdc24307346869c1898647d29d9d18deaaa9089476c03"
+      },
+      "swift": "Apple Swift version 6.4 (swiftlang-6.4.0.34.1 clang-2100.3.34.1)\nTarget: arm64-apple-macosx27.0.0",
+      "workingTreeDirty": false
+    }
+  },
+  "miniConclusion": "success",
+  "miniJob": 114308584896,
+  "miniRun": "https://github.com/emmettl/ContinuumKit/actions/runs/38084667114",
+  "optimizedConsumersPerHost": 9,
+  "originalAuditUnchanged": true,
+  "portableReplayPassed": true,
+  "privateEvidencePR": "https://github.com/emmettl/edgerton/pull/70",
+  "privateEvidenceRevision": "2747704737b9ace8eca5d8a7648c388669f29af0",
+  "releasePublished": false,
+  "schemaVersion": 1,
+  "scope": "checked small tall-matrix least squares; declared selected-cohort conditioning-dependent bounds, not arbitrary-input forward accuracy or a physical reconstruction model",
+  "summary": {
+    "cases": 741,
+    "counts": {
+      "factorAccepted": 475,
+      "factorRejected": 266,
+      "solvesAccepted": 1412,
+      "solvesRejected": 13
+    },
+    "schemaVersion": 1,
+    "scope": "chosen native cohort; conditioning-dependent coefficient diagnostics are not a universal forward-error theorem",
+    "worstCoefficientBoundFraction": 0.011718749999999998,
+    "worstOrthogonality": 1.2212453270876722e-15,
+    "worstRelativeReconstruction": 2.220446049250313e-15
+  },
+  "testsPerHost": 287
+}
