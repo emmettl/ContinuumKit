@@ -1,4 +1,5 @@
 import BenchmarkSupport
+import CompressibleFlow
 import CoreGraphics
 import DocumentKit
 import Foundation
@@ -189,6 +190,10 @@ enum Consumer {
     try require(
       openedResult.caseSpecification == specification && openedResult.schemaVersion == 1,
       "Benchmark result contract changed")
+    let gasWall = try CompressibleFlow.IdealGasWallRiemann.solve(
+      density: 1.225, pressure: 101325, normalVelocity: 0)
+    precondition(gasWall.pressure == 101325 && !gasWall.vacuum)
+    print("PASS CompressibleFlow fetched public wall reference")
     print("PASS Thermodynamics / BenchmarkSupport fetched public APIs and work refinement")
     let acousticWall = try AcousticCase.standard()[1]
     let reflectedPressure = AcousticOracle.continuum(
