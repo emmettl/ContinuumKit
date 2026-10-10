@@ -1,0 +1,263 @@
+{
+  "baseline": "da7cb5f5ac642edc57e8433c6150dceca6b9edd9",
+  "candidate": "8624103ec5839329807357be12a1268a8f723be3",
+  "completeFieldWordsPerHost": 13150728,
+  "completeNativeFramesPerHost": 27648,
+  "completeRunsPerHost": 27,
+  "crossHostFieldsReceiversMixingClocksAndInputs": "exact",
+  "firstGateRepair": "Float32 JSON source is verified by Float32 bits, preserving exact source arithmetic; initial failed run retained",
+  "hosts": [
+    {
+      "device": "Apple M4 Max",
+      "timings": [
+        {
+          "cellCount": 3888,
+          "dimensions": [
+            24,
+            18,
+            9
+          ],
+          "frequency": 100,
+          "largerGroupToProfile32GPU": 0.9996499054607343,
+          "largerGroupToReleasedWall": 0.980509245225826,
+          "modes": {
+            "profile256": {
+              "advanceSeconds": 0.015720791,
+              "commitWaitSeconds": 0.014521208,
+              "decodeSeconds": 0.000167667,
+              "encodingSeconds": 0.001013457,
+              "gpuSeconds": 0.009994208114221692,
+              "mixingSeconds": 0.000270123,
+              "setupSeconds": 0.000177125,
+              "wallSeconds": 0.0161735
+            },
+            "profile32": {
+              "advanceSeconds": 0.015980789999999998,
+              "commitWaitSeconds": 0.014715666999999998,
+              "decodeSeconds": 0.000174,
+              "encodingSeconds": 0.001006916,
+              "gpuSeconds": 0.00999770825728774,
+              "mixingSeconds": 0.000273002,
+              "setupSeconds": 0.000192209,
+              "wallSeconds": 0.016484834
+            },
+            "released": {
+              "advanceSeconds": 0.016020461,
+              "mixingSeconds": 0.00026958500000000003,
+              "setupSeconds": 0.000185375,
+              "wallSeconds": 0.016495
+            }
+          }
+        },
+        {
+          "cellCount": 29610,
+          "dimensions": [
+            47,
+            35,
+            18
+          ],
+          "frequency": 200,
+          "largerGroupToProfile32GPU": 0.8205658621477084,
+          "largerGroupToReleasedWall": 0.8390555942110639,
+          "modes": {
+            "profile256": {
+              "advanceSeconds": 0.017822125000000005,
+              "commitWaitSeconds": 0.016595541999999998,
+              "decodeSeconds": 0.000176001,
+              "encodingSeconds": 0.001025668,
+              "gpuSeconds": 0.012051958474330604,
+              "mixingSeconds": 0.000266626,
+              "setupSeconds": 0.000343042,
+              "wallSeconds": 0.018448875
+            },
+            "profile32": {
+              "advanceSeconds": 0.020672459,
+              "commitWaitSeconds": 0.019454292999999998,
+              "decodeSeconds": 0.000170333,
+              "encodingSeconds": 0.0010454589999999999,
+              "gpuSeconds": 0.014687374932691455,
+              "mixingSeconds": 0.000269542,
+              "setupSeconds": 0.000358333,
+              "wallSeconds": 0.021314208
+            },
+            "released": {
+              "advanceSeconds": 0.021339333000000002,
+              "mixingSeconds": 0.000267374,
+              "setupSeconds": 0.000357833,
+              "wallSeconds": 0.021987667
+            }
+          }
+        },
+        {
+          "cellCount": 331800,
+          "dimensions": [
+            105,
+            79,
+            40
+          ],
+          "frequency": 450,
+          "largerGroupToProfile32GPU": 0.7340239881657274,
+          "largerGroupToReleasedWall": 0.7625342148192668,
+          "modes": {
+            "profile256": {
+              "advanceSeconds": 0.050770001,
+              "commitWaitSeconds": 0.049465417,
+              "decodeSeconds": 0.000194583,
+              "encodingSeconds": 0.001066332,
+              "gpuSeconds": 0.044669916736893356,
+              "mixingSeconds": 0.000283664,
+              "setupSeconds": 0.002229709,
+              "wallSeconds": 0.053287416
+            },
+            "profile32": {
+              "advanceSeconds": 0.067169958,
+              "commitWaitSeconds": 0.065900957,
+              "decodeSeconds": 0.00020387500000000004,
+              "encodingSeconds": 0.001069791,
+              "gpuSeconds": 0.060856208321638405,
+              "mixingSeconds": 0.000278956,
+              "setupSeconds": 0.002206334,
+              "wallSeconds": 0.069659625
+            },
+            "released": {
+              "advanceSeconds": 0.06737433400000001,
+              "mixingSeconds": 0.000282624,
+              "setupSeconds": 0.002225791,
+              "wallSeconds": 0.069882
+            }
+          }
+        }
+      ]
+    },
+    {
+      "device": "Apple M4",
+      "timings": [
+        {
+          "cellCount": 3888,
+          "dimensions": [
+            24,
+            18,
+            9
+          ],
+          "frequency": 100,
+          "largerGroupToProfile32GPU": 0.9628143053296206,
+          "largerGroupToReleasedWall": 1.0657648561647335,
+          "modes": {
+            "profile256": {
+              "advanceSeconds": 0.020169542000000002,
+              "commitWaitSeconds": 0.018328917,
+              "decodeSeconds": 0.00021579099999999998,
+              "encodingSeconds": 0.0015827509999999999,
+              "gpuSeconds": 0.013362458324991167,
+              "mixingSeconds": 0.000271247,
+              "setupSeconds": 0.0003905,
+              "wallSeconds": 0.020858084
+            },
+            "profile32": {
+              "advanceSeconds": 0.024308167,
+              "commitWaitSeconds": 0.019818628,
+              "decodeSeconds": 0.0005814579999999999,
+              "encodingSeconds": 0.003821126,
+              "gpuSeconds": 0.01387854153290391,
+              "mixingSeconds": 0.000759999,
+              "setupSeconds": 0.0004915,
+              "wallSeconds": 0.025702209
+            },
+            "released": {
+              "advanceSeconds": 0.019190290999999998,
+              "mixingSeconds": 0.000239041,
+              "setupSeconds": 0.000131459,
+              "wallSeconds": 0.019571
+            }
+          }
+        },
+        {
+          "cellCount": 29610,
+          "dimensions": [
+            47,
+            35,
+            18
+          ],
+          "frequency": 200,
+          "largerGroupToProfile32GPU": 0.9662206154702879,
+          "largerGroupToReleasedWall": 0.9808467488936751,
+          "modes": {
+            "profile256": {
+              "advanceSeconds": 0.017181501000000002,
+              "commitWaitSeconds": 0.016033251999999998,
+              "decodeSeconds": 0.00016125000000000002,
+              "encodingSeconds": 0.000973417,
+              "gpuSeconds": 0.013330583460628986,
+              "mixingSeconds": 0.00023383299999999997,
+              "setupSeconds": 0.000281916,
+              "wallSeconds": 0.017703916
+            },
+            "profile32": {
+              "advanceSeconds": 0.017752625,
+              "commitWaitSeconds": 0.016598584,
+              "decodeSeconds": 0.000160707,
+              "encodingSeconds": 0.000976459,
+              "gpuSeconds": 0.013796624960377812,
+              "mixingSeconds": 0.00023270700000000002,
+              "setupSeconds": 0.00028675,
+              "wallSeconds": 0.018271208
+            },
+            "released": {
+              "advanceSeconds": 0.017521415999999998,
+              "mixingSeconds": 0.000232874,
+              "setupSeconds": 0.000302042,
+              "wallSeconds": 0.018049625
+            }
+          }
+        },
+        {
+          "cellCount": 331800,
+          "dimensions": [
+            105,
+            79,
+            40
+          ],
+          "frequency": 450,
+          "largerGroupToProfile32GPU": 1.0016328162375538,
+          "largerGroupToReleasedWall": 0.9917417239905435,
+          "modes": {
+            "profile256": {
+              "advanceSeconds": 0.24298683399999998,
+              "commitWaitSeconds": 0.24177083400000002,
+              "decodeSeconds": 0.00017887399999999998,
+              "encodingSeconds": 0.00100846,
+              "gpuSeconds": 0.23860208329278976,
+              "mixingSeconds": 0.00025462499999999997,
+              "setupSeconds": 0.002381333,
+              "wallSeconds": 0.245580333
+            },
+            "profile32": {
+              "advanceSeconds": 0.242688626,
+              "commitWaitSeconds": 0.24135525000000002,
+              "decodeSeconds": 0.00018995900000000002,
+              "encodingSeconds": 0.001082418,
+              "gpuSeconds": 0.23821312503423542,
+              "mixingSeconds": 0.00026325000000000003,
+              "setupSeconds": 0.002401958,
+              "wallSeconds": 0.245248625
+            },
+            "released": {
+              "advanceSeconds": 0.245066958,
+              "mixingSeconds": 0.000253209,
+              "setupSeconds": 0.002288333,
+              "wallSeconds": 0.247625291
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "negativeControls": 11,
+  "numericalOracle": "independent signed two-cell forcing plus final native pressure/terminal mixing and complete clocks",
+  "physicalMini": "https://github.com/emmettl/ContinuumKit/actions/runs/38026881647",
+  "recommendation": "retain narrow groups on small grids; capacity-bounded larger field groups on larger grids merit production/reference and actual-app checks",
+  "schemaVersion": 1,
+  "scope": "live-host controlled model cost; no isolated or application-default acceptance claim",
+  "status": "passed controlled profile",
+  "synchronization": "all barriers retained; private instrumentation and group shape only"
+}
