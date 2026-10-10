@@ -79,7 +79,7 @@ for (name, d) in [
   for z in 0...1 {
     for y in 0...1 {
       for x in 0...1 {
-        pc.append((x + 1) + d.x * (y + 1) + d.x * d.y * (z + 1))
+        pc.append((x + 1) + d.x * (y + 1) + d.x * d.y * (z + min(1, d.z - 2)))
         pw.append(Float((x == 0 ? 0.75 : 0.25) * (y == 0 ? 0.5 : 0.5) * (z == 0 ? 0.25 : 0.75)))
       }
     }
