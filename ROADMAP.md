@@ -475,3 +475,11 @@ The inventory and exact-native arithmetic audit distinguish scalar fitting from
 acoustic window/noise/material policy and expose raw-moment conditioning gaps.
 A stabilized primitive precedes any application migration; weighted spatial QR,
 heterogeneous waves and changing coupled mechanics remain separate contracts.
+
+Verified, 10 October 2026: the [stabilized affine primitive](docs/extraction/AFFINE_LEAST_SQUARES.md)
+passes both physical Macs' 281-test/eight-consumer gates. Its 300 complete native
+cases include all protected audit inputs, extreme scales and explicit failures;
+independent exact references and thirteen corruption controls pass. Alpha.18 exact-tag
+verification is the next release gate, followed by a separate RoomCAD adoption with
+complete selected windows/noise histories and intentional accuracy comparisons.
+Weighted QR, acoustic selection policy and changing mechanics remain separate tasks.

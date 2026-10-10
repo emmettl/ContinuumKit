@@ -81,15 +81,19 @@ to slope and 256 eps relative to relevant ordinate/coordinate magnitude, with
 four output ulps as a minimum. These are declared reference-suite limits, not a
 global theorem. For exact zero covariance the suite requires zero slope. Extreme
 unrepresentable coefficients, normalization and queries have explicit outcomes.
-Thirteen coherent-bit/input/coefficient/query/source-scope corruption controls
+Thirteen coherent-bit/input/coefficient/query/case-scope corruption controls
 must reject. Dynamic linkage rejects Accelerate, UI and Metal frameworks.
 
-Preliminary local results are 264 supported fits, 36 declared failures and 50,409
+Committed two-host results are 264 supported fits, 36 declared failures and 50,409
 complete predictions. Every nondegenerate original audit input is now independently
 accurate; the three already-degenerate native coordinate cases correctly reject.
-Maximum measured relative slope error in the preliminary cohort is about 2.28e-16.
-Final committed clean-consumer and both physical Macs' full package/previous model
-gates remain required before acceptance/release. No original audit identity changes.
+Maximum measured relative slope error in the complete cohort is about 2.28e-16.
+Both physical Macs pass 281 tests, eight optimized fetched consumers, actual Metal
+and all previous numerical/topology gates. The full native fitting and original-audit
+records are byte-identical across hosts. The [physical-mini run](https://github.com/emmettl/ContinuumKit/actions/runs/38073509760)
+verifies committed producer `a4fb9fe263dd059d2040f1719f4d68e8853ea5dd`;
+[verification identity](stable-affine-fit-verification.json) records the complete scope.
+Exact-tag verification remains required before publication. No original audit identity changes.
 
 ## Application ownership and adoption
 

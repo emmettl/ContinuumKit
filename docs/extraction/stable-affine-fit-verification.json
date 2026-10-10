@@ -1,0 +1,22 @@
+{
+  "actualMetal": true,
+  "applicationMigration": false,
+  "bothHostTests": 281,
+  "captureFollowUp": "metadata additionally lists the imported original audit verifier; numerical source unchanged",
+  "cases": 300,
+  "checkedFailures": 36,
+  "completePredictions": 50409,
+  "corruptionRejections": 13,
+  "crossHostNativeFitsAndOriginalAudit": "byte-identical",
+  "exactNativeReference": "Fraction OLS over actual binary64 inputs; inverse queries over public rounded line",
+  "maximumRelativeSlopeError": 2.2737367544431773e-16,
+  "miniConclusion": "success",
+  "miniJob": 114275597290,
+  "miniRun": "https://github.com/emmettl/ContinuumKit/actions/runs/38073509760",
+  "optimizedGitConsumers": 8,
+  "originalAuditPreserved": true,
+  "producer": "a4fb9fe263dd059d2040f1719f4d68e8853ea5dd",
+  "released": false,
+  "schemaVersion": 1,
+  "successfulFits": 264
+}
