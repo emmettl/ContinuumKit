@@ -1,0 +1,162 @@
+{
+  "comparison": {
+    "baseline": "2aecacbc3da082382cb11639d67af0ea37583272",
+    "baselineClassAdaptation": "class name only",
+    "completeNativeCapturesPerHost": 27,
+    "completeReceiverFramesPerHost": 27648,
+    "crossHostCompleteReports": "byte-identical",
+    "negativeControls": 7,
+    "runtimeBitMismatches": 0
+  },
+  "implementation": "60e4f0a529e6bb6bb333876418c17c5d7abb1e99",
+  "miniComparisonCandidate": "bf9613132a7023eef1673fb5cec7ca375641e49b",
+  "physicalMini": {
+    "actualMetalTests": 28,
+    "comparisonRun": "https://github.com/emmettl/ContinuumKit/actions/runs/38018534701",
+    "cpuTests": 46,
+    "fetchedParallelCPU": "passed",
+    "noMetalUIGuard": "passed",
+    "packageRun": "https://github.com/emmettl/ContinuumKit/actions/runs/38018425652",
+    "tests": 215
+  },
+  "schemaVersion": 1,
+  "scope": "synchronous CPU execution and fused complete-field finite certification; application throughput/default acceptance and empirical accuracy remain separate",
+  "status": "passed",
+  "threadSanitizer": {
+    "focusedTests": 8,
+    "status": "passed"
+  },
+  "timingScope": "optimized source/observation batches, warmed rotating three repetitions, wall and process CPU; live hosts, no isolation claim",
+  "timings": [
+    {
+      "hardware": "Apple M4 Max",
+      "reports": [
+        {
+          "cells": 3888,
+          "cpuMedians": {
+            "alpha8": 0.022852000000000094,
+            "parallel": 0.027967999999999993,
+            "serial": 0.019711000000000034
+          },
+          "dimensions": [
+            24,
+            18,
+            9
+          ],
+          "parallelToAlpha8Wall": 0.9444954248444929,
+          "serialToAlpha8Wall": 0.862519904011023,
+          "wallMedians": {
+            "alpha8": 0.022858458,
+            "parallel": 0.021589709,
+            "serial": 0.019715875
+          }
+        },
+        {
+          "cells": 29610,
+          "cpuMedians": {
+            "alpha8": 0.17480299999999982,
+            "parallel": 0.3628689999999999,
+            "serial": 0.15395599999999998
+          },
+          "dimensions": [
+            47,
+            35,
+            18
+          ],
+          "parallelToAlpha8Wall": 0.8017760245755362,
+          "serialToAlpha8Wall": 0.8805271118703741,
+          "wallMedians": {
+            "alpha8": 0.174913458,
+            "parallel": 0.140241417,
+            "serial": 0.154016042
+          }
+        },
+        {
+          "cells": 331800,
+          "cpuMedians": {
+            "alpha8": 2.0783949999999995,
+            "parallel": 2.526105000000001,
+            "serial": 1.9006469999999993
+          },
+          "dimensions": [
+            105,
+            79,
+            40
+          ],
+          "parallelToAlpha8Wall": 0.20953697428866866,
+          "serialToAlpha8Wall": 0.9144636949205702,
+          "wallMedians": {
+            "alpha8": 2.079630583,
+            "parallel": 0.4357595,
+            "serial": 1.9017466669999998
+          }
+        }
+      ]
+    },
+    {
+      "hardware": "Apple M4",
+      "reports": [
+        {
+          "cells": 3888,
+          "cpuMedians": {
+            "alpha8": 0.02308000000000021,
+            "parallel": 0.08464700000000014,
+            "serial": 0.02253700000000003
+          },
+          "dimensions": [
+            24,
+            18,
+            9
+          ],
+          "parallelToAlpha8Wall": 1.5677656395120103,
+          "serialToAlpha8Wall": 0.9818053558659867,
+          "wallMedians": {
+            "alpha8": 0.023076791,
+            "parallel": 0.036179,
+            "serial": 0.022656917
+          }
+        },
+        {
+          "cells": 29610,
+          "cpuMedians": {
+            "alpha8": 0.17473599999999978,
+            "parallel": 0.42803199999999997,
+            "serial": 0.177848
+          },
+          "dimensions": [
+            47,
+            35,
+            18
+          ],
+          "parallelToAlpha8Wall": 0.6528936961302787,
+          "serialToAlpha8Wall": 1.0170815406838574,
+          "wallMedians": {
+            "alpha8": 0.174886625,
+            "parallel": 0.114182375,
+            "serial": 0.177873958
+          }
+        },
+        {
+          "cells": 331800,
+          "cpuMedians": {
+            "alpha8": 2.0560270000000003,
+            "parallel": 3.3613049999999998,
+            "serial": 2.045662
+          },
+          "dimensions": [
+            105,
+            79,
+            40
+          ],
+          "parallelToAlpha8Wall": 0.3227187848099182,
+          "serialToAlpha8Wall": 0.9944070160359145,
+          "wallMedians": {
+            "alpha8": 2.057183084,
+            "parallel": 0.663891625,
+            "serial": 2.045677292
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -59,3 +59,27 @@ API using the original app's slab/cancellation policy and repeat complete output
 full wave-enabled generation/save and two-host timing. Only then may its default
 change. The legacy damped forcing accuracy limit and empirical room validation stay
 separate; accelerating an existing model does not improve its physical assumptions.
+
+## Verified execution checkpoint
+
+Implementation `60e4f0a529e6bb6bb333876418c17c5d7abb1e99` passes the
+[full mini check](https://github.com/emmettl/ContinuumKit/actions/runs/38018425652):
+215 tests, including all 46 CPU and 28 actual-Metal tests, all optimized fetched
+consumers, packaged parallel CPU and no-Metal/UI linkage. The eight new execution
+tests also pass Thread Sanitizer. Independent serial/parallel numerical bounds and
+source/receiver failure contracts remain unchanged.
+
+[Mini complete comparison](https://github.com/emmettl/ContinuumKit/actions/runs/38018534701)
+and M4 Max counterpart retain 27 native field/receiver captures and 27,648 complete
+receiver frames per host, with zero runtime bit mismatches. Every complete report is
+byte-identical across hosts. Both strict postconditions and seven negative controls
+pass. The mini comparison's intervening commit changes workflow routing only;
+subsequent changes add report controls and documentation, not production/test/fixture code.
+
+Largest-grid (331,800-cell) median parallel/alpha.8 wall ratios are 0.210 on M4 Max
+and 0.323 on M4. The 3,888-cell parallel mode is slower on the mini (1.568), so callers
+must retain a measured small-grid serial policy. Parallel work can consume more total
+process CPU; complete wall/CPU measurements remain available. These live-host model
+measurements do not prove RoomCAD's throughput/default gate. [Aggregate verification](cpu-wave-execution-verification.json)
+records identities; complete losslessly compressed raw fields/reports, baseline source,
+provenance, metadata, dependencies, sanitizer and job logs are retained privately.
