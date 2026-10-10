@@ -107,3 +107,15 @@ The prescribed gas-packet candidate belongs to CompressibleFlow: immutable exten
 state and supplied transfer/impulse/work only. Its [contract](extraction/PRESCRIBED_GAS_PACKETS.md)
 keeps constructor/view algebra distinct from checked advance, and documents the dry
 cleanup budget. Geometry, fluxes, timesteps and coupled body policy remain app-owned.
+
+## Scalar affine numerical contract
+
+`Numerics` owns unweighted affine least squares over explicit Double coordinates
+and values, with immutable origin-based results and checked predictions/crossings.
+Shifted/scaled compensated accumulation addresses the audited raw-moment loss.
+[The contract](extraction/AFFINE_LEAST_SQUARES.md) records rank/representation failures,
+conditioning diagnostics and finite-precision limits. The product imports no
+application, Foundation, Accelerate, UI or Metal modules. Acoustic window/noise
+selection, statistical acceptance and material/weighted reconstruction policy stay
+with callers; [RoomCAD adoption](extraction/ROOMCAD_AFFINE_ADOPTION_PLAN.md) is a
+separate bounded integration task.

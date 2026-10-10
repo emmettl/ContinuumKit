@@ -89,3 +89,14 @@ Its 751 native cases add independent SI/wall/characteristic ledgers, separate
 space and time refinement references and fourteen acceptance-corruption controls.
 Source conformance, analytic numerical references and empirical validation remain
 distinct. Exact-tag native Euler evidence is retained by the release workflow.
+
+Affine least squares has ten focused tests and a complete optimized public consumer.
+Its 300 native cases retain 264 supported fits, 36 checked failures and 50,409
+predictions, intercepts and inverse queries. Independent exact Fraction OLS uses
+every actual binary64 input; inverse references use the public rounded line.
+Thirteen deliberate coherent input/coefficient/query/completeness corruptions
+reject. Complete native records agree across physical Macs. Chosen reference bounds
+and covariance-cancellation diagnostics do not imply arbitrary-input relative error
+or measured acoustic accuracy. [Scope](extraction/AFFINE_LEAST_SQUARES.md) and the
+[separate application plan](extraction/ROOMCAD_AFFINE_ADOPTION_PLAN.md) preserve those
+boundaries.

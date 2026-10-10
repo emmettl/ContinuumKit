@@ -483,3 +483,14 @@ independent exact references and thirteen corruption controls pass. Alpha.18 exa
 verification is the next release gate, followed by a separate RoomCAD adoption with
 complete selected windows/noise histories and intentional accuracy comparisons.
 Weighted QR, acoustic selection policy and changing mechanics remain separate tasks.
+
+Published, 10 October 2026: alpha.18 releases the stabilized affine fitter after
+both physical Macs pass 281 tests, eight optimized exact-version consumers and
+complete independent native-reference/corruption gates. The
+[RoomCAD adoption plan](docs/extraction/ROOMCAD_AFFINE_ADOPTION_PLAN.md) now bounds
+the two actual fitting callers, complete selected windows/noise/tail/calibration
+histories, intentional accuracy comparisons and all frozen compile consumers.
+The separately repaired extrusion benchmark in RoomCAD #33 passes strict complete
+36-layout verification on both hosts; no production source or reference pin changes.
+Acoustic selection/measurement policy, weighted QR, heterogeneous waves and changing
+coupled mechanics remain separate work.

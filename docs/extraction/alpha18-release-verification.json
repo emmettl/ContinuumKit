@@ -1,0 +1,22 @@
+{
+  "actualMetal": true,
+  "annotatedTag": "0d38038f38e8317b54c7179168519181b7d5ac71",
+  "applicationAdoption": false,
+  "bothHostNativeRecords": "byte-identical to accepted candidate",
+  "cases": 300,
+  "checkedFailures": 36,
+  "commit": "0e0929f4a0806940ed2fc5be5f81d1a82034cc8c",
+  "completePredictions": 50409,
+  "corruptionControls": 13,
+  "exactVersionConsumers": 8,
+  "miniConclusion": "success",
+  "miniPublishJob": 114280967656,
+  "miniRun": "https://github.com/emmettl/ContinuumKit/actions/runs/38074459965",
+  "miniVerifyJob": 114279669850,
+  "publishedAt": "2026-10-10T18:19:40Z",
+  "releaseURL": "https://github.com/emmettl/ContinuumKit/releases/tag/0.1.0-alpha.18",
+  "schemaVersion": 1,
+  "successfulFits": 264,
+  "testsPerHost": 281,
+  "version": "0.1.0-alpha.18"
+}
