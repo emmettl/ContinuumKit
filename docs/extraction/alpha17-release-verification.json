@@ -1,0 +1,31 @@
+{
+  "FFT": {
+    "checkedFailures": 20,
+    "completeCasesPerVariant": 437,
+    "corruptionControlsRejected": 13,
+    "nativeArrays": "byte-identical to accepted two-host candidate",
+    "returnedOutputsPerVariant": 4953
+  },
+  "RoomCADAdoption": "separate gate; candidate in preparation",
+  "actualMetal": true,
+  "annotatedTagObject": "80d20128660250683fa8404d15edc1322608d395",
+  "commit": "e94d329c55495ca561306174d624eadf5c8e7da0",
+  "duplicatePostmergeCheck": {
+    "conclusion": "cancelled",
+    "reason": "unchanged source; superseded by complete exact-tag release",
+    "run": 38065411472
+  },
+  "exactTagWorkflow": "https://github.com/emmettl/ContinuumKit/actions/runs/38065611335",
+  "exactVersionOptimizedConsumers": 7,
+  "portableArchiveVerification": "pass",
+  "privateArchivePR": "https://github.com/emmettl/edgerton/pull/62",
+  "privateArchivePayloadHashes": 24,
+  "publicationURL": "https://github.com/emmettl/ContinuumKit/releases/tag/0.1.0-alpha.17",
+  "publishJob": 114253901238,
+  "publishedAt": "2026-10-10T16:03:16Z",
+  "schemaVersion": 1,
+  "tests": 271,
+  "verifyJob": 114252980438,
+  "version": "0.1.0-alpha.17",
+  "workflowConclusion": "success"
+}

@@ -17,7 +17,7 @@
   "physicalMiniWorkflow": "https://github.com/emmettl/ContinuumKit/actions/runs/38064739019",
   "privateArchivePR": "https://github.com/emmettl/edgerton/pull/61",
   "privateArchivePayloadHashes": 59,
-  "releaseStatus": "candidate; no FFT tag published",
+  "releaseStatus": "published 0.1.0-alpha.17; see alpha17-release-verification.json",
   "returnedOutputsPerVariant": 4953,
   "schemaVersion": 1,
   "testsPerHost": 271

@@ -1,8 +1,8 @@
 # Checked real FFT candidate
 
 `SpectralTransforms` is an implemented macOS 15+ Accelerate primitive. It has no
-application, UI, renderer or Metal dependency. This candidate is not a released
-version and RoomCAD still uses its original implementation. Release and complete
+application, UI, renderer or Metal dependency. Alpha.17 now releases this primitive; RoomCAD adoption remains
+a separate application gate. Release and complete
 application adoption remain separate gates.
 
 ## Provenance and unchanged supported arithmetic
@@ -139,3 +139,15 @@ phases and a portable reconstruction/reference replay. The initial signed JSON
 zero reporting failure is retained; its correction changed no transform arithmetic.
 This documentation checkpoint adds no numerical or consumer changes. Next are
 an exact-tag release gate and separate RoomCAD adoption.
+
+## Released alpha.17
+
+The candidate is now published as [alpha.17](https://github.com/emmettl/ContinuumKit/releases/tag/0.1.0-alpha.17)
+from immutable commit `e94d329c55495ca561306174d624eadf5c8e7da0`, after its
+[exact-tag physical-mini verification](https://github.com/emmettl/ContinuumKit/actions/runs/38065611335)
+passes all 271 tests, seven optimized exact-version consumers and actual Metal.
+Complete original/shared FFT arrays remain byte-identical to the accepted two-host
+candidate, with all independent references and corruption controls passing.
+[Publication proof](alpha17-release-verification.json) and the complete private
+24-payload replay archive retain source/version and numerical evidence. The
+standalone primitive is released; RoomCAD adoption remains separate.

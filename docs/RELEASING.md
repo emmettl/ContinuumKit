@@ -192,3 +192,16 @@ two-host assembly candidate; all fourteen corruption controls reject.
 [Publication proof](extraction/alpha16-release-verification.json) records scope and
 identity. The constructor leaves state/load validity and multi-stage policy with
 the caller. BombCAD adoption remains separate; earlier tags are immutable.
+
+## Published checked real FFT
+
+Alpha.17 publishes `SpectralTransforms` from reviewed merge
+`e94d329c55495ca561306174d624eadf5c8e7da0`. Its
+[exact-tag physical-mini workflow](https://github.com/emmettl/ContinuumKit/actions/runs/38065611335)
+passes 271 tests, seven optimized consumers resolving exact alpha.17, actual Metal
+and all previous numerical/topology references before publication. All 437 native
+FFT cases remain byte-identical to the accepted two-host candidate; 20 checked
+failures and 13 corruption controls retain their contracts.
+[Publication proof](extraction/alpha17-release-verification.json) records the
+annotated/peeled tag and successful publication. Previous tags are unchanged.
+RoomCAD's complete application adoption remains a separate gate.
