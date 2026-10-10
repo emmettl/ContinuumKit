@@ -141,3 +141,8 @@ shock/contact/acoustic refinement gates. Alpha.15 passes its exact-tag
 release gate and is published. Alpha.16 releases public Result assembly
 for app-owned SSPRK2 after complete two-host and exact-tag 261-test/six-consumer
 verification. BombCAD adoption remains a separate integration gate.
+
+BombCAD now consumes alpha.16's Euler reference after [complete application
+adoption](https://github.com/emmettl/bombcad/pull/24), including app-owned multistage
+result assembly. Geometry, reconstruction, time/body policy and production air
+remain separate. The next independent primitive is the [real FFT verification plan](docs/extraction/REAL_FFT_PLAN.md).
