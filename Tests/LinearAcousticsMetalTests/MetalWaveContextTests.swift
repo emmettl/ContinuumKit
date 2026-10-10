@@ -18,7 +18,7 @@ import Testing
     let initial = waveFields([1, 0, 100, 100, 100, 100, 100, 100])
     let a = try MetalWaveStepper(context: context, grid: g, initialFields: initial)
     let b = try MetalWaveStepper(context: context, grid: g, initialFields: initial)
-    #expect(a.pipelineIdentities == b.pipelineIdentities && a.pipelineIdentities.count == 5)
+    #expect(a.pipelineIdentities == b.pipelineIdentities && a.pipelineIdentities.count == 6)
     #expect(a.queueIdentity != b.queueIdentity)
     #expect(Set(a.fieldBufferIdentities).isDisjoint(with: b.fieldBufferIdentities))
     let source = try a.prepareSource(

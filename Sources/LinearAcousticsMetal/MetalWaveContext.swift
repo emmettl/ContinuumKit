@@ -9,7 +9,8 @@ public final class MetalWaveContext: Sendable {
   public let deviceName: String
   public let deviceRegistryID: UInt64
   let device: any MTLDevice
-  let velocity, pressure, injection, sampling, pressureSampling: any MTLComputePipelineState
+  let velocity, pressure, injection, sampling, pressureSampling,
+    mixedSampling: any MTLComputePipelineState
 
   public init(device: any MTLDevice) throws {
     let library: any MTLLibrary
@@ -34,9 +35,11 @@ public final class MetalWaveContext: Sendable {
     injection = try pipeline("waveInject")
     sampling = try pipeline("waveSample")
     pressureSampling = try pipeline("waveSamplePressure")
+    mixedSampling = try pipeline("waveSampleMixed")
   }
 
   var pipelineIdentities: [ObjectIdentifier] {
-    [velocity, pressure, injection, sampling, pressureSampling].map(ObjectIdentifier.init)
+    [velocity, pressure, injection, sampling, pressureSampling, mixedSampling].map(
+      ObjectIdentifier.init)
   }
 }

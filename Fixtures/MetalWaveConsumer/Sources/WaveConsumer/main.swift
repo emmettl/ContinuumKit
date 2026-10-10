@@ -172,4 +172,28 @@ do {
   print(
     "PASS fetched large uneven masked Metal field groups: independent CPU fields, forcing and clocks",
     device.name)
+  let mixedPlan = try PreparedWaveObservation(
+    grid: grid,
+    receivers: [
+      WaveReceiverStencil(
+        pressureCells: Array(repeating: 1, count: 8), pressureWeights: [1, 0, 0, 0, 0, 0, 0, 0]),
+      WaveReceiverStencil(
+        pressureCells: Array(repeating: 2, count: 8), pressureWeights: [1, 0, 0, 0, 0, 0, 0, 0],
+        velocityCell: 171, velocityAxis: [1, 0, 0]),
+    ])
+  let directionalPlan = try PreparedWaveObservation(grid: grid, receivers: [mixedPlan.receivers[1]])
+  let mixed = try gpu.observe(gpu.prepareObservation(mixedPlan))
+  let directional = try gpu.observe(gpu.prepareObservation(directionalPlan))
+  try require(
+    mixed.pressureOverDensity == [
+      Double(a.pressureOverDensity[1]), Double(a.pressureOverDensity[2]),
+    ])
+  try require(
+    mixed.projectedVelocity[0] == nil
+      && mixed.projectedVelocity[1] == directional.projectedVelocity[0])
+  try require(mixed.pressureStepIndex == 257 && mixed.arithmetic == .metalFloat)
+  print(
+    "PASS fetched mixed pressure/directional sampling: ordered native pressure, absent probes and original velocity bits",
+    device.name)
+
 }

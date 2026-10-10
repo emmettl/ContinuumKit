@@ -8,9 +8,10 @@ public final class PreparedMetalWaveObservation {
   public let observation: PreparedWaveObservation
   public let deviceName: String
   let deviceRegistryID: UInt64
-  let full, pressureOnly: MetalObservationGroup?
+  let full, pressureOnly, mixed: MetalObservationGroup?
   var bufferIdentities: [ObjectIdentifier] {
     (full?.bufferIdentities ?? []) + (pressureOnly?.bufferIdentities ?? [])
+      + (mixed?.bufferIdentities ?? [])
   }
   init(device: any MTLDevice, observation: PreparedWaveObservation) throws {
     self.observation = observation
@@ -32,16 +33,26 @@ public final class PreparedMetalWaveObservation {
         throw MetalWaveError.unrepresentableObservationAxis(receiver: index)
       }
     }
-    full =
-      fullIndices.isEmpty
-      ? nil
-      : try MetalObservationGroup(
-        device: device, observation: observation, indices: fullIndices, velocity: true)
-    pressureOnly =
-      onlyIndices.isEmpty
-      ? nil
-      : try MetalObservationGroup(
-        device: device, observation: observation, indices: onlyIndices, velocity: false)
+    if !fullIndices.isEmpty && !onlyIndices.isEmpty {
+      // A reserved absent-probe marker is checked before any velocity address/read.
+      mixed = try MetalObservationGroup(
+        device: device, observation: observation,
+        indices: Array(observation.receivers.indices), velocity: true)
+      full = nil
+      pressureOnly = nil
+    } else {
+      mixed = nil
+      full =
+        fullIndices.isEmpty
+        ? nil
+        : try MetalObservationGroup(
+          device: device, observation: observation, indices: fullIndices, velocity: true)
+      pressureOnly =
+        onlyIndices.isEmpty
+        ? nil
+        : try MetalObservationGroup(
+          device: device, observation: observation, indices: onlyIndices, velocity: false)
+    }
   }
 }
 
@@ -64,11 +75,14 @@ final class MetalObservationGroup {
       device: device, values: indices.flatMap { observation.receivers[$0].pressureWeights })
     if velocity {
       velocityCells = try MetalWaveStepper.makeBuffer(
-        device: device, values: indices.map { UInt32(observation.receivers[$0].velocityCell!) })
+        device: device,
+        values: indices.map {
+          observation.receivers[$0].velocityCell.map(UInt32.init) ?? UInt32.max
+        })
       axes = try MetalWaveStepper.makeBuffer(
         device: device,
         values: indices.flatMap { index -> [Float] in
-          let a = observation.receivers[index].velocityAxis!
+          let a = observation.receivers[index].velocityAxis ?? .zero
           return [Float(a.x), Float(a.y), Float(a.z)]
         })
     } else {
@@ -80,9 +94,11 @@ final class MetalObservationGroup {
 
 final class MetalObservationStorage {
   let owner: PreparedMetalWaveObservation
-  let fullPressure, fullVelocity, onlyPressure: (any MTLBuffer)?
+  let fullPressure, fullVelocity, onlyPressure, mixedPressure, mixedVelocity: (any MTLBuffer)?
   var bufferIdentities: [ObjectIdentifier] {
-    [fullPressure, fullVelocity, onlyPressure].compactMap { $0.map(ObjectIdentifier.init) }
+    [fullPressure, fullVelocity, onlyPressure, mixedPressure, mixedVelocity].compactMap {
+      $0.map(ObjectIdentifier.init)
+    }
   }
   init(device: any MTLDevice, owner: PreparedMetalWaveObservation) throws {
     self.owner = owner
@@ -100,5 +116,7 @@ final class MetalObservationStorage {
     fullPressure = try owner.full.map { try buffer($0.indices.count * 128) }
     fullVelocity = try owner.full.map { try buffer($0.indices.count * 129) }
     onlyPressure = try owner.pressureOnly.map { try buffer($0.indices.count * 128) }
+    mixedPressure = try owner.mixed.map { try buffer($0.indices.count * 128) }
+    mixedVelocity = try owner.mixed.map { try buffer($0.indices.count * 129) }
   }
 }
