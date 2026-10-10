@@ -426,9 +426,10 @@ package gates. The next release is alpha.15, subject to the exact-tag physical-m
 gate. App-owned flux/limiter/group/piston adoption and broader model gaps remain
 separate; no production air solver or changing mechanics has moved.
 
-API compatibility correction, 10 October 2026: the alpha.15 release was cancelled
-before publication because app-owned SSPRK2 callers must assemble a public Euler
-Result. The alpha.15 tag is preserved. An explicit unchecked forwarding initializer
+API compatibility correction, 10 October 2026: alpha.15 passed the exact-tag gate
+and published before cancellation could take effect. Its verified direct-step API
+is preserved. App-owned SSPRK2 callers additionally need to assemble a public Euler
+Result. An explicit unchecked forwarding initializer
 and independent two-stage ledger test prepare alpha.16; full two-host/exact-tag
 gates precede release, then separate bounded application adoption. The operator's
 numerical arithmetic is unchanged.

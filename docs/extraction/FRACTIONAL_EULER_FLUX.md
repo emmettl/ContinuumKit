@@ -124,8 +124,9 @@ states, wall ordering, count agreement or budgets; callers validate their combin
 states and supply matching loads. Results returned by `advanceWithWalls` remain
 checked as before. The separate fetched consumer exercises this public constructor.
 
-Publication correction: alpha.15 remains an unchanged, unpublished tag. Its release
-was cancelled after inspection found that BombCAD's tube/group SSPRK2 callers need
-a public Result initializer. Numerical operator bodies and earlier native evidence
+Publication correction: alpha.15 passed its exact-tag gate and published at
+2026-10-10T13:22:47Z before an attempted cancellation could take effect. It remains
+unchanged and verified for direct steps. Inspection found that BombCAD's tube/group
+SSPRK2 callers additionally need a public Result initializer. Numerical operator bodies and earlier native evidence
 remain unchanged. Alpha.16 is the corrected API candidate and requires complete
 two-host and exact-tag gates before publication and adoption.
