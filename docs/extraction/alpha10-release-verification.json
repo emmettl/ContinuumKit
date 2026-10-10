@@ -1,0 +1,16 @@
+{
+  "commit": "da7cb5f5ac642edc57e8433c6150dceca6b9edd9",
+  "cpuTests": 46,
+  "exactTagRun": "https://github.com/emmettl/ContinuumKit/actions/runs/38024519661",
+  "fetchedSemanticVersion": "exact 0.1.0-alpha.10 on all consumers",
+  "metalTests": 31,
+  "optimizedConsumers": 3,
+  "release": "https://github.com/emmettl/ContinuumKit/releases/tag/0.1.0-alpha.10",
+  "remaining": "RoomCAD production Metal comparison, ownership/abandon/restart and device timing; no empirical accuracy claim",
+  "schemaVersion": 1,
+  "scope": "explicit immutable checked-Sendable Metal pipelines; each mutable run has independent state; unchanged evolution and native clocks",
+  "status": "published",
+  "swiftTests": 218,
+  "tagObject": "b82d11b0bc8948aa139442e17089685a138ee483",
+  "version": "0.1.0-alpha.10"
+}

@@ -316,3 +316,9 @@ run retains independent queues, fields, staging/output, completion and invalidat
 Independent two-cell forcing, failure isolation, concurrent full-field/history parity
 and clean public consumer gates precede release. RoomCAD Metal binding, nonterminal
 abandonment/fresh CPU restart and representative device timing remain subsequent gates.
+
+Published: `0.1.0-alpha.10` exposes the verified immutable explicit Metal wave
+context after exact-tag physical-mini checks and three optimized exact-version
+consumers. The next application slice is optional original/shared Metal comparison
+with full native outputs, cancellation/abandonment, fresh CPU restart and representative
+device timing before default adoption or retiring original numerical code.
