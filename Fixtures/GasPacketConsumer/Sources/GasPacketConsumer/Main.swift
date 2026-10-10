@@ -212,5 +212,8 @@ struct Case: Codable {
       to: URL(fileURLWithPath: output).appendingPathComponent("summary.json"))
     print("PASS fetched public gas packet API: \(cases.count) complete original/shared cases")
   }
-  enum Failure: Error { case mismatch(String), output }
+  enum Failure: Error {
+    case mismatch(String)
+    case output
+  }
 }
