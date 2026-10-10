@@ -150,11 +150,17 @@ remain separate. The next independent primitive is the [real FFT verification pl
 The implemented [checked real FFT candidate](docs/extraction/REAL_FFT.md) adds
 `SpectralTransforms` with explicit Accelerate capability, independent DFT/inverse
 and direct convolution references, protected original/shared native conformance
-and safe public boundaries. Alpha.17 releases it; RoomCAD adoption remains separate.
+and safe public boundaries. Alpha.17 releases it; RoomCAD has completed its separate adoption gate.
 
 [Alpha.17](https://github.com/emmettl/ContinuumKit/releases/tag/0.1.0-alpha.17)
 now releases `SpectralTransforms` after the exact-tag physical-mini gate passes
 271 tests, seven optimized exact-version consumers and actual Metal work. Complete
 437-case FFT arrays remain byte-identical to the accepted two-host candidate.
 [Publication proof](docs/extraction/alpha17-release-verification.json) records
-immutable identities; RoomCAD adoption remains separate.
+immutable identities and completed RoomCAD adoption.
+
+RoomCAD now consumes alpha.17's FFT primitive after [complete application adoption](https://github.com/emmettl/RoomCAD/pull/31):
+84 full case outputs (12.8 million native values per variant) agree byte-for-byte
+across protected original/shared and both Macs. Both hosts pass 192 tests, actual
+Metal, packaging/signatures/snapshots and complete CPU/Metal/thin-probe gates.
+Application band/fitting/measured-data and audition policy remain explicit.
