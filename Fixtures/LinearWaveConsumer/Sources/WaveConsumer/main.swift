@@ -45,3 +45,20 @@ try require(
   forcedFields.velocityY == zero && forcedFields.velocityZ == zero
     && forcedFields.pressureStepIndex == 2)
 print("PASS fetched CPU pressure forcing: signed sparse increments, complete fields and clocks")
+
+let observation = try PreparedWaveObservation(
+  grid: grid,
+  receivers: [
+    WaveReceiverStencil(
+      pressureCells: Array(repeating: 1, count: 8), pressureWeights: [1, 0, 0, 0, 0, 0, 0, 0])
+  ])
+let observed = try forced.observe(observation)
+try require(observed.pressureOverDensity == [0.53076171875] && observed.projectedVelocity == [nil])
+try require(observed.pressureStepIndex == 2 && observed.pressureTime == 0.25)
+let history = try forced.advance(source: source, amplitudes: [0.25, -0.5], observing: observation)
+var alignment = WaveObservationAligner()
+let aligned = try alignment.append(history) + alignment.finishUsingFinalHalfStep()
+try require(
+  aligned.count == 2 && aligned[0].pressureStepIndex == 3 && aligned[1].pressureStepIndex == 4)
+try require(!aligned[0].usesTerminalHalfStep && aligned[1].usesTerminalHalfStep)
+print("PASS fetched CPU receiver observation and chunk-safe lookahead API; pressure-only sampling")

@@ -1,0 +1,37 @@
+{
+  "blocks": [
+    {
+      "bytes": 683,
+      "endLine": 671,
+      "id": "cpu-masked-observation",
+      "path": "Sources/AcousticCore/WaveSolver.swift",
+      "selector": {
+        "anchor": "    func simulateMasked(",
+        "endMarker": "\n        }\n        return receivers.indices.map",
+        "startMarker": "            for (r, receiver) in receivers.enumerated()"
+      },
+      "sha256": "d0dd895ac2e30985fbeba7bd0320dd56671c70f6391163673efdbab567564b4d",
+      "startLine": 660
+    },
+    {
+      "bytes": 496,
+      "endLine": 683,
+      "id": "cpu-masked-microphone-timing",
+      "path": "Sources/AcousticCore/WaveSolver.swift",
+      "selector": {
+        "anchor": "    func simulateMasked(",
+        "endMarker": "\n    }\n}",
+        "startMarker": "        return receivers.indices.map"
+      },
+      "sha256": "67420463ff6bd06523558e38edfb682cdbf7117c76ece52d08ff449941c412d5",
+      "startLine": 674
+    }
+  ],
+  "license": "MIT, Copyright (c) 2026 Louis Emmett",
+  "repository": {
+    "revision": "f2f6465d0d845af9adda596c004b18ca15a77edd",
+    "url": "https://github.com/emmettl/RoomCAD"
+  },
+  "schemaVersion": 1,
+  "scope": "CPU ordered Double pressure observation, Float face sums and Double SIMD projection; exact original microphone lookahead/terminal source comparison"
+}

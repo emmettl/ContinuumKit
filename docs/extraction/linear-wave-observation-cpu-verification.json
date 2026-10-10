@@ -1,0 +1,39 @@
+{
+  "candidateDifference": "independent two-layer fixture anchor only; production/test/consumer code identical",
+  "finalSourceCandidate": "d637788ebe771950b1ef1c43d3186060b0633c7e",
+  "implementation": "552f7cf0dd1b969d98f30c0a38633f05ab1594ac",
+  "physicalMini": {
+    "coreRun": "https://github.com/emmettl/ContinuumKit/actions/runs/38011548981",
+    "cpuNoMetalUIGuard": "passed",
+    "cpuTests": 38,
+    "fetchedCPUObservation": "passed",
+    "newCPUObservationTests": 10,
+    "privateSourceProducer": "0c7278decab21c0f3a21d475caa1bc156a6440ee",
+    "sourceRun": "https://github.com/emmettl/edgerton/actions/runs/38011890175",
+    "tests": 199
+  },
+  "schemaVersion": 1,
+  "scope": "unreleased CPU spatial receiver observation and neutral one-frame lookahead; Metal sampling/application integration remains separate",
+  "sourceComparison": {
+    "boundedObservedBatchSteps": 128,
+    "capturesPerDevice": 2064,
+    "configurations": [
+      "debug",
+      "release"
+    ],
+    "crossHostConfigurationReportsByteIdentical": true,
+    "devices": [
+      "Apple M4 Max",
+      "Apple M4"
+    ],
+    "lookaheadComparisonChunkSteps": 37,
+    "mixedSamplesPerDevice": 6168,
+    "postconditionNegativeControls": 7,
+    "roomRevision": "f2f6465d0d845af9adda596c004b18ca15a77edd",
+    "runtimeFloat32AndFloat64BitMismatches": 0,
+    "stepsPerCase": 257,
+    "totalMixedSamples": 12336,
+    "totalNativeReceiverCaptures": 4128
+  },
+  "status": "passed"
+}
