@@ -1,8 +1,8 @@
 # Checked real FFT candidate
 
 `SpectralTransforms` is an implemented macOS 15+ Accelerate primitive. It has no
-application, UI, renderer or Metal dependency. Alpha.17 now releases this primitive; RoomCAD adoption remains
-a separate application gate. Release and complete
+application, UI, renderer or Metal dependency. Alpha.17 releases this primitive and RoomCAD has completed
+its separate application adoption gate. Release and complete
 application adoption remain separate gates.
 
 ## Provenance and unchanged supported arithmetic
@@ -151,3 +151,23 @@ candidate, with all independent references and corruption controls passing.
 [Publication proof](alpha17-release-verification.json) and the complete private
 24-payload replay archive retain source/version and numerical evidence. The
 standalone primitive is released; RoomCAD adoption remains separate.
+
+## Accepted RoomCAD adoption
+
+[RoomCAD #31](https://github.com/emmettl/RoomCAD/pull/31), merge
+`453e2f97cfc9062e0e5d18415a830b30091b7817`, retires its local vDSP implementation
+behind a small compatibility boundary. All other AcousticCore/Audition source bytes
+are unchanged. Both physical hosts pass 192 tests, actual Metal, optimized package/
+deep strict signature and inspected headless snapshots, plus complete CPU/Metal
+production and thin-probe output/oracle gates.
+
+Its complete 84-case original/shared fixture retains 12,778,605 native values in
+51,455,392 bytes per variant. All native payloads are identical across hosts and
+variants, and independent complete decay/convolution/mix references pass. Ten
+paired corruption controls reject. The initial mini workflow is recorded as failed
+only for authored fixture setup; its application/wave jobs succeed. The corrected
+comparison workflow succeeds. Actual producer/source scopes, invalid fixture logs/
+partial exports, all raw arrays and portable replay remain in the complete private
+164-payload archive. [Release/adoption identity](alpha17-release-verification.json)
+links those records. Application recovery and acoustic/measurement policy remain
+with RoomCAD; existing reference and release identities are unchanged.

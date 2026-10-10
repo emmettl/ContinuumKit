@@ -1,5 +1,5 @@
 {
-  "RoomCADAdoptionStatus": "pending separate complete application gate",
+  "RoomCADAdoptionStatus": "merged RoomCAD #31 at 453e2f97; see alpha17-release-verification.json",
   "actualMetalPerHost": true,
   "archivePortableReplay": "pass",
   "checkedFailures": 20,

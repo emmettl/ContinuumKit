@@ -243,3 +243,11 @@ filtering and convolution references agree across both physical Macs. The
 `SpectralTransforms` candidate adds checked public safety boundaries. Exact-tag
 release and RoomCAD adoption remain next; acoustic band/fitting/measured-data
 policy and Edgerton's spectral/forcing models remain distinct gaps.
+
+The FFT candidate above is now released in alpha.17 and adopted by
+[RoomCAD #31](https://github.com/emmettl/RoomCAD/pull/31), with complete independent
+primitive references and whole application/native conformance on both physical Macs.
+The FFT packing/normalization gap is addressed. Next bounded numerical work should
+separate fitting arithmetic from measurement/decay-window policy before extraction;
+heterogeneous fluids, Edgerton's different 2D forcing/damping and actively changing
+coupled material/contact/fracture systems remain separate model gaps.
