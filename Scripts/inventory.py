@@ -103,15 +103,26 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--bombcad", required=True, type=Path)
     parser.add_argument("--edgerton", required=True, type=Path)
+    parser.add_argument("--roomcad", type=Path, help="Standalone RoomCAD repository; requires --core")
+    parser.add_argument("--core", type=Path, help="ContinuumKit repository; requires --roomcad")
     parser.add_argument("--descriptions", required=True, type=Path)
     parser.add_argument("--output", required=True, type=Path)
     args = parser.parse_args()
+    if (args.roomcad is None) != (args.core is None):
+        parser.error("Supply both --roomcad and --core for the four-repository inventory")
     scopes = [
         ("simulationkit", args.bombcad / "Packages/SimulationKit", ["Package.swift", "README.md", "Sources", "Tests"]),
         ("roomcad", args.bombcad / "RoomCAD", ["Package.swift", "README.md", "Sources", "Tests", "Scripts", "Validation"]),
         ("bombcad", args.bombcad, ["Package.swift", "LICENSE", "Sources", "Tests", "Scripts", "Packages/SimulationKit"]),
         ("edgerton", args.edgerton, ["Package.swift", "Sources", "Scripts", "Calibration", "Studies/TargetMechanics"]),
     ]
+    if args.roomcad is not None:
+        scopes = [
+            ("continuumkit", args.core, ["Package.swift", "LICENSE", "Sources", "Tests", "Scripts"]),
+            ("roomcad", args.roomcad, ["Package.swift", "LICENSE", "Sources", "Tests", "Scripts", "Fixtures"]),
+            ("bombcad", args.bombcad, ["Package.swift", "LICENSE", "Sources", "Tests", "Scripts"]),
+            ("edgerton", args.edgerton, ["Package.swift", "Sources", "Scripts", "Calibration", "Studies/TargetMechanics"]),
+        ]
     result = {
         "schema_version": 1, "collected_at_utc": datetime.now(timezone.utc).isoformat(),
         "purpose": "Source inventory, not a model conformance or physical validation result",

@@ -190,3 +190,42 @@ passes in [the checkpoint CI](https://github.com/emmettl/bombcad/actions/runs/37
 The initial source/hash tables remain collection-time evidence. Committing that work
 resolves its source-control gate; moving-geometry numerical readiness still needs its
 separate convergence and contract checks.
+
+## Current four-repository checkpoint — 10 October 2026
+
+The [new dated collection](inventory/2026-10-10-four-repositories.json) records the
+current standalone ContinuumKit, RoomCAD, BombCAD and Edgerton packages. The original
+8 October snapshot above remains historical and unchanged. The collector retains
+legacy nested-package mode and accepts explicit standalone --roomcad/--core paths.
+Counts/imports/test annotations are lexical observations, not executed test results;
+symlinks are excluded from the scoped file list, while their canonical test sources
+are recorded. The collection is per-file and is not an atomic cross-repository snapshot.
+
+Core at 0320015330d65e5a70ebca431657b7a9920d6971 has ten libraries, including both
+released linear-wave backends. RoomCAD at 2bc11ed6a033e8642de4018e8e9ae9cfb4e1151c
+has accepted both shared production defaults and retired duplicate masked CPU/GPU
+implementations. Original controls, snapshots and independent benchmark provenance
+remain available. Its 192-test and complete two-host output/packaging gates are linked
+in the [retirement proof](https://github.com/emmettl/RoomCAD/blob/main/docs/benchmarks/RETIRED_ORIGINAL_METAL.md).
+The optimized unmasked box CPU contract remains application-owned and distinct.
+
+BombCAD at 4104864b63163e45810b5862c6e4057aa48c912d is clean in this collection.
+Edgerton has active committed and uncommitted mechanics/rendering work; the snapshot
+records its current hashes/status rather than presenting that work as a stable
+extraction candidate. The mature scalar contact and GMRES candidates remain separate
+from changing coupled material/contact/fracture systems. Their initial study evidence
+does not establish readiness of all surrounding mechanics.
+
+The next bounded candidate is BombCAD's Foundation-only IdealGasWallRiemann. Its
+source at 0b4943def5ec50064d1e44b9ab0ab249c2689b15 has the recorded current hash
+8008860fe21e94a5cc3cd2a1af1eea9d8457f91d6d341bc7a49de69c2a199064. Define normal
+sign/wall frame, SI quantities, shock/rarefaction/vacuum and binary64 failure behavior,
+then independently check jump/invariant/acoustic limits and a clean public consumer.
+Its signalSpeed is an incident-state rate estimate, not an exact shock-front velocity
+or a general downstream characteristic certificate. Bulk transport, moving-volume
+integration and production blast GPU evolution remain separate gates.
+
+Other gaps remain: heterogeneous fluids and Edgerton's different 2D forcing/damping
+contract; finite-band FFT normalization references; conservative gas transport/coupled
+geometry; fitting algorithms separated from measured-data policy; and bounded stable
+mechanics primitives with explicit dimensional/ownership/failure contracts.

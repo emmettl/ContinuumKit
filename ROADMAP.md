@@ -355,3 +355,16 @@ budgets, and verify complete application output, fallback and packaging after ea
 bounded move. The optimized unmasked box CPU arithmetic remains a distinct contract;
 shared default adoption does not authorize silently replacing it or changing app-owned
 geometry, microphone mixing, engine policy or measured fixtures.
+
+Current checkpoint, 10 October 2026: RoomCAD has completed production masked CPU/GPU
+retirement after [verified source/control preservation and selected-backend availability](https://github.com/emmettl/RoomCAD/pull/30).
+The app uses exact alpha.12; normal outputs remain exact on both Macs, with 192 tests
+and packaged original-code exclusion. Missing shared context now selects CPU directly;
+the old inline-GPU preparation fallback is intentionally retired. No new Core tag is
+needed for this application integration. Original snapshots/oracles remain available.
+
+The [refreshed four-repository inventory](docs/INVENTORY.md#current-four-repository-checkpoint--10-october-2026)
+separates this completed migration from the remaining model work. Next: a standalone
+ideal-gas planar wall-pressure reference, independently verified without app imports.
+Gas transport/moving geometry, heterogeneous/forced 2D waves, FFT/fitting contracts and
+changing coupled mechanics remain their own bounded candidates.
