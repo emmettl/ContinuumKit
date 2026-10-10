@@ -54,10 +54,10 @@ volumes. Packet and wall errors remain distinct from `invalidFace`, `invalidWall
 
 ## Independent acceptance and complete source conformance
 
-Twelve focused tests cover literal oblique SI flux, a stationary discontinuity's
+Thirteen focused tests cover literal oblique SI flux, a stationary discontinuity's
 characteristic dissipation, intensive traces, volume/characteristic clocks, face
 reversal, independent Mach-two wall shock and rarefaction/vacuum loads, extensive
-wall ledgers, unsupported trace positivity, invalid clocks/geometry, inactive dry
+wall ledgers, unsupported trace positivity, supplied wall trace ownership, invalid clocks/geometry, inactive dry
 states and characteristic representability. The first oblique test run exposed an
 incorrect hand-calculated momentum expectation; the expectation was corrected to
 rho u (u.n) + p n, without changing source arithmetic or tolerances.
@@ -92,7 +92,9 @@ separate BombCAD adoption and complete affected application comparison.
 [Source manifest](euler-flux-source.json) pins BombCAD revision
 `063d6fe818fd78ccbfe46c1c79e035f04de03800` and its MIT-authored implementation.
 Access modifiers, immutable conformance and type names change; normalized numerical
-source must remain identical. Original code is verification-only. The production
+source must remain identical. The scratch consumer prepends only an explicit CompressibleFlow import to its
+compiled original copy, verifying the remaining bytes against the immutable oracle.
+Original code is verification-only. The production
 BombCAD copy remains until its own adoption gate.
 
 Geometry, topology changes, remapping, reconstruction/limiting, higher-order time

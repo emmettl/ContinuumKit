@@ -90,6 +90,19 @@ struct FractionalEulerFluxTests {
     #expect(a == b)
   }
 
+  @Test("A supplied wall trace determines pressure and signal but preserves host identity")
+  func wallTrace() throws {
+    let host = Cell(volume: 0.5, density: 1, pressure: 1)
+    let trace = Cell(volume: 7, density: 2, velocity: SIMD3(0, 3, 0), pressure: 10)
+    let wall = Flux.Wall(cell: 0, normal: SIMD3(1, 0, 0), area: 1, state: trace)
+    let result = try Flux.advanceWithWalls([host], faces: [], walls: [wall], duration: 0.001)
+    near(try Flux.maximumStep([host], faces: [], walls: [wall]), 0.4 * 0.5 / sqrt(7))
+    near(result.wallImpulses[0].x, 0.01)
+    #expect(result.cells[0].volume == host.volume)
+    #expect(result.cells[0].amount[0] == host.amount[0])
+    #expect(result.cells[0].amount[4] == host.amount[4] && result.wallWork == [0])
+  }
+
   @Test("Independent Mach-two shock relations determine wall impulse, work and clock")
   func shockWall() throws {
     let c = sqrt(1.4)

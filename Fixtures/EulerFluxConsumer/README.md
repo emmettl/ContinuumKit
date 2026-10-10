@@ -13,3 +13,7 @@ See [the contract](../../docs/extraction/FRACTIONAL_EULER_FLUX.md) for the compl
 748-case tree, continuum refinement gates, units, trace/clock limitations and the
 separate application adoption requirement. Output directories preserve every native
 cell, physical clock, supplied interface/trace and ordered wall exchange.
+
+The compiled scratch copy of the original receives one explicit CompressibleFlow
+import so released alias types are visible to the compiler. The remaining bytes
+are checked identical to the immutable oracle; no numerical adaptation occurs.

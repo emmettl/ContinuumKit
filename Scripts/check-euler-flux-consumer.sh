@@ -32,6 +32,17 @@ d={'schemaVersion':1,'candidate':git('rev-parse','HEAD'),'workingTreeDirty':bool
 PYMETA
 mkdir "$scratch/consumer"
 cp -R "$scratch/ContinuumKit/Fixtures/EulerFluxConsumer/." "$scratch/consumer/"
+# The frozen app source used app aliases. Its compiled copy needs an explicit
+# import for the already shared value types, without altering any original bytes
+# in the repository or numerical declarations. Verify the import-only adaptation.
+python3 - "$scratch/consumer/Sources/EulerFluxConsumer/OriginalFlux.swift" <<'PYIMPORT'
+import hashlib,sys
+from pathlib import Path
+p=Path(sys.argv[1]);original=p.read_bytes()
+assert hashlib.sha256(original).hexdigest()=='d80e566a9938f665d71ee00bb813e934bb5febff1a112920200fd47560c818c5'
+p.write_bytes(b'import CompressibleFlow\n'+original)
+assert p.read_bytes().split(b'\n',1)[1]==original
+PYIMPORT
 swift build --package-path "$scratch/consumer" -c release -Xswiftc -warnings-as-errors
 swift run --package-path "$scratch/consumer" -c release --skip-build EulerFluxConsumer
 binary=$(swift build --package-path "$scratch/consumer" -c release --show-bin-path)/EulerFluxConsumer
