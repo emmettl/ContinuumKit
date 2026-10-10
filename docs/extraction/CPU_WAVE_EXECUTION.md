@@ -1,10 +1,11 @@
 # Synchronous CPU execution and finite certification
 
-Candidate: 10 October 2026, unreleased. RoomCAD's complete CPU binding found a
+Published in `0.1.0-alpha.9` after the verified checkpoint below and
+[exact-tag mini publication](alpha9-release-verification.json). RoomCAD's complete CPU binding found a
 large-grid serial throughput gap. This tranche adds explicit `CPUWaveExecution`
 (serial by default, or a caller-chosen parallel slab count) without changing the
 wave equations, Float operations, source/receiver arithmetic or completion clocks.
-No application default, release tag or frozen numerical reference is changed here.
+Application defaults and frozen numerical references remain outside this library contract.
 
 Counts must be positive and no larger than the grid's z dimension; invalid counts
 reject before field allocation. Each slab owns a disjoint integer z-plane interval.
