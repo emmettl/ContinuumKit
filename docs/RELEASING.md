@@ -127,3 +127,16 @@ serial/current parallel fields and raw receiver reports are byte-identical; sani
 and failure/certificate checks pass. Serial remains the API default and callers
 choose synchronous slabs; CPU execution now links system Dispatch. Application
 throughput/default acceptance and empirical model validation remain separate gates.
+
+## Published reusable Metal context prerelease
+
+`0.1.0-alpha.10` is published from reviewed merge commit
+`da7cb5f5ac642edc57e8433c6150dceca6b9edd9`. Its
+[exact-tag release workflow](https://github.com/emmettl/ContinuumKit/actions/runs/38024519661)
+passes 218 tests (31 actual Metal, 46 CPU), all three optimized consumers resolving
+exact alpha.10, CPU-only no-Metal/UI linkage, packaged context/forcing/observation
+checks and unchanged numerical/topology references before publication.
+[Publication proof](extraction/alpha10-release-verification.json) retains the tag and
+commit identity. Existing tags remain unchanged. The immutable explicit device
+context allows pipeline reuse across independently owned runs; RoomCAD production
+Metal binding, abandonment/fresh CPU restart and timing remain separate gates.
