@@ -3,7 +3,7 @@
 import argparse,json,math,struct,statistics,hashlib
 from pathlib import Path
 BASELINE='da7cb5f5ac642edc57e8433c6150dceca6b9edd9'
-MODES=['released','profile32','profile256']
+MODES=['candidate','profile32','profile256']
 def require(v,s):
  if not v:raise ValueError(s)
 def words(data):return list(struct.unpack('<'+'I'*(len(data)//4),data))
@@ -54,7 +54,7 @@ def verify(root):
    require(run['mixed'][-1][0]==last[0] and double(run['mixed'][-1][1])==0.5*double(last[1])-0.5*speed*double(last[3]),'independent terminal mixed output')
    require(all(math.isfinite(run[k]) and run[k]>0 for k in ['wallSeconds','setupSeconds','advanceSeconds','mixingSeconds']),'positive measured phases')
    require(run['wallSeconds']>=run['setupSeconds']+run['advanceSeconds']+run['mixingSeconds']-1e-6,'phase containment')
-   if run['mode']=='released':require(run.get('commands') is None and run.get('decodeSeconds') is None,'unmeasured profiling fields explicitly absent')
+   if run['mode']=='candidate':require(run.get('commands') is None and run.get('decodeSeconds') is None,'unmeasured profiling fields explicitly absent')
    else:
     require(len(run['commands'])==8 and all(cmd['steps']==128 for cmd in run['commands']),'complete command chronology')
     require(run['decodeSeconds']>0 and math.isfinite(run['decodeSeconds']),'decode measurement')
@@ -66,15 +66,15 @@ def verify(root):
   summary={'dimensions':d,'cellCount':n,'frequency':case['frequency'],'modes':{}}
   for m in MODES:
    rs=[r for r in runs if r['mode']==m];v={k:statistics.median(r[k] for r in rs) for k in ['wallSeconds','setupSeconds','advanceSeconds','mixingSeconds']}
-   if m!='released':
+   if m!='candidate':
     v['decodeSeconds']=statistics.median(r['decodeSeconds'] for r in rs)
     v['gpuSeconds']=statistics.median(sum(c['gpuEndSeconds']-c['gpuStartSeconds'] for c in r['commands']) for r in rs)
     v['encodingSeconds']=statistics.median(sum(c['encodingSeconds'] for c in r['commands']) for r in rs)
     v['commitWaitSeconds']=statistics.median(sum(c['commitWaitSeconds'] for c in r['commands']) for r in rs)
    summary['modes'][m]=v
-  summary['largerGroupToReleasedWall']=summary['modes']['profile256']['wallSeconds']/summary['modes']['released']['wallSeconds']
+  summary['largerGroupToCandidateWall']=summary['modes']['profile256']['wallSeconds']/summary['modes']['candidate']['wallSeconds']
   summary['largerGroupToProfile32GPU']=summary['modes']['profile256']['gpuSeconds']/summary['modes']['profile32']['gpuSeconds'];summaries.append(summary)
  require(frame_count==27648,'complete receiver frame tree')
- return {'schemaVersion':1,'status':'passed','candidate':env['candidate'],'device':report['device'],'completeRuns':27,'completeFieldWords':field_words,'nativeFrames':frame_count,'source':'exact alpha.10 except declared profiling and group-shape selection; every barrier retained','scope':'controlled model profile on live hosts; no isolated or application throughput claim','timings':summaries}
+ return {'schemaVersion':1,'status':'passed','candidate':env['candidate'],'device':report['device'],'completeRuns':27,'completeFieldWords':field_words,'nativeFrames':frame_count,'source':'private profiling copies retain exact alpha.10 except declared timing/group patches; public candidate uses fetched exact revision; every barrier retained','scope':'controlled model profile on live hosts; no isolated or application throughput claim','timings':summaries}
 if __name__=='__main__':
- p=argparse.ArgumentParser(description=__doc__);p.add_argument('root',type=Path);a=p.parse_args();r=verify(a.root);(a.root/'verification.json').write_text(json.dumps(r,indent=2,sort_keys=True)+'\n');print('PASS 27 complete field/receiver/clock profiles; larger-group/released wall ratios:',[t['largerGroupToReleasedWall'] for t in r['timings']])
+ p=argparse.ArgumentParser(description=__doc__);p.add_argument('root',type=Path);a=p.parse_args();r=verify(a.root);(a.root/'verification.json').write_text(json.dumps(r,indent=2,sort_keys=True)+'\n');print('PASS 27 complete field/receiver/clock profiles; larger-group/candidate wall ratios:',[t['largerGroupToCandidateWall'] for t in r['timings']])

@@ -142,14 +142,14 @@ struct Report: Encodable {
       var controlFrames: [[UInt64]] = []
       var controlMixed: [[UInt64]] = []
       for repetition in -1..<3 {
-        let modes = ["released", "profile32", "profile256"]
+        let modes = ["candidate", "profile32", "profile256"]
         let ordered = Array(modes[max(repetition, 0)...]) + Array(modes[..<max(repetition, 0)])
         for mode in ordered {
           let allStart = ContinuousClock().now
           let setupStart = allStart
           let profile: ProfiledMetal.MetalWaveStepper?
           let released: LinearAcousticsMetal.MetalWaveStepper?
-          if mode == "released" {
+          if mode == "candidate" {
             profile = nil
             released = try LinearAcousticsMetal.MetalWaveStepper(
               context: baselineContext, grid: g, initialFields: initial)
@@ -235,7 +235,7 @@ struct Report: Encodable {
     encoder.outputFormatting = [.sortedKeys]
     try encoder.encode(report).write(to: output.appendingPathComponent("metal-throughput.json"))
     print(
-      "PASS 27 complete released/profiled/group runs; every field and receiver bit retained; barriers unchanged"
+      "PASS 27 complete candidate/profiled/group runs; every field and receiver bit retained; barriers unchanged"
     )
   }
 }
