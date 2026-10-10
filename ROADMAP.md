@@ -389,3 +389,8 @@ preserved concurrent integration. The next bounded gas task is the
 [prescribed packet-conservation operator](docs/extraction/GAS_PACKET_PLAN.md),
 with independent extensive-state references before any app adapter. Full Euler flux,
 moving geometry and changing coupled mechanics remain distinct future gates.
+
+Implemented candidate, 10 October 2026: the [prescribed gas packet operator](docs/extraction/PRESCRIBED_GAS_PACKETS.md)
+now has a public CompressibleFlow value API and independent conservation/cleanup/failure
+tests. Immutable-source and complete public-consumer gates precede release; application
+adoption remains separate. No Euler flux, topology, geometry or timestep logic moves.

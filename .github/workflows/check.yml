@@ -34,6 +34,7 @@ jobs:
       - name: Build and clean consumer
         env:
           CONTINUUMKIT_REQUIRE_METAL: "1"
+          CONTINUUMKIT_GAS_PACKET_OUTPUT: ${{ runner.temp }}/gas-packet-${{ github.run_id }}-${{ github.run_attempt }}
           CONTINUUMKIT_GAS_WALL_OUTPUT: ${{ runner.temp }}/gas-wall-${{ github.run_id }}-${{ github.run_attempt }}
           CONTINUUMKIT_EXTRUDED_LAYOUT_OUTPUT: ${{ runner.temp }}/extruded-layout-${{ github.run_id }}-${{ github.run_attempt }}
           CONTINUUMKIT_TILTED_PULSE_OUTPUT: ${{ runner.temp }}/tilted-pulse-${{ github.run_id }}-${{ github.run_attempt }}
@@ -47,6 +48,14 @@ jobs:
           CONTINUUMKIT_ACOUSTIC_OUTPUT: ${{ runner.temp }}/acoustic-${{ github.run_id }}-${{ github.run_attempt }}
           CONTINUUMKIT_BENCHMARK_OUTPUT: ${{ runner.temp }}/adiabatic-${{ github.run_id }}-${{ github.run_attempt }}
         run: bash Scripts/check.sh
+      - name: Retain complete gas-packet states, ledgers and source conformance
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: gas-packet-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/gas-packet-${{ github.run_id }}-${{ github.run_attempt }}
+          if-no-files-found: warn
+          retention-days: 14
       - name: Retain complete gas-wall source and conformance evidence
         if: always()
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2

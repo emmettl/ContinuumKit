@@ -1,0 +1,11 @@
+{
+  "adaptation": "public PrescribedGasTransport name, access control, explicit transfer/exchange initializers, Sendable/Equatable and contract documentation; original arithmetic and validation order retained",
+  "immutableOriginal": "Fixtures/GasPacketConsumer/Sources/GasPacketConsumer/OriginalPacket.swift",
+  "license": "MIT",
+  "path": "Sources/BlastCore/FractionalGasTransport.swift",
+  "repository": "https://github.com/emmettl/bombcad",
+  "revision": "8ec83cb524d1e745c0793106b0d78a7269131030",
+  "schemaVersion": 1,
+  "sourceGitBlob": "af65c142dbd6dfaffe8ccbb516c0b846d62c4086",
+  "sourceSHA256": "9a3bccd54cd6448bb468ccd71e6d0f391ccd6f6f19f9661f6c250f2c9daa02a7"
+}

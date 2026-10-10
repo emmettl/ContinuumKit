@@ -193,6 +193,13 @@ enum Consumer {
     let gasWall = try CompressibleFlow.IdealGasWallRiemann.solve(
       density: 1.225, pressure: 101325, normalVelocity: 0)
     precondition(gasWall.pressure == 101325 && !gasWall.vacuum)
+    let packet = PrescribedGasTransport.Cell(volume: 1, density: 1, pressure: 1)
+    let packetMix = try PrescribedGasTransport.advance(
+      [packet, packet], newVolumes: [0.5, 1.5],
+      transfers: [.init(from: 0, to: 1, volume: 0.5)])
+    try require(
+      packetMix[0].amount[0] == 0.5 && packetMix[1].amount[0] == 1.5,
+      "Fetched prescribed gas-packet conservation failed")
     print("PASS CompressibleFlow fetched public wall reference")
     print("PASS Thermodynamics / BenchmarkSupport fetched public APIs and work refinement")
     let acousticWall = try AcousticCase.standard()[1]
