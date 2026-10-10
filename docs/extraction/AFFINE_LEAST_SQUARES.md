@@ -1,10 +1,10 @@
-# Stabilized affine least squares candidate
+# Stabilized affine least squares
 
-`Numerics` is a new implemented Swift-only numerical product. This candidate adds
+`Numerics` is a new implemented Swift-only numerical product. It adds
 unweighted affine least squares over explicit paired Double coordinates/values.
 It imports no application, Foundation, Accelerate, UI or Metal module. It is a
-numerical improvement, not a byte-preserving extraction. No application adopts it
-and no new release is published by this candidate checkpoint.
+numerical improvement, not a byte-preserving extraction. Alpha.18 releases this
+contract after the separate exact-tag gate; no application has adopted it yet.
 
 The [original fitting audit](FITTING_PLAN.md) and both complete RoomCAD snapshots
 remain immutable. Original raw-moment arithmetic loses variance/covariance through
@@ -93,13 +93,18 @@ and all previous numerical/topology gates. The full native fitting and original-
 records are byte-identical across hosts. The [physical-mini run](https://github.com/emmettl/ContinuumKit/actions/runs/38073509760)
 verifies committed producer `a4fb9fe263dd059d2040f1719f4d68e8853ea5dd`;
 [verification identity](stable-affine-fit-verification.json) records the complete scope.
-Exact-tag verification remains required before publication. No original audit identity changes.
+The separate [exact-tag release](https://github.com/emmettl/ContinuumKit/actions/runs/38074459965)
+now passes 281 tests, eight exact-version optimized consumers, actual Metal and all
+previous references on the physical mini. Local Max exact-tag verification also
+passes; all 300 raw fit and original-audit records remain byte-identical to the
+accepted candidate. [Publication identity](alpha18-release-verification.json) records
+alpha.18's immutable tag/commit and successful release. No original audit identity changes.
 
 ## Application ownership and adoption
 
 RoomCAD's selected sample windows, dB conversion, onset/noise detection and noise
 crossing/tail iteration, EDT/T20/T30 extrapolation, absorption-feedback search and
-all measured fixture policy remain application-owned. A later adoption must capture
+all measured fixture policy remain application-owned. The [separate adoption plan](ROOMCAD_AFFINE_ADOPTION_PLAN.md) must capture
 complete selected coordinates, coefficients, predictions and output parameters/
 noise histories; intentional arithmetic changes need accuracy criteria instead of
 old/native byte-equality claims. Through-origin projection, Edgerton's constrained

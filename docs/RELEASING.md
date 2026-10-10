@@ -205,3 +205,17 @@ failures and 13 corruption controls retain their contracts.
 [Publication proof](extraction/alpha17-release-verification.json) records the
 annotated/peeled tag and successful publication. Previous tags are unchanged.
 RoomCAD's complete application adoption remains a separate gate.
+
+## Published stabilized affine least squares
+
+Alpha.18 publishes the `Numerics` affine primitive from reviewed merge
+`0e0929f4a0806940ed2fc5be5f81d1a82034cc8c`. Its
+[exact-tag physical-mini workflow](https://github.com/emmettl/ContinuumKit/actions/runs/38074459965)
+passes 281 tests, eight optimized consumers resolving exact alpha.18, actual Metal
+and all previous numerical/topology references before publication. Local Max
+exact-version verification passes the same full scope. Complete 300-case native
+fitting and original-audit records remain byte-identical to the accepted candidate,
+with independent exact-native references and thirteen corruption controls.
+[Publication proof](extraction/alpha18-release-verification.json) records the immutable
+annotated/peeled tag and successful release. RoomCAD adoption and measured acoustic
+accuracy are separate gates; previous tags are unchanged.

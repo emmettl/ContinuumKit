@@ -165,7 +165,12 @@ across protected original/shared and both Macs. Both hosts pass 192 tests, actua
 Metal, packaging/signatures/snapshots and complete CPU/Metal/thin-probe gates.
 Application band/fitting/measured-data and audition policy remain explicit.
 
-The implemented [stabilized affine fitting candidate](docs/extraction/AFFINE_LEAST_SQUARES.md)
+The released [stabilized affine fitting primitive](docs/extraction/AFFINE_LEAST_SQUARES.md)
 adds `Numerics` with a checked origin-based line and independent exact-native
 references. It addresses the audited raw-moment cancellation gap without moving
-acoustic window/noise or material-calibration policy. It is not released/adopted yet.
+acoustic window/noise or material-calibration policy. [Alpha.18](https://github.com/emmettl/ContinuumKit/releases/tag/0.1.0-alpha.18)
+publishes it after both physical Macs pass 281 tests and eight optimized exact-version
+consumers, with unchanged complete 300-case fitting records.
+[Publication proof](docs/extraction/alpha18-release-verification.json) records immutable
+identities. [RoomCAD adoption](docs/extraction/ROOMCAD_AFFINE_ADOPTION_PLAN.md) remains
+a separate accuracy-checked integration task.
