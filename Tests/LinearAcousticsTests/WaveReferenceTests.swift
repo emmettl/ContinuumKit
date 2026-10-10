@@ -21,8 +21,10 @@ func referenceFields(_ initial: RigidModeFrame, _ d: SIMD3<Int>, _ density: Doub
 }
 
 @Suite("Independent complete-field wave references") struct WaveReferenceTests {
-  @Test("All-active anisotropic 3D masked path converges in every field against rigid-mode oracle")
-  func rigidThreeDimensions() throws {
+  @Test(
+    "All-active anisotropic 3D masked path converges in every field against rigid-mode oracle",
+    arguments: [CPUWaveExecution.serial, .parallel(slabs: 2)])
+  func rigidThreeDimensions(execution: CPUWaveExecution) throws {
     for c in try RigidModeCase.standard() {
       let d: SIMD3<Int> = [16, 8, c.anisotropicGrid ? 4 : 8]
       let spacing = SIMD3(
@@ -36,7 +38,7 @@ func referenceFields(_ initial: RigidModeFrame, _ d: SIMD3<Int>, _ density: Doub
         let expected = RigidModeOracle.history(c, r, dt: dt)
         let stepper = try CPUWaveStepper(
           grid: waveGrid(d, dt: dt, spacing: spacing, speed: c.speed, density: c.density),
-          initialFields: referenceFields(initial, d, c.density))
+          initialFields: referenceFields(initial, d, c.density), execution: execution)
         var numerator = [Double](repeating: 0, count: 4)
         var denominator = numerator
         var previous = 0
@@ -66,8 +68,9 @@ func referenceFields(_ initial: RigidModeFrame, _ d: SIMD3<Int>, _ density: Doub
     }
   }
   @Test(
-    "Masked off-origin and split chambers preserve padding and converge against independent modes")
-  func maskedModes() throws {
+    "Masked off-origin and split chambers preserve padding and converge against independent modes",
+    arguments: [CPUWaveExecution.serial, .parallel(slabs: 2)])
+  func maskedModes(execution: CPUWaveExecution) throws {
     for c in try MaskedModeCase.standard() {
       let r = MaskedModeResolution(axis: "time", nx: 16, ny: 8, nz: 8, steps: 256)
       let g = try MaskedGrid(c, r)
@@ -79,7 +82,7 @@ func referenceFields(_ initial: RigidModeFrame, _ d: SIMD3<Int>, _ density: Doub
         grid: waveGrid(
           d, mask: g.inside, dt: dt, spacing: spacing, speed: c.speed, density: c.density,
           faces: g.faces),
-        initialFields: referenceFields(initial, d, c.density))
+        initialFields: referenceFields(initial, d, c.density), execution: execution)
       let expected = try MaskedModeOracle.history(c, r)
       var num = [Double](repeating: 0, count: 4)
       var den = num
@@ -105,8 +108,10 @@ func referenceFields(_ initial: RigidModeFrame, _ d: SIMD3<Int>, _ density: Doub
       #expect((0..<4).allSatisfy { sqrt(num[$0] / den[$0]) < 0.001 })
     }
   }
-  @Test("Heterogeneous dissipative graph has second-order complete-field time convergence")
-  func dissipativeGraph() throws {
+  @Test(
+    "Heterogeneous dissipative graph has second-order complete-field time convergence",
+    arguments: [CPUWaveExecution.serial, .parallel(slabs: 2)])
+  func dissipativeGraph(execution: CPUWaveExecution) throws {
     let d: SIMD3<Int> = [4, 3, 2]
     let spacing: SIMD3<Double> = [1, 0.8, 1.3]
     let c = 1.7
@@ -139,7 +144,7 @@ func referenceFields(_ initial: RigidModeFrame, _ d: SIMD3<Int>, _ density: Doub
       }
       let s = try CPUWaveStepper(
         grid: waveGrid(d, mask: mask, dt: dt, spacing: spacing, speed: c, faces: faces),
-        initialFields: waveFields(p, v))
+        initialFields: waveFields(p, v), execution: execution)
       var num = [Double](repeating: 0, count: 4)
       var den = num
       var previous = 0

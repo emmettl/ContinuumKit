@@ -62,3 +62,22 @@ try require(
   aligned.count == 2 && aligned[0].pressureStepIndex == 3 && aligned[1].pressureStepIndex == 4)
 try require(!aligned[0].usesTerminalHalfStep && aligned[1].usesTerminalHalfStep)
 print("PASS fetched CPU receiver observation and chunk-safe lookahead API; pressure-only sampling")
+
+let parallel = try CPUWaveStepper(
+  grid: grid, initialFields: fields, execution: .parallel(slabs: 2))
+let parallelHistory = try parallel.advance(
+  source: source, amplitudes: [2, -1], observing: observation)
+try require(parallel.execution == .parallel(slabs: 2) && parallel.slabCount == 2)
+try require(parallelHistory.map(\.pressureStepIndex) == [1, 2])
+try require(parallelHistory.map(\.pressureOverDensity) == [[1.015625], [0.53076171875]])
+let parallelFields = try parallel.snapshot()
+try require(
+  parallelFields.pressureOverDensity == forcedFields.pressureOverDensity
+    && parallelFields.velocityX == forcedFields.velocityX
+    && parallelFields.velocityY == forcedFields.velocityY
+    && parallelFields.velocityZ == forcedFields.velocityZ)
+try parallel.advance(steps: 7)
+try require(parallelHistory[0].pressureOverDensity == [1.015625])
+print(
+  "PASS fetched synchronous parallel CPU execution: complete fields, forced receiver history and finite clocks"
+)

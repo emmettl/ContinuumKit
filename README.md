@@ -14,7 +14,7 @@ is the current prerelease; earlier tags remain available for existing consumers.
 | `DocumentKit` | Versioned project containers, assets, integrity and bounded readers | Foundation, CryptoKit |
 | `ImpulseResponseKit` | Response metadata, float WAV I/O and common channel conditioning | Foundation |
 | `Thermodynamics` | Checked uniform adiabatic reservoir potential and signed work | Foundation |
-| `LinearAcoustics` | Checked serial masked wave update, pressure forcing and receiver observation | Swift standard library only |
+| `LinearAcoustics` | Checked masked CPU updates, pressure forcing and receiver observation; explicit serial/parallel execution | Swift standard library, Dispatch |
 | `LinearAcousticsMetal` | Resident GPU updates, pressure forcing, receiver sampling and bundled kernels | LinearAcoustics, Foundation, Metal |
 | `BenchmarkSupport` | Versioned adiabatic/acoustic cases, analytic references and complete-field reports | Thermodynamics, Foundation |
 

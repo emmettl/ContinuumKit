@@ -292,3 +292,9 @@ requires complete output/clock, cancellation/abandonment, lifetime and timing ga
 Serial CPU throughput and per-run Metal pipeline preparation are measured readiness
 questions before changing defaults; numerical/source verification alone does not
 establish application performance or empirical room accuracy.
+
+CPU execution candidate: [explicit synchronous slabs and a fused finite certificate](docs/extraction/CPU_WAVE_EXECUTION.md)
+address the measured shared CPU throughput gap without relaxing fields, source work,
+readout or completion semantics. Independent serial/parallel references, sanitizer,
+fetched CPU-only linkage and complete alpha.8 comparisons precede merge/release.
+Application throughput/default acceptance and Metal pipeline reuse remain later gates.

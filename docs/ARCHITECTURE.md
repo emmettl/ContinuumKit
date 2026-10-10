@@ -74,7 +74,9 @@ application loop adoption remains subject to its own numerical and timing gates.
 
 The separate [Metal wave backend](extraction/LINEAR_WAVE_METAL.md) owns resident
 tracked buffers, synchronous complete-batch clocks and packaged source-free kernels.
-Shared initial-field validation remains in the framework-free CPU module.
+Shared initial-field validation remains in the CPU module. The current execution candidate
+adds system Dispatch for explicit synchronous slabs; CPU consumers still require no
+Metal device or UI framework. Published alpha.8 retains its original serial implementation.
 
 Released sparse source and receiver plans use the exact prepared grid identity.
 Metal mappings also bind to the physical device; mutable output/field state stays
