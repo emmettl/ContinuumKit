@@ -82,3 +82,22 @@ and the fetched CPU consumer's no-Metal/UI linkage check must also remain intact
 Final merge requires the committed candidate's full `Scripts/check.sh` gate on the
 physical mini, its optimized fetched consumers, and complete pinned-source comparison
 reports. No package tag or application migration is implied by this CPU tranche.
+
+## Verified candidate checkpoint
+
+Candidate `970c4e22f652bb3666e57c4b061e12d48f1ed5d8` passes the
+[full physical-mini check](https://github.com/emmettl/ContinuumKit/actions/runs/38006739731):
+180 tests, three optimized fetched consumers, actual source-free Metal regressions
+and every unchanged reference/report gate. All 28 CPU tests pass. The independent
+forcing metrics are identical on M4 Max and M4: rigid all-field time orders
+1.985–2.249 and finest relative L2 below 2.86e−6; connected source/wall relative
+work residual 5.96e−7. Omitting the pressure–velocity source term instead gives
+5.01e−4 residual. The legacy damped forcing control has orders 1.0015/1.0002,
+with finest absolute continuum error 0.001507. These different accuracy scopes remain explicit.
+
+Pinned original CPU comparisons pass 520 forced and 520 source-free complete captures
+in debug/release, with zero Float32 bit mismatches and byte-identical reports between
+configurations. [Aggregate verification](linear-wave-forcing-cpu-verification.json)
+records identities and scope. Full raw reports, exact pinned generated wrappers,
+resolved dependencies, environment and independent/mini logs are retained privately
+in Edgerton. This subsequent checkpoint adds documentation only.
