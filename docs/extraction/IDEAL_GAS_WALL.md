@@ -1,4 +1,4 @@
-# Planar ideal-gas wall reference candidate
+# Planar ideal-gas wall reference
 
 CompressibleFlow.IdealGasWallRiemann is a Foundation-only stateless relation for one
 uniform incident calorically perfect gas and a planar impermeable wall. Inputs are
@@ -59,3 +59,19 @@ initial all-library consumer name collision and repaired run remain retained. Fi
 evidence checkpoint changes documentation only. [Aggregate proof](ideal-gas-wall-verification.json)
 is public; full raw comparison reports, pins, logs and source provenance remain private
 in Edgerton. Exact-tag verification precedes prerelease; application adoption is separate.
+
+## Published prerelease
+
+[0.1.0-alpha.13](https://github.com/emmettl/ContinuumKit/releases/tag/0.1.0-alpha.13)
+points to b6ff3ca28eb96bbac23ec15d93a13afda99b2be9. The
+[exact-tag physical-mini release gate](https://github.com/emmettl/ContinuumKit/actions/runs/38041229593)
+passed all 233 tests and four optimized fetched consumers before publication,
+including the public CPU-only CompressibleFlow consumer at this precise tag.
+[Publication provenance](ideal-gas-wall-release.json) records the tag object,
+commit, publication time and retained log hash. The earlier candidate checkpoint
+remains a historical record.
+
+[BombCAD adoption](https://github.com/emmettl/bombcad/pull/22) proceeds separately,
+with an exact dependency pin, application bridge/error-category tests, complete
+pre/post piston states and wall-load intervals, public reflection histories and
+full application/package checks. Publication alone does not certify that adoption.

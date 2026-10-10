@@ -1,0 +1,14 @@
+{
+  "applicationAdoption": "BombCAD PR #22: separate full-app and two-host coupled-history acceptance in progress",
+  "commit": "b6ff3ca28eb96bbac23ec15d93a13afda99b2be9",
+  "logSHA256": "02a4122c62dd7776b4b1caabc100cdca4f5c1001752cf4e7f1f256519bdbcf34",
+  "physicalMini": "https://github.com/emmettl/ContinuumKit/actions/runs/38041229593",
+  "publishedAt": "2026-10-10T09:30:29Z",
+  "release": "https://github.com/emmettl/ContinuumKit/releases/tag/0.1.0-alpha.13",
+  "schemaVersion": 1,
+  "scope": "uniform planar ideal-gas wall reference; no bulk gas transport, moving geometry or empirical blast validation",
+  "status": "published verified prerelease",
+  "tag": "0.1.0-alpha.13",
+  "tagObject": "0766836a5c2cd00a9dae509ace1756056f118e02",
+  "verification": "233 tests and four optimized fetched public consumers, including exact-tag CompressibleFlow; existing numerical/kernel/topology gates retained"
+}
