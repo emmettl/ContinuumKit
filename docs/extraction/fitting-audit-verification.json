@@ -1,0 +1,22 @@
+{
+  "applicationMigration": false,
+  "auditProducer": "ae932e31490a0064bc5ed1848297324f1c53b693",
+  "bothHostClassifications": {
+    "native_coordinate_rank_failure": 3,
+    "raw_moment_inaccurate": 50,
+    "raw_moment_nonfinite": 27,
+    "reference_agreement": 108
+  },
+  "cases": 188,
+  "coherentCoefficientMutation": "flagged as numerical finding",
+  "corruptionRejections": 5,
+  "crossHostNativeAndAudit": "byte-identical",
+  "diagnosticTolerance": "2e-10 * max(1, abs(exact-native slope))",
+  "exactNativeReference": "unweighted affine OLS using exact rational arithmetic over actual binary64 x/y",
+  "miniConclusion": "success: original arithmetic audit completed; inaccuracies remain findings",
+  "miniJob": 114270996069,
+  "miniRun": "https://github.com/emmettl/ContinuumKit/actions/runs/38071950237",
+  "newProductOrRelease": false,
+  "protectedRoomCAD": "37d7f8a0491dc4bc1908e71a8e8f63c0f4fd055b",
+  "schemaVersion": 1
+}

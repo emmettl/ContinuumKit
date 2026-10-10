@@ -113,3 +113,18 @@ calibration targets, positivity/ramp correction, search/limiting policy and meas
 validation with their owners. Through-origin projection, weighted multi-column QR
 and physical reconstruction are later independently bounded contracts. Heterogeneous
 fluids, Edgerton's 2D forcing/damping and changing mechanics remain separate gaps.
+
+## Accepted audit checkpoint
+
+Audit producer `ae932e31490a0064bc5ed1848297324f1c53b693` executes the same
+188 protected-source cases on M4 Max and physical Mac mini. Complete native data
+and exact-reference findings are byte-identical. The
+[mini audit](https://github.com/emmettl/ContinuumKit/actions/runs/38071950237)
+completes successfully, including five rejecting corruption controls and one
+coherent wrong-coefficient finding. This verifies the audit machinery and findings,
+not the numerical accuracy of the original kernels.
+[Exact scope](fitting-audit-verification.json) records classifications and identities.
+The private complete 23-payload archive retains source, compiled bindings, all raw
+inputs/coefficient bits/nonfinite results and portable independent replay.
+No application code/pins or public products/releases change. The next bounded
+implementation remains stabilized affine least squares with the contract above.
