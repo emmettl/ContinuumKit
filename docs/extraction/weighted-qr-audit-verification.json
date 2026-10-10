@@ -1,0 +1,117 @@
+{
+  "applicationChanged": false,
+  "bombcadSourceRevision": "5f2e50dcef5a5adcde3d3c4cb811426e6de2fe6c",
+  "completeNativeBytesPerHost": 27451130,
+  "completeNativeFactorAndStencilIdentity": true,
+  "completeNativeSHA256": "cf2d1e31ab5a6ecee5006b75510483b74a9fd41ab096e36e817bec8b4ba55890",
+  "completeReferenceFindingIdentity": true,
+  "controls": {
+    "coherentCoefficientChange": "finite_coefficient_inaccuracy",
+    "rejectingControls": [
+      "missing direct case",
+      "duplicate direct case",
+      "missing stencil",
+      "duplicate stencil",
+      "native bits",
+      "coherent changed matrix input",
+      "coherent changed rhs input",
+      "parameter identity",
+      "sample identity",
+      "weighted basis",
+      "distance weight",
+      "complete factor vectors",
+      "query coverage",
+      "query identity",
+      "degree fallback",
+      "source snapshot",
+      "compiled arithmetic",
+      "producer source hash",
+      "source revision",
+      "reversible bindings"
+    ],
+    "schemaVersion": 1
+  },
+  "evidencePath": "docs/benchmarks/evidence/2026-10-10-weighted-qr-audit",
+  "hosts": {
+    "m4max": {
+      "flags": [
+        "-O",
+        "-warnings-as-errors"
+      ],
+      "hardware": "Apple M4 Max",
+      "os": "macOS-27.0.1-arm64-arm-64bit",
+      "producerRevision": "802059b5faed7cd4d4cc2f2fd84864841ecf8a2b",
+      "schemaVersion": 1,
+      "scope": "protected original QR arithmetic audit; findings are not shared solver conformance",
+      "sourceHashes": {
+        "Fixtures/WeightedQRAudit/ConservedGasReconstruction.swift.txt": "55ccef8419142735965d7b19b7f961f903546f3bc1d4a0684893b6fd6df59d72",
+        "Fixtures/WeightedQRAudit/FiniteVolumePressureFit.swift.txt": "8120e41b29cd28d68c731a96b637bd8db56f6b08c3871241a3f51e5c9c95f7f2",
+        "Fixtures/WeightedQRAudit/FiniteVolumePressureFitTests.swift.txt": "ca1fbf9ea3afe5db2823d1e07aa90ce6bbc737b51df885daf11c50225375fddb",
+        "Fixtures/WeightedQRAudit/README.md": "f2e02177aa9f3e29342c632ddd90a72724f802c98049980f84132cfaaa173776",
+        "Fixtures/WeightedQRAudit/main.swift": "cc0a63bb6c8e652a31aeb5e2c40b822be7c1597b217ccce5700dd723fb38e491",
+        "Fixtures/WeightedQRAudit/source.json": "5d929fcfe296b059413c1cbbe8630190b98f33a5fb46accc7905962490a99644",
+        "Scripts/check-weighted-qr-audit.sh": "771316de1e8d0ecbee163300fad118868492d8c297504a01f7150580e2ecb400",
+        "Scripts/prepare-weighted-qr-audit.py": "dd15abc65f04c6dc3010b51d1c99f8ce51fd46ee44b68f6b4128e9f4e9481a7f",
+        "Scripts/test-weighted-qr-audit-gate.py": "1ab3d0ce671d3c3cf2a2682f45cebc673052a37fbaa41a25a656f468c1b4ab3d",
+        "Scripts/verify-weighted-qr-audit.py": "8a62066c57b6fa980a84ba847db699e46e2203865665c375a47162999baffaf6"
+      },
+      "swift": "Apple Swift version 6.4 (swiftlang-6.4.0.34.1 clang-2100.3.34.1)\nTarget: arm64-apple-macosx27.0.0",
+      "workingTreeDirty": false
+    },
+    "mini": {
+      "flags": [
+        "-O",
+        "-warnings-as-errors"
+      ],
+      "hardware": "Apple M4",
+      "os": "macOS-27.0.1-arm64-arm-64bit",
+      "producerRevision": "802059b5faed7cd4d4cc2f2fd84864841ecf8a2b",
+      "schemaVersion": 1,
+      "scope": "protected original QR arithmetic audit; findings are not shared solver conformance",
+      "sourceHashes": {
+        "Fixtures/WeightedQRAudit/ConservedGasReconstruction.swift.txt": "55ccef8419142735965d7b19b7f961f903546f3bc1d4a0684893b6fd6df59d72",
+        "Fixtures/WeightedQRAudit/FiniteVolumePressureFit.swift.txt": "8120e41b29cd28d68c731a96b637bd8db56f6b08c3871241a3f51e5c9c95f7f2",
+        "Fixtures/WeightedQRAudit/FiniteVolumePressureFitTests.swift.txt": "ca1fbf9ea3afe5db2823d1e07aa90ce6bbc737b51df885daf11c50225375fddb",
+        "Fixtures/WeightedQRAudit/README.md": "f2e02177aa9f3e29342c632ddd90a72724f802c98049980f84132cfaaa173776",
+        "Fixtures/WeightedQRAudit/main.swift": "cc0a63bb6c8e652a31aeb5e2c40b822be7c1597b217ccce5700dd723fb38e491",
+        "Fixtures/WeightedQRAudit/source.json": "5d929fcfe296b059413c1cbbe8630190b98f33a5fb46accc7905962490a99644",
+        "Scripts/check-weighted-qr-audit.sh": "771316de1e8d0ecbee163300fad118868492d8c297504a01f7150580e2ecb400",
+        "Scripts/prepare-weighted-qr-audit.py": "dd15abc65f04c6dc3010b51d1c99f8ce51fd46ee44b68f6b4128e9f4e9481a7f",
+        "Scripts/test-weighted-qr-audit-gate.py": "1ab3d0ce671d3c3cf2a2682f45cebc673052a37fbaa41a25a656f468c1b4ab3d",
+        "Scripts/verify-weighted-qr-audit.py": "8a62066c57b6fa980a84ba847db699e46e2203865665c375a47162999baffaf6"
+      },
+      "swift": "Apple Swift version 6.4 (swiftlang-6.4.0.34.1 clang-2100.3.34.1)\nTarget: arm64-apple-macosx27.0.0",
+      "workingTreeDirty": false
+    }
+  },
+  "miniJob": 114303525444,
+  "miniRun": "https://github.com/emmettl/ContinuumKit/actions/runs/38082974176",
+  "miniRunConclusion": "success",
+  "portableReplayPassed": true,
+  "privateEvidencePR": "https://github.com/emmettl/edgerton/pull/69",
+  "privateEvidenceProducerRevision": "dce749731c0db95f93edceb159533b8d1f391ca4",
+  "producerRevision": "802059b5faed7cd4d4cc2f2fd84864841ecf8a2b",
+  "releaseChanged": false,
+  "schemaVersion": 1,
+  "scope": "Audit machinery and retained findings verified; original QR accuracy, shared primitive, gas reconstruction migration and empirical validation not accepted by this audit",
+  "summary": {
+    "actualStencilCases": 176,
+    "classifications": {
+      "empty_rows_rejected": 8,
+      "finite_coefficient_inaccuracy": 20,
+      "native_rank_rejected": 52,
+      "nonfinite_rhs_rejected": 4,
+      "reference_agreement": 336,
+      "relative_rank_policy_rejected": 152,
+      "unchecked_rhs_dimension_accepted": 4,
+      "unsafe_square_norm_scale_rejected": 48
+    },
+    "diagnosticBound": "2e-10 * max(1, abs(exact-native coefficient)); findings are not accepted generic solver contracts",
+    "directCases": 272,
+    "factorOrthogonalityFindings": 8,
+    "factorReconstructionFindings": 0,
+    "factorRecords": 624,
+    "newProductOrMigration": false,
+    "schemaVersion": 1
+  }
+}

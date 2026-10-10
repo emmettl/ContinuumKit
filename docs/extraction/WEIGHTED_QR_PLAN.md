@@ -82,5 +82,24 @@ existing relative rank cutoff with exact mathematical rank.
 Through-origin material projection, acoustic selection/calibration policy,
 heterogeneous/2D waves and changing coupled mechanics remain distinct gaps.
 This checkpoint changes no application dependency, numerical implementation or
-release tag. Two-host accepted audit identities and complete retained evidence
-will be added after the clean candidate finishes both gates.
+release tag. The accepted two-host audit and complete retained evidence are recorded below.
+
+
+## Accepted original audit checkpoint
+
+Producer `802059b5faed7cd4d4cc2f2fd84864841ecf8a2b` passes on the physical
+M4 Max and [physical M4 mini](https://github.com/emmettl/ContinuumKit/actions/runs/38082974176),
+including twenty rejecting corruption controls and a coherent wrong-coefficient
+finding. Each complete native capture is 27,451,130 bytes. All matrices, RHS,
+Q/R/permutation, solutions, row predictions, stencils and queries are byte-identical;
+all independent reference findings and control receipts also match. The
+[verification record](weighted-qr-audit-verification.json) retains exact producer,
+source, hardware, hash and completed run/job identities.
+
+The complete [private Edgerton archive](https://github.com/emmettl/edgerton/pull/69) at
+`docs/benchmarks/evidence/2026-10-10-weighted-qr-audit` retains both hosts' lossless
+native captures, protected source, compiled bindings, environment, full findings,
+reference/control scripts and completed runner receipts. Portable replay checks
+every payload and reruns both complete independent gates. The next task is the
+bounded stabilized factorization described above; no solver implementation or
+application adoption is implied by this accepted evidence checkpoint.

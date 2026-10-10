@@ -513,3 +513,13 @@ gas geometry, mean preservation, fallback, limiting and EOS policy. Exact-native
 references expose unsafe norm scaling and accepted near-dependent inaccuracies;
 the future primitive needs explicit rank/conditioning and dimension contracts.
 No weighted solver product, application migration or release is added by the audit.
+
+
+Audited, 10 October 2026: the weighted QR producer passes both physical Macs with
+272 direct cases, 176 actual weighted stencils and 624 complete factor records.
+Full native factors/stencils and exact-reference findings are byte-identical;
+twenty corruption controls reject and coherent wrong coefficients remain findings.
+[Verification scope](docs/extraction/weighted-qr-audit-verification.json) records
+identities, original numerical gaps and retained evidence. Next implement safe
+factorization with explicit dimensions/rank/conditioning and repeated RHS contracts,
+then verify and release before a separate BombCAD reconstruction adoption.
