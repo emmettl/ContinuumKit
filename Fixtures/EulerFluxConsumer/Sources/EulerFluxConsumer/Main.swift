@@ -219,58 +219,65 @@ func cases(_ backend: Backend) throws -> [Case] {
   reject("tracePositivity", cells, [traced], [], try backend.limit(cells, [traced], [], 0.4))
   reject("dryFace", [Cell(volume: 0, amount: .zero), cells[1]], [face])
 
-  for kind in ["acoustic", "contact", "shock"] {
-    for n in [32, 64, 128] {
-      let h = 1.0 / Double(n)
-      let end = kind == "shock" ? 0.05 : 0.15
-      var state: [Cell] = []
-      let c = sqrt(1.4)
-      let eps = 1e-6
-      let upstream = Cell(volume: h, density: 1, velocity: SIMD3(3 - 2 * c, 0, 0), pressure: 1)
-      let downstream = Cell(
-        volume: h, density: 8.0 / 3, velocity: SIMD3(3 - 0.75 * c, 0, 0), pressure: 4.5)
-      if kind == "shock" {
-        state = [downstream] + (0..<n).map { $0 < n / 4 ? downstream : upstream } + [upstream]
-      } else {
-        state = (0..<n).map {
-          // Exact cell-averaged sine perturbation on [i h, (i+1) h].
-          let s =
-            (cos(2 * Double.pi * Double($0) * h) - cos(2 * Double.pi * Double($0 + 1) * h))
-            / (2 * Double.pi * h)
-          if kind == "contact" {
-            return Cell(volume: h, density: 1 + 0.1 * s, velocity: SIMD3(0.7, 0, 0), pressure: 1)
-          }
-          return Cell(
-            volume: h, density: 1 + eps * s, velocity: SIMD3(0.2 + eps * c * s, 0, 0),
-            pressure: 1 + 1.4 * eps * s)
+  let spatial = ["acoustic", "contact", "shock"].flatMap { kind in
+    [32, 64, 128].map { (kind, $0, 0.4, "\(kind)/\($0)") }
+  }
+  let temporal = [0.4, 0.2, 0.1].enumerated().map {
+    ("acousticTime", 64, $0.element, "acousticTime/\($0.offset)")
+  }
+  for (kind, n, cfl, id) in spatial + temporal {
+    let h = 1.0 / Double(n)
+    let end = kind == "shock" ? 0.05 : 0.15
+    var state: [Cell] = []
+    let c = sqrt(1.4)
+    let eps = 1e-6
+    let upstream = Cell(volume: h, density: 1, velocity: SIMD3(3 - 2 * c, 0, 0), pressure: 1)
+    let downstream = Cell(
+      volume: h, density: 8.0 / 3, velocity: SIMD3(3 - 0.75 * c, 0, 0), pressure: 4.5)
+    if kind == "shock" {
+      state = [downstream] + (0..<n).map { $0 < n / 4 ? downstream : upstream } + [upstream]
+    } else {
+      state = (0..<n).map {
+        // Exact cell-averaged sine perturbation on [i h, (i+1) h].
+        let s =
+          (cos(2 * Double.pi * Double($0) * h) - cos(2 * Double.pi * Double($0 + 1) * h))
+          / (2 * Double.pi * h)
+        if kind == "contact" {
+          return Cell(volume: h, density: 1 + 0.1 * s, velocity: SIMD3(0.7, 0, 0), pressure: 1)
         }
+        return Cell(
+          volume: h, density: 1 + eps * s, velocity: SIMD3(0.2 + eps * c * s, 0, 0),
+          pressure: 1 + 1.4 * eps * s)
       }
-      let f: [FaceInput] =
-        kind == "shock"
-        ? (0...n).map { FaceInput(a: $0, b: $0 + 1, normal: [1, 0, 0], area: 1) }
-        : (0..<n).map { FaceInput(a: $0, b: ($0 + 1) % n, normal: [1, 0, 0], area: 1) }
-      var time = 0.0
-      var intervals: [Interval] = []
-      while time < end {
-        if kind == "shock" {
-          state[0] = downstream
-          state[n + 1] = upstream
-        }
-        let dt = min(end - time, try backend.limit(state, f, [], 0.4))
-        let interval = backend.interval(state, faces: f, time: time, duration: dt)
-        guard let result = interval.result else {
-          fatalError("Wave \(kind) failed: \(interval.failure ?? "unknown")")
-        }
-        intervals.append(interval)
-        state = result.map(\.cell)
-        time += dt
-        guard intervals.count <= 10000 else { fatalError("Nonterminating wave clock") }
-      }
-      output.append(
-        Case(
-          id: "\(kind)/\(n)", kind: kind, parameters: ["cells": Double(n), "duration": end],
-          intervals: intervals))
     }
+    let f: [FaceInput] =
+      kind == "shock"
+      ? (0...n).map { FaceInput(a: $0, b: $0 + 1, normal: [1, 0, 0], area: 1) }
+      : (0..<n).map { FaceInput(a: $0, b: ($0 + 1) % n, normal: [1, 0, 0], area: 1) }
+    var time = 0.0
+    var intervals: [Interval] = []
+    while time < end {
+      if kind == "shock" {
+        state[0] = downstream
+        state[n + 1] = upstream
+      }
+      let dt = min(end - time, try backend.limit(state, f, [], cfl))
+      let interval = backend.interval(state, faces: f, time: time, duration: dt, cfl: cfl)
+      guard let result = interval.result else {
+        fatalError("Wave \(kind) failed: \(interval.failure ?? "unknown")")
+      }
+      intervals.append(interval)
+      state = result.map(\.cell)
+      time += dt
+      guard intervals.count <= 10000 else { fatalError("Nonterminating wave clock") }
+    }
+    output.append(
+      Case(
+        id: id, kind: kind,
+        parameters: kind == "acousticTime"
+          ? ["cells": Double(n), "duration": end, "cfl": cfl]
+          : ["cells": Double(n), "duration": end],
+        intervals: intervals))
   }
   return output
 }

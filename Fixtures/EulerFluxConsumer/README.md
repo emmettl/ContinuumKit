@@ -10,7 +10,7 @@ the already released packet and wall primitives. It is a verification oracle.
 The shared implementation is consumed through public CompressibleFlow only.
 
 See [the contract](../../docs/extraction/FRACTIONAL_EULER_FLUX.md) for the complete
-748-case tree, continuum refinement gates, units, trace/clock limitations and the
+751-case tree, continuum refinement gates, units, trace/clock limitations and the
 separate application adoption requirement. Output directories preserve every native
 cell, physical clock, supplied interface/trace and ordered wall exchange.
 

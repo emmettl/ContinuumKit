@@ -66,7 +66,7 @@ A sixth optimized public consumer imports only CompressibleFlow and system math.
 It retains the immutable original with SHA/blob protection and compares complete
 original/shared values and bits, inputs, CFL clocks, failures, ordered wall loads
 and every native interval. Its declared tree has 486 paired-face trials, 243 moving
-wall trials, ten failures and nine complete wave histories (748 cases total).
+wall trials, ten failures and twelve complete wave histories (751 cases total).
 The matrix varies density, pressure, velocity, normal, cell-volume scale and traces.
 The scalar checker independently checks per-cell extensive balances, complete
 external ledgers, EOS views, characteristic/geometric clocks and wall traction by
@@ -82,7 +82,15 @@ the shock; finest bounds are 0.06 and 0.12 respectively. The shock comparison us
 analytical cell averages of conserved mass, momentum and energy, normalized by the
 corresponding jump. Acoustic amplitude is 1e-6; linearization error is distinct from
 first-order spatial diffusion. Pressure/velocity phase checks also apply.
-Thirteen deliberate corruptions must reject even when both comparison reports are
+A separate fixed-64-cell small-amplitude acoustic history refines CFL 0.4, 0.2 and
+0.1 at the same final time, against the exact Fourier evolution of the linearized
+semidiscrete reference. Its right-acoustic eigenvalue is
+`-(0.2 + sqrt(1.4)) / h * (1 - exp(-2 pi i h))`. This closed-form matrix exponential
+does not step the production operator. Normalized mean density error must fall by
+factors above 1.6 per halving and finish below 0.01. This isolates first-order time
+error from the separately measured spatial diffusion; small nonlinear error remains
+an explicit limitation of the 1e-6-amplitude reference.
+Fourteen deliberate corruptions must reject even when both comparison reports are
 changed together. Both physical Macs, existing Core suites and a clean fetched Git
 consumer must pass before release. An exact-tag release gate then precedes any
 separate BombCAD adoption and complete affected application comparison.

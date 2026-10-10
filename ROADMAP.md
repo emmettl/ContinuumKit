@@ -415,6 +415,6 @@ remain independent tasks.
 
 Implemented candidate, 10 October 2026: the [prescribed fractional Euler reference](docs/extraction/FRACTIONAL_EULER_FLUX.md)
 uses the released packet and wall primitives. Independent SI/characteristic/positivity
-contracts and complete 748-case source/continuum consumers now bound the next
+contracts and complete 751-case source/continuum consumers now bound the next
 extraction. Two-host acceptance and exact-tag release precede separate BombCAD
 flux/limiter/group/piston integration; geometry and body policy remain application-owned.

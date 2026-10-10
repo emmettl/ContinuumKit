@@ -10,12 +10,13 @@ def controls(root):
  source=json.loads((root/'shared.json').read_text())
  by_id={c['id']:i for i,c in enumerate(source)}
  rejected=[]
- trials=['missing case','duplicate identity','missing native result','unaccounted mass','unaccounted energy','reserved lane','wrong CFL clock','wrong wall work','missing wall impulse','wrong failure category','incomplete wave interval','wrong fetched pin','dirty producer']
+ trials=['missing case','duplicate identity','missing native result','unaccounted mass','unaccounted energy','reserved lane','wrong CFL clock','wrong wall work','missing wall impulse','wrong failure category','incomplete wave interval','missing temporal level','wrong fetched pin','dirty producer']
  for label in trials:
   tree=list(source);metadata={}
   index=by_id['wall/0/0/0/0/1'] if 'wall' in label else (by_id['failure/index'] if 'failure' in label else (by_id['acoustic/128'] if 'wave' in label else 0))
   tree[index]=copy.deepcopy(tree[index]);c=tree[index];i=c['intervals'][0]
-  if label=='missing case':tree.pop()
+  if label=='missing temporal level':tree.pop(by_id['acousticTime/1'])
+  elif label=='missing case':tree.pop()
   elif label=='duplicate identity':tree[1]=tree[0]
   elif label=='missing native result':i['result'].pop()
   elif label=='unaccounted mass':set_value(i['result'][0],1,i['result'][0]['values'][1]*1.1)

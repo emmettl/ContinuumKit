@@ -19,8 +19,8 @@ solver configuration, units, device/toolchain, resolution, errors, budget residu
 and runtime in JSON, with CSV histories and reproducible comparison reports.
 Reference solutions must be independent of the implementation under test.
 
-Current CI builds the CAD foundations, runs 141 tests across CAD foundations, response
-interchange, thermodynamics and numerical benchmark contracts, and exercises all
+The early CI baseline built the CAD foundations, ran 141 tests across CAD foundations, response
+interchange, thermodynamics and numerical benchmark contracts, and exercised all
 eight public libraries from an isolated Git consumer compiled in release configuration.
 Seven additional closed-box query checks cover analytic intersections, invalid input,
 transform invariance and 400 segment comparisons against an independent face-plane oracle.
@@ -82,3 +82,10 @@ The [Metal wave candidate](extraction/LINEAR_WAVE_METAL.md) adds eleven required
 actual-device tests using the same independent all-field/time/work bounds as CPU,
 an independent packaged-grid ABI probe, residency/multi-batch and injected failure
 checks, plus a fetched optimized GPU consumer. CPU consumer linkage remains guarded.
+
+The current prescribed Euler candidate has 260 package tests and six optimized
+fetched consumers, including CPU-only model linkage and actual Metal resources.
+Its 751 native cases add independent SI/wall/characteristic ledgers, separate
+space and time refinement references and fourteen acceptance-corruption controls.
+Source conformance, analytic numerical references and empirical validation remain
+distinct. Exact-tag native Euler evidence is retained by the release workflow.

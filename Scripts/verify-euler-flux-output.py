@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Complete native conformance, scalar SI ledgers and independent continuum refinement references."""
-import argparse,itertools,json,math,struct,sys
+import argparse,cmath,itertools,json,math,struct,sys
 from pathlib import Path
 EPS=sys.float_info.epsilon
 def require(v,label):
@@ -109,7 +109,8 @@ def verify(root,reports=None,metadata=None):
  expected={"face/"+'/'.join(map(str,p)) for p in itertools.product(range(3),range(3),range(3),range(3),range(3),range(2))}
  expected|={"wall/"+'/'.join(map(str,p)) for p in itertools.product(range(3),repeat=5)}
  expected|={'failure/'+s for s in FAILURES}|{k+'/'+str(n) for k in ['acoustic','contact','shock'] for n in [32,64,128]}
- require(len(shared)==len(expected)==748 and {c['id'] for c in shared}==expected,'complete unique 748-case tree')
+ expected|={'acousticTime/'+str(k) for k in range(3)}
+ require(len(shared)==len(expected)==751 and {c['id'] for c in shared}==expected,'complete unique 751-case tree')
  env=json.loads((root/'environment.json').read_text());summary=json.loads((root/'summary.json').read_text())
  if metadata is not None:env=metadata.get('environment',env)
  require(env['workingTreeDirty'] is False and env['candidate']==summary['candidate'],'clean committed producer')
@@ -117,7 +118,7 @@ def verify(root,reports=None,metadata=None):
  if metadata is not None:pins=metadata.get('pins',pins)
  require(len(pins)==1 and pins[0]['identity']=='continuumkit' and pins[0]['state']['revision']==summary['candidate'],'exact public fetched Git producer')
  if summary['version']:require(pins[0]['state']['version']==summary['version'],'exact semantic version pin')
- errors={k:[] for k in ['acoustic','contact','shock']};native_count=0;interval_count=0
+ errors={k:[] for k in ['acoustic','contact','shock']};temporal=[];native_count=0;interval_count=0
  for case in shared:
   kind=case['kind'];ids=case['id'].split('/');ints=case['intervals'];require(len(ints)>0,'nonempty native history')
   if kind in ['face','wall','failure']:require(len(ints)==1,'single prescribed trial')
@@ -142,14 +143,17 @@ def verify(root,reports=None,metadata=None):
     require((w['cell'],w['normal'],w['area'])==(0,n,.7) and w.get('state') is None,'declared wall identity')
     for a,b in zip(w['velocity'],[x*speed for x in n]):near(a,b,label='prescribed wall velocity')
   for i in ints:native_count+=inspect_interval(i);interval_count+=1
-  if kind not in errors:continue
-  n=int(ids[1]);h=1/n;end=.05 if kind=='shock' else .15
-  require(case['parameters']=={'cells':n,'duration':end},'refinement declared grid/duration')
+  if kind not in errors and kind!='acousticTime':continue
+  is_time=kind=='acousticTime';n=64 if is_time else int(ids[1]);h=1/n;end=.05 if kind=='shock' else .15
+  cfl=[.4,.2,.1][int(ids[1])] if is_time else .4
+  parameters={'cells':n,'duration':end}
+  if is_time:parameters['cfl']=cfl
+  require(case['parameters']==parameters,'refinement declared grid/duration/CFL')
   count=n+2 if kind=='shock' else n
   c=math.sqrt(1.4);up=primitive(h,1,[3-2*c,0,0],1);down=primitive(h,8/3,[3-.75*c,0,0],4.5)
   require(ints[0]['time']==0,'native history begins at zero')
   for step,i in enumerate(ints):
-   require(len(i['input'])==len(i['result'])==count and i['walls']==[] and i['cfl']==.4,'complete native wave grid')
+   require(len(i['input'])==len(i['result'])==count and i['walls']==[] and i['cfl']==cfl,'complete native wave grid')
    graph=[(f['a'],f['b'],f['normal'],f['area']) for f in i['faces']]
    require(graph==[(k,k+1 if kind=='shock' else (k+1)%n,[1,0,0],1) for k in range(n+1 if kind=='shock' else n)],'complete native interface graph')
    require(all(f.get('left') is None and f.get('right') is None for f in i['faces']),'first-order wave traces')
@@ -173,17 +177,24 @@ def verify(root,reports=None,metadata=None):
     eps=.1 if kind=='contact' else 1e-6;speed=.7 if kind=='contact' else .2+c
     match_primitive(first[k],h,1+eps*sine,[.7 if kind=='contact' else .2+eps*c*sine,0,0],1 if kind=='contact' else 1+1.4*eps*sine)
     phase=speed*end;s=(math.cos(2*math.pi*(k*h-phase))-math.cos(2*math.pi*((k+1)*h-phase)))/(2*math.pi*h)
+    if is_time:
+     eigenvalue=-(.2+c)/h*(1-cmath.exp(-2j*math.pi*h))
+     s=(cmath.exp(2j*math.pi*x+eigenvalue*end)*(math.sin(math.pi*h)/(math.pi*h))).imag
     final=native(last[k]);err.append(abs(final[1]/h-(1+eps*s))/eps)
     if kind=='contact':near(final[12],1,10,'contact constant pressure');near(final[9],.7,10,'contact constant velocity')
     else:
      require(abs(final[12]-(1+1.4*eps*s))/(1.4*eps)<.3,'acoustic pressure phase/amplitude')
      require(abs(final[9]-(.2+eps*c*s))/(eps*c)<.3,'acoustic velocity phase/amplitude')
-  errors[kind].append((n,math.fsum(err)/n))
+  (temporal if is_time else errors[kind]).append((cfl if is_time else n,math.fsum(err)/n))
  for kind,rows in errors.items():
   rows.sort();require([n for n,e in rows]==[32,64,128],'complete refinement levels')
   for (_,a),(_,b) in zip(rows,rows[1:]):require(a/b>(1.2 if kind=='shock' else 1.6),'independent '+kind+' refinement rate')
   require(rows[-1][1] < (.12 if kind=='shock' else .06),'independent finest '+kind+' error bound')
- return {'schemaVersion':1,'status':'passed','cases':748,'returnedNativeCells':native_count,'intervals':interval_count,'refinementErrors':errors,'scope':'native source conformance, SI scalar balances/characteristics and analytic continuum references; no empirical blast validation'}
+ temporal.sort(reverse=True)
+ require([cfl for cfl,e in temporal]==[.4,.2,.1],'complete independent temporal levels')
+ for (_,a),(_,b) in zip(temporal,temporal[1:]):require(a/b>1.6,'independent temporal refinement rate')
+ require(temporal[-1][1]<.01,'independent finest temporal error bound')
+ return {'schemaVersion':1,'status':'passed','cases':751,'returnedNativeCells':native_count,'intervals':interval_count,'refinementErrors':errors,'temporalErrors':temporal,'scope':'native source conformance, SI scalar balances/characteristics and analytic continuum references; no empirical blast validation'}
 if __name__=='__main__':
  p=argparse.ArgumentParser(description=__doc__);p.add_argument('root',type=Path);a=p.parse_args()
  d=verify(a.root);(a.root/'verification.json').write_text(json.dumps(d,indent=2,sort_keys=True)+'\n');print('PASS Euler native conformance and independent shock/contact/acoustic refinement:',d['returnedNativeCells'],'cells')
