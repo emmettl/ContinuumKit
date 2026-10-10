@@ -165,8 +165,10 @@ import Testing
 }
 
 @Suite("Independent forced wave references") struct ForcedWaveReferenceTests {
-  @Test("Manufactured anisotropic rigid lattice forcing converges in all four native fields")
-  func modal() throws {
+  @Test(
+    "Manufactured anisotropic rigid lattice forcing converges in all four native fields",
+    arguments: [CPUWaveExecution.serial, .parallel(slabs: 2)])
+  func modal(execution: CPUWaveExecution) throws {
     let d: SIMD3<Int> = [8, 6, 4]
     let modes: SIMD3<Int> = [1, 2, 1]
     let spacing: SIMD3<Double> = [0.4, 0.7, 1.1]
@@ -205,7 +207,7 @@ import Testing
       let initial = waveFields(
         Array(repeating: 0, count: count),
         (0..<3).map { axis in (0..<count).map { Float(velocity($0, axis, -dt / 2)) } })
-      let s = try CPUWaveStepper(grid: g, initialFields: initial)
+      let s = try CPUWaveStepper(grid: g, initialFields: initial, execution: execution)
       var num = Array(repeating: 0.0, count: 4)
       var den = num
       for step in 1...steps {

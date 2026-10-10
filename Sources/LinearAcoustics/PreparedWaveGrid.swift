@@ -115,5 +115,6 @@ public enum WaveError: Error, Equatable, Sendable {
   case invalidWallSum(cell: Int)
   case invalidInitialFields
   case closedFaceVelocity(field: Int, cell: Int)
+  case invalidSlabCount
   case invalidStepCount, stepIndexOverflow, stepClockOverflow, nonfiniteOutput, invalidatedState
 }

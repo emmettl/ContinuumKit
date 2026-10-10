@@ -1,4 +1,8 @@
-# Serial masked CPU wave update — unreleased candidate
+# Historical serial masked CPU wave extraction
+
+This document records the original extraction checkpoint. Updates, forcing and
+observations are published through alpha.8. The current [execution candidate](CPU_WAVE_EXECUTION.md)
+adds explicit Dispatch slabs and fused finite certification; its gates remain separate.
 
 `LinearAcoustics` implements the first tranche of the [wave-update design](LINEAR_WAVE_UPDATE.md).
 It is a framework-free Swift product with a checked immutable `PreparedWaveGrid`,
