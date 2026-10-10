@@ -89,3 +89,11 @@ compiled device pipelines from each single-owner run's queue, resident fields, s
 and clock. Callers can reuse pipelines across independent runs without global caching
 or application scheduling inside the model. Production Metal adoption remains a
 separate application gate.
+
+RoomCAD's production masked CPU/GPU loops are now retired in favour of exact released
+alpha.12, with canonical verification-only originals, immutable reconstruction and
+complete two-host application evidence. App-owned selected-backend availability,
+geometry, microphone mixing, cancellation and fresh CPU restart remain explicit.
+The optimized box CPU and Edgerton's 2D force/damping contracts remain distinct.
+See the [current inventory](INVENTORY.md#current-four-repository-checkpoint--10-october-2026)
+for the next stable primitive and unresolved model gaps.
