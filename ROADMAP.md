@@ -283,3 +283,12 @@ returns bounded owned histories from resident fields, with explicit arithmetic i
 plan/device/resource validation and complete clocks. Full original-source/mini gates
 precede production RoomCAD loop binding; geometry, microphone mixing and cancellation
 stay application-owned.
+
+Published: `0.1.0-alpha.8` includes independently verified CPU and resident Metal
+receiver observations, complete clocks and explicit lookahead. RoomCAD's exact
+dependency update and full application checks precede production loop binding.
+The [bounded migration outline](https://github.com/emmettl/RoomCAD/blob/main/docs/benchmarks/WAVE_PRODUCTION_INTEGRATION.md)
+requires complete output/clock, cancellation/abandonment, lifetime and timing gates.
+Serial CPU throughput and per-run Metal pipeline preparation are measured readiness
+questions before changing defaults; numerical/source verification alone does not
+establish application performance or empirical room accuracy.

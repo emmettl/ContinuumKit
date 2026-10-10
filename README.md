@@ -2,7 +2,7 @@
 
 Shared Swift foundations for RoomCAD, BombCAD and Edgerton. The package contains the existing CAD foundations from BombCAD's SimulationKit and
 RoomCAD's application-independent response interchange, and a checked adiabatic reservoir
-with independent conformance. [`0.1.0-alpha.7`](https://github.com/emmettl/ContinuumKit/releases/tag/0.1.0-alpha.7)
+with independent conformance. [`0.1.0-alpha.8`](https://github.com/emmettl/ContinuumKit/releases/tag/0.1.0-alpha.8)
 is the current prerelease; earlier tags remain available for existing consumers.
 
 | Product / module | Contents | Dependencies |
@@ -14,8 +14,8 @@ is the current prerelease; earlier tags remain available for existing consumers.
 | `DocumentKit` | Versioned project containers, assets, integrity and bounded readers | Foundation, CryptoKit |
 | `ImpulseResponseKit` | Response metadata, float WAV I/O and common channel conditioning | Foundation |
 | `Thermodynamics` | Checked uniform adiabatic reservoir potential and signed work | Foundation |
-| `LinearAcoustics` | Checked serial masked wave update and prepared pressure forcing | Swift standard library only |
-| `LinearAcousticsMetal` | Resident GPU wave updates, sparse pressure forcing and bundled kernels | LinearAcoustics, Foundation, Metal |
+| `LinearAcoustics` | Checked serial masked wave update, pressure forcing and receiver observation | Swift standard library only |
+| `LinearAcousticsMetal` | Resident GPU updates, pressure forcing, receiver sampling and bundled kernels | LinearAcoustics, Foundation, Metal |
 | `BenchmarkSupport` | Versioned adiabatic/acoustic cases, analytic references and complete-field reports | Thermodynamics, Foundation |
 
 Requires Swift 6.4 and macOS 15 or later. CPU products do not depend on SceneRender.
@@ -98,3 +98,11 @@ included in `0.1.0-alpha.7` after exact-tag verification.
 The released [resident Metal forcing API](docs/extraction/LINEAR_WAVE_FORCING_METAL.md)
 uses the checked CPU source description with opaque device mappings and 128-sample
 staging. It preserves original GPU arithmetic and explicit completion/snapshot semantics.
+
+`0.1.0-alpha.8` releases [CPU receiver observation](docs/extraction/LINEAR_WAVE_OBSERVATION_CPU.md)
+and [resident Metal sampling](docs/extraction/LINEAR_WAVE_OBSERVATION_METAL.md),
+with owned bounded histories, native clocks, backend arithmetic identity and explicit
+one-frame lookahead/final-half-step policy. Its [exact-tag mini check](https://github.com/emmettl/ContinuumKit/actions/runs/38014077324)
+passed 207 tests and all three optimized exact-version consumers. [Publication proof](docs/extraction/alpha8-release-verification.json)
+records scope and identities. Source/receiver geometry, microphone mixing, cancellation
+and production application adoption remain caller-owned.

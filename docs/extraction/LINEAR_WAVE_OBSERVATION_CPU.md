@@ -1,8 +1,9 @@
 # Prepared CPU receiver observation and explicit lookahead
 
-Status: implemented CPU candidate, unreleased. Alpha.7 remains the published pressure-
-forcing release. Resident Metal sampling and production application adoption follow
-separately; no app loop or microphone-pattern policy is moved by this tranche.
+Status: published in `0.1.0-alpha.8`, following the CPU source checkpoint below and
+its separate resident Metal gate. [Exact-tag publication proof](alpha8-release-verification.json)
+records completed mini checks. Production application adoption remains separate;
+no app loop or microphone-pattern policy is moved by this tranche.
 
 `PreparedWaveObservation` validates ordered eight-slot pressure stencils and optional
 velocity probes, bound to the exact prepared grid. Repeated indices and signed/zero
