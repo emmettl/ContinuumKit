@@ -271,3 +271,9 @@ interface gap is receiver observation/encoding, including backend-specific preci
 directional-microphone lookahead and bounded history/lifetime. Production RoomCAD
 loop adoption follows those independent gates; the legacy damped forcing accuracy
 limit remains an explicitly measured model scope.
+
+CPU receiver candidate: [prepared read-only observation and explicit one-frame lookahead](docs/extraction/LINEAR_WAVE_OBSERVATION_CPU.md)
+retain ordered Double pressure, Float face-pair sums and native clocks. Bounded post-
+source histories, plan provenance and labelled final-half-step policy precede exact
+original-source/mini verification. Resident Metal Float sampling and production loop
+adoption remain separate gates; pattern/mixing and cancellation stay app-owned.

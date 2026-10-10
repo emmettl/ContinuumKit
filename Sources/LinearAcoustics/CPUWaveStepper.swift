@@ -89,7 +89,7 @@ public final class CPUWaveStepper {
   }
 
   public func advance(steps: Int = 1) throws {
-    try advance(steps: steps, source: nil, amplitudes: [])
+    _ = try advance(steps: steps, source: nil, amplitudes: [], observing: nil)
   }
 
   /// One already evaluated midpoint amplitude per complete update. The entire batch
@@ -100,12 +100,75 @@ public final class CPUWaveStepper {
     for (step, value) in amplitudes.enumerated() where !value.isFinite {
       throw PressureSourceError.nonfiniteAmplitude(step: step)
     }
-    try advance(steps: amplitudes.count, source: source, amplitudes: amplitudes)
+    _ = try advance(steps: amplitudes.count, source: source, amplitudes: amplitudes, observing: nil)
   }
 
-  private func advance(steps: Int, source: PreparedPressureSource?, amplitudes: [Float]) throws {
+  /// Read only the prepared receiver slots directly from resident fields; no full-field copy.
+  public func observe(_ observation: PreparedWaveObservation) throws -> WaveObservationFrame {
+    guard !invalidated else { throw WaveError.invalidatedState }
+    try observation.validate(for: grid)
+    var pressure: [Double] = []
+    var velocity: [Double?] = []
+    for (receiver, stencil) in observation.receivers.enumerated() {
+      var value = 0.0
+      for entry in 0..<8 {
+        value += Double(p[stencil.pressureCells[entry]]) * Double(stencil.pressureWeights[entry])
+      }
+      guard value.isFinite else { throw WaveObservationError.nonfiniteResult(receiver: receiver) }
+      pressure.append(value)
+      if let at = stencil.velocityCell, let axis = stencil.velocityAxis {
+        // Preserve original Float face-pair addition before Double conversion/averaging.
+        let u = SIMD3<Double>(
+          Double(ux[at - 1] + ux[at]) / 2,
+          Double(uy[at - grid.dimensions.x] + uy[at]) / 2,
+          Double(uz[at - grid.dimensions.x * grid.dimensions.y] + uz[at]) / 2)
+        let projected = (u * axis).sum()
+        guard projected.isFinite else {
+          throw WaveObservationError.nonfiniteResult(receiver: receiver)
+        }
+        velocity.append(projected)
+      } else {
+        velocity.append(nil)
+      }
+    }
+    return WaveObservationFrame(
+      pressureStepIndex: pressureStepIndex, timeStep: grid.timeStep,
+      pressureOverDensity: pressure, projectedVelocity: velocity, observation: observation)
+  }
+
+  public func advance(steps: Int, observing observation: PreparedWaveObservation) throws
+    -> [WaveObservationFrame]
+  {
+    try advance(steps: steps, source: nil, amplitudes: [], observing: observation)
+  }
+
+  public func advance(
+    source: PreparedPressureSource, amplitudes: [Float],
+    observing observation: PreparedWaveObservation
+  ) throws -> [WaveObservationFrame] {
+    guard !invalidated else { throw WaveError.invalidatedState }
+    try source.validate(for: grid)
+    for (step, value) in amplitudes.enumerated() where !value.isFinite {
+      throw PressureSourceError.nonfiniteAmplitude(step: step)
+    }
+    return try advance(
+      steps: amplitudes.count, source: source, amplitudes: amplitudes, observing: observation)
+  }
+
+  private func advance(
+    steps: Int, source: PreparedPressureSource?, amplitudes: [Float],
+    observing observation: PreparedWaveObservation?
+  ) throws -> [WaveObservationFrame] {
+
     guard !invalidated else { throw WaveError.invalidatedState }
     guard steps >= 0 else { throw WaveError.invalidStepCount }
+    if let observation {
+      try observation.validate(for: grid)
+      guard steps <= PreparedWaveObservation.maximumBatchSteps else {
+        throw WaveObservationError.batchTooLarge
+      }
+    }
+    var observed: [WaveObservationFrame] = []
     let (finalIndex, overflow) = pressureStepIndex.addingReportingOverflow(steps)
     guard !overflow else { throw WaveError.stepIndexOverflow }
     guard (Double(finalIndex) * grid.timeStep).isFinite,
@@ -176,7 +239,9 @@ public final class CPUWaveStepper {
         }
       }
       pressureStepIndex += 1
+      if let observation { observed.append(try observe(observation)) }
     }
+    return observed
   }
 
   public func snapshot() throws -> WaveSnapshot {
