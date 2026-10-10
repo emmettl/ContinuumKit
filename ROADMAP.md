@@ -322,3 +322,9 @@ context after exact-tag physical-mini checks and three optimized exact-version
 consumers. The next application slice is optional original/shared Metal comparison
 with full native outputs, cancellation/abandonment, fresh CPU restart and representative
 device timing before default adoption or retiring original numerical code.
+
+Published: `0.1.0-alpha.11` provides verified capacity-bounded larger-grid Metal
+field groups, with crossed exact alpha.10 numerics and exact-tag public-consumer
+checks. RoomCAD's original/shared real output/generator/save and live-host timing
+comparison follows before default adoption; sampling dispatch overhead remains a
+possible later bounded cost question if demonstrated by those measurements.
