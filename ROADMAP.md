@@ -259,3 +259,8 @@ batch prevalidation, exact grid binding and complete-step acknowledgement. Indep
 rigid forcing and full source/wall work references precede source-wrapper/mini verification.
 The legacy damped forcing split retains first-order continuum time error explicitly;
 resident Metal forcing and observation/lifetime integration remain next gates.
+
+Resident Metal forcing candidate: [opaque uploaded mappings and bounded amplitude staging](docs/extraction/LINEAR_WAVE_FORCING_METAL.md)
+add the pinned injection kernel after pressure evolution. Actual-device reference,
+source-work, residency, batch/clock and failure gates precede merge/release. Source
+sampling, directional-microphone lookahead and application lifetime remain later slices.

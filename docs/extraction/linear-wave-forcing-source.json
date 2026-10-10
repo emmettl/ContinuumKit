@@ -13,6 +13,19 @@
     "startLine": 659
   },
   "license": "MIT, Copyright (c) 2026 Louis Emmett",
+  "metalBlock": {
+    "bytes": 480,
+    "endLine": 227,
+    "id": "metal-injection",
+    "path": "Sources/AcousticCore/MetalWaveSolver.swift",
+    "selector": {
+      "anchor": "    static let source =",
+      "endMarker": "        // Pressure at each receiver",
+      "startMarker": "        kernel void waveInject"
+    },
+    "sha256": "5bca5be947942ac7a9a862d72d4942e8b53a589ea0c1f7950fb7b320ef6e4324",
+    "startLine": 220
+  },
   "repository": {
     "revision": "f2f6465d0d845af9adda596c004b18ca15a77edd",
     "url": "https://github.com/emmettl/RoomCAD"

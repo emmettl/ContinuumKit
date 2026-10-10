@@ -8,20 +8,23 @@ public enum MetalWaveError: Error, Equatable, Sendable {
   case shaderCompilation(String)
   case pipelineCreation(String)
   case deviceResourceLimit(bytes: Int)
+  case sourceDeviceMismatch
   case allocationFailed
   case commandEncodingFailed
   case commandFailed(String)
 }
 
-/// Synchronous, single-owner source-free backend with resident tracked shared buffers.
+/// Synchronous, single-owner backend with resident tracked shared buffers.
 /// The logical clock advances only after command completion. Output finiteness is
 /// checked on explicit snapshot; completion alone does not guarantee finite fields.
 public final class MetalWaveStepper {
   public let grid: PreparedWaveGrid
   public let deviceName: String
   public private(set) var pressureStepIndex = 0
+  private let device: any MTLDevice
   private let queue: any MTLCommandQueue
-  private let velocity, pressure: any MTLComputePipelineState
+  private let velocity, pressure, injection: any MTLComputePipelineState
+  private var amplitudeBuffer: (any MTLBuffer)?
   private let p, ux, uy, uz, inside, faces: any MTLBuffer
   private let complete: (any MTLCommandBuffer) throws -> Void
   private var invalidated = false
@@ -93,25 +96,16 @@ public final class MetalWaveStepper {
       }
     }
     func buffer<T>(_ values: [T]) throws -> any MTLBuffer {
-      let bytes = values.count * MemoryLayout<T>.stride
-      guard bytes <= device.maxBufferLength else {
-        throw MetalWaveError.deviceResourceLimit(bytes: bytes)
-      }
-      return try values.withUnsafeBytes { raw in
-        guard let base = raw.baseAddress,
-          let buffer = device.makeBuffer(
-            bytes: base, length: bytes,
-            options: [.storageModeShared, .hazardTrackingModeTracked])
-        else { throw MetalWaveError.allocationFailed }
-        return buffer
-      }
+      try Self.makeBuffer(device: device, values: values)
     }
+    self.device = device
     self.grid = grid
     deviceName = device.name
     self.queue = queue
     complete = completion
     velocity = try pipeline("waveVelocity")
     pressure = try pipeline("wavePressure")
+    injection = try pipeline("waveInject")
     p = try buffer(initialFields.pressureOverDensity)
     ux = try buffer(initialFields.velocityX)
     uy = try buffer(initialFields.velocityY)
@@ -120,9 +114,53 @@ public final class MetalWaveStepper {
     faces = try buffer(grid.boundaryTerms)
   }
 
+  static func makeBuffer<T>(device: any MTLDevice, values: [T]) throws -> any MTLBuffer {
+    let (bytes, overflow) = values.count.multipliedReportingOverflow(by: MemoryLayout<T>.stride)
+    guard !overflow, bytes <= device.maxBufferLength else {
+      throw MetalWaveError.deviceResourceLimit(bytes: overflow ? Int.max : bytes)
+    }
+    return try values.withUnsafeBytes { raw in
+      guard let base = raw.baseAddress,
+        let buffer = device.makeBuffer(
+          bytes: base, length: bytes,
+          options: [.storageModeShared, .hazardTrackingModeTracked])
+      else { throw MetalWaveError.allocationFailed }
+      return buffer
+    }
+  }
+
+  /// Upload immutable source indices/coefficients once; fields remain owned by the stepper.
+  public func prepareSource(_ source: PreparedPressureSource) throws -> PreparedMetalPressureSource
+  {
+    guard !invalidated else { throw WaveError.invalidatedState }
+    try source.validate(for: grid)
+    return try PreparedMetalPressureSource(device: device, source: source)
+  }
+
+  var sourceStagingBufferIdentity: ObjectIdentifier? { amplitudeBuffer.map(ObjectIdentifier.init) }
+
   var fieldBufferIdentities: [ObjectIdentifier] { [p, ux, uy, uz].map(ObjectIdentifier.init) }
 
   public func advance(steps: Int = 1) throws {
+    try advance(steps: steps, source: nil, amplitudes: [])
+  }
+
+  /// One finite, caller-evaluated midpoint amplitude per complete step. Stages at most
+  /// 128 values and waits before reusing that storage; no host field readback occurs.
+  public func advance(source: PreparedMetalPressureSource, amplitudes: [Float]) throws {
+    guard !invalidated else { throw WaveError.invalidatedState }
+    try source.source.validate(for: grid)
+    guard source.deviceRegistryID == device.registryID else {
+      throw MetalWaveError.sourceDeviceMismatch
+    }
+    for (step, value) in amplitudes.enumerated() where !value.isFinite {
+      throw PressureSourceError.nonfiniteAmplitude(step: step)
+    }
+    try advance(steps: amplitudes.count, source: source, amplitudes: amplitudes)
+  }
+
+  private func advance(steps: Int, source: PreparedMetalPressureSource?, amplitudes: [Float]) throws
+  {
     guard !invalidated else { throw WaveError.invalidatedState }
     guard steps >= 0 else { throw WaveError.invalidStepCount }
     let (finalIndex, overflow) = pressureStepIndex.addingReportingOverflow(steps)
@@ -130,6 +168,11 @@ public final class MetalWaveStepper {
     guard (Double(finalIndex) * grid.timeStep).isFinite,
       ((Double(finalIndex) - 0.5) * grid.timeStep).isFinite
     else { throw WaveError.stepClockOverflow }
+    let hasSource = source?.cells != nil
+    if steps > 0, hasSource, amplitudeBuffer == nil {
+      amplitudeBuffer = try Self.makeBuffer(
+        device: device, values: [Float](repeating: 0, count: 128))
+    }
     var remaining = steps
     let threads = MTLSize(
       width: grid.dimensions.x, height: grid.dimensions.y, depth: grid.dimensions.z)
@@ -145,13 +188,20 @@ public final class MetalWaveStepper {
         invalidated = true
         throw MetalWaveError.commandEncodingFailed
       }
-      encoder.setBuffer(p, offset: 0, index: 0)
-      encoder.setBuffer(ux, offset: 0, index: 1)
-      encoder.setBuffer(uy, offset: 0, index: 2)
-      encoder.setBuffer(uz, offset: 0, index: 3)
-      encoder.setBuffer(inside, offset: 0, index: 4)
-      for _ in 0..<batch {
+      if hasSource, let amplitudeBuffer {
+        amplitudes.withUnsafeBufferPointer { values in
+          amplitudeBuffer.contents().assumingMemoryBound(to: Float.self)
+            .update(from: values.baseAddress!.advanced(by: steps - remaining), count: batch)
+        }
+      }
+      for step in 0..<batch {
         encoder.setComputePipelineState(velocity)
+        // Injection uses these slots differently; restore every velocity binding each step.
+        encoder.setBuffer(p, offset: 0, index: 0)
+        encoder.setBuffer(ux, offset: 0, index: 1)
+        encoder.setBuffer(uy, offset: 0, index: 2)
+        encoder.setBuffer(uz, offset: 0, index: 3)
+        encoder.setBuffer(inside, offset: 0, index: 4)
         encoder.setBytes(&abi, length: MemoryLayout<Grid>.stride, index: 5)
         encoder.dispatchThreads(threads, threadsPerThreadgroup: group)
         encoder.memoryBarrier(scope: .buffers)
@@ -160,6 +210,22 @@ public final class MetalWaveStepper {
         encoder.setBytes(&abi, length: MemoryLayout<Grid>.stride, index: 6)
         encoder.dispatchThreads(threads, threadsPerThreadgroup: group)
         encoder.memoryBarrier(scope: .buffers)
+        if let source, let cells = source.cells, let weights = source.weights, let amplitudeBuffer {
+          var localStep = UInt32(step)
+          var count = UInt32(source.source.cellIndices.count)
+          encoder.setComputePipelineState(injection)
+          encoder.setBuffer(p, offset: 0, index: 0)
+          encoder.setBuffer(amplitudeBuffer, offset: 0, index: 1)
+          encoder.setBuffer(cells, offset: 0, index: 2)
+          encoder.setBuffer(weights, offset: 0, index: 3)
+          encoder.setBytes(&localStep, length: 4, index: 4)
+          encoder.setBytes(&count, length: 4, index: 5)
+          encoder.dispatchThreads(
+            MTLSize(width: Int(count), height: 1, depth: 1),
+            threadsPerThreadgroup: MTLSize(
+              width: min(8, injection.maxTotalThreadsPerThreadgroup), height: 1, depth: 1))
+          encoder.memoryBarrier(scope: .buffers)
+        }
       }
       encoder.endEncoding()
       do { try complete(commands) } catch {
@@ -190,5 +256,31 @@ public final class MetalWaveStepper {
       pressureStepIndex: pressureStepIndex, timeStep: grid.timeStep,
       pressureOverDensity: fields.pressureOverDensity, velocityX: fields.velocityX,
       velocityY: fields.velocityY, velocityZ: fields.velocityZ)
+  }
+}
+
+/// Immutable device-resident sparse source mapping, prepared by its grid's stepper.
+/// Buffers are opaque, copied once and retained through synchronous command completion.
+public final class PreparedMetalPressureSource {
+  public let source: PreparedPressureSource
+  public let deviceName: String
+  let deviceRegistryID: UInt64
+  let cells, weights: (any MTLBuffer)?
+  var bufferIdentities: [ObjectIdentifier] {
+    [cells, weights].compactMap { $0.map(ObjectIdentifier.init) }
+  }
+
+  init(device: any MTLDevice, source: PreparedPressureSource) throws {
+    self.source = source
+    deviceName = device.name
+    deviceRegistryID = device.registryID
+    if source.cellIndices.isEmpty {
+      cells = nil
+      weights = nil
+    } else {
+      cells = try MetalWaveStepper.makeBuffer(
+        device: device, values: source.cellIndices.map(UInt32.init))
+      weights = try MetalWaveStepper.makeBuffer(device: device, values: source.coefficients)
+    }
   }
 }
