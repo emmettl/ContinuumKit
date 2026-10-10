@@ -328,3 +328,10 @@ field groups, with crossed exact alpha.10 numerics and exact-tag public-consumer
 checks. RoomCAD's original/shared real output/generator/save and live-host timing
 comparison follows before default adoption; sampling dispatch overhead remains a
 possible later bounded cost question if demonstrated by those measurements.
+
+Published: `0.1.0-alpha.12` adds verified guarded single-dispatch mixed observations,
+with exact crossed fields/readouts against split controls and successful exact-tag
+public consumer/reference gates. RoomCAD's current application output/generator/save,
+lifetime and representative live-host timing comparison follows before GPU default
+adoption. Retiring original numerical loops remains a separate bounded task after
+both production backend defaults are accepted.
