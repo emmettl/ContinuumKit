@@ -35,3 +35,15 @@ RoomCAD retains its original production Metal path until a separate application
 binding passes complete original/shared outputs, cancellation at 128-step boundaries,
 nonterminal abandonment, fresh CPU restart and device timing. Measure context
 compilation and per-run setup separately; reuse itself does not prove a speedup.
+
+## Verified checkpoint
+
+Candidate `c38cba59358f0ba5c9bd84ae08218122412f34d4` passes full local and
+[physical-mini package checks](https://github.com/emmettl/ContinuumKit/actions/runs/38024135039):
+218 tests, including 31 actual-Metal and 46 CPU tests; three optimized fetched Git
+consumers; CPU-only no-Metal/UI linkage; unchanged complete numerical/topology
+reference reports and exact kernel hashes. The entire evolution/injection/sampling/
+snapshot implementation remains byte-identical. The final evidence checkpoint changes
+documentation only. [Aggregate identity/ownership proof](metal-wave-context-verification.json)
+is public; complete logs and checks are retained privately in Edgerton. Exact-tag
+publication and application Metal/timing acceptance remain separate gates.
