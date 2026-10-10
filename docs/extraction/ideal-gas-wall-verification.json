@@ -1,0 +1,29 @@
+{
+  "candidate": "518b118e73cc847228a830758028edc49d467158",
+  "consumerProducts": "four fetched optimized consumers, including CPU-only CompressibleFlow linkage guard",
+  "crossHostBitMismatches": 0,
+  "existingWaveKernelAndNumericalReferences": "all unchanged reference/port/topology gates passed",
+  "independentLaws": [
+    "normal-shock states",
+    "mass/momentum/energy/entropy jumps",
+    "isentropic rarefaction",
+    "vacuum/acoustic limits",
+    "scaling",
+    "near-isothermal limit",
+    "invalid/unrepresentable inputs"
+  ],
+  "modelTests": 11,
+  "numericalAdaptations": [
+    "stable near-gamma-one expansion",
+    "explicit intermediate/non-vacuum pressure underflow rejection"
+  ],
+  "originalCasesPerHost": 360,
+  "physicalMini": "https://github.com/emmettl/ContinuumKit/actions/runs/38040549991",
+  "remaining": "exact-tag release verification and deliberate BombCAD adoption with separate application/coupled gates",
+  "schemaVersion": 1,
+  "scope": "stateless uniform planar ideal-gas wall reference; no transport/moving geometry/empirical blast accuracy claim",
+  "sourceOrdinaryPressureSignalVacuum": "bit-exact across 360 cases and both hosts",
+  "sourceRevision": "0b4943def5ec50064d1e44b9ab0ab249c2689b15",
+  "status": "passed independent ideal-gas wall candidate",
+  "swiftTests": 233
+}

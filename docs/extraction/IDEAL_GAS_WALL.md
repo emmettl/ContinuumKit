@@ -46,3 +46,16 @@ regressions for the existing libraries. No application defaults or dependency pi
 change in this candidate. BombCAD adoption follows an exact tested tag and separate
 wall/flux/piston/full application gates. Existing acoustic and thermodynamic products
 retain their own assumptions and previous tags.
+
+## Verified candidate checkpoint
+
+Clean 518b118e73cc847228a830758028edc49d467158 passes the full local package gate
+and [physical mini](https://github.com/emmettl/ContinuumKit/actions/runs/38040549991):
+233 tests, four optimized fetched consumers, CPU-only linkage, protected source identity
+and all unchanged numerical/kernel/topology references. All 360 ordinary cases, complete
+pressure/signal values/bits and vacuum branches remain exact across M4 Max/M4. The
+independent complete-case gas-law and near-isothermal postconditions pass too. The
+initial all-library consumer name collision and repaired run remain retained. Final
+evidence checkpoint changes documentation only. [Aggregate proof](ideal-gas-wall-verification.json)
+is public; full raw comparison reports, pins, logs and source provenance remain private
+in Edgerton. Exact-tag verification precedes prerelease; application adoption is separate.
