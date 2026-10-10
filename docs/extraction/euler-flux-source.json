@@ -1,0 +1,16 @@
+{
+  "adaptations": [
+    "public immutable value types, initializers and methods",
+    "PrescribedGasTransport replaces application alias; same released wall primitive",
+    "documentation only; numerical arithmetic and operation order unchanged"
+  ],
+  "blob": "4736724d8bf71dd84ebb8bde48c0b10b7953a474",
+  "immutableOriginal": "Fixtures/EulerFluxConsumer/Sources/EulerFluxConsumer/OriginalFlux.swift",
+  "license": "MIT",
+  "path": "Sources/BlastCore/FractionalEulerFlux.swift",
+  "repository": "https://github.com/emmettl/bombcad",
+  "revision": "063d6fe818fd78ccbfe46c1c79e035f04de03800",
+  "schemaVersion": 1,
+  "scope": "fixed gamma=1.4 first-order paired Rusanov flux and supplied planar walls; no topology, reconstruction or production air solver",
+  "sha256": "d80e566a9938f665d71ee00bb813e934bb5febff1a112920200fd47560c818c5"
+}
