@@ -277,3 +277,9 @@ retain ordered Double pressure, Float face-pair sums and native clocks. Bounded 
 source histories, plan provenance and labelled final-half-step policy precede exact
 original-source/mini verification. Resident Metal Float sampling and production loop
 adoption remain separate gates; pattern/mixing and cancellation stay app-owned.
+
+Resident receiver candidate: [original Float sampling with separate pressure-only mappings](docs/extraction/LINEAR_WAVE_OBSERVATION_METAL.md)
+returns bounded owned histories from resident fields, with explicit arithmetic identity,
+plan/device/resource validation and complete clocks. Full original-source/mini gates
+precede production RoomCAD loop binding; geometry, microphone mixing and cancellation
+stay application-owned.

@@ -84,7 +84,12 @@ public struct PreparedWaveObservation: Sendable {
 
 /// Owned readout: psi at integer pressure time, projected velocity at the preceding half time.
 /// Value construction does not certify fields; alignment validates all caller-supplied frames.
+public enum WaveObservationArithmetic: Equatable, Sendable {
+  case callerSupplied, cpuDouble, metalFloat
+}
+
 public struct WaveObservationFrame: Sendable {
+  public let arithmetic: WaveObservationArithmetic
   public let pressureStepIndex: Int
   public let timeStep: Double
   public let pressureOverDensity: [Double]
@@ -92,12 +97,14 @@ public struct WaveObservationFrame: Sendable {
   let identity: WaveObservationIdentity?
   public init(
     pressureStepIndex: Int, timeStep: Double, pressureOverDensity: [Double],
-    projectedVelocity: [Double?], observation: PreparedWaveObservation? = nil
+    projectedVelocity: [Double?], observation: PreparedWaveObservation? = nil,
+    arithmetic: WaveObservationArithmetic = .callerSupplied
   ) {
     self.pressureStepIndex = pressureStepIndex
     self.timeStep = timeStep
     self.pressureOverDensity = pressureOverDensity
     self.projectedVelocity = projectedVelocity
+    self.arithmetic = arithmetic
     identity = observation?.identity
   }
   public var pressureTime: Double { Double(pressureStepIndex) * timeStep }
@@ -115,6 +122,7 @@ public struct WaveObservationFrame: Sendable {
 
 /// Pressure with temporally aligned velocity; the explicit terminal fallback retains its half clock.
 public struct AlignedWaveObservationFrame: Sendable {
+  public let arithmetic: WaveObservationArithmetic
   public let pressureStepIndex: Int
   public let timeStep: Double
   public let pressureOverDensity: [Double]
@@ -141,7 +149,8 @@ public struct WaveObservationAligner: Sendable {
     for frame in frames {
       try frame.validate()
       if let previous = next {
-        guard previous.identity === frame.identity, previous.timeStep == frame.timeStep,
+        guard previous.identity === frame.identity, previous.arithmetic == frame.arithmetic,
+          previous.timeStep == frame.timeStep,
           previous.pressureOverDensity.count == frame.pressureOverDensity.count,
           zip(previous.projectedVelocity, frame.projectedVelocity).allSatisfy({
             ($0 == nil) == ($1 == nil)
@@ -167,7 +176,7 @@ public struct WaveObservationAligner: Sendable {
         }
         result.append(
           AlignedWaveObservationFrame(
-            pressureStepIndex: previous.pressureStepIndex,
+            arithmetic: previous.arithmetic, pressureStepIndex: previous.pressureStepIndex,
             timeStep: previous.timeStep, pressureOverDensity: previous.pressureOverDensity,
             projectedVelocity: velocity, usesTerminalHalfStep: false))
       }
@@ -183,7 +192,7 @@ public struct WaveObservationAligner: Sendable {
     pending = nil
     return [
       AlignedWaveObservationFrame(
-        pressureStepIndex: frame.pressureStepIndex,
+        arithmetic: frame.arithmetic, pressureStepIndex: frame.pressureStepIndex,
         timeStep: frame.timeStep, pressureOverDensity: frame.pressureOverDensity,
         projectedVelocity: frame.projectedVelocity, usesTerminalHalfStep: true)
     ]

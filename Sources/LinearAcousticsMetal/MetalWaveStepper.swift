@@ -8,6 +8,8 @@ public enum MetalWaveError: Error, Equatable, Sendable {
   case shaderCompilation(String)
   case pipelineCreation(String)
   case deviceResourceLimit(bytes: Int)
+  case observationDeviceMismatch
+  case unrepresentableObservationAxis(receiver: Int)
   case sourceDeviceMismatch
   case allocationFailed
   case commandEncodingFailed
@@ -23,7 +25,8 @@ public final class MetalWaveStepper {
   public private(set) var pressureStepIndex = 0
   private let device: any MTLDevice
   private let queue: any MTLCommandQueue
-  private let velocity, pressure, injection: any MTLComputePipelineState
+  private let velocity, pressure, injection, sampling, pressureSampling: any MTLComputePipelineState
+  private var observationStorage: MetalObservationStorage?
   private var amplitudeBuffer: (any MTLBuffer)?
   private let p, ux, uy, uz, inside, faces: any MTLBuffer
   private let complete: (any MTLCommandBuffer) throws -> Void
@@ -106,6 +109,8 @@ public final class MetalWaveStepper {
     velocity = try pipeline("waveVelocity")
     pressure = try pipeline("wavePressure")
     injection = try pipeline("waveInject")
+    sampling = try pipeline("waveSample")
+    pressureSampling = try pipeline("waveSamplePressure")
     p = try buffer(initialFields.pressureOverDensity)
     ux = try buffer(initialFields.velocityX)
     uy = try buffer(initialFields.velocityY)
@@ -142,7 +147,7 @@ public final class MetalWaveStepper {
   var fieldBufferIdentities: [ObjectIdentifier] { [p, ux, uy, uz].map(ObjectIdentifier.init) }
 
   public func advance(steps: Int = 1) throws {
-    try advance(steps: steps, source: nil, amplitudes: [])
+    _ = try advance(steps: steps, source: nil, amplitudes: [], observing: nil)
   }
 
   /// One finite, caller-evaluated midpoint amplitude per complete step. Stages at most
@@ -156,11 +161,160 @@ public final class MetalWaveStepper {
     for (step, value) in amplitudes.enumerated() where !value.isFinite {
       throw PressureSourceError.nonfiniteAmplitude(step: step)
     }
-    try advance(steps: amplitudes.count, source: source, amplitudes: amplitudes)
+    _ = try advance(steps: amplitudes.count, source: source, amplitudes: amplitudes, observing: nil)
   }
 
-  private func advance(steps: Int, source: PreparedMetalPressureSource?, amplitudes: [Float]) throws
+  public func prepareObservation(_ observation: PreparedWaveObservation) throws
+    -> PreparedMetalWaveObservation
   {
+    guard !invalidated else { throw WaveError.invalidatedState }
+    try observation.validate(for: grid)
+    return try PreparedMetalWaveObservation(device: device, observation: observation)
+  }
+
+  private func storage(for observation: PreparedMetalWaveObservation) throws
+    -> MetalObservationStorage
+  {
+    try observation.observation.validate(for: grid)
+    guard observation.deviceRegistryID == device.registryID else {
+      throw MetalWaveError.observationDeviceMismatch
+    }
+    if let old = observationStorage, old.owner === observation { return old }
+    let next = try MetalObservationStorage(device: device, owner: observation)
+    observationStorage = next
+    return next
+  }
+
+  var observationBufferIdentities: [ObjectIdentifier] { observationStorage?.bufferIdentities ?? [] }
+
+  /// Sparse readout only; finite observed channels do not certify unsampled field slots.
+  public func observe(_ observation: PreparedMetalWaveObservation) throws -> WaveObservationFrame {
+    guard !invalidated else { throw WaveError.invalidatedState }
+    let output = try storage(for: observation)
+    if observation.observation.receivers.isEmpty {
+      return WaveObservationFrame(
+        pressureStepIndex: pressureStepIndex, timeStep: grid.timeStep,
+        pressureOverDensity: [], projectedVelocity: [], observation: observation.observation,
+        arithmetic: .metalFloat)
+    }
+    guard let commands = queue.makeCommandBuffer(),
+      let encoder = commands.makeComputeCommandEncoder(dispatchType: .serial)
+    else {
+      invalidated = true
+      throw MetalWaveError.commandEncodingFailed
+    }
+    encodeObservation(encoder, output: output, step: 0, steps: 1)
+    encoder.endEncoding()
+    do { try complete(commands) } catch {
+      invalidated = true
+      throw error
+    }
+    return try decodeObservation(output, steps: 1, firstIndex: pressureStepIndex)[0]
+  }
+
+  public func advance(steps: Int, observing observation: PreparedMetalWaveObservation) throws
+    -> [WaveObservationFrame]
+  {
+    try advance(steps: steps, source: nil, amplitudes: [], observing: observation)
+  }
+
+  public func advance(
+    source: PreparedMetalPressureSource, amplitudes: [Float],
+    observing observation: PreparedMetalWaveObservation
+  ) throws -> [WaveObservationFrame] {
+    guard !invalidated else { throw WaveError.invalidatedState }
+    try source.source.validate(for: grid)
+    guard source.deviceRegistryID == device.registryID else {
+      throw MetalWaveError.sourceDeviceMismatch
+    }
+    for (step, value) in amplitudes.enumerated() where !value.isFinite {
+      throw PressureSourceError.nonfiniteAmplitude(step: step)
+    }
+    return try advance(
+      steps: amplitudes.count, source: source, amplitudes: amplitudes, observing: observation)
+  }
+
+  private func encodeObservation(
+    _ encoder: any MTLComputeCommandEncoder, output: MetalObservationStorage, step: Int, steps: Int
+  ) {
+    let plan = output.owner
+    var localStep = UInt32(step)
+    var totalSteps = UInt32(steps)
+    var abi = Grid(grid)
+    func encode(_ group: MetalObservationGroup, _ pressureOutput: any MTLBuffer, _ full: Bool) {
+      var count = UInt32(group.indices.count)
+      encoder.setComputePipelineState(full ? sampling : pressureSampling)
+      encoder.setBuffer(p, offset: 0, index: 0)
+      encoder.setBuffer(group.cells, offset: 0, index: 4)
+      encoder.setBuffer(group.weights, offset: 0, index: 5)
+      encoder.setBuffer(pressureOutput, offset: 0, index: 8)
+      encoder.setBytes(&localStep, length: 4, index: 11)
+      encoder.setBytes(&totalSteps, length: 4, index: 12)
+      encoder.setBytes(&count, length: 4, index: 13)
+      if full {
+        encoder.setBuffer(ux, offset: 0, index: 1)
+        encoder.setBuffer(uy, offset: 0, index: 2)
+        encoder.setBuffer(uz, offset: 0, index: 3)
+        encoder.setBuffer(group.velocityCells, offset: 0, index: 6)
+        encoder.setBuffer(group.axes, offset: 0, index: 7)
+        encoder.setBuffer(output.fullVelocity, offset: 0, index: 9)
+        encoder.setBytes(&abi, length: MemoryLayout<Grid>.stride, index: 10)
+      }
+      let pipeline = full ? sampling : pressureSampling
+      encoder.dispatchThreads(
+        MTLSize(width: Int(count), height: 1, depth: 1),
+        threadsPerThreadgroup: MTLSize(
+          width: min(8, pipeline.maxTotalThreadsPerThreadgroup), height: 1, depth: 1))
+      encoder.memoryBarrier(scope: .buffers)
+    }
+    if let group = plan.full, let buffer = output.fullPressure { encode(group, buffer, true) }
+    if let group = plan.pressureOnly, let buffer = output.onlyPressure {
+      encode(group, buffer, false)
+    }
+  }
+
+  private func decodeObservation(_ output: MetalObservationStorage, steps: Int, firstIndex: Int)
+    throws -> [WaveObservationFrame]
+  {
+    var frames: [WaveObservationFrame] = []
+    let plan = output.owner
+    for step in 0..<steps {
+      var pressure = [Double](repeating: 0, count: plan.observation.receivers.count)
+      var velocity = [Double?](repeating: nil, count: pressure.count)
+      if let group = plan.full, let pBuffer = output.fullPressure, let vBuffer = output.fullVelocity
+      {
+        let p = pBuffer.contents().assumingMemoryBound(to: Float.self)
+        let v = vBuffer.contents().assumingMemoryBound(to: Float.self)
+        for (r, index) in group.indices.enumerated() {
+          pressure[index] = Double(p[r * steps + step])
+          velocity[index] = Double(v[r * (steps + 1) + step + 1])
+        }
+      }
+      if let group = plan.pressureOnly, let pBuffer = output.onlyPressure {
+        let p = pBuffer.contents().assumingMemoryBound(to: Float.self)
+        for (r, index) in group.indices.enumerated() {
+          pressure[index] = Double(p[r * steps + step])
+        }
+      }
+      for index in pressure.indices {
+        guard pressure[index].isFinite, velocity[index]?.isFinite ?? true else {
+          throw WaveObservationError.nonfiniteResult(receiver: index)
+        }
+      }
+      frames.append(
+        WaveObservationFrame(
+          pressureStepIndex: firstIndex + step, timeStep: grid.timeStep,
+          pressureOverDensity: pressure, projectedVelocity: velocity, observation: plan.observation,
+          arithmetic: .metalFloat))
+    }
+    return frames
+  }
+
+  private func advance(
+    steps: Int, source: PreparedMetalPressureSource?, amplitudes: [Float],
+    observing observation: PreparedMetalWaveObservation?
+  ) throws -> [WaveObservationFrame] {
+
     guard !invalidated else { throw WaveError.invalidatedState }
     guard steps >= 0 else { throw WaveError.invalidStepCount }
     let (finalIndex, overflow) = pressureStepIndex.addingReportingOverflow(steps)
@@ -168,6 +322,19 @@ public final class MetalWaveStepper {
     guard (Double(finalIndex) * grid.timeStep).isFinite,
       ((Double(finalIndex) - 0.5) * grid.timeStep).isFinite
     else { throw WaveError.stepClockOverflow }
+    var output: MetalObservationStorage?
+    if let observation {
+      guard steps <= PreparedWaveObservation.maximumBatchSteps else {
+        throw WaveObservationError.batchTooLarge
+      }
+      // All output allocation precedes numerical field work.
+      try observation.observation.validate(for: grid)
+      guard observation.deviceRegistryID == device.registryID else {
+        throw MetalWaveError.observationDeviceMismatch
+      }
+      if steps > 0 { output = try storage(for: observation) }
+    }
+    let firstIndex = steps > 0 ? pressureStepIndex + 1 : pressureStepIndex
     let hasSource = source?.cells != nil
     if steps > 0, hasSource, amplitudeBuffer == nil {
       amplitudeBuffer = try Self.makeBuffer(
@@ -226,6 +393,7 @@ public final class MetalWaveStepper {
               width: min(8, injection.maxTotalThreadsPerThreadgroup), height: 1, depth: 1))
           encoder.memoryBarrier(scope: .buffers)
         }
+        if let output { encodeObservation(encoder, output: output, step: step, steps: batch) }
       }
       encoder.endEncoding()
       do { try complete(commands) } catch {
@@ -235,6 +403,10 @@ public final class MetalWaveStepper {
       pressureStepIndex += batch
       remaining -= batch
     }
+    if let output, steps > 0 {
+      return try decodeObservation(output, steps: steps, firstIndex: firstIndex)
+    }
+    return []
   }
 
   /// Copies resident fields only when requested. Nonfinite output invalidates this backend;

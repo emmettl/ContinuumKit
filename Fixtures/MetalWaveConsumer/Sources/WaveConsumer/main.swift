@@ -86,3 +86,23 @@ try require(
 print(
   "PASS fetched resident Metal forcing: packaged injection, signed source phases and three command batches",
   device.name)
+
+let observation = try PreparedWaveObservation(
+  grid: grid,
+  receivers: [
+    WaveReceiverStencil(
+      pressureCells: Array(repeating: 1, count: 8), pressureWeights: [1, 0, 0, 0, 0, 0, 0, 0])
+  ])
+let observer = try forced.prepareObservation(observation)
+let observed = try forced.observe(observer)
+try require(
+  observed.pressureOverDensity == [0.53076171875] && observed.projectedVelocity == [nil]
+    && observed.arithmetic == .metalFloat)
+let history = try forced.advance(source: source, amplitudes: [0.25, -0.5], observing: observer)
+var alignment = WaveObservationAligner()
+let aligned = try alignment.append(history) + alignment.finishUsingFinalHalfStep()
+try require(
+  aligned.count == 2 && aligned[0].pressureStepIndex == 3 && aligned[1].usesTerminalHalfStep)
+print(
+  "PASS fetched resident Metal observation: pressure-only kernel, owned history and lookahead clocks",
+  device.name)

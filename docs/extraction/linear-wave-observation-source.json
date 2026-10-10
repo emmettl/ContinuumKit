@@ -25,9 +25,41 @@
       },
       "sha256": "67420463ff6bd06523558e38edfb682cdbf7117c76ece52d08ff449941c412d5",
       "startLine": 674
+    },
+    {
+      "bytes": 1369,
+      "endLine": 245,
+      "id": "metal-observation",
+      "path": "Sources/AcousticCore/MetalWaveSolver.swift",
+      "selector": {
+        "anchor": "    static let source =",
+        "endMarker": "        \"\"\"",
+        "startMarker": "        kernel void waveSample"
+      },
+      "sha256": "63168d612d901354ef1a85514e0e2347ee445596a78e85bb12fcb1cc409520dd",
+      "startLine": 229
+    },
+    {
+      "bytes": 577,
+      "endLine": 171,
+      "id": "metal-microphone-timing",
+      "path": "Sources/AcousticCore/MetalWaveSolver.swift",
+      "selector": {
+        "anchor": "let velocities = velocityOutput",
+        "endMarker": "\n    }\n",
+        "startMarker": "        return receivers.indices.map"
+      },
+      "sha256": "eddf512ceb46561ed746d7a4eb1a64f8c82caa3865d63c5d11611d8cf007ee62",
+      "startLine": 162
     }
   ],
   "license": "MIT, Copyright (c) 2026 Louis Emmett",
+  "pressureOnlyAdaptation": {
+    "retainedPressureStatementsBytes": 167,
+    "retainedPressureStatementsSHA256": "45cd0ed8dd984ad3c0bd14d9362d239f4182aaa430909d3c44e634ab94e7bee1",
+    "scope": "same ordered Float pressure statements; velocity-free header/resources for pressure-only receivers",
+    "source": "metal-observation"
+  },
   "repository": {
     "revision": "f2f6465d0d845af9adda596c004b18ca15a77edd",
     "url": "https://github.com/emmettl/RoomCAD"
