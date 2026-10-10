@@ -494,3 +494,15 @@ The separately repaired extrusion benchmark in RoomCAD #33 passes strict complet
 36-layout verification on both hosts; no production source or reference pin changes.
 Acoustic selection/measurement policy, weighted QR, heterogeneous waves and changing
 coupled mechanics remain separate work.
+
+Completed, 10 October 2026: RoomCAD #34 adopts exact alpha.18 and retires both local
+raw-moment fit kernels. Complete two-host 39-case/260-fit/2,855,099-prediction native
+captures, every noise/calibration/summary history, independent full policy references
+and 25 coherent corruption categories pass. All affected current/frozen reference
+suites and both hosts' 194-test/actual-Metal/app-package gates pass; the complete
+private archive has a passing portable replay. [Scope](docs/extraction/roomcad-affine-adoption-verification.json)
+retains identities and original inaccuracies. Next fitting candidates need a fresh
+current-source audit: through-origin material projection and weighted spatial QR
+are distinct numerical contracts. Heterogeneous/2D waves and changing mechanics
+remain separate model gaps; no empirical acoustic accuracy claim or new Core tag
+is implied by this adoption.

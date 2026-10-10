@@ -172,5 +172,5 @@ acoustic window/noise or material-calibration policy. [Alpha.18](https://github.
 publishes it after both physical Macs pass 281 tests and eight optimized exact-version
 consumers, with unchanged complete 300-case fitting records.
 [Publication proof](docs/extraction/alpha18-release-verification.json) records immutable
-identities. [RoomCAD adoption](docs/extraction/ROOMCAD_AFFINE_ADOPTION_PLAN.md) remains
-a separate accuracy-checked integration task.
+identities. [RoomCAD adoption](docs/extraction/ROOMCAD_AFFINE_ADOPTION_PLAN.md) is complete,
+with source-bound full policy/accuracy evidence and both-host application checks.

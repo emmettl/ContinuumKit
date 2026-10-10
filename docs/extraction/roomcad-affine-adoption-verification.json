@@ -1,0 +1,121 @@
+{
+  "actualMetalPackagingSignaturesSnapshots": "passed both hosts; inspected images",
+  "appSourceProducer": "a252d4444843f022eac64a065429ef663cceb9ad",
+  "applicationAdoption": true,
+  "cases": 39,
+  "completePredictions": 2855099,
+  "corruptionCategories": 25,
+  "crossHostJSONAndNative": "byte-identical per original/shared variant",
+  "eventsPerVariant": 800,
+  "exactCore": {
+    "revision": "0e0929f4a0806940ed2fc5be5f81d1a82034cc8c",
+    "version": "0.1.0-alpha.18"
+  },
+  "fitRecordsPerVariant": 260,
+  "initialPolicySetupFailure": "https://github.com/emmettl/RoomCAD/actions/runs/38079701569: gh absent; no numeric checks executed",
+  "maxCaptureProducer": "73bd72f79cdf932cc57ed52fc2772d1cce5dad36",
+  "maximumSharedRelativeSlopeError": 3.400708234256367e-16,
+  "miniCaptureConclusion": "success",
+  "miniCaptureProducer": "176b81c536d1d5f93c853d98f6008a45781c41dd",
+  "miniCaptureRun": "https://github.com/emmettl/RoomCAD/actions/runs/38077531976",
+  "miniIntegrationConclusion": "success",
+  "miniIntegrationJobs": [
+    {
+      "conclusion": "success",
+      "databaseId": 114283998933,
+      "name": "boundaries"
+    },
+    {
+      "conclusion": "success",
+      "databaseId": 114283998999,
+      "name": "check"
+    },
+    {
+      "conclusion": "success",
+      "databaseId": 114283999015,
+      "name": "acoustics"
+    },
+    {
+      "conclusion": "success",
+      "databaseId": 114283999029,
+      "name": "absorbing-cylinder"
+    },
+    {
+      "conclusion": "success",
+      "databaseId": 114283999061,
+      "name": "rigid-3d"
+    },
+    {
+      "conclusion": "success",
+      "databaseId": 114283999062,
+      "name": "production-metal"
+    },
+    {
+      "conclusion": "success",
+      "databaseId": 114283999063,
+      "name": "masked"
+    },
+    {
+      "conclusion": "success",
+      "databaseId": 114283999124,
+      "name": "production-cpu"
+    },
+    {
+      "conclusion": "success",
+      "databaseId": 114283999133,
+      "name": "cylinder"
+    },
+    {
+      "conclusion": "success",
+      "databaseId": 114283999136,
+      "name": "thin-probes"
+    },
+    {
+      "conclusion": "success",
+      "databaseId": 114283999162,
+      "name": "oblique"
+    },
+    {
+      "conclusion": "success",
+      "databaseId": 114283999173,
+      "name": "admittance"
+    },
+    {
+      "conclusion": "success",
+      "databaseId": 114283999239,
+      "name": "tilted-pulse"
+    },
+    {
+      "conclusion": "success",
+      "databaseId": 114283999243,
+      "name": "extruded-layout"
+    },
+    {
+      "conclusion": "success",
+      "databaseId": 114283999256,
+      "name": "fft-adoption"
+    }
+  ],
+  "miniIntegrationRun": "https://github.com/emmettl/RoomCAD/actions/runs/38076350589",
+  "miniPolicyConclusion": "success",
+  "miniPolicyJob": 114294646571,
+  "miniPolicyRun": "https://github.com/emmettl/RoomCAD/actions/runs/38079952222",
+  "nativeBytesPerVariant": 210357816,
+  "nativeValuesPerVariant": 30941191,
+  "newCoreRelease": false,
+  "noiseIterationsPerVariant": 60,
+  "originalFindings": {
+    "finiteInaccurate": 45,
+    "nonfinite": 1,
+    "referenceAgreement": 214
+  },
+  "portableReplay": "passed complete archive, both-host policies and every affected frozen/current independent suite",
+  "privateEvidenceMerge": "0b06e9496460e3d9ea22c55536b1d9a1af891ada",
+  "privateEvidencePR": "https://github.com/emmettl/edgerton/pull/68",
+  "roomCADMerge": "46e6b7c1b14627a672fa884a89d6d97c343998c7",
+  "roomCADPR": "https://github.com/emmettl/RoomCAD/pull/34",
+  "schemaVersion": 1,
+  "scope": "numerical/source/application conformance; no empirical acoustic validation; native short/silent singular categories retained",
+  "testsPerAppHost": 194,
+  "verifier": "0ea3d6c7592fcc628d0127983fb04d54d34dace1"
+}

@@ -4,7 +4,7 @@
 unweighted affine least squares over explicit paired Double coordinates/values.
 It imports no application, Foundation, Accelerate, UI or Metal module. It is a
 numerical improvement, not a byte-preserving extraction. Alpha.18 releases this
-contract after the separate exact-tag gate; no application has adopted it yet.
+contract after the separate exact-tag gate; RoomCAD has completed its independently checked adoption.
 
 The [original fitting audit](FITTING_PLAN.md) and both complete RoomCAD snapshots
 remain immutable. Original raw-moment arithmetic loses variance/covariance through
@@ -110,3 +110,20 @@ noise histories; intentional arithmetic changes need accuracy criteria instead o
 old/native byte-equality claims. Through-origin projection, Edgerton's constrained
 material/relaxation search and BombCAD's weighted polynomial QR/limiting are distinct
 contracts. This candidate does not migrate or generalize those models.
+
+## Completed RoomCAD adoption
+
+[RoomCAD #34](https://github.com/emmettl/RoomCAD/pull/34) retires both production
+raw-moment kernels at exact alpha.18. It preserves index/time conversions and
+app-owned window/onset/noise/tail/calibration policy, with origin-based queries
+and checked bounded integer conversions. [Accepted scope](roomcad-affine-adoption-verification.json)
+records source/merge identities, 39 complete cases, 260 exact-reference fits and
+2,855,099 complete predictions. Both physical Macs retain byte-identical complete
+original/shared JSON and native payloads per variant, every noise/calibration
+history and full metadata/summary arrays. All 25 coherent corruption categories
+reject; all affected current/frozen reference suites and both hosts' 194-test/
+actual-Metal/package/signature/snapshot checks pass. Complete portable private
+archive replay passes without dropping values or precision. Original numerical
+inaccuracies and initial runner setup diagnostics remain retained findings.
+No new Core tag is needed; alpha.18 and earlier tags remain immutable. Empirical
+measured-room accuracy, weighted reconstruction and changing mechanics are separate.
