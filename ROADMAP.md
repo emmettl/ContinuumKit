@@ -539,3 +539,22 @@ controls agree byte-for-byte. [Verification scope](docs/extraction/pivoted-qr-ve
 preserves original audit failures, all source identities and the complete retained
 candidate archive. Exact-tag release precedes a fresh bounded BombCAD reconstruction
 adoption; geometry, fallback, limiting/EOS and empirical validation remain owner work.
+
+
+Published, 10 October 2026: alpha.19 releases PivotedQR after both physical Macs'
+complete exact-tag 287-test/nine-consumer/actual-Metal/reference gates pass. All
+741-case native records, independent findings and 24 corruption receipts remain
+unchanged from the accepted two-host candidate. [Publication proof](docs/extraction/alpha19-release-verification.json)
+records the immutable tag and successful release. The next bounded tranche is
+BombCAD reconstruction adoption from a fresh source checkpoint, keeping geometry,
+mean preservation, degree fallback, frame/limiter/EOS and coupled transport policy
+with their owners. Through-origin fitting and heterogeneous/2D/changing mechanics
+remain separate gaps; no empirical blast accuracy is implied.
+
+
+The [bounded BombCAD QR adoption plan](docs/extraction/BOMBCAD_QR_ADOPTION_PLAN.md)
+records the fresh alpha.16 application baseline, unchanged protected numerical
+source and exact alpha.19 target. Complete actual Stencil reuse, means/frame/
+component-threshold/limiter/backoff/EOS histories and affected coupled references
+must pass independently before migration. Application tests and packaging are
+required separately; original inaccuracies and prior source pins remain retained.
