@@ -464,3 +464,14 @@ is the next independent numerical-primitives tranche: dedicated scalar transform
 normalization/packing and safe-dimension references precede implementation. Changing
 geometry, heterogeneous/2D waves, fitting/measurement policy and mechanics remain
 separate gaps.
+
+Completed, 10 October 2026: alpha.17 releases the independently verified real FFT
+primitive and RoomCAD #31 adopts it with complete native application conformance.
+Verification-only pre-alpha.17 consumers retain their original pins through the
+protected compile control in RoomCAD #32; production remains shared.
+
+Next bounded numerical work is the [affine fitting plan](docs/extraction/FITTING_PLAN.md).
+The inventory and exact-native arithmetic audit distinguish scalar fitting from
+acoustic window/noise/material policy and expose raw-moment conditioning gaps.
+A stabilized primitive precedes any application migration; weighted spatial QR,
+heterogeneous waves and changing coupled mechanics remain separate contracts.

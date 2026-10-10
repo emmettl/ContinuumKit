@@ -1,0 +1,17 @@
+{
+  "repository": "https://github.com/emmettl/RoomCAD",
+  "revision": "37d7f8a0491dc4bc1908e71a8e8f63c0f4fd055b",
+  "schemaVersion": 1,
+  "sources": {
+    "Sources/AcousticCore/DecayAnalysis.swift": {
+      "gitBlob": "63fc6c90bb524f50b1b18adddcdd55496d6581c0",
+      "sha256": "931363a156f4b52d6c390385ba5cce3f733f9a9742281ffc2063e50f575922b1",
+      "snapshot": "OriginalDecayAnalysis.swift.txt"
+    },
+    "Sources/AcousticCore/RoomParameters.swift": {
+      "gitBlob": "3b5c0e8761ee54b63e0a19b51596673bd702a780",
+      "sha256": "ad897708b1e654796786cc7745a68ed88817343df3589f66ff011bc57c6996da",
+      "snapshot": "OriginalRoomParameters.swift.txt"
+    }
+  }
+}
