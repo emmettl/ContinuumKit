@@ -154,3 +154,17 @@ cells, signed forcing and 257 complete steps against independent CPU fields/cloc
 immutable annotated tag/commit. Larger field groups obey pipeline and device capacity;
 small-grid shape, kernels, barriers and arithmetic remain unchanged. Actual application
 throughput/default acceptance and empirical accuracy remain separate gates.
+
+## Published mixed Metal observation prerelease
+
+`0.1.0-alpha.12` is published from reviewed commit
+`f464e04866903bfc7c9ce94c34d31125a776d270`. Its
+[exact-tag release workflow](https://github.com/emmettl/ContinuumKit/actions/runs/38030485794)
+passes 222 tests (35 actual Metal, 46 CPU), three optimized consumers resolving
+exact alpha.12, CPU-only linkage, guarded mixed pressure/nil/velocity parity and
+unchanged complete numerical/topology references before publication.
+[Publication proof](extraction/alpha12-release-verification.json) retains immutable
+annotated tag/commit identity. Mixed sets use one guarded sampling dispatch; homogeneous
+paths, exact Float arithmetic, field/injection dependencies and owned completed clocks
+retain their contracts. Actual application/default and empirical accuracy gates remain
+separate. Existing tags stay unchanged.

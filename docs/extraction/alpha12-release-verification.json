@@ -1,0 +1,17 @@
+{
+  "commit": "f464e04866903bfc7c9ce94c34d31125a776d270",
+  "cpuTests": 46,
+  "exactTagRun": "https://github.com/emmettl/ContinuumKit/actions/runs/38030485794",
+  "exactVersion": "0.1.0-alpha.12",
+  "metalTests": 35,
+  "optimizedConsumers": 3,
+  "publicMixedConsumer": "ordered pressure/nil/velocity equals retained full kernel on actual M4",
+  "release": "https://github.com/emmettl/ContinuumKit/releases/tag/0.1.0-alpha.12",
+  "remaining": "actual RoomCAD output/lifetime/timing/default acceptance; no empirical accuracy claim",
+  "schemaVersion": 1,
+  "scope": "guarded single-dispatch mixed observations; homogeneous paths, pinned arithmetic, field/injection dependencies and completed ownership/clocks unchanged",
+  "status": "published",
+  "swiftTests": 222,
+  "tagObject": "0a604165229027f28f7bcda886dbc5f2087de507",
+  "version": "0.1.0-alpha.12"
+}
