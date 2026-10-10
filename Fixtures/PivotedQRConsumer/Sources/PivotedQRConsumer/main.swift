@@ -117,7 +117,10 @@ import Numerics
     let hadamard: [[Double]] = (0..<64).map { i in
       (0..<64).map { j in Double((i & j).nonzeroBitCount % 2 == 0 ? 1 : -1) / 8 }
     }
-    let hadamardCoefficients = (0..<64).map { Double(($0 % 2 == 0 ? 1 : -1) * ($0 + 1)) / 128 }
+    let hadamardCoefficients: [Double] = (0..<64).map { j -> Double in
+      let sign: Double = j % 2 == 0 ? 1 : -1
+      return sign * Double(j + 1) / 128
+    }
     try run("dimension/64-hadamard", hadamard, hadamard.map { dot($0, hadamardCoefficients) })
     let tallHadamard =
       hadamard + (0..<16).map { i in (0..<64).map { j in Double(i == j ? 1 : 0) / 2 } }

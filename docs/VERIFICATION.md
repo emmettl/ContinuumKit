@@ -100,3 +100,15 @@ and covariance-cancellation diagnostics do not imply arbitrary-input relative er
 or measured acoustic accuracy. [Scope](extraction/AFFINE_LEAST_SQUARES.md) and the
 [separate application plan](extraction/ROOMCAD_AFFINE_ADOPTION_PLAN.md) preserve those
 boundaries.
+
+
+Pivoted QR adds six focused package tests for independent noisy least squares,
+reused factors, extreme common scales, orthogonality/permutation, rank tolerance,
+dimensions/finite inputs, both allocation caps and normalization/solution failures.
+Its optimized public Git consumer records 741 complete factor cases, including
+all protected original inputs plus dense and noisy tall 64-column controls, and
+three distinct RHS with an exact primary repeat. Exact native rational references
+check pivot policy, full Q/R, triangular condition, conditioning-dependent
+coefficients, normal-equation and optimal residuals. Complete input/factor/output/
+RHS/source/pin corruption controls are required. Numerical and physical-model
+acceptance remain separate under [the QR contract](extraction/PIVOTED_QR.md).
