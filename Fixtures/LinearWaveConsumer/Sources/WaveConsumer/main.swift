@@ -33,3 +33,15 @@ try require(a.velocityY == zero && a.velocityZ == zero && a.pressureStepIndex ==
 print(
   "PASS LinearAcoustics fetched CPU-only product: all native fields, clocks, ownership and composition"
 )
+
+let forced = try CPUWaveStepper(grid: grid, initialFields: fields)
+let source = try PreparedPressureSource(grid: grid, cellIndices: [1], coefficients: [0.5])
+try forced.advance(source: source, amplitudes: [2, -1])
+let forcedFields = try forced.snapshot()
+try require(
+  forcedFields.pressureOverDensity == [0.96923828125, 0.53076171875, 100, 100, 100, 100, 100, 100])
+try require(forcedFields.velocityX == [0.12109375, 0, 0, 0, 0, 0, 0, 0])
+try require(
+  forcedFields.velocityY == zero && forcedFields.velocityZ == zero
+    && forcedFields.pressureStepIndex == 2)
+print("PASS fetched CPU pressure forcing: signed sparse increments, complete fields and clocks")

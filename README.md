@@ -89,3 +89,8 @@ mini verification](https://github.com/emmettl/ContinuumKit/actions/runs/38003236
 169 tests and all three consumers resolve the exact version. [Actual benchmark
 readiness](docs/extraction/SHARED_WAVE_READINESS.md) includes 96 complete exact
 original/shared records. Production source/receiver integration is separate.
+
+The unreleased [CPU pressure-forcing candidate](docs/extraction/LINEAR_WAVE_FORCING_CPU.md)
+adds checked sparse source plans without application imports. Its declared phase order,
+independent work/refinement references and legacy damped-forcing accuracy limit are
+separate from the source-free `0.1.0-alpha.6` release.

@@ -1,8 +1,12 @@
 // Copyright (c) 2026 Louis Emmett. MIT licence; see LICENSE.
 
-/// Checked, fixed uniform-fluid topology for the source-free masked wave update.
+final class WaveGridIdentity: Sendable {}
+
+/// Checked, fixed uniform-fluid topology for the masked wave update.
 /// Pressure is stored divided by density; no geometry or material inference occurs here.
 public struct PreparedWaveGrid: Sendable {
+  // Copies retain identity; separately prepared grids require separately prepared plans.
+  let identity = WaveGridIdentity()
   public let dimensions: SIMD3<Int>
   public let spacing: SIMD3<Double>
   public let soundSpeed, density, timeStep: Double

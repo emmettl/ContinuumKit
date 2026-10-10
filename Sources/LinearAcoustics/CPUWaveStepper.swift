@@ -89,6 +89,21 @@ public final class CPUWaveStepper {
   }
 
   public func advance(steps: Int = 1) throws {
+    try advance(steps: steps, source: nil, amplitudes: [])
+  }
+
+  /// One already evaluated midpoint amplitude per complete update. The entire batch
+  /// is checked before mutation; each acknowledged step includes source injection.
+  public func advance(source: PreparedPressureSource, amplitudes: [Float]) throws {
+    guard !invalidated else { throw WaveError.invalidatedState }
+    try source.validate(for: grid)
+    for (step, value) in amplitudes.enumerated() where !value.isFinite {
+      throw PressureSourceError.nonfiniteAmplitude(step: step)
+    }
+    try advance(steps: amplitudes.count, source: source, amplitudes: amplitudes)
+  }
+
+  private func advance(steps: Int, source: PreparedPressureSource?, amplitudes: [Float]) throws {
     guard !invalidated else { throw WaveError.invalidatedState }
     guard steps >= 0 else { throw WaveError.invalidStepCount }
     let (finalIndex, overflow) = pressureStepIndex.addingReportingOverflow(steps)
@@ -109,7 +124,7 @@ public final class CPUWaveStepper {
     let bx = grid.pressureCoefficients.x
     let by = grid.pressureCoefficients.y
     let bz = grid.pressureCoefficients.z
-    for _ in 0..<steps {
+    for step in 0..<steps {
       // Source cpu-masked-velocity: slabs flattened into the full serial k range.
       for k in 0..<nz {
         for j in 0..<ny {
@@ -144,6 +159,12 @@ public final class CPUWaveStepper {
             if ceiling < 0 { divergence += bz * uz[at] } else { wall += ceiling }
             p[at] = ((1 - wall) * p[at] - divergence) / (1 + wall)
           }
+        }
+      }
+      if let source {
+        // Pinned RoomCAD masked injection order: pre-rounded Float amplitude * weight.
+        for entry in source.cellIndices.indices {
+          p[source.cellIndices[entry]] += amplitudes[step] * source.coefficients[entry]
         }
       }
       // Scan resident CPU memory without allocating. A failed complete update invalidates

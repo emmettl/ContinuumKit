@@ -1,0 +1,42 @@
+{
+  "candidate": "970c4e22f652bb3666e57c4b061e12d48f1ed5d8",
+  "independentReferences": {
+    "connectedWorkRelativeResidualMax": 5.956936985906935e-07,
+    "crossHostMetricsIdentical": true,
+    "legacyDampedFinestAbsoluteError": 0.0015066995906385383,
+    "legacyDampedTemporalOrders": [
+      1.0014654475798916,
+      1.000221867692547
+    ],
+    "omittedSourceCrossTermRelativeResidual": 0.0005009779357938449,
+    "rigidAllFieldTemporalOrderRange": [
+      1.9845684625576592,
+      2.2493720475555543
+    ],
+    "rigidFinestRelativeL2Max": 2.85248878859943e-06
+  },
+  "physicalMini": {
+    "actualSourceFreeMetalRegression": "passed",
+    "cpuNoMetalUIGuard": "passed",
+    "cpuTests": 28,
+    "newCPUForcingTests": 11,
+    "optimizedFetchedConsumers": 3,
+    "run": "https://github.com/emmettl/ContinuumKit/actions/runs/38006739731",
+    "status": "passed",
+    "tests": 180
+  },
+  "pinnedSource": {
+    "Float32BitMismatches": 0,
+    "configurations": [
+      "debug",
+      "release"
+    ],
+    "crossConfigurationReportsByteIdentical": true,
+    "forcedCaptures": 520,
+    "roomRevision": "f2f6465d0d845af9adda596c004b18ca15a77edd",
+    "sourceFreeCaptures": 520
+  },
+  "schemaVersion": 1,
+  "scope": "unreleased CPU prepared sparse pressure forcing; Metal forcing and receiver/application integration remain separate",
+  "status": "passed"
+}

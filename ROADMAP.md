@@ -252,3 +252,10 @@ The [forcing and observation outline](docs/extraction/WAVE_FORCING_AND_OBSERVATI
 bounds the next CPU sparse-injection tranche, then actual resident Metal and receiver
 gates. The audit preserves source scaling, backend-specific observation precision and
 directional-microphone lookahead before any production loop replacement.
+
+CPU pressure-forcing candidate: [prepared sparse source plans](docs/extraction/LINEAR_WAVE_FORCING_CPU.md)
+apply signed midpoint amplitudes after the original masked pressure update, with whole-
+batch prevalidation, exact grid binding and complete-step acknowledgement. Independent
+rigid forcing and full source/wall work references precede source-wrapper/mini verification.
+The legacy damped forcing split retains first-order continuum time error explicitly;
+resident Metal forcing and observation/lifetime integration remain next gates.

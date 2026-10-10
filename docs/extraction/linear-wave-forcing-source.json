@@ -1,0 +1,22 @@
+{
+  "block": {
+    "bytes": 71,
+    "endLine": 659,
+    "id": "cpu-masked-injection",
+    "path": "Sources/AcousticCore/WaveSolver.swift",
+    "selector": {
+      "anchor": "    func simulateMasked(",
+      "endMarker": "            for (r, receiver)",
+      "startMarker": "            for (cell, w) in sourceWeights"
+    },
+    "sha256": "7c762c0e2ee79833648f90cfcfd1b82ccd593af2dc397a96d44739c1e12be66d",
+    "startLine": 659
+  },
+  "license": "MIT, Copyright (c) 2026 Louis Emmett",
+  "repository": {
+    "revision": "f2f6465d0d845af9adda596c004b18ca15a77edd",
+    "url": "https://github.com/emmettl/RoomCAD"
+  },
+  "schemaVersion": 1,
+  "scope": "masked CPU Float(q) times pre-rounded source weight after the original pressure update; pulse preparation remains app-owned"
+}
