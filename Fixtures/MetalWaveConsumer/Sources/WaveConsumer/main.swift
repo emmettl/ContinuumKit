@@ -53,3 +53,36 @@ for pair in zip(
 print(
   "PASS actual packaged wave Metal kernels, multiple command batches and CPU/native fields:",
   device.name)
+
+let forced = try MetalWaveStepper(device: device, grid: grid, initialFields: fields)
+let source = try forced.prepareSource(
+  PreparedPressureSource(grid: grid, cellIndices: [1], coefficients: [0.5]))
+try forced.advance(source: source, amplitudes: [2, -1])
+let forcedFields = try forced.snapshot()
+try require(
+  forcedFields.pressureOverDensity == [0.96923828125, 0.53076171875, 100, 100, 100, 100, 100, 100])
+try require(forcedFields.velocityX == [0.12109375, 0, 0, 0, 0, 0, 0, 0])
+try require(
+  forcedFields.pressureStepIndex == 2 && forcedFields.pressureTime == 0.25
+    && forcedFields.velocityTime == 0.1875)
+let longGPU = try MetalWaveStepper(device: device, grid: grid, initialFields: fields)
+let longPlan = try longGPU.prepareSource(source.source)
+let chunkGPU = try MetalWaveStepper(device: device, grid: grid, initialFields: fields)
+let amplitudes = (0..<257).map { Float($0 % 7 - 3) / 128 }
+try longGPU.advance(source: longPlan, amplitudes: amplitudes)
+try chunkGPU.advance(source: longPlan, amplitudes: Array(amplitudes.prefix(127)))
+try chunkGPU.advance(source: longPlan, amplitudes: Array(amplitudes.dropFirst(127)))
+let longFields = try longGPU.snapshot()
+let chunkFields = try chunkGPU.snapshot()
+try require(longFields.pressureStepIndex == 257 && chunkFields.pressureStepIndex == 257)
+try require(
+  [
+    longFields.pressureOverDensity, longFields.velocityX, longFields.velocityY,
+    longFields.velocityZ,
+  ] == [
+    chunkFields.pressureOverDensity, chunkFields.velocityX, chunkFields.velocityY,
+    chunkFields.velocityZ,
+  ])
+print(
+  "PASS fetched resident Metal forcing: packaged injection, signed source phases and three command batches",
+  device.name)

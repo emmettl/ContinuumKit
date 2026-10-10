@@ -43,3 +43,14 @@ using namespace metal;
         }
 
 // End of exact pinned source-free kernel blocks.
+
+// Exact pinned masked injection kernel; destinations are checked unique by source preparation.
+        kernel void waveInject(device float* p [[buffer(0)]], device const float* q [[buffer(1)]],
+                               device const uint* cells [[buffer(2)]], device const float* weights [[buffer(3)]],
+                               constant uint& step [[buffer(4)]], constant uint& count [[buffer(5)]],
+                               uint i [[thread_position_in_grid]]) {
+            if (i >= count) return;
+            p[cells[i]] += q[step] * weights[i];
+        }
+
+// End of exact pinned masked injection block.
