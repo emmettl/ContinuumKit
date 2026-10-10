@@ -523,3 +523,10 @@ twenty corruption controls reject and coherent wrong coefficients remain finding
 identities, original numerical gaps and retained evidence. Next implement safe
 factorization with explicit dimensions/rank/conditioning and repeated RHS contracts,
 then verify and release before a separate BombCAD reconstruction adoption.
+
+Candidate, 10 October 2026: [PivotedQR](docs/extraction/PIVOTED_QR.md) implements
+bounded immutable column-pivoted Householder factors with lossless power-of-two
+normalization and checked repeated RHS. Its preliminary 741-case exact-native
+cohort passes independent rank, factor, condition, coefficient and residual checks.
+Complete committed two-host package/consumer/corruption gates precede release;
+gas reconstruction migration remains a separate task.
