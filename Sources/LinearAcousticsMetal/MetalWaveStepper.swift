@@ -160,6 +160,21 @@ public final class MetalWaveStepper {
 
   var fieldBufferIdentities: [ObjectIdentifier] { [p, ux, uy, uz].map(ObjectIdentifier.init) }
 
+  // Small grids retain the original narrow shape. Larger grids use more rows/planes
+  // per group without exceeding either field pipeline or any physical device axis.
+  static func fieldThreadgroup(
+    cellCount: Int, pipelineLimit: Int, deviceLimit: MTLSize
+  ) throws -> MTLSize {
+    guard cellCount > 0, pipelineLimit > 0,
+      deviceLimit.width > 0, deviceLimit.height > 0, deviceLimit.depth > 0
+    else { throw MetalWaveError.commandEncodingFailed }
+    let width = min(32, min(pipelineLimit, deviceLimit.width))
+    let height = cellCount < 4_096 ? 1 : min(4, min(pipelineLimit / width, deviceLimit.height))
+    let depth =
+      cellCount < 4_096 ? 1 : min(2, min(pipelineLimit / (width * height), deviceLimit.depth))
+    return MTLSize(width: width, height: height, depth: depth)
+  }
+
   public func advance(steps: Int = 1) throws {
     _ = try advance(steps: steps, source: nil, amplitudes: [], observing: nil)
   }
@@ -357,9 +372,11 @@ public final class MetalWaveStepper {
     var remaining = steps
     let threads = MTLSize(
       width: grid.dimensions.x, height: grid.dimensions.y, depth: grid.dimensions.z)
-    let width = min(
-      32, min(velocity.maxTotalThreadsPerThreadgroup, pressure.maxTotalThreadsPerThreadgroup))
-    let group = MTLSize(width: width, height: 1, depth: 1)
+    let group = try Self.fieldThreadgroup(
+      cellCount: grid.cellCount,
+      pipelineLimit: min(
+        velocity.maxTotalThreadsPerThreadgroup, pressure.maxTotalThreadsPerThreadgroup),
+      deviceLimit: device.maxThreadsPerThreadgroup)
     var abi = Grid(grid)
     while remaining > 0 {
       let batch = min(remaining, 128)
