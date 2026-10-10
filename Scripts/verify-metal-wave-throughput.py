@@ -32,7 +32,10 @@ def verify(root):
   speed=331.3*math.sqrt((20+273.15)/273.15);expected_d=[math.ceil(s/(speed/(case['frequency']*10))) for s in [8,6,3]]
   require(d==expected_d and case['speed']==speed and case['spacing']==[s/k for s,k in zip([8,6,3],d)],'independent physical grid input')
   require(len(case['inside'])==n and all(x==1 for x in case['inside']) and len(case['faces'])==6*n,'complete topology')
-  require(len(case['amplitudes'])==1024 and case['amplitudes']==[(i%7-3)/2048 for i in range(1024)],'complete signed source amplitudes')
+  limit=0.95/(speed*math.sqrt(sum(1/(h*h) for h in case['spacing'])));decimation=1
+  while 2*decimation/48000<=limit:decimation*=2
+  require(case['timeStep']==decimation/48000,'independent pressure clock')
+  require(len(case['amplitudes'])==1024 and [float_bits(v) for v in case['amplitudes']]==[float_bits((i%7-3)/2048) for i in range(1024)],'complete signed source amplitudes')
   require(case['sourceCells']==[n//3,n//3+1] and case['sourceCoefficients']==[0.25,-0.125],'source identity')
   initial=(root/case['initialFieldFile']).read_bytes();require(len(initial)==4*n*4,'initial complete fields')
   require(words(initial)==[float_bits((i%17-8)/512) for i in range(n)]+[0]*(3*n),'independent initial fields')
@@ -41,8 +44,14 @@ def verify(root):
   require(all(math.isfinite(v[0]) for v in struct.iter_unpack('<f',control)),'finite full field snapshot')
   for run in runs:
    require((root/run['fieldFile']).read_bytes()==control,'every final field bit')
+   require(run['frameIndices']==list(range(1,1025)),'every native frame clock')
    require(run['clock']==1024 and run['frames']==runs[0]['frames'] and run['mixed']==runs[0]['mixed'],'complete field/readout/clock parity')
    require(len(run['frames'])==len(run['mixed'])==1024 and all(len(f)==4 for f in run['frames']) and all(len(f)==2 for f in run['mixed']),'all native/mixed frames')
+   last=run['frames'][-1];require(last[2]==2**64-1,'pressure-only channel has absent velocity')
+   def double(word):return struct.unpack('<d',struct.pack('<Q',word))[0]
+   final=list(struct.unpack('<'+'f'*(4*n),control))
+   require(all(double(last[i])==final[case['pressureCells'][i][0]] for i in range(2)),'independent final native pressure readout')
+   require(run['mixed'][-1][0]==last[0] and double(run['mixed'][-1][1])==0.5*double(last[1])-0.5*speed*double(last[3]),'independent terminal mixed output')
    require(all(math.isfinite(run[k]) and run[k]>0 for k in ['wallSeconds','setupSeconds','advanceSeconds','mixingSeconds']),'positive measured phases')
    require(run['wallSeconds']>=run['setupSeconds']+run['advanceSeconds']+run['mixingSeconds']-1e-6,'phase containment')
    if run['mode']=='released':require(run.get('commands') is None and run.get('decodeSeconds') is None,'unmeasured profiling fields explicitly absent')

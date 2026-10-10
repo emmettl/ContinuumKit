@@ -38,6 +38,7 @@ struct Run: Encodable {
   let clock: Int, wallSeconds, setupSeconds, advanceSeconds, mixingSeconds: Double
   let decodeSeconds: Double?
   let commands: [ProfileCommand]?
+  let frameIndices: [Int]
   let frames: [[UInt64]], mixed: [[UInt64]]
 }
 struct Case: Encodable {
@@ -213,7 +214,8 @@ struct Report: Encodable {
               clock: snapshot.pressureStepIndex, wallSeconds: wall, setupSeconds: setup,
               advanceSeconds: advance, mixingSeconds: mixing,
               decodeSeconds: profile?.profileDecodeSeconds,
-              commands: profile?.profileCommands, frames: rawFrames, mixed: mixed))
+              commands: profile?.profileCommands, frameIndices: frames.map(\.pressureStepIndex),
+              frames: rawFrames, mixed: mixed))
         }
       }
       cases.append(

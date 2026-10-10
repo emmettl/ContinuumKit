@@ -22,7 +22,7 @@ signed-source two-cell recurrence guards against consistent zero or malformed wo
 Strict gates require exact fields and histories across every variant/repetition,
 all completed 128-step GPU command intervals, separate phase accounting and exact
 retained source/patch provenance. Unmeasured released command/decode phases remain
-absent, not recorded as zero duration. Nine negative controls reject incomplete or
+absent, not recorded as zero duration. Eleven negative controls reject incomplete or
 altered fields, readouts, clocks, timestamps and shader source.
 
 Measurements are live-host evidence, with shader-cache and scheduling effects. They
