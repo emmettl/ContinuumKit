@@ -1,10 +1,12 @@
 {
-  "applicationAdoption": "separate BombCAD packet adapter and complete remap/reservoir/moving-gas/piston/app gates remain next",
+  "applicationAcceptance": "https://github.com/emmettl/bombcad/blob/92702f7033837d738bcf18d9cf5d68be48049451/docs/packet-adoption-verification.json",
+  "applicationAdoption": "BombCAD PR #23 merged at 92702f7033837d738bcf18d9cf5d68be48049451; packet production copy retired through alias",
   "commit": "f5543e3c336a80ec86868c3f0f245b688dfba148",
   "fetchedExactVersionConsumers": 5,
   "independentReferences": "prescribed extensive packet and external gas-load accounting, physical views, cleanup/failure contracts; existing package/wave/kernel/topology gates retained",
   "packageTests": 247,
   "physicalMini": "https://github.com/emmettl/ContinuumKit/actions/runs/38047656035",
+  "privateEvidence": "Edgerton PR #53 merged at 755a5a89f93c07351959fa156962c5d23c5735e9",
   "publishedAt": "2026-10-10T11:21:09Z",
   "release": "https://github.com/emmettl/ContinuumKit/releases/tag/0.1.0-alpha.14",
   "releaseLogSHA256": "ff7b94643b55e6e3a507473ab61abd1db0002c2ce785da19c8099108f3fb145d",

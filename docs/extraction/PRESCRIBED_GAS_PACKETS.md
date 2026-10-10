@@ -106,3 +106,21 @@ retains the tag object, commit, publication time and complete log hash.
 BombCAD still pins alpha.13 in the completed wall adoption. The following bounded
 packet adapter must separately preserve full remap/reservoir/moving-gas/piston and
 application/package results. It does not move flux, geometry or body integration.
+
+## Completed application adoption
+
+[BombCAD #23](https://github.com/emmettl/bombcad/pull/23) retires its production
+packet calculation through an alias at exact alpha.14. Complete original/shared
+and crossed reports preserve 72,000 moving native captures, 128 reservoir/wall
+intervals, 192 remap replay states and actual wet/dry transitions, alongside complete
+wall/piston/reference records. Independent native completeness/accounting and
+12 wall/13 packet corruption controls pass per host. The mini app/package job passes
+910 tests; local initial timing failures pass in isolation with their original limits.
+
+The historical adiabatic core pin remains unchanged with protected original packet
+bytes; a separate current alias consumer at alpha.14 matches every sample over three
+cases/twelve refinement runs, including repaired mini CI. Initial failures stay retained.
+Concurrent span/tie work is preserved with integrated package/signature and focused
+checks. [Source-specific app proof](https://github.com/emmettl/bombcad/blob/92702f7033837d738bcf18d9cf5d68be48049451/docs/packet-adoption-verification.json)
+records measured sources, repairs and scope; raw evidence remains private in Edgerton
+PR #53. No new core tag is needed for this app-only integration.

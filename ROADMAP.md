@@ -402,3 +402,13 @@ rejection checks. The next application tranche is the BombCAD packet adapter, th
 complete affected remap/reservoir/moving-gas/piston and app/package verification.
 Broader flux, geometry, heterogeneous waves and changing coupled mechanics remain
 independent future tasks.
+
+Completed, 10 October 2026: BombCAD #23 adopts prescribed gas-packet conservation
+at exact alpha.14 and retires its production duplicate. Full native two-host
+remap/moving-reservoir/piston/wall evidence and separate app/package gates pass,
+with source-specific timing/fixture repairs retained. The next bounded gas candidate
+is the paired fractional Euler/wall-flux reference, with its own characteristic/CFL,
+conservation, positivity and shock/acoustic refinement contracts before public API
+extraction. Geometry/topology/time/body coupling remains application-owned; other
+inventory gaps (heterogeneous/2D waves, FFT/fitting and stable mechanics primitives)
+remain independent tasks.

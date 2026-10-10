@@ -129,3 +129,8 @@ releases prescribed gas-packet conservation after exact-tag mini verification of
 247 tests and five fetched version-pinned consumers.
 [Publication proof](docs/extraction/gas-packet-release.json) records identities;
 application adapter and complete integration verification remain the next step.
+
+BombCAD now consumes alpha.14's packet operator after [complete native application
+verification](https://github.com/emmettl/bombcad/pull/23); its production duplicate
+is retired. Application fluxes, geometry, reservoir and body/timestep policy remain
+separate from the shared packet-conservation contract.
