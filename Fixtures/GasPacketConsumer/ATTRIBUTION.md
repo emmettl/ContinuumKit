@@ -1,0 +1,1 @@
+OriginalPacket.swift is the unmodified MIT-licensed authored BombCAD source. See docs/extraction/gas-packet-source.json for immutable revision/blob/SHA-256. The comparison is a source regression oracle; independent conservation references live in Core tests and the output verifier.

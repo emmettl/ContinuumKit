@@ -1,0 +1,31 @@
+{
+  "candidate": "533eb7fcb2501bb4cb20e773f85b04db13a6e311",
+  "completeCasesPerHost": 1637,
+  "completeReportSHA256": "1fb6ebc95d1663fc5bc2f11e194915bd231554b3d2f3a83398b442052d6f186a",
+  "crossHostAndOriginalSharedBitMismatches": 0,
+  "existingReferences": "all previous package, numerical, kernel and topology gates passed",
+  "fetchedConsumers": 5,
+  "independentReferences": [
+    "analytic simultaneous mixing",
+    "mass/momentum/total-energy external ledgers",
+    "Galilean covariance",
+    "uniform wet/dry transport",
+    "adiabatic supplied-work refinement",
+    "exact dry cleanup boundary",
+    "exact rational complete-case balances and derived views"
+  ],
+  "modelTests": 14,
+  "negativeControlsPerHost": 13,
+  "ordinaryMatrixCases": 1620,
+  "packageTests": 247,
+  "physicalMini": "https://github.com/emmettl/ContinuumKit/actions/runs/38046691915",
+  "postconditionRefinement": "initial-pressure error scale uses dimensionally consistent total/kinetic energy over volume; rerun all complete reports and corruption controls on both retained host datasets",
+  "remaining": "reviewed merge, exact-tag release verification and separate BombCAD adoption",
+  "returnedNativeCellsPerHost": 4541,
+  "schemaVersion": 1,
+  "scope": "prescribed packet graph and external gas loads; no flux/geometry/timestep/body integration/empirical blast claim",
+  "sourceAdaptations": "access control, name, explicit public initializers, value conformances and documentation only; ordinary arithmetic/validation/cleanup order retained",
+  "sourceEnvelopes": "same clean committed source hashes on both hosts",
+  "sourceRevision": "8ec83cb524d1e745c0793106b0d78a7269131030",
+  "status": "passed independently verified two-host candidate"
+}

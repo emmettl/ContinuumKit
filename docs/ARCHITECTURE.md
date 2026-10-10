@@ -98,7 +98,12 @@ The optimized box CPU and Edgerton's 2D force/damping contracts remain distinct.
 See the [current inventory](INVENTORY.md#current-four-repository-checkpoint--10-october-2026)
 for the next stable primitive and unresolved model gaps.
 
-A [standalone planar ideal-gas wall reference](extraction/IDEAL_GAS_WALL.md) is now implemented as a bounded
-CompressibleFlow candidate, with independent gas-law/representability tests and an
-optimized public CPU-only consumer. It adds no bulk transport, moving geometry or
-production blast backend. Full source/consumer/mini gates precede release/adoption.
+A [standalone planar ideal-gas wall reference](extraction/IDEAL_GAS_WALL.md) is released at alpha.13
+and adopted in BombCAD after independent gas-law/representability tests, optimized
+public CPU-only consumers and separate complete two-host application gates. It adds
+no bulk transport, moving geometry or production blast backend.
+
+The prescribed gas-packet candidate belongs to CompressibleFlow: immutable extensive
+state and supplied transfer/impulse/work only. Its [contract](extraction/PRESCRIBED_GAS_PACKETS.md)
+keeps constructor/view algebra distinct from checked advance, and documents the dry
+cleanup budget. Geometry, fluxes, timesteps and coupled body policy remain app-owned.

@@ -2,7 +2,7 @@
 
 Shared Swift foundations for RoomCAD, BombCAD and Edgerton. The package contains the existing CAD foundations from BombCAD's SimulationKit and
 RoomCAD's application-independent response interchange, and a checked adiabatic reservoir
-with independent conformance. [`0.1.0-alpha.9`](https://github.com/emmettl/ContinuumKit/releases/tag/0.1.0-alpha.9)
+with independent conformance. [`0.1.0-alpha.13`](https://github.com/emmettl/ContinuumKit/releases/tag/0.1.0-alpha.13)
 is the current prerelease; earlier tags remain available for existing consumers.
 
 | Product / module | Contents | Dependencies |
@@ -14,6 +14,7 @@ is the current prerelease; earlier tags remain available for existing consumers.
 | `DocumentKit` | Versioned project containers, assets, integrity and bounded readers | Foundation, CryptoKit |
 | `ImpulseResponseKit` | Response metadata, float WAV I/O and common channel conditioning | Foundation |
 | `Thermodynamics` | Checked uniform adiabatic reservoir potential and signed work | Foundation |
+| `CompressibleFlow` | Planar ideal-gas wall reference; prescribed gas-packet conservation candidate | Foundation, simd |
 | `LinearAcoustics` | Checked masked CPU updates, pressure forcing and receiver observation; explicit serial/parallel execution | Swift standard library, Dispatch |
 | `LinearAcousticsMetal` | Resident GPU updates, pressure forcing, receiver sampling and bundled kernels | LinearAcoustics, Foundation, Metal |
 | `BenchmarkSupport` | Versioned adiabatic/acoustic cases, analytic references and complete-field reports | Thermodynamics, Foundation |
@@ -29,12 +30,13 @@ From a clean committed candidate:
 CONTINUUMKIT_REQUIRE_METAL=1 bash Scripts/check.sh
 ```
 
-Checks run 22 CAD foundation tests, 12 response interchange tests and 14 adiabatic and 9 axial and 12 boundary and 8 three-dimensional and 7 oblique numerical/conformance tests and an isolated Git consumer in release
-configuration. That consumer imports all ten public libraries, round-trips an archive
-on disk, reads OBJ geometry, checks camera/grid/picking contracts and verifies actual
-offscreen pixels from the fetched package's shader. No path dependency or source alias
-is used. The response checks include independently authored WAV bytes, format/dimension
-compatibility, conditioning history and a disk round trip through the fetched product. CI runs on the physical Mac mini; see [CI operations](docs/CI.md).
+The complete package gate builds and tests all eleven public libraries, then verifies
+five clean optimized Git consumers: all-library CAD/model smoke, CPU waves, resident
+Metal waves, ideal-gas wall reference and prescribed gas packets. CPU-only consumers
+reject Metal/UI framework linkage. Complete reference/source/geometry reports retain
+physical gaps separately from numerical conformance. CI runs on the physical Mac mini;
+see [CI operations](docs/CI.md). The committed candidate is fetched through Git, with
+an exact version requirement at release verification.
 
 The module implementations and shader are copied byte-for-byte. The rendering test
 now fails on missing Metal instead of returning early. Saved identifiers, including
@@ -114,3 +116,10 @@ passed 215 tests and all three exact-version consumers, including actual package
 parallel CPU and CPU-only linkage. [Publication proof](docs/extraction/alpha9-release-verification.json)
 records identities. Complete model reports remain identical to alpha.8 across both
 Macs; application throughput/default and measured acoustic accuracy remain separate.
+
+Alpha.13 releases the [planar ideal-gas wall reference](docs/extraction/IDEAL_GAS_WALL.md),
+independently verified and adopted in BombCAD. The next
+[prescribed gas packet candidate](docs/extraction/PRESCRIBED_GAS_PACKETS.md) retains
+source arithmetic and explicit dry cleanup, with independent conservation references
+and complete native original/shared comparison. Release and application adoption
+remain distinct gates.
