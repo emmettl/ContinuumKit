@@ -87,3 +87,15 @@ records scope/identities. Existing tags are unchanged.
 The release follows all 96 complete exact actual RoomCAD original/shared records
 and original frozen reference bounds. It releases independently useful source-free
 steppers, not production forcing/receiver integration or empirical acoustic accuracy.
+
+## Published prepared pressure-forcing prerelease
+
+`0.1.0-alpha.7` is published from reviewed commit
+`5ee7c90161d1a002d0f5e7cca41cc37cbcd4bbc6`. Its
+[exact-tag release run](https://github.com/emmettl/ContinuumKit/actions/runs/38009833474)
+passed 189 tests and all three optimized consumers resolving the exact semantic
+version, including packaged resident injection/command batches and CPU-only linkage.
+[Publication proof](extraction/alpha7-release-verification.json) records identities.
+Dual-host original-source gates retain 4,176 complete captures with zero runtime
+Float32 mismatches. Receiver/application integration remains separate, and the
+first-order damped forcing limit is unchanged and explicit. Existing tags are immutable.

@@ -1,0 +1,13 @@
+{
+  "actualResidentMetalForcing": true,
+  "exactVersionConsumers": 3,
+  "pinnedSourceCapturesAcrossTwoDevices": 4176,
+  "release": "https://github.com/emmettl/ContinuumKit/releases/tag/0.1.0-alpha.7",
+  "schemaVersion": 1,
+  "scope": "prepared CPU and resident Metal pressure forcing; receiver/application integration and empirical validation remain separate",
+  "status": "published",
+  "tagCommit": "5ee7c90161d1a002d0f5e7cca41cc37cbcd4bbc6",
+  "tests": 189,
+  "verification": "https://github.com/emmettl/ContinuumKit/actions/runs/38009833474",
+  "version": "0.1.0-alpha.7"
+}
