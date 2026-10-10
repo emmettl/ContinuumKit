@@ -1,0 +1,15 @@
+{
+  "adaptations": [
+    "public standalone API and Sendable/Equatable result",
+    "explicit unrepresentable intermediate/output rejection; non-vacuum pressure underflow is not an analytic vacuum",
+    "stable log1p rarefaction only for gamma-1 < 1e-8; ordinary source operation order retained"
+  ],
+  "license": "MIT",
+  "repository": "https://github.com/emmettl/bombcad",
+  "revision": "0b4943def5ec50064d1e44b9ab0ab249c2689b15",
+  "schemaVersion": 1,
+  "scope": "uniform planar calorically perfect ideal-gas wall reference; no bulk transport, geometry, viscosity or moving-wall integration",
+  "sourceGitBlob": "23639df7113fe5164422355f51a023106ab96a6c",
+  "sourcePath": "Sources/BlastCore/IdealGasWallRiemann.swift",
+  "sourceSHA256": "8008860fe21e94a5cc3cd2a1af1eea9d8457f91d6d341bc7a49de69c2a199064"
+}

@@ -368,3 +368,8 @@ separates this completed migration from the remaining model work. Next: a standa
 ideal-gas planar wall-pressure reference, independently verified without app imports.
 Gas transport/moving geometry, heterogeneous/forced 2D waves, FFT/fitting contracts and
 changing coupled mechanics remain their own bounded candidates.
+
+A [standalone planar ideal-gas wall reference](docs/extraction/IDEAL_GAS_WALL.md) is now implemented as a bounded
+CompressibleFlow candidate, with independent gas-law/representability tests and an
+optimized public CPU-only consumer. It adds no bulk transport, moving geometry or
+production blast backend. Full source/consumer/mini gates precede release/adoption.

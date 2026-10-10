@@ -97,3 +97,8 @@ geometry, microphone mixing, cancellation and fresh CPU restart remain explicit.
 The optimized box CPU and Edgerton's 2D force/damping contracts remain distinct.
 See the [current inventory](INVENTORY.md#current-four-repository-checkpoint--10-october-2026)
 for the next stable primitive and unresolved model gaps.
+
+A [standalone planar ideal-gas wall reference](extraction/IDEAL_GAS_WALL.md) is now implemented as a bounded
+CompressibleFlow candidate, with independent gas-law/representability tests and an
+optimized public CPU-only consumer. It adds no bulk transport, moving geometry or
+production blast backend. Full source/consumer/mini gates precede release/adoption.
