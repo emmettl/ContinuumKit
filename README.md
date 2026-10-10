@@ -137,5 +137,6 @@ separate from the shared packet-conservation contract.
 
 The [prescribed Euler flux candidate](docs/extraction/FRACTIONAL_EULER_FLUX.md) adds
 a fixed-gamma CPU reference with independent characteristic, wall-ledger and
-shock/contact/acoustic refinement gates. It remains a candidate until complete
-two-host and fetched-consumer acceptance; BombCAD production adoption is separate.
+shock/contact/acoustic refinement gates. Its complete
+two-host and fetched-consumer acceptance passes; exact-tag release verification
+and BombCAD production adoption remain separate.

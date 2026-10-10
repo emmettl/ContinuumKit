@@ -64,7 +64,7 @@ rho u (u.n) + p n, without changing source arithmetic or tolerances.
 
 A sixth optimized public consumer imports only CompressibleFlow and system math.
 It retains the immutable original with SHA/blob protection and compares complete
-original/shared values and bits, inputs, CFL clocks, failures, ordered wall loads
+original/shared cell values and bits, inputs, CFL clocks, failures, ordered wall loads
 and every native interval. Its declared tree has 486 paired-face trials, 243 moving
 wall trials, ten failures and twelve complete wave histories (751 cases total).
 The matrix varies density, pressure, velocity, normal, cell-volume scale and traces.
@@ -109,3 +109,11 @@ Geometry, topology changes, remapping, reconstruction/limiting, higher-order tim
 integration, body response, reservoirs, scheduling and the production Metal air
 solver remain application-owned. These numerical references do not establish
 empirical blast accuracy or certify arbitrary reconstructed states.
+
+Verified candidate, 10 October 2026: [complete acceptance](euler-flux-verification.json)
+records two-host byte-identical raw reports, 751 cases, 105,149 returned native
+cells and 1,974 intervals. Both full package gates pass 260 tests, actual Metal,
+six optimized fetched consumers and all existing reference/topology checks.
+Fourteen corruption controls reject per host. Separate temporal error halves at
+fixed grid size. Exact-tag verification precedes publication; application adoption
+remains a separate bounded task.
