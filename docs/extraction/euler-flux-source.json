@@ -2,7 +2,8 @@
   "adaptations": [
     "public immutable value types, initializers and methods",
     "PrescribedGasTransport replaces application alias; same released wall primitive",
-    "documentation only; numerical arithmetic and operation order unchanged"
+    "documentation only; numerical arithmetic and operation order unchanged",
+    "explicit public Result initializer with stored-field forwarding only, replacing the source internal memberwise initializer"
   ],
   "blob": "4736724d8bf71dd84ebb8bde48c0b10b7953a474",
   "immutableOriginal": "Fixtures/EulerFluxConsumer/Sources/EulerFluxConsumer/OriginalFlux.swift",

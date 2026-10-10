@@ -425,3 +425,10 @@ refinement, fourteen corruption controls and separate 260-test/six-consumer
 package gates. The next release is alpha.15, subject to the exact-tag physical-mini
 gate. App-owned flux/limiter/group/piston adoption and broader model gaps remain
 separate; no production air solver or changing mechanics has moved.
+
+API compatibility correction, 10 October 2026: the alpha.15 release was cancelled
+before publication because app-owned SSPRK2 callers must assemble a public Euler
+Result. The alpha.15 tag is preserved. An explicit unchecked forwarding initializer
+and independent two-stage ledger test prepare alpha.16; full two-host/exact-tag
+gates precede release, then separate bounded application adoption. The operator's
+numerical arithmetic is unchanged.

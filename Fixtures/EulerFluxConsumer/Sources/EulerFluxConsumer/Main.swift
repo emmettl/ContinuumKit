@@ -107,7 +107,11 @@ enum Backend {
             cell: $0.cell, normal: vector($0.normal), area: $0.area, velocity: vector($0.velocity),
             state: $0.state?.cell)
         }, duration: dt, cfl: cfl)
-      return (r.cells, r.wallImpulses, r.wallWork)
+      // App-owned higher-order schemes assemble matching extensive/load records.
+      // Exercise the public assembly boundary from this separately fetched module.
+      let assembled = CompressibleFlow.FractionalEulerFlux.Result(
+        cells: r.cells, wallImpulses: r.wallImpulses, wallWork: r.wallWork)
+      return (assembled.cells, assembled.wallImpulses, assembled.wallWork)
     }
   }
   func interval(
