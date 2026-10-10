@@ -433,3 +433,8 @@ Result. An explicit unchecked forwarding initializer
 and independent two-stage ledger test prepare alpha.16; full two-host/exact-tag
 gates precede release, then separate bounded application adoption. The operator's
 numerical arithmetic is unchanged.
+
+Verified compatibility candidate, 10 October 2026: public unchecked Euler result
+assembly passes two-host 261-test/six-consumer gates, with all 751 native cases
+unchanged. Alpha.15 publication is retained; alpha.16 exact-tag verification then
+separate BombCAD flux/limiter/group/piston adoption are the next bounded steps.

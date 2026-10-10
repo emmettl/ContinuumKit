@@ -2,7 +2,7 @@
 
 Shared Swift foundations for RoomCAD, BombCAD and Edgerton. The package contains the existing CAD foundations from BombCAD's SimulationKit and
 RoomCAD's application-independent response interchange, and a checked adiabatic reservoir
-with independent conformance. [`0.1.0-alpha.14`](https://github.com/emmettl/ContinuumKit/releases/tag/0.1.0-alpha.14)
+with independent conformance. [`0.1.0-alpha.15`](https://github.com/emmettl/ContinuumKit/releases/tag/0.1.0-alpha.15)
 is the current prerelease; earlier tags remain available for existing consumers.
 
 | Product / module | Contents | Dependencies |
@@ -14,7 +14,7 @@ is the current prerelease; earlier tags remain available for existing consumers.
 | `DocumentKit` | Versioned project containers, assets, integrity and bounded readers | Foundation, CryptoKit |
 | `ImpulseResponseKit` | Response metadata, float WAV I/O and common channel conditioning | Foundation |
 | `Thermodynamics` | Checked uniform adiabatic reservoir potential and signed work | Foundation |
-| `CompressibleFlow` | Planar ideal-gas wall reference; prescribed gas-packet conservation | Foundation, simd |
+| `CompressibleFlow` | Planar ideal-gas wall, prescribed gas packets and paired Euler reference | Foundation, simd |
 | `LinearAcoustics` | Checked masked CPU updates, pressure forcing and receiver observation; explicit serial/parallel execution | Swift standard library, Dispatch |
 | `LinearAcousticsMetal` | Resident GPU updates, pressure forcing, receiver sampling and bundled kernels | LinearAcoustics, Foundation, Metal |
 | `BenchmarkSupport` | Versioned adiabatic/acoustic cases, analytic references and complete-field reports | Thermodynamics, Foundation |
@@ -31,8 +31,8 @@ CONTINUUMKIT_REQUIRE_METAL=1 bash Scripts/check.sh
 ```
 
 The complete package gate builds and tests all eleven public libraries, then verifies
-five clean optimized Git consumers: all-library CAD/model smoke, CPU waves, resident
-Metal waves, ideal-gas wall reference and prescribed gas packets. CPU-only consumers
+six clean optimized Git consumers: all-library CAD/model smoke, CPU waves, resident
+Metal waves, ideal-gas wall reference, prescribed gas packets and paired Euler flux. CPU-only consumers
 reject Metal/UI framework linkage. Complete reference/source/geometry reports retain
 physical gaps separately from numerical conformance. CI runs on the physical Mac mini;
 see [CI operations](docs/CI.md). The committed candidate is fetched through Git, with
@@ -137,6 +137,7 @@ separate from the shared packet-conservation contract.
 
 The [prescribed Euler flux candidate](docs/extraction/FRACTIONAL_EULER_FLUX.md) adds
 a fixed-gamma CPU reference with independent characteristic, wall-ledger and
-shock/contact/acoustic refinement gates. Its complete
-two-host and fetched-consumer acceptance passes; exact-tag release verification
-and BombCAD production adoption remain separate.
+shock/contact/acoustic refinement gates. Alpha.15 passes its exact-tag
+release gate and is published. The public Result-assembly compatibility candidate
+for app-owned SSPRK2 passes complete two-host 261-test/six-consumer verification;
+alpha.16 exact-tag release and BombCAD adoption remain separate gates.

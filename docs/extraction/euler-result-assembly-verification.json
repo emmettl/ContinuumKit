@@ -1,0 +1,20 @@
+{
+  "API": "public unchecked Result(cells:wallImpulses:wallWork:) for caller-owned SSPRK2 composition",
+  "alpha15": "successfully published at 2026-10-10T13:22:47Z before cancellation attempt; immutable",
+  "candidate": "838863aa21f6e09bafcc66a632b72b704cf68a6f",
+  "focusedEulerTests": 14,
+  "mini": "https://github.com/emmettl/ContinuumKit/actions/runs/38055831731",
+  "nativeCases": 751,
+  "nativeIntervals": 1974,
+  "negativeControlsPerHost": 14,
+  "nextRelease": "0.1.0-alpha.16",
+  "numericalSource": "unchanged normalized frozen operator; explicit stored-field forwarding initializer only",
+  "optimizedFetchedConsumers": 6,
+  "packageTests": 261,
+  "rawReportIdentity": "byte-identical original/shared/across hosts and unchanged from alpha.15 candidate",
+  "rawReportSHA256": "79a86e6181e179339c7458a987c8adb5a35364951e406e07522f76be2871a471",
+  "returnedNativeCells": 105149,
+  "schemaVersion": 1,
+  "scope": "no numerical operator, geometry, reconstruction or integration-policy changes",
+  "status": "verified public Result assembly candidate; exact-tag publication and application adoption pending"
+}

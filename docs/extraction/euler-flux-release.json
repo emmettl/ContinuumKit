@@ -1,0 +1,20 @@
+{
+  "applicationAdoption": "pending alpha.16 public Result assembly compatibility and separate app integration",
+  "attemptedCancellation": "run was already complete; alpha.15 successfully published and is preserved",
+  "commit": "5e784115a08aebb6b3380dbf0b51fe9f7c34f71e",
+  "fetchedExactVersionConsumers": 6,
+  "nativeCases": 751,
+  "nativeIntervals": 1974,
+  "negativeControls": 14,
+  "packageTests": 260,
+  "physicalMini": "https://github.com/emmettl/ContinuumKit/actions/runs/38055152719",
+  "privateEvidence": "https://github.com/emmettl/edgerton/pull/56",
+  "publishedAt": "2026-10-10T13:22:47Z",
+  "rawReportMatchesTwoHostCandidate": true,
+  "release": "https://github.com/emmettl/ContinuumKit/releases/tag/0.1.0-alpha.15",
+  "returnedNativeCells": 105149,
+  "schemaVersion": 1,
+  "scope": "prescribed fixed-gamma Euler reference direct steps, not production air/geometry/body policy or empirical blast validation",
+  "tag": "0.1.0-alpha.15",
+  "tagObject": "5ce6cad8640cc1df0b27339b712ddfd28ceda761"
+}

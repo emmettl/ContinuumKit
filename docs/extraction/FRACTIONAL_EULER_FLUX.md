@@ -130,3 +130,10 @@ unchanged and verified for direct steps. Inspection found that BombCAD's tube/gr
 SSPRK2 callers additionally need a public Result initializer. Numerical operator bodies and earlier native evidence
 remain unchanged. Alpha.16 is the corrected API candidate and requires complete
 two-host and exact-tag gates before publication and adoption.
+
+The [result assembly acceptance](euler-result-assembly-verification.json) now passes
+261 package tests, six optimized public consumers and all existing reference gates
+on both hosts. All 751 complete native cases remain byte-identical to alpha.15.
+The [alpha.15 publication record](euler-flux-release.json) retains the completed
+release and compatibility follow-up. Alpha.16 exact-tag verification precedes use
+by the app-owned SSPRK2 wrappers.
