@@ -2,7 +2,7 @@
 
 Shared Swift foundations for RoomCAD, BombCAD and Edgerton. The package contains the existing CAD foundations from BombCAD's SimulationKit and
 RoomCAD's application-independent response interchange, and a checked adiabatic reservoir
-with independent conformance. [`0.1.0-alpha.13`](https://github.com/emmettl/ContinuumKit/releases/tag/0.1.0-alpha.13)
+with independent conformance. [`0.1.0-alpha.14`](https://github.com/emmettl/ContinuumKit/releases/tag/0.1.0-alpha.14)
 is the current prerelease; earlier tags remain available for existing consumers.
 
 | Product / module | Contents | Dependencies |
@@ -14,7 +14,7 @@ is the current prerelease; earlier tags remain available for existing consumers.
 | `DocumentKit` | Versioned project containers, assets, integrity and bounded readers | Foundation, CryptoKit |
 | `ImpulseResponseKit` | Response metadata, float WAV I/O and common channel conditioning | Foundation |
 | `Thermodynamics` | Checked uniform adiabatic reservoir potential and signed work | Foundation |
-| `CompressibleFlow` | Planar ideal-gas wall reference; prescribed gas-packet conservation candidate | Foundation, simd |
+| `CompressibleFlow` | Planar ideal-gas wall reference; prescribed gas-packet conservation | Foundation, simd |
 | `LinearAcoustics` | Checked masked CPU updates, pressure forcing and receiver observation; explicit serial/parallel execution | Swift standard library, Dispatch |
 | `LinearAcousticsMetal` | Resident GPU updates, pressure forcing, receiver sampling and bundled kernels | LinearAcoustics, Foundation, Metal |
 | `BenchmarkSupport` | Versioned adiabatic/acoustic cases, analytic references and complete-field reports | Thermodynamics, Foundation |
@@ -123,3 +123,9 @@ independently verified and adopted in BombCAD. The next
 source arithmetic and explicit dry cleanup, with independent conservation references
 and complete native original/shared comparison. Release and application adoption
 remain distinct gates.
+
+[Alpha.14](https://github.com/emmettl/ContinuumKit/releases/tag/0.1.0-alpha.14)
+releases prescribed gas-packet conservation after exact-tag mini verification of
+247 tests and five fetched version-pinned consumers.
+[Publication proof](docs/extraction/gas-packet-release.json) records identities;
+application adapter and complete integration verification remain the next step.

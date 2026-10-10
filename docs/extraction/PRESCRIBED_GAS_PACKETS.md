@@ -1,4 +1,4 @@
-# Prescribed gas packet conservation candidate
+# Prescribed gas packet conservation
 
 `CompressibleFlow.PrescribedGasTransport` is an immutable CPU value API for one
 simultaneous extensive-state update. It supplies no Euler/Riemann flux, geometry,
@@ -92,3 +92,17 @@ The final postcondition uses dimensionally consistent energy/volume pressure err
 scales; both retained datasets and negative controls were reverified. No operator,
 fixture or test arithmetic changes in this evidence checkpoint. Exact-tag release
 and application adoption remain separate. Complete raw proof stays private in Edgerton.
+
+## Published prerelease
+
+[0.1.0-alpha.14](https://github.com/emmettl/ContinuumKit/releases/tag/0.1.0-alpha.14)
+points to f5543e3c336a80ec86868c3f0f245b688dfba148. Its
+[exact-tag physical-mini gate](https://github.com/emmettl/ContinuumKit/actions/runs/38047656035)
+passes 247 tests, all five optimized consumers resolving this precise semantic version,
+CPU-only linkage, complete 1,637-case conformance/independent accounting and thirteen
+rejection controls before publication. [Publication record](gas-packet-release.json)
+retains the tag object, commit, publication time and complete log hash.
+
+BombCAD still pins alpha.13 in the completed wall adoption. The following bounded
+packet adapter must separately preserve full remap/reservoir/moving-gas/piston and
+application/package results. It does not move flux, geometry or body integration.

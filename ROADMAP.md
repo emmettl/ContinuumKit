@@ -394,3 +394,11 @@ Implemented candidate, 10 October 2026: the [prescribed gas packet operator](doc
 now has a public CompressibleFlow value API and independent conservation/cleanup/failure
 tests. Immutable-source and complete public-consumer gates precede release; application
 adoption remains separate. No Euler flux, topology, geometry or timestep logic moves.
+
+Published, 10 October 2026: alpha.14 releases the prescribed gas-packet conservation
+operator after the exact-tag physical-mini gate passes 247 tests and five optimized
+version-pinned consumers, including complete original/shared rational-ledger and
+rejection checks. The next application tranche is the BombCAD packet adapter, then
+complete affected remap/reservoir/moving-gas/piston and app/package verification.
+Broader flux, geometry, heterogeneous waves and changing coupled mechanics remain
+independent future tasks.
