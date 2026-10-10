@@ -164,3 +164,8 @@ RoomCAD now consumes alpha.17's FFT primitive after [complete application adopti
 across protected original/shared and both Macs. Both hosts pass 192 tests, actual
 Metal, packaging/signatures/snapshots and complete CPU/Metal/thin-probe gates.
 Application band/fitting/measured-data and audition policy remain explicit.
+
+The implemented [stabilized affine fitting candidate](docs/extraction/AFFINE_LEAST_SQUARES.md)
+adds `Numerics` with a checked origin-based line and independent exact-native
+references. It addresses the audited raw-moment cancellation gap without moving
+acoustic window/noise or material-calibration policy. It is not released/adopted yet.
