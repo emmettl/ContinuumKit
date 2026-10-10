@@ -17,7 +17,9 @@ let fields = WaveInitialFields(
   pressureOverDensity: [1, 0, 100, 100, 100, 100, 100, 100],
   velocityX: zero, velocityY: zero, velocityZ: zero)
 guard let device = MTLCreateSystemDefaultDevice() else { throw ConsumerError.failed }
-let stepper = try MetalWaveStepper(device: device, grid: grid, initialFields: fields)
+let context = try MetalWaveContext(device: device)
+try require(context.deviceName == device.name && context.deviceRegistryID == device.registryID)
+let stepper = try MetalWaveStepper(context: context, grid: grid, initialFields: fields)
 let saved = try stepper.snapshot()
 try stepper.advance()
 let first = try stepper.snapshot()
@@ -26,7 +28,7 @@ try require(first.velocityX == [0.125, 0, 0, 0, 0, 0, 0, 0])
 try require(first.pressureTime == 0.125 && first.velocityTime == 0.0625)
 try stepper.advance(steps: 15)
 try require(saved.pressureOverDensity[0] == 1 && saved.pressureStepIndex == 0)
-let split = try MetalWaveStepper(device: device, grid: grid, initialFields: fields)
+let split = try MetalWaveStepper(context: context, grid: grid, initialFields: fields)
 try split.advance(steps: 7)
 try split.advance(steps: 9)
 let a = try stepper.snapshot()
@@ -39,7 +41,7 @@ print(
 
 let cpu = try CPUWaveStepper(grid: grid, initialFields: fields)
 try cpu.advance(steps: 257)
-let gpu = try MetalWaveStepper(device: device, grid: grid, initialFields: fields)
+let gpu = try MetalWaveStepper(context: context, grid: grid, initialFields: fields)
 try gpu.advance(steps: 257)
 let cpuResult = try cpu.snapshot()
 let gpuResult = try gpu.snapshot()
@@ -54,7 +56,7 @@ print(
   "PASS actual packaged wave Metal kernels, multiple command batches and CPU/native fields:",
   device.name)
 
-let forced = try MetalWaveStepper(device: device, grid: grid, initialFields: fields)
+let forced = try MetalWaveStepper(context: context, grid: grid, initialFields: fields)
 let source = try forced.prepareSource(
   PreparedPressureSource(grid: grid, cellIndices: [1], coefficients: [0.5]))
 try forced.advance(source: source, amplitudes: [2, -1])
@@ -65,9 +67,9 @@ try require(forcedFields.velocityX == [0.12109375, 0, 0, 0, 0, 0, 0, 0])
 try require(
   forcedFields.pressureStepIndex == 2 && forcedFields.pressureTime == 0.25
     && forcedFields.velocityTime == 0.1875)
-let longGPU = try MetalWaveStepper(device: device, grid: grid, initialFields: fields)
+let longGPU = try MetalWaveStepper(context: context, grid: grid, initialFields: fields)
 let longPlan = try longGPU.prepareSource(source.source)
-let chunkGPU = try MetalWaveStepper(device: device, grid: grid, initialFields: fields)
+let chunkGPU = try MetalWaveStepper(context: context, grid: grid, initialFields: fields)
 let amplitudes = (0..<257).map { Float($0 % 7 - 3) / 128 }
 try longGPU.advance(source: longPlan, amplitudes: amplitudes)
 try chunkGPU.advance(source: longPlan, amplitudes: Array(amplitudes.prefix(127)))
@@ -106,3 +108,22 @@ try require(
 print(
   "PASS fetched resident Metal observation: pressure-only kernel, owned history and lookahead clocks",
   device.name)
+
+// The compatible convenience API compiles its own context. Its complete forced fields
+// remain identical to the explicitly reused context, without shared mutable run state.
+let independent = try MetalWaveStepper(device: device, grid: grid, initialFields: fields)
+let independentSource = try independent.prepareSource(source.source)
+try independent.advance(source: independentSource, amplitudes: amplitudes)
+let independentFields = try independent.snapshot()
+try require(
+  [
+    independentFields.pressureOverDensity, independentFields.velocityX,
+    independentFields.velocityY, independentFields.velocityZ,
+  ] == [
+    longFields.pressureOverDensity, longFields.velocityX, longFields.velocityY,
+    longFields.velocityZ,
+  ])
+try require(independentFields.pressureStepIndex == 257 && forced.pressureStepIndex == 4)
+print(
+  "PASS fetched explicit reusable Metal context: independent fields, source/receiver storage and native clocks",
+  context.deviceName)
