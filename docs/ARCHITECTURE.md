@@ -56,7 +56,7 @@ Specialized gel, concrete and room-acoustic policies remain with their applicati
 until a concrete reusable contract is established. Shared location alone does not
 make different physical assumptions interchangeable.
 
-## Linear-wave candidate boundary
+## Linear-wave extraction history
 
 The [proposed complete-step contract](extraction/LINEAR_WAVE_UPDATE.md) bounds the
 next extraction to RoomCAD's source-free masked update. An owned serial CPU stepper
@@ -67,10 +67,17 @@ policy and application scheduling stay in RoomCAD. Edgerton's 2D physical-pressu
 force/damping model needs a separate adapter. No products or releases are added by
 this design checkpoint.
 
-The first [serial CPU implementation](extraction/LINEAR_WAVE_CPU.md) is now an
-unreleased `LinearAcoustics` candidate, with no framework/target dependencies.
-Metal and application adoption remain subsequent tranches.
+The first [serial CPU implementation](extraction/LINEAR_WAVE_CPU.md) introduced the
+framework-free `LinearAcoustics` product. CPU and Metal updates were released in
+alpha.6, prepared forcing in alpha.7 and observations/lookahead in alpha.8. Production
+application loop adoption remains subject to its own numerical and timing gates.
 
 The separate [Metal wave backend](extraction/LINEAR_WAVE_METAL.md) owns resident
 tracked buffers, synchronous complete-batch clocks and packaged source-free kernels.
 Shared initial-field validation remains in the framework-free CPU module.
+
+Released sparse source and receiver plans use the exact prepared grid identity.
+Metal mappings also bind to the physical device; mutable output/field state stays
+stepper-owned. Bounded histories retain backend arithmetic and complete native clocks.
+Geometry, microphone patterns/mixing, longer history, cancellation and GPU abandonment
+remain application-owned. See [alpha.8 publication proof](extraction/alpha8-release-verification.json).

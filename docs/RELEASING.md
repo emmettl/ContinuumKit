@@ -99,3 +99,18 @@ version, including packaged resident injection/command batches and CPU-only link
 Dual-host original-source gates retain 4,176 complete captures with zero runtime
 Float32 mismatches. Receiver/application integration remains separate, and the
 first-order damped forcing limit is unchanged and explicit. Existing tags are immutable.
+
+## Published receiver-observation prerelease
+
+`0.1.0-alpha.8` is published from reviewed merge commit
+`2aecacbc3da082382cb11639d67af0ea37583272`. Its source/tests/fixtures/scripts match
+verified candidate `ac0e8dbde2bc7dbfdd68eba8619f14c8e8f92735`. The
+[exact-tag release workflow](https://github.com/emmettl/ContinuumKit/actions/runs/38014077324)
+passed 207 tests, including 38 CPU and 28 actual-Metal tests, all three optimized
+exact-version consumers, CPU-only linkage and fetched resident observations before
+publication. [Publication proof](extraction/alpha8-release-verification.json) records
+identities. Each backend's dual-host source gate retains 4,128 complete captures and
+12,336 mixed samples with zero runtime bit mismatches. Native arithmetic, explicit
+lookahead and bounded owned histories are released; production loop adoption,
+performance acceptance and empirical acoustic validation remain separate gates.
+Existing tags are unchanged.

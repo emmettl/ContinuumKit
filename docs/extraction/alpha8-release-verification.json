@@ -1,0 +1,23 @@
+{
+  "actualMetalTests": 28,
+  "annotatedTagObject": "bfd0462025f643d72d354cd6cb08264afc101fd7",
+  "cpuNoMetalUIGuard": "passed",
+  "cpuTests": 38,
+  "exactVersionConsumers": 3,
+  "fetchedCPUAndMetalObservations": "passed",
+  "release": "https://github.com/emmettl/ContinuumKit/releases/tag/0.1.0-alpha.8",
+  "schemaVersion": 1,
+  "scope": "prepared CPU and resident Metal receiver sampling, owned bounded histories and explicit one-frame lookahead; production loop migration and empirical validation remain separate",
+  "sourceEvidence": {
+    "capturesPerBackendAcrossTwoDevices": 4128,
+    "cpu": "linear-wave-observation-cpu-verification.json",
+    "metal": "linear-wave-observation-metal-verification.json",
+    "mixedSamplesPerBackendAcrossTwoDevices": 12336,
+    "runtimeBitMismatches": 0
+  },
+  "status": "published",
+  "tagCommit": "2aecacbc3da082382cb11639d67af0ea37583272",
+  "tests": 207,
+  "verification": "https://github.com/emmettl/ContinuumKit/actions/runs/38014077324",
+  "version": "0.1.0-alpha.8"
+}

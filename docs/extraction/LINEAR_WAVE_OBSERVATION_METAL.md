@@ -1,7 +1,7 @@
 # Resident Metal receiver sampling and bounded histories
 
-Status: implemented candidate, unreleased. Alpha.7 remains the published forcing
-release. Receiver/application geometry, patterns, mixing, cancellation and longer
+Status: published in `0.1.0-alpha.8`, following the resident checkpoint below and
+[exact-tag mini verification](alpha8-release-verification.json). Receiver/application geometry, patterns, mixing, cancellation and longer
 history remain caller-owned. This tranche extends the verified CPU observation plan
 and neutral lookahead with the original GPU arithmetic and explicit device resources.
 
