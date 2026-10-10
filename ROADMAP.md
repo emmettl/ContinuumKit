@@ -438,3 +438,12 @@ Verified compatibility candidate, 10 October 2026: public unchecked Euler result
 assembly passes two-host 261-test/six-consumer gates, with all 751 native cases
 unchanged. Alpha.15 publication is retained; alpha.16 exact-tag verification then
 separate BombCAD flux/limiter/group/piston adoption are the next bounded steps.
+
+Published, 10 October 2026: alpha.16 releases public unchecked Euler result
+assembly after the exact-tag physical-mini gate passes 261 tests, actual Metal,
+six version-pinned consumers and unchanged native/refinement reports. The next
+application tranche retires BombCAD's local Euler calculation through its true
+alias, then verifies complete affected limiter/group/tube/moving-gas/piston
+histories and separate full-app/package checks. Geometry, reconstruction, higher-order
+time/body policy and broader heterogeneous-wave/FFT/fitting/mechanics gaps remain
+independent tasks. Earlier alpha.15 remains available unchanged.

@@ -180,3 +180,15 @@ passes 260 tests, actual Metal and six optimized exact-version consumers. Comple
 The verified direct-step release remains unchanged. Application-owned SSPRK2
 additionally requires a public Result initializer; that correction prepares
 alpha.16 after complete two-host and separate exact-tag verification.
+
+## Published public Euler result assembly
+
+Alpha.16 publishes the forwarding initializer from reviewed commit
+`1977b38a66382533be902350b40e7084a2d1e9ca`. Its
+[exact-tag workflow](https://github.com/emmettl/ContinuumKit/actions/runs/38056735711)
+passes 261 tests, actual Metal and six optimized exact-version consumers before
+publication. Complete 751-case native reports remain byte-identical to the verified
+two-host assembly candidate; all fourteen corruption controls reject.
+[Publication proof](extraction/alpha16-release-verification.json) records scope and
+identity. The constructor leaves state/load validity and multi-stage policy with
+the caller. BombCAD adoption remains separate; earlier tags are immutable.

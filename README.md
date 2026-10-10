@@ -2,7 +2,7 @@
 
 Shared Swift foundations for RoomCAD, BombCAD and Edgerton. The package contains the existing CAD foundations from BombCAD's SimulationKit and
 RoomCAD's application-independent response interchange, and a checked adiabatic reservoir
-with independent conformance. [`0.1.0-alpha.15`](https://github.com/emmettl/ContinuumKit/releases/tag/0.1.0-alpha.15)
+with independent conformance. [`0.1.0-alpha.16`](https://github.com/emmettl/ContinuumKit/releases/tag/0.1.0-alpha.16)
 is the current prerelease; earlier tags remain available for existing consumers.
 
 | Product / module | Contents | Dependencies |
@@ -138,6 +138,6 @@ separate from the shared packet-conservation contract.
 The [prescribed Euler flux candidate](docs/extraction/FRACTIONAL_EULER_FLUX.md) adds
 a fixed-gamma CPU reference with independent characteristic, wall-ledger and
 shock/contact/acoustic refinement gates. Alpha.15 passes its exact-tag
-release gate and is published. The public Result-assembly compatibility candidate
-for app-owned SSPRK2 passes complete two-host 261-test/six-consumer verification;
-alpha.16 exact-tag release and BombCAD adoption remain separate gates.
+release gate and is published. Alpha.16 releases public Result assembly
+for app-owned SSPRK2 after complete two-host and exact-tag 261-test/six-consumer
+verification. BombCAD adoption remains a separate integration gate.
