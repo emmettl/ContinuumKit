@@ -2,7 +2,7 @@
 
 Shared Swift foundations for RoomCAD, BombCAD and Edgerton. The package contains the existing CAD foundations from BombCAD's SimulationKit and
 RoomCAD's application-independent response interchange, and a checked adiabatic reservoir
-with independent conformance. [`0.1.0-alpha.6`](https://github.com/emmettl/ContinuumKit/releases/tag/0.1.0-alpha.6)
+with independent conformance. [`0.1.0-alpha.7`](https://github.com/emmettl/ContinuumKit/releases/tag/0.1.0-alpha.7)
 is the current prerelease; earlier tags remain available for existing consumers.
 
 | Product / module | Contents | Dependencies |
@@ -14,8 +14,8 @@ is the current prerelease; earlier tags remain available for existing consumers.
 | `DocumentKit` | Versioned project containers, assets, integrity and bounded readers | Foundation, CryptoKit |
 | `ImpulseResponseKit` | Response metadata, float WAV I/O and common channel conditioning | Foundation |
 | `Thermodynamics` | Checked uniform adiabatic reservoir potential and signed work | Foundation |
-| `LinearAcoustics` | Checked source-free serial masked wave update | Swift standard library only |
-| `LinearAcousticsMetal` | Resident source-free GPU wave stepper and bundled kernels | LinearAcoustics, Foundation, Metal |
+| `LinearAcoustics` | Checked serial masked wave update and prepared pressure forcing | Swift standard library only |
+| `LinearAcousticsMetal` | Resident GPU wave updates, sparse pressure forcing and bundled kernels | LinearAcoustics, Foundation, Metal |
 | `BenchmarkSupport` | Versioned adiabatic/acoustic cases, analytic references and complete-field reports | Thermodynamics, Foundation |
 
 Requires Swift 6.4 and macOS 15 or later. CPU products do not depend on SceneRender.
@@ -90,11 +90,11 @@ mini verification](https://github.com/emmettl/ContinuumKit/actions/runs/38003236
 readiness](docs/extraction/SHARED_WAVE_READINESS.md) includes 96 complete exact
 original/shared records. Production source/receiver integration is separate.
 
-The unreleased [CPU pressure-forcing candidate](docs/extraction/LINEAR_WAVE_FORCING_CPU.md)
+The released [CPU pressure-forcing API](docs/extraction/LINEAR_WAVE_FORCING_CPU.md)
 adds checked sparse source plans without application imports. Its declared phase order,
 independent work/refinement references and legacy damped-forcing accuracy limit are
-separate from the source-free `0.1.0-alpha.6` release.
+included in `0.1.0-alpha.7` after exact-tag verification.
 
-The unreleased [resident Metal forcing candidate](docs/extraction/LINEAR_WAVE_FORCING_METAL.md)
+The released [resident Metal forcing API](docs/extraction/LINEAR_WAVE_FORCING_METAL.md)
 uses the checked CPU source description with opaque device mappings and 128-sample
 staging. It preserves original GPU arithmetic and explicit completion/snapshot semantics.

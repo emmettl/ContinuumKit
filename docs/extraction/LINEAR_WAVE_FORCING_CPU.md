@@ -1,7 +1,7 @@
-# Prepared masked pressure forcing — CPU candidate
+# Prepared masked pressure forcing — CPU
 
-Status: implemented CPU candidate, unreleased. `0.1.0-alpha.6` remains the source-free
-release. Metal forcing, receiver encoding and production loop adoption are separate
+Status: released in `0.1.0-alpha.7`. The earlier `0.1.0-alpha.6` remains available
+with its source-free scope. Metal forcing, receiver encoding and production loop adoption are separate
 tranches in [the integration outline](WAVE_FORCING_AND_OBSERVATION.md).
 
 `PreparedPressureSource` contains immutable ordered cell indices and Float coefficients.
@@ -101,3 +101,6 @@ configurations. [Aggregate verification](linear-wave-forcing-cpu-verification.js
 records identities and scope. Full raw reports, exact pinned generated wrappers,
 resolved dependencies, environment and independent/mini logs are retained privately
 in Edgerton. This subsequent checkpoint adds documentation only.
+
+[Exact-tag publication](alpha7-release-verification.json) passed all 189 tests and
+three optimized consumers resolving the exact version before publication.

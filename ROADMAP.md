@@ -264,3 +264,10 @@ Resident Metal forcing candidate: [opaque uploaded mappings and bounded amplitud
 add the pinned injection kernel after pressure evolution. Actual-device reference,
 source-work, residency, batch/clock and failure gates precede merge/release. Source
 sampling, directional-microphone lookahead and application lifetime remain later slices.
+
+Published: `0.1.0-alpha.7` exposes prepared CPU and resident Metal pressure forcing
+after dual-host source equivalence and exact-tag mini verification. The next model
+interface gap is receiver observation/encoding, including backend-specific precision,
+directional-microphone lookahead and bounded history/lifetime. Production RoomCAD
+loop adoption follows those independent gates; the legacy damped forcing accuracy
+limit remains an explicitly measured model scope.

@@ -1,6 +1,6 @@
-# Resident masked pressure forcing — Metal candidate
+# Resident masked pressure forcing — Metal
 
-Status: implemented candidate, unreleased. The published alpha.6 remains source-free;
+Status: released in `0.1.0-alpha.7`. The earlier alpha.6 remains source-free;
 CPU forcing and this separate device-backed tranche precede receiver/application
 integration. The [CPU forcing contract](LINEAR_WAVE_FORCING_CPU.md) supplies the immutable
 unique active-cell mapping, physical scaling ownership and independent references.
@@ -84,3 +84,6 @@ require full report/cardinality/dependency scope; seven adversarial controls rej
 missing or corrupted evidence. [Aggregate verification](linear-wave-forcing-metal-verification.json)
 records identities. Full raw reports/wrappers, environments, dependencies and all
 logs are retained privately in Edgerton. The final checkpoint changes documentation only.
+
+[Exact-tag publication](alpha7-release-verification.json) passed all 189 tests and
+three optimized consumers resolving the exact version before publication.
