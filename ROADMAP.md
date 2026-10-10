@@ -506,3 +506,10 @@ current-source audit: through-origin material projection and weighted spatial QR
 are distinct numerical contracts. Heterogeneous/2D waves and changing mechanics
 remain separate model gaps; no empirical acoustic accuracy claim or new Core tag
 is implied by this adoption.
+
+Next bounded fitting work is the [weighted QR plan](docs/extraction/WEIGHTED_QR_PLAN.md).
+Its protected current-source audit separates finite matrix/RHS arithmetic from
+gas geometry, mean preservation, fallback, limiting and EOS policy. Exact-native
+references expose unsafe norm scaling and accepted near-dependent inaccuracies;
+the future primitive needs explicit rank/conditioning and dimension contracts.
+No weighted solver product, application migration or release is added by the audit.

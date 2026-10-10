@@ -174,3 +174,8 @@ consumers, with unchanged complete 300-case fitting records.
 [Publication proof](docs/extraction/alpha18-release-verification.json) records immutable
 identities. [RoomCAD adoption](docs/extraction/ROOMCAD_AFFINE_ADOPTION_PLAN.md) is complete,
 with source-bound full policy/accuracy evidence and both-host application checks.
+
+The next fitting tranche is a [protected weighted QR source audit](Fixtures/WeightedQRAudit/README.md)
+and [bounded stabilization plan](docs/extraction/WEIGHTED_QR_PLAN.md). It records
+complete native factors and independent exact references before deciding the
+shared solver contract; gas reconstruction and admissibility remain model-owned.

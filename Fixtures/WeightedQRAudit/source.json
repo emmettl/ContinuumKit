@@ -1,0 +1,22 @@
+{
+  "repository": "https://github.com/emmettl/bombcad",
+  "revision": "5f2e50dcef5a5adcde3d3c4cb811426e6de2fe6c",
+  "schemaVersion": 1,
+  "sources": {
+    "Sources/BlastCore/ConservedGasReconstruction.swift": {
+      "gitBlob": "3e2b5dffd343f26dd0957ac76fdbe3841fcc444a",
+      "sha256": "55ccef8419142735965d7b19b7f961f903546f3bc1d4a0684893b6fd6df59d72",
+      "snapshot": "ConservedGasReconstruction.swift.txt"
+    },
+    "Sources/BlastCore/FiniteVolumePressureFit.swift": {
+      "gitBlob": "31e58a31f681d81b8379fc7e81a000f75ba8df8d",
+      "sha256": "8120e41b29cd28d68c731a96b637bd8db56f6b08c3871241a3f51e5c9c95f7f2",
+      "snapshot": "FiniteVolumePressureFit.swift.txt"
+    },
+    "Tests/BlastCoreTests/FiniteVolumePressureFitTests.swift": {
+      "gitBlob": "12edbd8f5298a3a77d0a0a471e69d9229d2e6e52",
+      "sha256": "ca1fbf9ea3afe5db2823d1e07aa90ce6bbc737b51df885daf11c50225375fddb",
+      "snapshot": "FiniteVolumePressureFitTests.swift.txt"
+    }
+  }
+}
