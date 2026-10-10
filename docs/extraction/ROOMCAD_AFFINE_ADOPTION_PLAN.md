@@ -73,3 +73,12 @@ Commit and merge the bounded RoomCAD change only after these gates. Public Core
 release verification and app adoption evidence remain separate. Weighted spatial
 QR, through-origin material projection, heterogeneous waves and changing coupled
 mechanics are later contracts.
+
+## Completed bounded adoption
+
+RoomCAD #34 now merges at `46e6b7c1b14627a672fa884a89d6d97c343998c7` after the
+complete two-host/source/policy/corruption/current-and-frozen-reference/app/package
+gates above pass. [Recorded acceptance](roomcad-affine-adoption-verification.json)
+and the [full app contract](https://github.com/emmettl/RoomCAD/blob/main/docs/benchmarks/SHARED_AFFINE_FIT.md)
+retain exact scopes. This closes affine primitive adoption, not acoustic window
+policy, empirical measurement validation or the other fitting families.
