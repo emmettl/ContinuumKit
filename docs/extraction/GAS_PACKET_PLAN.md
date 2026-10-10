@@ -1,4 +1,6 @@
-# Next bounded gas candidate: prescribed packet conservation
+# Gas packet conservation planning checkpoint
+
+The [implemented candidate](PRESCRIBED_GAS_PACKETS.md) now follows this planning checkpoint.
 
 The wall reference is released at alpha.13 and adopted in BombCAD. The next small
 candidate is BombCAD's 104-line `FractionalGasTransport`, rather than its complete

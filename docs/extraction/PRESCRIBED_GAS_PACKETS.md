@@ -80,3 +80,15 @@ Clean committed consumers, source identity, both-host complete reports, all prev
 package/reference/actual Metal gates and exact-tag verification precede publication.
 BombCAD adoption is a separate task, with complete remap/reservoir/moving-gas/piston and
 app/package checks. No application source or pin changes in this candidate.
+
+## Verified candidate checkpoint
+
+Clean 533eb7fcb2501bb4cb20e773f85b04db13a6e311 passes both-host full package gates:
+247 tests, five optimized fetched consumers, CPU-only linkage and every existing
+numerical/kernel/topology reference. All 1,637 complete reports and 4,541 returned
+cells match original bits and cross-host bytes. Thirteen corruption controls pass.
+[Aggregate proof](gas-packet-verification.json) records scope and producer identity.
+The final postcondition uses dimensionally consistent energy/volume pressure error
+scales; both retained datasets and negative controls were reverified. No operator,
+fixture or test arithmetic changes in this evidence checkpoint. Exact-tag release
+and application adoption remain separate. Complete raw proof stays private in Edgerton.

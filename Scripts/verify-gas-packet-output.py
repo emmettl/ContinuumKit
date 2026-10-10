@@ -90,7 +90,7 @@ def verify(root):
                 if volume:
                     close_exact(amount[0],Q(volume)*Q(rho*[1,2,.5][n]),abs(Q(amount[0])),'matrix density')
                     for axis in range(3):close_exact(velocity[axis],Q(u[axis])*Q([1,-.5,.25][n]),abs(Q(velocity[axis])),'matrix initial velocity')
-                    close_exact(pressure,Q(p*[1,.5,2][n]),(abs(Q(amount[4]))+sum(abs(Q(x)) for x in amount[1:4]))/Q(volume),'matrix initial pressure',128)
+                    close_exact(pressure,Q(p*[1,.5,2][n]),(abs(Q(amount[4]))+sum(Q(x)**2 for x in amount[1:4])/(2*Q(amount[0])))/Q(volume),'matrix initial pressure',128)
             for n,v in enumerate(volumes):
                 volume=Q(old[n][0])+sum(Q(t['volume']) for t in c['transfers'] if t['to']==n)-sum(Q(t['volume']) for t in c['transfers'] if t['from']==n)
                 close_exact(v,volume,sum(abs(Q(x[0])) for x in old),'matrix geometric input balance')
