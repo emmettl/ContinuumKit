@@ -110,10 +110,11 @@ shared implementation, with complete native values/bits and inputs for:
 native bit identities, scalar O(N²) DFT/inverse, Parseval and normalization,
 response bins, seeded sums, padded circular filtering and direct convolution.
 Transform tolerances are 256 Double epsilon * N * max(1,L1 reference scale).
-Float output tolerances are 256 Float epsilon * max(1,L1 input/product scale);
+Float output tolerances are 4 Float epsilon * max(1,L1 input/product scale);
 these are declared bounded small-case reference checks, not global FFT error
 bounds. Complete original/shared native values/bits must also agree exactly.
-Twenty public checked-failure cases are separate from original unsafe behavior.
+This bounded case tree contains 437 complete cases and 4953 returned output
+values per variant. Twenty public checked-failure cases are separate from original unsafe behavior.
 Thirteen deliberate corruptions challenge independent references/completeness,
 including changes applied to both native variants. Environment, source hashes,
 resolved Git pins and linkage are retained. Both physical Macs and the full

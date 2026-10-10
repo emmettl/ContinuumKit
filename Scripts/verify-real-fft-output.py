@@ -3,14 +3,19 @@
 import argparse, json, math, struct, sys
 from pathlib import Path
 
+def load_json(path):
+    # Foundation emits signed zero as the valid JSON integer token -0.
+    # Preserve its sign instead of Python's default integer conversion.
+    return json.loads(Path(path).read_text(), parse_int=lambda s: -0.0 if s == '-0' else int(s))
+
 LENGTHS=[2,4,8,16,32]
 GAINS=['identity','dcReject','tilt','center3tap']
 def need(condition,message):
     if not condition: raise ValueError(message)
-def near(a,b,scale=1,epsilon=2.220446049250313e-16,n=32):
+def near(a,b,scale=1,epsilon=2.220446049250313e-16,n=32,factor=256):
     need(len(a)==len(b),'vector length')
     for j,(x,y) in enumerate(zip(a,b)):
-        need(math.isfinite(x) and abs(x-y)<=256*epsilon*n*max(1,scale),f'reference value {j}: {x} != {y}')
+        need(math.isfinite(x) and abs(x-y)<=factor*epsilon*n*max(1,scale),f'reference value {j}: {x} != {y}')
 def values(record,key,precision=64):
     v=record[key]
     need(set(v)=={'values','bits'},'native vector schema')
@@ -112,7 +117,7 @@ def verify_records(records):
             elif g=='identity':ref=x
             elif g=='dcReject':ref=[t-math.fsum(padded)/n for t in x]
             else:ref=inverse(*weighted(*dft(padded),g,rate))[:count]
-            near(y,ref,sum(map(abs,x)),epsilon=2**-23,n=1)
+            near(y,ref,sum(map(abs,x)),epsilon=2**-23,n=1,factor=4)
             near(values(c,'frequencies'),frequency_order(n,rate),rate,n=n)
         else:
             m=c['m'];p=c['profile'];a=values(c,'input',32);b=values(c,'responseInput',32)
@@ -120,7 +125,7 @@ def verify_records(records):
             bb=[.5*float(j==0) if p=='impulse' else .75*(-1)**j if p=='nyquist' else ((j*3)%7-3)/4 for j in range(n)]
             need(a==aa and b==bb,'convolution source')
             ref=[math.fsum(a[j]*b[k-j] for j in range(m) if 0<=k-j<n) for k in range(m+n-1)] if m and n else []
-            near(y,ref,sum(map(abs,a))*sum(map(abs,b)),epsilon=2**-23,n=1)
+            near(y,ref,sum(map(abs,a))*sum(map(abs,b)),epsilon=2**-23,n=1,factor=4)
         native+=len(y)
     return len(records),native
 
@@ -130,10 +135,10 @@ def verify_failures(records):
 
 def verify(root,metadata=True):
     root=Path(root)
-    original=json.loads((root/'original.json').read_text());shared=json.loads((root/'shared.json').read_text())
+    original=load_json(root/'original.json');shared=load_json(root/'shared.json')
     counts=verify_records(original);need(verify_records(shared)==counts,'scope parity')
     need(original==shared,'complete native original/shared values and bits')
-    verify_failures(json.loads((root/'failures.json').read_text()))
+    verify_failures(load_json(root/'failures.json'))
     if metadata:
         env=json.loads((root/'environment.json').read_text());need(env['workingTreeDirty'] is False,'dirty producer')
         pins=json.loads((root/'consumer-Package.resolved').read_text())['pins'];need(len(pins)==1 and pins[0]['state']['revision']==env['candidate'],'fetched source pin')

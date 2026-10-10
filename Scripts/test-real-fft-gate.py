@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 import copy, importlib.util, json, sys
 from pathlib import Path
+sys.dont_write_bytecode=True
 spec=importlib.util.spec_from_file_location('gate',Path(__file__).with_name('verify-real-fft-output.py'));gate=importlib.util.module_from_spec(spec);spec.loader.exec_module(gate)
-cases=json.loads((Path(sys.argv[1])/'shared.json').read_text())
+cases=gate.load_json(Path(sys.argv[1])/'shared.json')
 def mutate(id,field,index,value):
     r=copy.deepcopy(cases);c=next(c for c in r if c['id']==id);c[field]['values'][index]=value
     import struct
@@ -28,7 +29,7 @@ for name,r in controls.items():
     try:gate.verify_records(r)
     except (ValueError,KeyError,IndexError,TypeError):pass
     else:raise SystemExit(f'FAIL accepted corruption: {name}')
-f=json.loads((Path(sys.argv[1])/'failures.json').read_text())
+f=gate.load_json(Path(sys.argv[1])/'failures.json')
 try:gate.verify_failures(f[:-1])
 except ValueError:pass
 else:raise SystemExit('FAIL missing checked failure')
