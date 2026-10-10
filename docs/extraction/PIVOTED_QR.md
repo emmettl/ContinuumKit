@@ -94,13 +94,14 @@ These are declared acceptance criteria for the selected cohort, not universal
 forward/backward-error theorems. Large conditioning-dependent bounds must remain
 visible in full findings rather than being summarized as uniformly accurate fits.
 
-Preliminary optimized results accept 473 factors and 1,406 solves, with 266 factor
-and 13 RHS failures. Maximum Q orthogonality defect is `8.89e-16`; relative matrix
-reconstruction is `5.32e-16`. In the protected width-nine `δ=2^-33` exact-profile
+Committed optimized results accept 475 factors and 1,412 solves, with 266 factor
+and 13 RHS failures. Maximum Q orthogonality defect is `1.23e-15`; relative matrix
+reconstruction is `2.23e-15`. In the protected width-nine `δ=2^-33` exact-profile
 case, coefficient L2 error is about `5.86e-8`, κF about `3.75e10`, and normal-equation
 gradient about `3.98e-16`. This improves the original numerical failure while
-retaining the poor conditioning explicitly. Complete committed two-host evidence
-and corruption controls are required before tagging or application adoption.
+retaining the poor conditioning explicitly. The committed M4 Max gate passes 24 deliberate corruption controls and linkage
+checks. Complete two-host package evidence is required before tagging or application
+adoption.
 
 The algorithm follows the mathematical reflector/pivot representation documented
 by [LAPACK DGEQP3](https://www.netlib.org/lapack/explore-html/d0/dea/group__geqp3_gae96659507d789266660af28c617ef87f.html)
