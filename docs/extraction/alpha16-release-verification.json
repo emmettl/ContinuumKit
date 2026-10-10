@@ -1,5 +1,6 @@
 {
-  "applicationAdoption": "separate BombCAD gate pending; alpha.15 remains immutable",
+  "applicationAcceptance": "https://github.com/emmettl/bombcad/blob/930bc0116f53f82b7baba8bcadb2a19f94419715/docs/euler-adoption-verification.json",
+  "applicationAdoption": "BombCAD PR #24 merged at 930bc0116f53f82b7baba8bcadb2a19f94419715",
   "commit": "1977b38a66382533be902350b40e7084a2d1e9ca",
   "fetchedExactVersionConsumers": 6,
   "nativeCases": 751,
@@ -7,6 +8,7 @@
   "negativeControls": 14,
   "packageTests": 261,
   "physicalMini": "https://github.com/emmettl/ContinuumKit/actions/runs/38056735711",
+  "privateApplicationEvidence": "https://github.com/emmettl/edgerton/pull/59",
   "publishedAt": "2026-10-10T13:48:53Z",
   "rawReportMatchesTwoHostAssemblyCandidate": true,
   "release": "https://github.com/emmettl/ContinuumKit/releases/tag/0.1.0-alpha.16",

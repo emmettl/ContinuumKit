@@ -142,3 +142,13 @@ Published, 10 October 2026: [alpha.16 exact-tag proof](alpha16-release-verificat
 records successful 261-test/six-consumer physical-mini verification and retained
 complete native identity before publication. Public result assembly is now released;
 actual application adoption and its complete coupled/full-app gates remain separate.
+
+Application adoption completed: [BombCAD #24](https://github.com/emmettl/bombcad/pull/24)
+retires the local fractional Euler calculation at exact alpha.16. Complete crossed
+wall/packet/Euler reports and separate full-app/package gates pass; actual app-owned
+SSPRK2 results are reproduced by complete staged captures and matching wall loads.
+[Acceptance](https://github.com/emmettl/bombcad/blob/930bc0116f53f82b7baba8bcadb2a19f94419715/docs/euler-adoption-verification.json)
+retains measured/integrated sources, initial timing/checker failures and repairs.
+Later peer integration receives supplemental package/affected tests without
+relabeling earlier numerical measurements. Geometry, limiting, reconstruction,
+time/body policy and production Metal air remain application-owned.

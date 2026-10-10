@@ -455,3 +455,12 @@ analytical mode gains and direct convolution references precede any public API o
 module. This planning checkpoint moves no code and does not replace the pending
 complete BombCAD Euler adoption gate or the separate heterogeneous-wave/fitting/
 changing-mechanics work.
+
+Completed, 10 October 2026: BombCAD #24 adopts exact alpha.16 and retires its local
+fractional Euler reference. Complete native two-host stage/trace/load/grid/scatter,
+wall/piston/remap/moving-gas reports and separate app/package checks pass with
+source-specific repairs retained. The [real FFT plan](docs/extraction/REAL_FFT_PLAN.md)
+is the next independent numerical-primitives tranche: dedicated scalar transform,
+normalization/packing and safe-dimension references precede implementation. Changing
+geometry, heterogeneous/2D waves, fitting/measurement policy and mechanics remain
+separate gaps.
