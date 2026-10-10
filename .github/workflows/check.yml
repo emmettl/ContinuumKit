@@ -34,6 +34,7 @@ jobs:
       - name: Build and clean consumer
         env:
           CONTINUUMKIT_REQUIRE_METAL: "1"
+          CONTINUUMKIT_REAL_FFT_OUTPUT: ${{ runner.temp }}/real-fft-${{ github.run_id }}-${{ github.run_attempt }}
           CONTINUUMKIT_EULER_FLUX_OUTPUT: ${{ runner.temp }}/euler-flux-${{ github.run_id }}-${{ github.run_attempt }}
           CONTINUUMKIT_GAS_PACKET_OUTPUT: ${{ runner.temp }}/gas-packet-${{ github.run_id }}-${{ github.run_attempt }}
           CONTINUUMKIT_GAS_WALL_OUTPUT: ${{ runner.temp }}/gas-wall-${{ github.run_id }}-${{ github.run_attempt }}
@@ -49,6 +50,14 @@ jobs:
           CONTINUUMKIT_ACOUSTIC_OUTPUT: ${{ runner.temp }}/acoustic-${{ github.run_id }}-${{ github.run_attempt }}
           CONTINUUMKIT_BENCHMARK_OUTPUT: ${{ runner.temp }}/adiabatic-${{ github.run_id }}-${{ github.run_attempt }}
         run: bash Scripts/check.sh
+      - name: Retain complete packed real FFT and independent reference evidence
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: real-fft-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/real-fft-${{ github.run_id }}-${{ github.run_attempt }}
+          if-no-files-found: error
+
       - name: Retain complete Euler states, wall ledgers and continuum refinements
         if: always()
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2

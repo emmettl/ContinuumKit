@@ -235,3 +235,11 @@ alpha.13 and adopted by [BombCAD #22](https://github.com/emmettl/bombcad/pull/22
 The source hashes above describe the pre-extraction collection. The
 [next bounded gas plan](extraction/GAS_PACKET_PLAN.md) addresses prescribed packet
 conservation first; no moving geometry or complete production flow model is implied.
+
+After the gas wall, packet and Euler extractions/adoptions, the bounded real FFT
+primitive now has [independent standalone verification](extraction/REAL_FFT.md):
+complete original/shared packing, inverse, Parseval, weighted sums, circular
+filtering and convolution references agree across both physical Macs. The
+`SpectralTransforms` candidate adds checked public safety boundaries. Exact-tag
+release and RoomCAD adoption remain next; acoustic band/fitting/measured-data
+policy and Edgerton's spectral/forcing models remain distinct gaps.
