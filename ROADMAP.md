@@ -335,3 +335,23 @@ public consumer/reference gates. RoomCAD's current application output/generator/
 lifetime and representative live-host timing comparison follows before GPU default
 adoption. Retiring original numerical loops remains a separate bounded task after
 both production backend defaults are accepted.
+
+RoomCAD has now [accepted the shared Metal application default](https://github.com/emmettl/RoomCAD/pull/28)
+at exact alpha.12, alongside its previously accepted masked CPU default. Full local
+and physical-mini application checks pass 188 Swift tests; packaging, signature
+verification and an inspected actual-Metal snapshot pass. Complete original/shared/
+actual-default outputs, timed histories, generator/save data and all-axis thin streams
+remain exact across both Macs and the previous pin checkpoint. Lazy app-owned context
+selection preserves independent mutable run state, cancellation, resource/CPU fallback
+and automatic-engine/fresh-restart policy. All live-host repetitions remain retained;
+the [acceptance proof](https://github.com/emmettl/RoomCAD/blob/main/docs/benchmarks/shared-metal-default-verification.json)
+records bounded practical costs without universal performance or empirical accuracy
+claims. This adoption changes no Core package contract or release tag.
+
+The next extraction task is retirement of duplicated production update/injection/
+sampling code, with immutable original-source reconstruction and numerical oracles
+preserved. Audit resource/availability checks that feed RoomCAD's automatic-engine
+budgets, and verify complete application output, fallback and packaging after each
+bounded move. The optimized unmasked box CPU arithmetic remains a distinct contract;
+shared default adoption does not authorize silently replacing it or changing app-owned
+geometry, microphone mixing, engine policy or measured fixtures.
