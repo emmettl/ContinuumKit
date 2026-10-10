@@ -56,3 +56,25 @@ chunks against the exact original loop. Final merge requires full committed-cand
 mini checks, the fetched CPU-only consumer/linkage guard and complete source evidence.
 Resident Metal needs its own Float pressure/velocity rounding and encoded-history gate;
 CPU success does not stand in for that implementation or empirical room accuracy.
+
+## Verified CPU checkpoint
+
+Implementation `552f7cf0dd1b969d98f30c0a38633f05ab1594ac` passes the
+[full physical-mini check](https://github.com/emmettl/ContinuumKit/actions/runs/38011548981):
+199 tests, all 38 CPU tests, fetched observation/lookahead and CPU-only linkage,
+with all existing references and actual Metal regressions intact. Final source
+candidate `d637788ebe771950b1ef1c43d3186060b0633c7e` changes only the independent
+two-layer fixture anchor; production/test/consumer code is identical. Its optimized
+fetched CPU consumer passes separately. No validation assertion was relaxed.
+
+The [private receiver mini gate](https://github.com/emmettl/edgerton/actions/runs/38011890175)
+and M4 Max counterpart pass 4,128 complete native-field/receiver captures and 12,336
+mixed samples across hosts/debug/release, with zero runtime Float32/Float64 bit
+mismatches and corresponding complete reports byte-identical. Every 257-step case
+compares direct and 128-step observed batches, arbitrary 37-frame lookahead chunks
+and exact original final microphone output. The producer and independent postcondition
+require full field/receiver/clock/history/dependency scope; seven adversarial controls
+reject altered or missing evidence. [Aggregate verification](linear-wave-observation-cpu-verification.json)
+records identities. Complete raw outputs, pinned wrappers/controls, clean producer
+environments, dependencies and logs are retained privately in Edgerton. The subsequent
+checkpoint adds documentation only; encoded Metal observations remain the next tranche.
