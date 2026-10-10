@@ -127,3 +127,49 @@ try require(independentFields.pressureStepIndex == 257 && forced.pressureStepInd
 print(
   "PASS fetched explicit reusable Metal context: independent fields, source/receiver storage and native clocks",
   context.deviceName)
+
+// Exercise the released public product above the field-group threshold, including
+// uneven dimensions, internal walls, forcing and multiple completed command batches.
+do {
+  let d = SIMD3<Int>(17, 9, 29)
+  let n = d.x * d.y * d.z
+  let mask = (0..<n).map { UInt8($0 % 37 == 0 ? 0 : 1) }
+  let strides = [1, d.x, d.x * d.y]
+  var faces = [Float](repeating: -1, count: 6 * n)
+  for at in 0..<n where mask[at] == 1 {
+    let xyz = [at % d.x, at / d.x % d.y, at / (d.x * d.y)]
+    for side in 0..<6 {
+      let axis = side / 2
+      let plus = side % 2 == 1
+      let within = plus ? xyz[axis] + 1 < d[axis] : xyz[axis] > 0
+      let neighbour = at + (plus ? strides[axis] : -strides[axis])
+      faces[side * n + at] = within && mask[neighbour] == 1 ? -1 : 0.001
+    }
+  }
+  let grid = try PreparedWaveGrid(
+    dimensions: d, spacing: [1, 0.8, 1.3], soundSpeed: 1.7, density: 1,
+    timeStep: 0.03125, activeCells: mask, boundaryTerms: faces)
+  let p = (0..<n).map { Float($0 % 17 - 8) / 512 }
+  let zero = [Float](repeating: 0, count: n)
+  let fields = WaveInitialFields(
+    pressureOverDensity: p, velocityX: zero, velocityY: zero, velocityZ: zero)
+  let source = try PreparedPressureSource(
+    grid: grid, cellIndices: [1, 2], coefficients: [0.25, -0.125])
+  let q = (0..<257).map { Float($0 % 7 - 3) / 128 }
+  let gpu = try MetalWaveStepper(context: context, grid: grid, initialFields: fields)
+  let cpu = try CPUWaveStepper(grid: grid, initialFields: fields)
+  try gpu.advance(source: gpu.prepareSource(source), amplitudes: q)
+  try cpu.advance(source: source, amplitudes: q)
+  let a = try gpu.snapshot()
+  let b = try cpu.snapshot()
+  try require(a.pressureStepIndex == 257 && b.pressureStepIndex == 257)
+  for (actual, expected) in zip(
+    [a.pressureOverDensity, a.velocityX, a.velocityY, a.velocityZ],
+    [b.pressureOverDensity, b.velocityX, b.velocityY, b.velocityZ])
+  {
+    try require(actual.count == n && zip(actual, expected).allSatisfy { abs($0 - $1) <= 2e-5 })
+  }
+  print(
+    "PASS fetched large uneven masked Metal field groups: independent CPU fields, forcing and clocks",
+    device.name)
+}
