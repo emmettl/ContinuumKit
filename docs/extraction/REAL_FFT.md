@@ -125,3 +125,17 @@ decay, wave-validation and audition outputs, plus full application packaging.
 Its acoustic bands, absorption, fitting, measured fixtures, preview scheduling
 and sample-rate conversion remain application-owned. Edgerton's spectral model
 is not changed by this primitive.
+
+## Accepted candidate checkpoint
+
+Measured source `fe910ed874c57d662d5b49753bd3b34eb35c93dd` passes full
+`Scripts/check.sh` on M4 Max and [physical Mac mini](https://github.com/emmettl/ContinuumKit/actions/runs/38064739019):
+271 tests, seven optimized Git consumers, actual Metal and all existing reference
+and topology gates. All 437 original/shared FFT cases and 20 checked failures
+are byte-identical across the hosts; 13 corruption controls reject.
+[Verification identity](real-fft-verification.json) records scope. The complete
+private evidence archive retains 59 hashed payloads, both producer/checker source
+phases and a portable reconstruction/reference replay. The initial signed JSON
+zero reporting failure is retained; its correction changed no transform arithmetic.
+This documentation checkpoint adds no numerical or consumer changes. Next are
+an exact-tag release gate and separate RoomCAD adoption.
