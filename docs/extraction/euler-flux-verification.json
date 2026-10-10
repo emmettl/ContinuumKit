@@ -1,0 +1,84 @@
+{
+  "candidate": "7ae63946699b7706a0b58c59e552de6c00ca70e9",
+  "initialMini": "https://github.com/emmettl/ContinuumKit/actions/runs/38053777366",
+  "mini": "https://github.com/emmettl/ContinuumKit/actions/runs/38054258374",
+  "nativeCases": 751,
+  "nativeCellBitMismatches": 0,
+  "nativeIntervals": 1974,
+  "negativeControlsPerHost": 14,
+  "optimizedFetchedConsumers": 6,
+  "originalBlob": "4736724d8bf71dd84ebb8bde48c0b10b7953a474",
+  "originalRevision": "063d6fe818fd78ccbfe46c1c79e035f04de03800",
+  "originalSHA256": "d80e566a9938f665d71ee00bb813e934bb5febff1a112920200fd47560c818c5",
+  "packageTests": 260,
+  "privateEvidence": "Edgerton docs/benchmarks/evidence/2026-10-10-fractional-euler-flux",
+  "rawOriginalSharedCrossHostReports": "byte-identical",
+  "rawReportSHA256": "79a86e6181e179339c7458a987c8adb5a35364951e406e07522f76be2871a471",
+  "refinementErrors": {
+    "acoustic": [
+      [
+        32,
+        0.062031887675118025
+      ],
+      [
+        64,
+        0.03176951927051641
+      ],
+      [
+        128,
+        0.016093307696890546
+      ]
+    ],
+    "contact": [
+      [
+        32,
+        0.09919285482840101
+      ],
+      [
+        64,
+        0.051813074151589575
+      ],
+      [
+        128,
+        0.026458916100579606
+      ]
+    ],
+    "shock": [
+      [
+        32,
+        0.03886689173859776
+      ],
+      [
+        64,
+        0.02298225784520862
+      ],
+      [
+        128,
+        0.016959249927404642
+      ]
+    ]
+  },
+  "retainedInitialRepairs": [
+    "hand-calculated oblique momentum expectation corrected without source/tolerance changes",
+    "original scratch copy receives one verified explicit import; canonical original bytes unchanged"
+  ],
+  "returnedNativeCells": 105149,
+  "schemaVersion": 1,
+  "scope": "fixed-gamma prescribed paired Rusanov/wall CPU reference; no geometry/reconstruction/time/body policy or empirical blast validation",
+  "sourceNumerics": "unchanged normalized frozen implementation",
+  "status": "verified candidate; exact-tag release and app adoption remain separate",
+  "temporalErrors": [
+    [
+      0.4,
+      0.007661524935309583
+    ],
+    [
+      0.2,
+      0.003826292442610235
+    ],
+    [
+      0.1,
+      0.0019103534084491391
+    ]
+  ]
+}

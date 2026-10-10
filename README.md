@@ -134,3 +134,9 @@ BombCAD now consumes alpha.14's packet operator after [complete native applicati
 verification](https://github.com/emmettl/bombcad/pull/23); its production duplicate
 is retired. Application fluxes, geometry, reservoir and body/timestep policy remain
 separate from the shared packet-conservation contract.
+
+The [prescribed Euler flux candidate](docs/extraction/FRACTIONAL_EULER_FLUX.md) adds
+a fixed-gamma CPU reference with independent characteristic, wall-ledger and
+shock/contact/acoustic refinement gates. Its complete
+two-host and fetched-consumer acceptance passes; exact-tag release verification
+and BombCAD production adoption remain separate.

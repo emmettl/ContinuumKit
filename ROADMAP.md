@@ -412,3 +412,16 @@ conservation, positivity and shock/acoustic refinement contracts before public A
 extraction. Geometry/topology/time/body coupling remains application-owned; other
 inventory gaps (heterogeneous/2D waves, FFT/fitting and stable mechanics primitives)
 remain independent tasks.
+
+Implemented candidate, 10 October 2026: the [prescribed fractional Euler reference](docs/extraction/FRACTIONAL_EULER_FLUX.md)
+uses the released packet and wall primitives. Independent SI/characteristic/positivity
+contracts and complete 751-case source/continuum consumers now bound the next
+extraction. Two-host acceptance and exact-tag release precede separate BombCAD
+flux/limiter/group/piston integration; geometry and body policy remain application-owned.
+
+Verified, 10 October 2026: the Euler reference candidate passes complete two-host
+acceptance with 751 cases, 105,149 returned cells, independent spatial/temporal
+refinement, fourteen corruption controls and separate 260-test/six-consumer
+package gates. The next release is alpha.15, subject to the exact-tag physical-mini
+gate. App-owned flux/limiter/group/piston adoption and broader model gaps remain
+separate; no production air solver or changing mechanics has moved.
