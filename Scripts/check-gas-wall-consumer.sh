@@ -17,7 +17,7 @@ fi
 export CONTINUUMKIT_CONSUMER_VERSION="$candidate_version"
 export CONTINUUMKIT_CONSUMER_SOURCE="$scratch/ContinuumKit"
 export CONTINUUMKIT_CONSUMER_REVISION="$revision"
-output=${2:-$(mktemp -d "${TMPDIR:-/tmp}/continuumkit-gas-wall-output.XXXXXX")}
+output=${2:-${CONTINUUMKIT_GAS_WALL_OUTPUT:-$(mktemp -d "${TMPDIR:-/tmp}/continuumkit-gas-wall-output.XXXXXX")}}
 mkdir -p "$output"
 export CONTINUUMKIT_GAS_OUTPUT="$output"
 mkdir "$scratch/consumer"
@@ -30,4 +30,6 @@ if rg -q '/(Metal|MetalKit|AppKit|SwiftUI)\.framework/' <<< "$linked_frameworks"
   echo 'Gas wall consumer unexpectedly links a rendering/UI framework' >&2
   exit 1
 fi
+cp "$scratch/consumer/Package.resolved" "$output/consumer-Package.resolved"
+python3 "$root/Scripts/verify-gas-wall-output.py" "$output"
 printf 'PASS Gas wall consumer has no Metal or UI framework dependency\n'
