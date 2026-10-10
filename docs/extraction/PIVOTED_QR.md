@@ -109,3 +109,23 @@ and [DLARFG](https://www.netlib.org/lapack/explore-html/d8/d0d/group__larfg_gadc
 This is an independent small scalar Swift implementation, without copied LAPACK
 source or its blocked BLAS execution. BombCAD adoption remains a separate bounded
 reconstruction/model task under the [weighted QR plan](WEIGHTED_QR_PLAN.md).
+
+
+## Accepted two-host candidate
+
+Producer `24a17f086b58e9255bc1eb9f403fc55c9e07839f` passes both physical Macs'
+complete 287-test/nine-consumer/actual-Metal package gates. The
+[physical mini run](https://github.com/emmettl/ContinuumKit/actions/runs/38084667114)
+completes successfully. Each complete native QR capture is 26,510,779 bytes; all
+741 factor cases, repeated RHS/results and diagnostics are byte-identical across
+hosts. Full independent findings and all 24 corruption receipts also match.
+[The exact verification record](pivoted-qr-verification.json) retains producer,
+source/fixture/script hashes, toolchain/hardware, completed run/job and scope.
+
+The complete [private candidate archive](https://github.com/emmettl/edgerton/pull/70)
+retains every output from seventeen suites
+for each host, all pinned Core source, complete logs/receipts and lossless native
+records. Portable replay checks source and payload identities and reruns all
+retained numerical/reference/control gates; the full portable replay passes.
+Exact-tag verification and publication
+remain the next release gate; application reconstruction adoption is separate.
