@@ -380,3 +380,12 @@ release gate passed 233 tests and four fetched consumers before publication.
 [BombCAD PR #22](https://github.com/emmettl/bombcad/pull/22) is the separate
 application adoption gate; its complete coupled comparisons and app/package
 checks remain in progress. The release does not move bulk transport or geometry.
+
+Completed, 10 October 2026: BombCAD #22 adopts exact alpha.13 after complete
+two-host original/shared wall/piston/reflection reports, independent budgets and
+rejection controls, and separate full-app/package gates. Raw evidence is retained
+privately; the public application aggregate records measured source identities and
+preserved concurrent integration. The next bounded gas task is the
+[prescribed packet-conservation operator](docs/extraction/GAS_PACKET_PLAN.md),
+with independent extensive-state references before any app adapter. Full Euler flux,
+moving geometry and changing coupled mechanics remain distinct future gates.
