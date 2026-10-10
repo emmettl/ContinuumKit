@@ -219,3 +219,20 @@ with independent exact-native references and thirteen corruption controls.
 [Publication proof](extraction/alpha18-release-verification.json) records the immutable
 annotated/peeled tag and successful release. RoomCAD adoption and measured acoustic
 accuracy are separate gates; previous tags are unchanged.
+
+
+## Published reusable pivoted QR
+
+Alpha.19 publishes `Numerics.PivotedQR` from reviewed merge
+`00eac5537843c85c3c25a7ecef1120f49e8aa469`. Its
+[exact-tag physical-mini workflow](https://github.com/emmettl/ContinuumKit/actions/runs/38086598978)
+passes 287 tests, nine optimized consumers resolving exact alpha.19, actual Metal
+and all previous numerical/topology references before publication. The M4 Max
+passes the same complete exact-version scope. Complete 741-case native factors,
+reused RHS/results, conditioning-dependent findings and 24 corruption receipts
+remain byte-identical across hosts and the accepted candidate. The protected
+original audit stays unchanged, including its numerical findings.
+[Publication proof](extraction/alpha19-release-verification.json) records immutable
+annotated/peeled tag, successful verify/publish jobs and actual release timestamp.
+Gas reconstruction/fallback/limiting/EOS adoption and empirical accuracy remain
+separate gates; previous tags are unchanged.

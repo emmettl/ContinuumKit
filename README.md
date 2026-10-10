@@ -185,3 +185,12 @@ A [PivotedQR candidate](docs/extraction/PIVOTED_QR.md) now adds reusable small-m
 Householder factors to Numerics with explicit scaling, rank/conditioning and RHS
 contracts. The complete 741-case optimized public consumer and independent native
 references precede release and a separate gas reconstruction migration.
+
+
+[Alpha.19](https://github.com/emmettl/ContinuumKit/releases/tag/0.1.0-alpha.19) now
+releases `Numerics.PivotedQR` after both physical Macs pass 287 tests, nine optimized
+exact-version consumers, actual Metal and all previous reference gates. Complete
+741-case native factors and reusable RHS/results remain identical to the accepted
+candidate; conditioning-dependent bounds and independent corruption controls stay
+explicit. [Publication proof](docs/extraction/alpha19-release-verification.json)
+records immutable identities. BombCAD reconstruction adoption is a separate gate.

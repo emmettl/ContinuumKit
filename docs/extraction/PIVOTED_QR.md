@@ -129,3 +129,25 @@ records. Portable replay checks source and payload identities and reruns all
 retained numerical/reference/control gates; the full portable replay passes.
 Exact-tag verification and publication
 remain the next release gate; application reconstruction adoption is separate.
+
+
+## Published alpha.19
+
+[Alpha.19](https://github.com/emmettl/ContinuumKit/releases/tag/0.1.0-alpha.19)
+releases the verified primitive after both physical Macs pass complete exact-tag
+287-test/nine-consumer/actual-Metal gates and all prior references. The physical
+mini's verify and publish jobs both complete successfully. All native QR and
+original-audit records, independent findings and 24 corruption receipts remain
+byte-identical to the accepted candidate. [Publication identities](alpha19-release-verification.json)
+record the annotated and peeled tag, full producer, completed run/jobs and actual
+21:19:25 UTC publication on 10 October 2026. BombCAD's separate adoption must retain
+its then-current source, full reconstruction/fallback/limiter/EOS histories and
+independent numerical/application checks; this tag does not claim that migration.
+
+
+The complete [private exact-tag archive](https://github.com/emmettl/edgerton/pull/71)
+retains both hosts' full source/pins/native records/findings/controls, completed
+package and verify/publish logs and actual release receipt. Its portable exact-tag
+source/pin/reference/control replay passes. The
+[bounded BombCAD adoption plan](BOMBCAD_QR_ADOPTION_PLAN.md) records the fresh
+application checkpoint and remaining independent reconstruction gates.
