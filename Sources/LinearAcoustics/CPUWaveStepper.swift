@@ -133,7 +133,8 @@ public final class CPUWaveStepper {
     }
     return WaveObservationFrame(
       pressureStepIndex: pressureStepIndex, timeStep: grid.timeStep,
-      pressureOverDensity: pressure, projectedVelocity: velocity, observation: observation)
+      pressureOverDensity: pressure, projectedVelocity: velocity, observation: observation,
+      arithmetic: .cpuDouble)
   }
 
   public func advance(steps: Int, observing observation: PreparedWaveObservation) throws

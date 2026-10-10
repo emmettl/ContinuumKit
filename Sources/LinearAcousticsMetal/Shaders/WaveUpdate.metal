@@ -54,3 +54,33 @@ using namespace metal;
         }
 
 // End of exact pinned masked injection block.
+
+// Exact pinned full receiver kernel.
+        kernel void waveSample(device const float* p [[buffer(0)]], device const float* ux [[buffer(1)]],
+                               device const float* uy [[buffer(2)]], device const float* uz [[buffer(3)]],
+                               device const uint* cells [[buffer(4)]], device const float* weights [[buffer(5)]],
+                               device const uint* velocityCells [[buffer(6)]], device const float* axes [[buffer(7)]],
+                               device float* output [[buffer(8)]], device float* velocityOutput [[buffer(9)]],
+                               constant Grid& g [[buffer(10)]], constant uint& step [[buffer(11)]],
+                               constant uint& steps [[buffer(12)]], constant uint& receivers [[buffer(13)]],
+                               uint r [[thread_position_in_grid]]) {
+            if (r >= receivers) return;
+            float value = 0;
+            for (uint k = 0; k < 8; k++) value += p[cells[8 * r + k]] * weights[8 * r + k];
+            output[r * steps + step] = value;
+            uint at = velocityCells[r];
+            uint plane = g.nx * g.ny;
+            float3 u = float3((ux[at - 1] + ux[at]) / 2, (uy[at - g.nx] + uy[at]) / 2, (uz[at - plane] + uz[at]) / 2);
+            velocityOutput[r * (steps + 1) + step + 1] = dot(u, float3(axes[3 * r], axes[3 * r + 1], axes[3 * r + 2]));
+        }
+// Pressure-only port of the exact pinned pressure statements; no dummy velocity addresses.
+kernel void waveSamplePressure(device const float* p [[buffer(0)]],
+ device const uint* cells [[buffer(4)]], device const float* weights [[buffer(5)]],
+ device float* output [[buffer(8)]], constant uint& step [[buffer(11)]],
+ constant uint& steps [[buffer(12)]], constant uint& receivers [[buffer(13)]],
+ uint r [[thread_position_in_grid]]) {
+ if (r >= receivers) return;
+            float value = 0;
+            for (uint k = 0; k < 8; k++) value += p[cells[8 * r + k]] * weights[8 * r + k];
+            output[r * steps + step] = value;
+}

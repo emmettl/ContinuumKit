@@ -7,6 +7,7 @@ root=Path(__file__).resolve().parents[1];m=json.loads((root/'docs/extraction/lin
 spec=importlib.util.spec_from_file_location('source_map',root/'Scripts/verify-wave-extraction-source.py');v=importlib.util.module_from_spec(spec);spec.loader.exec_module(v)
 source=subprocess.check_output(['git','show',m['repository']['revision']+':'+m['blocks'][0]['path']],cwd=a.roomcad).decode();blocks={}
 for block in m['blocks']:
+ if not block['id'].startswith('cpu-'):continue
  start,end=v.selected_block(source,block['selector']);raw=source[start:end]
  v.require(len(raw.encode())==block['bytes'] and hashlib.sha256(raw.encode()).hexdigest()==block['sha256'],block['id']);blocks[block['id']]=raw
 subprocess.run([sys.executable,str(root/'Scripts/prepare-forced-wave-source-parity.py'),'--roomcad',str(a.roomcad),'--output',str(a.output)],check=True)
