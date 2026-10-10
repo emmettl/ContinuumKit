@@ -229,3 +229,9 @@ Other gaps remain: heterogeneous fluids and Edgerton's different 2D forcing/damp
 contract; finite-band FFT normalization references; conservative gas transport/coupled
 geometry; fitting algorithms separated from measured-data policy; and bounded stable
 mechanics primitives with explicit dimensional/ownership/failure contracts.
+
+Following this inventory checkpoint, the ideal-gas wall candidate was released in
+alpha.13 and adopted by [BombCAD #22](https://github.com/emmettl/bombcad/pull/22).
+The source hashes above describe the pre-extraction collection. The
+[next bounded gas plan](extraction/GAS_PACKET_PLAN.md) addresses prescribed packet
+conservation first; no moving geometry or complete production flow model is implied.

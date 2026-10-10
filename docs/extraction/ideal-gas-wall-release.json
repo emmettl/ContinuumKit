@@ -1,8 +1,10 @@
 {
-  "applicationAdoption": "BombCAD PR #22: separate full-app and two-host coupled-history acceptance in progress",
+  "applicationAcceptance": "https://github.com/emmettl/bombcad/blob/8ec83cb524d1e745c0793106b0d78a7269131030/docs/wall-adoption-verification.json",
+  "applicationAdoption": "BombCAD PR #22 merged at 8ec83cb524d1e745c0793106b0d78a7269131030 after two-host complete comparison and separate app/package gates",
   "commit": "b6ff3ca28eb96bbac23ec15d93a13afda99b2be9",
   "logSHA256": "02a4122c62dd7776b4b1caabc100cdca4f5c1001752cf4e7f1f256519bdbcf34",
   "physicalMini": "https://github.com/emmettl/ContinuumKit/actions/runs/38041229593",
+  "privateEvidence": "Edgerton PR #49 merged at 87c48caf48199ca6de92dee65b9ff4f65ebc83aa",
   "publishedAt": "2026-10-10T09:30:29Z",
   "release": "https://github.com/emmettl/ContinuumKit/releases/tag/0.1.0-alpha.13",
   "schemaVersion": 1,

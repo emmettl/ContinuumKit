@@ -75,3 +75,21 @@ remains a historical record.
 with an exact dependency pin, application bridge/error-category tests, complete
 pre/post piston states and wall-load intervals, public reflection histories and
 full application/package checks. Publication alone does not certify that adoption.
+
+## Completed application adoption
+
+[BombCAD #22](https://github.com/emmettl/bombcad/pull/22) is merged with an exact
+alpha.13 pin and its result/error-category bridge. All four complete original/shared
+M4 Max/M4 reports are byte-identical: 360 wall states, twelve piston runs with 396
+native frames/9,424 cells/2,898 accepted load intervals, eight public reflection
+histories and the eight-case wall study. Independent accounting/completeness and
+twelve rejection controls pass on both hosts. The separate full app check passes
+872 Swift Testing cases, lint, script checks, build and mini packaging/signature.
+Concrete/cloud main work is preserved with additional integrated build/focused checks;
+complete raw logs/reports remain private in Edgerton PR #49.
+
+The [application acceptance record](https://github.com/emmettl/bombcad/blob/8ec83cb524d1e745c0793106b0d78a7269131030/docs/wall-adoption-verification.json)
+retains each measured clean source revision and integration scope. Publication and
+adoption are complete for the declared wall relation; bulk gas transport and geometry
+remain separate. The [next packet-conservation plan](GAS_PACKET_PLAN.md) bounds the
+following candidate without changing model code.
