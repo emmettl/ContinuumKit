@@ -1,0 +1,17 @@
+{
+  "commit": "72dae5da882774ef9739d27c06c4a06a9c8ea66d",
+  "cpuTests": 46,
+  "exactTagRun": "https://github.com/emmettl/ContinuumKit/actions/runs/38028077058",
+  "exactVersion": "0.1.0-alpha.11",
+  "fetchedLargeMetalConsumer": "4437 uneven masked cells, signed forcing, 257 steps; all fields and clocks checked against independent CPU",
+  "metalTests": 33,
+  "optimizedConsumers": 3,
+  "release": "https://github.com/emmettl/ContinuumKit/releases/tag/0.1.0-alpha.11",
+  "remaining": "actual RoomCAD throughput/default acceptance; no empirical accuracy claim",
+  "schemaVersion": 1,
+  "scope": "capacity-bounded larger-grid field dispatch; small-grid shape/kernels/barriers/arithmetic/ownership/clocks unchanged",
+  "status": "published",
+  "swiftTests": 220,
+  "tagObject": "06e9aa43709d84c1f1f2fd7ca6a53c572f9ceba8",
+  "version": "0.1.0-alpha.11"
+}

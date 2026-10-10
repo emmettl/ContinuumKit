@@ -140,3 +140,17 @@ checks and unchanged numerical/topology references before publication.
 commit identity. Existing tags remain unchanged. The immutable explicit device
 context allows pipeline reuse across independently owned runs; RoomCAD production
 Metal binding, abandonment/fresh CPU restart and timing remain separate gates.
+
+## Published capacity-bounded Metal execution prerelease
+
+`0.1.0-alpha.11` is published from reviewed commit
+`72dae5da882774ef9739d27c06c4a06a9c8ea66d`. Its
+[exact-tag release gate](https://github.com/emmettl/ContinuumKit/actions/runs/38028077058)
+passes 220 tests (33 actual Metal, 46 CPU), all three optimized consumers resolving
+exact alpha.11, CPU-only linkage and unchanged complete numerical/topology references
+before publication. The Metal consumer additionally exercises 4,437 uneven masked
+cells, signed forcing and 257 complete steps against independent CPU fields/clocks.
+[Publication identity](extraction/alpha11-release-verification.json) retains the
+immutable annotated tag/commit. Larger field groups obey pipeline and device capacity;
+small-grid shape, kernels, barriers and arithmetic remain unchanged. Actual application
+throughput/default acceptance and empirical accuracy remain separate gates.
