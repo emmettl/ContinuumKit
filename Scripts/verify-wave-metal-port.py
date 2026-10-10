@@ -26,3 +26,17 @@ adapt=observation['pressureOnlyAdaptation'];start=shader.index(b'            flo
 raw=shader[start:start+adapt['retainedPressureStatementsBytes']]
 if hashlib.sha256(raw).hexdigest()!=adapt['retainedPressureStatementsSHA256']:raise ValueError('pressure-only sampling statements differ')
 print('PASS exact pinned observation kernel and pressure-only arithmetic')
+
+# Mixed receivers retain the exact pinned arithmetic on both sides of the absent-probe guard.
+full=shader[shader.index(b'kernel void waveSample('):shader.index(b'// Pressure-only port')]
+mixed=shader[shader.index(b'kernel void waveSampleMixed('):]
+pressure_start=b'            float value = 0;'
+velocity_start=b'            uint plane = g.nx * g.ny;'
+pressure_end=b'            uint at = velocityCells[r];'
+if full[full.index(pressure_start):full.index(pressure_end)] != mixed[mixed.index(pressure_start):mixed.index(pressure_end)]:
+ raise ValueError('mixed pressure statements differ from pinned kernel')
+if full[full.index(velocity_start):full.index(b'        }')] != mixed[mixed.index(velocity_start):mixed.index(b'        }',mixed.index(velocity_start))]:
+ raise ValueError('mixed velocity statements differ from pinned kernel')
+guard=b'if (at == 0xffffffffu) {\n                velocityOutput[r * (steps + 1) + step + 1] = 0;\n                return;\n            }'
+if guard not in mixed or mixed.index(guard)>mixed.index(velocity_start):raise ValueError('missing early absent-probe guard')
+print('PASS mixed observation exact pinned pressure/velocity arithmetic and early absent-probe guard')

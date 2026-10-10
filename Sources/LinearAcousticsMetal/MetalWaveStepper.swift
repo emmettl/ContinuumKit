@@ -26,7 +26,8 @@ public final class MetalWaveStepper {
   private let context: MetalWaveContext
   private let device: any MTLDevice
   private let queue: any MTLCommandQueue
-  private let velocity, pressure, injection, sampling, pressureSampling: any MTLComputePipelineState
+  private let velocity, pressure, injection, sampling, pressureSampling,
+    mixedSampling: any MTLComputePipelineState
   private var observationStorage: MetalObservationStorage?
   private var amplitudeBuffer: (any MTLBuffer)?
   private let p, ux, uy, uz, inside, faces: any MTLBuffer
@@ -121,6 +122,7 @@ public final class MetalWaveStepper {
     injection = context.injection
     sampling = context.sampling
     pressureSampling = context.pressureSampling
+    mixedSampling = context.mixedSampling
     p = try buffer(initialFields.pressureOverDensity)
     ux = try buffer(initialFields.velocityX)
     uy = try buffer(initialFields.velocityY)
@@ -270,9 +272,12 @@ public final class MetalWaveStepper {
     var localStep = UInt32(step)
     var totalSteps = UInt32(steps)
     var abi = Grid(grid)
-    func encode(_ group: MetalObservationGroup, _ pressureOutput: any MTLBuffer, _ full: Bool) {
+    func encode(
+      _ group: MetalObservationGroup, _ pressureOutput: any MTLBuffer,
+      _ pipeline: any MTLComputePipelineState, _ velocityOutput: (any MTLBuffer)?
+    ) {
       var count = UInt32(group.indices.count)
-      encoder.setComputePipelineState(full ? sampling : pressureSampling)
+      encoder.setComputePipelineState(pipeline)
       encoder.setBuffer(p, offset: 0, index: 0)
       encoder.setBuffer(group.cells, offset: 0, index: 4)
       encoder.setBuffer(group.weights, offset: 0, index: 5)
@@ -280,25 +285,29 @@ public final class MetalWaveStepper {
       encoder.setBytes(&localStep, length: 4, index: 11)
       encoder.setBytes(&totalSteps, length: 4, index: 12)
       encoder.setBytes(&count, length: 4, index: 13)
-      if full {
+      if let velocityOutput {
         encoder.setBuffer(ux, offset: 0, index: 1)
         encoder.setBuffer(uy, offset: 0, index: 2)
         encoder.setBuffer(uz, offset: 0, index: 3)
         encoder.setBuffer(group.velocityCells, offset: 0, index: 6)
         encoder.setBuffer(group.axes, offset: 0, index: 7)
-        encoder.setBuffer(output.fullVelocity, offset: 0, index: 9)
+        encoder.setBuffer(velocityOutput, offset: 0, index: 9)
         encoder.setBytes(&abi, length: MemoryLayout<Grid>.stride, index: 10)
       }
-      let pipeline = full ? sampling : pressureSampling
       encoder.dispatchThreads(
         MTLSize(width: Int(count), height: 1, depth: 1),
         threadsPerThreadgroup: MTLSize(
           width: min(8, pipeline.maxTotalThreadsPerThreadgroup), height: 1, depth: 1))
       encoder.memoryBarrier(scope: .buffers)
     }
-    if let group = plan.full, let buffer = output.fullPressure { encode(group, buffer, true) }
+    if let group = plan.full, let buffer = output.fullPressure {
+      encode(group, buffer, sampling, output.fullVelocity)
+    }
     if let group = plan.pressureOnly, let buffer = output.onlyPressure {
-      encode(group, buffer, false)
+      encode(group, buffer, pressureSampling, nil)
+    }
+    if let group = plan.mixed, let buffer = output.mixedPressure {
+      encode(group, buffer, mixedSampling, output.mixedVelocity)
     }
   }
 
@@ -323,6 +332,18 @@ public final class MetalWaveStepper {
         let p = pBuffer.contents().assumingMemoryBound(to: Float.self)
         for (r, index) in group.indices.enumerated() {
           pressure[index] = Double(p[r * steps + step])
+        }
+      }
+      if let group = plan.mixed, let pBuffer = output.mixedPressure,
+        let vBuffer = output.mixedVelocity
+      {
+        let p = pBuffer.contents().assumingMemoryBound(to: Float.self)
+        let v = vBuffer.contents().assumingMemoryBound(to: Float.self)
+        for (r, index) in group.indices.enumerated() {
+          pressure[index] = Double(p[r * steps + step])
+          if plan.observation.receivers[index].velocityCell != nil {
+            velocity[index] = Double(v[r * (steps + 1) + step + 1])
+          }
         }
       }
       for index in pressure.indices {

@@ -72,9 +72,11 @@ def verify(root):
     v['encodingSeconds']=statistics.median(sum(c['encodingSeconds'] for c in r['commands']) for r in rs)
     v['commitWaitSeconds']=statistics.median(sum(c['commitWaitSeconds'] for c in r['commands']) for r in rs)
    summary['modes'][m]=v
+  control='profile32' if n<4096 else 'profile256'
+  summary['sameFieldGroupSplitToCandidateWall']=summary['modes'][control]['wallSeconds']/summary['modes']['candidate']['wallSeconds']
   summary['largerGroupToCandidateWall']=summary['modes']['profile256']['wallSeconds']/summary['modes']['candidate']['wallSeconds']
   summary['largerGroupToProfile32GPU']=summary['modes']['profile256']['gpuSeconds']/summary['modes']['profile32']['gpuSeconds'];summaries.append(summary)
  require(frame_count==27648,'complete receiver frame tree')
- return {'schemaVersion':1,'status':'passed','candidate':env['candidate'],'device':report['device'],'completeRuns':27,'completeFieldWords':field_words,'nativeFrames':frame_count,'source':'private profiling copies retain exact alpha.10 except declared timing/group patches; public candidate uses fetched exact revision; every barrier retained','scope':'controlled model profile on live hosts; no isolated or application throughput claim','timings':summaries}
+ return {'schemaVersion':1,'status':'passed','candidate':env['candidate'],'device':report['device'],'completeRuns':27,'completeFieldWords':field_words,'nativeFrames':frame_count,'source':'private profiling copies retain exact alpha.10 except declared timing/group patches; public candidate uses fetched exact revision; field/injection/completion dependencies retained','scope':'controlled model profile on live hosts; no isolated or application throughput claim','timings':summaries}
 if __name__=='__main__':
  p=argparse.ArgumentParser(description=__doc__);p.add_argument('root',type=Path);a=p.parse_args();r=verify(a.root);(a.root/'verification.json').write_text(json.dumps(r,indent=2,sort_keys=True)+'\n');print('PASS 27 complete field/receiver/clock profiles; larger-group/candidate wall ratios:',[t['largerGroupToCandidateWall'] for t in r['timings']])

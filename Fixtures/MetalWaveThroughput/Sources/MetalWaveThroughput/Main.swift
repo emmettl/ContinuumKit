@@ -235,7 +235,7 @@ struct Report: Encodable {
     encoder.outputFormatting = [.sortedKeys]
     try encoder.encode(report).write(to: output.appendingPathComponent("metal-throughput.json"))
     print(
-      "PASS 27 complete candidate/profiled/group runs; every field and receiver bit retained; barriers unchanged"
+      "PASS 27 complete candidate/profiled/group runs; every field and receiver bit retained; dependency barriers preserved"
     )
   }
 }
