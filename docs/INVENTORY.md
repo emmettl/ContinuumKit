@@ -251,3 +251,10 @@ The FFT packing/normalization gap is addressed. Next bounded numerical work shou
 separate fitting arithmetic from measurement/decay-window policy before extraction;
 heterogeneous fluids, Edgerton's different 2D forcing/damping and actively changing
 coupled material/contact/fracture systems remain separate model gaps.
+
+The [fitting inventory and conditioning audit](extraction/FITTING_PLAN.md) now
+pins actual RoomCAD affine kernels and separates their numeric operation from
+noise/window/calibration policy, Edgerton's material search and BombCAD's weighted
+reconstruction. Exact-native rational references expose raw-moment cancellation.
+A stabilized affine primitive requires its own contract; no source/pin/model is
+moved or released by this audit.

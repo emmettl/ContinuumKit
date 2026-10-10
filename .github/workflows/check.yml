@@ -8,7 +8,7 @@ on:
       suite:
         description: Complete package verification or bounded CPU execution evidence
         type: choice
-        options: [all, cpu-throughput, metal-throughput]
+        options: [all, cpu-throughput, metal-throughput, fitting-audit]
         default: all
 
 permissions:
@@ -241,3 +241,22 @@ jobs:
           path: ${{ runner.temp }}/metal-throughput-${{ github.run_id }}-${{ github.run_attempt }}
           if-no-files-found: warn
           retention-days: 14
+
+  fitting-audit:
+    if: github.event_name == 'workflow_dispatch' && inputs.suite == 'fitting-audit'
+    runs-on: [self-hosted, macOS, ARM64, metal, continuumkit]
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Audit protected affine kernels against exact native rational references
+        run: bash Scripts/check-affine-fit-audit.sh "${{ runner.temp }}/fitting-audit-${{ github.run_id }}-${{ github.run_attempt }}"
+      - name: Retain complete inputs/bits, findings and protected numerical bindings
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: fitting-audit-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/fitting-audit-${{ github.run_id }}-${{ github.run_attempt }}
+          if-no-files-found: error
