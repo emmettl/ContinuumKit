@@ -1,0 +1,56 @@
+{
+  "candidate": "e86fb0cd7acbc5f8b06b7d6bcd962b042a85d1a5",
+  "independentReferences": {
+    "connectedWorkRelativeResidualMax": 3.781966544380566e-07,
+    "crossHostMetricsIdentical": true,
+    "legacyDampedFinestAbsoluteError": 0.0015061631488355598,
+    "legacyDampedTemporalOrders": [
+      1.00167950274676,
+      1.000478802678491
+    ],
+    "omittedSourceCrossTermRelativeResidual": 0.0005011956694778164,
+    "rigidAllFieldTimeOrders": [
+      1.9890440942588512,
+      2.23402499354804,
+      1.9978730683282646,
+      2.046097756225496,
+      2.0051492242120412,
+      2.1175986646760596,
+      1.9991302218861409,
+      2.130741758146146
+    ],
+    "rigidFinestRelativeL2Max": 2.8771123973774505e-06
+  },
+  "physicalMini": {
+    "actualMetalTests": 20,
+    "coreRun": "https://github.com/emmettl/ContinuumKit/actions/runs/38008507643",
+    "cpuNoMetalUIGuard": "passed",
+    "fetchedResidentForcing": "passed",
+    "newMetalForcingTests": 9,
+    "optimizedFetchedConsumers": 3,
+    "privateSourceProducer": "b3d56ac7a8631099866ca3ad1f400b13744f376e",
+    "sourceRun": "https://github.com/emmettl/edgerton/actions/runs/38008752306",
+    "tests": 189
+  },
+  "schemaVersion": 1,
+  "scope": "unreleased resident GPU and CPU pressure forcing; receiver/application integration remains separate",
+  "sourceComparison": {
+    "Float32BitMismatches": 0,
+    "GPUFinalBatchStep": 257,
+    "GPUForcedCapturesPerDevice": 528,
+    "capturesPerDevice": 2088,
+    "configurations": [
+      "debug",
+      "release"
+    ],
+    "crossDeviceConfigurationReportsByteIdentical": true,
+    "devices": [
+      "Apple M4 Max",
+      "Apple M4"
+    ],
+    "postconditionNegativeControls": 7,
+    "roomRevision": "f2f6465d0d845af9adda596c004b18ca15a77edd",
+    "totalCaptures": 4176
+  },
+  "status": "passed"
+}

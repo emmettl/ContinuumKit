@@ -61,3 +61,26 @@ The optimized fetched Metal consumer must load the packaged injection resource a
 exercise signed forcing plus three command batches. Merge requires the committed
 candidate full physical-mini `Scripts/check.sh`, original references and complete
 private source comparison evidence. No receiver, app loop or release tag is moved here.
+
+## Verified candidate checkpoint
+
+Candidate `e86fb0cd7acbc5f8b06b7d6bcd962b042a85d1a5` passes
+[the full mini check](https://github.com/emmettl/ContinuumKit/actions/runs/38008507643):
+189 tests, all three optimized fetched consumers, CPU-only linkage and actual
+packaged resident forcing. Twenty actual-device tests pass, nine for forcing.
+Independent Metal metrics match M4 Max and M4: rigid all-field time orders
+1.989–2.234, finest relative L2 below 2.88e−6, full source/wall work residual
+3.79e−7. Omitting the pressure–velocity term instead gives 5.01e−4 residual.
+Preserved damped forcing measures orders 1.0017/1.0005 with finest absolute
+continuum error 0.001507; that accuracy limit remains separate.
+
+The [private source mini gate](https://github.com/emmettl/edgerton/actions/runs/38008752306)
+and M4 Max counterpart pass all 2,088 captures each across CPU/GPU, forced/source-free
+and debug/release (4,176 total). GPU forcing retains 65 consecutive clocks and a
+257-step state crossing three command batches per control. Original/shared fields
+have zero runtime Float32 bit mismatches; all corresponding complete reports are
+byte-identical across hosts/configurations. The producer and separate postcondition
+require full report/cardinality/dependency scope; seven adversarial controls reject
+missing or corrupted evidence. [Aggregate verification](linear-wave-forcing-metal-verification.json)
+records identities. Full raw reports/wrappers, environments, dependencies and all
+logs are retained privately in Edgerton. The final checkpoint changes documentation only.
