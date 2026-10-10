@@ -55,3 +55,25 @@ for 257 steps, including 128-step observation batches and arbitrary lookahead ch
 Final merge requires the committed-candidate full mini check, fetched packaged consumer,
 complete source evidence on both Macs/configurations and strict report postconditions.
 Application loop replacement and empirical acoustic validation remain separate gates.
+
+## Verified resident checkpoint
+
+Candidate `ac0e8dbde2bc7dbfdd68eba8619f14c8e8f92735` passes
+[the full physical-mini check](https://github.com/emmettl/ContinuumKit/actions/runs/38013163081):
+207 tests, all 38 CPU and 28 actual-Metal tests, all optimized fetched consumers,
+packaged resident observations and CPU-only linkage. The
+[private GPU receiver gate](https://github.com/emmettl/edgerton/actions/runs/38013324179)
+and M4 Max counterpart pass 4,128 complete native-field/receiver captures and 12,336
+mixed samples across hosts/debug/release, with zero runtime Float32/Float64 bit
+mismatches and corresponding complete reports byte-identical. Every 257-step case
+checks direct samples, 128-step retained histories, arbitrary 37-frame lookahead
+chunks and exact original final mixed output. Pressure-only output matches the
+original full kernel's pressure values without requiring unused velocity work.
+
+All current CPU native/receiver/mixed reports match the prior verified CPU implementation,
+except the candidate-revision envelope. The strict producer and independent postcondition
+retain full shape/clock/value/history/dependency scope; seven adversarial controls reject
+altered or incomplete evidence. [Aggregate proof](linear-wave-observation-metal-verification.json)
+records identities. Complete raw reports, pinned original/control source, environments,
+resolved dependencies and logs are retained privately in Edgerton. This subsequent
+checkpoint adds documentation only. Production loop binding remains the next gate.

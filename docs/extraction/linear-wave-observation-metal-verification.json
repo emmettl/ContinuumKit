@@ -1,0 +1,41 @@
+{
+  "CPUContinuity": {
+    "allCompleteReportsUnchangedExceptCandidateMetadata": true,
+    "currentCandidate": "ac0e8dbde2bc7dbfdd68eba8619f14c8e8f92735",
+    "priorCPUReference": "d637788ebe771950b1ef1c43d3186060b0633c7e"
+  },
+  "candidate": "ac0e8dbde2bc7dbfdd68eba8619f14c8e8f92735",
+  "physicalMini": {
+    "actualMetalTests": 28,
+    "coreRun": "https://github.com/emmettl/ContinuumKit/actions/runs/38013163081",
+    "cpuNoMetalUIGuard": "passed",
+    "cpuTests": 38,
+    "fetchedResidentObservation": "passed",
+    "newMetalObservationTests": 8,
+    "sourceProducer": "6612983b0d373fb7c020acf5c8db12e9cd9f3851",
+    "sourceRun": "https://github.com/emmettl/edgerton/actions/runs/38013324179",
+    "tests": 207
+  },
+  "schemaVersion": 1,
+  "scope": "unreleased resident Metal receiver sampling and bounded histories; production app integration remains separate",
+  "sourceComparison": {
+    "boundedObservedBatchSteps": 128,
+    "configurations": [
+      "debug",
+      "release"
+    ],
+    "correspondingReportsByteIdentical": true,
+    "devices": [
+      "Apple M4 Max",
+      "Apple M4"
+    ],
+    "lookaheadChunkSteps": 37,
+    "postconditionNegativeControls": 7,
+    "roomRevision": "f2f6465d0d845af9adda596c004b18ca15a77edd",
+    "runtimeFloat32AndFloat64BitMismatches": 0,
+    "stepsPerCase": 257,
+    "totalMixedSamples": 12336,
+    "totalNativeReceiverCaptures": 4128
+  },
+  "status": "passed"
+}
