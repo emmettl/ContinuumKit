@@ -1,0 +1,20 @@
+{
+  "applicationAdoption": "separate BombCAD gate pending; alpha.15 remains immutable",
+  "commit": "1977b38a66382533be902350b40e7084a2d1e9ca",
+  "fetchedExactVersionConsumers": 6,
+  "nativeCases": 751,
+  "nativeIntervals": 1974,
+  "negativeControls": 14,
+  "packageTests": 261,
+  "physicalMini": "https://github.com/emmettl/ContinuumKit/actions/runs/38056735711",
+  "publishedAt": "2026-10-10T13:48:53Z",
+  "rawReportMatchesTwoHostAssemblyCandidate": true,
+  "release": "https://github.com/emmettl/ContinuumKit/releases/tag/0.1.0-alpha.16",
+  "releaseLogSHA256": "3e81fdd961e107d69e6e73b6bb58289cb62550d60566f8ff5377b3074805d951",
+  "returnedNativeCells": 105149,
+  "schemaVersion": 1,
+  "scope": "public unchecked result assembly for app-owned SSPRK2; prescribed Euler reference, no geometry/body/time policy or empirical blast claim",
+  "status": "published verified prerelease",
+  "tag": "0.1.0-alpha.16",
+  "tagObject": "7bbb65636a22cc4b782c423a103dd55e012b35e3"
+}

@@ -137,3 +137,8 @@ on both hosts. All 751 complete native cases remain byte-identical to alpha.15.
 The [alpha.15 publication record](euler-flux-release.json) retains the completed
 release and compatibility follow-up. Alpha.16 exact-tag verification precedes use
 by the app-owned SSPRK2 wrappers.
+
+Published, 10 October 2026: [alpha.16 exact-tag proof](alpha16-release-verification.json)
+records successful 261-test/six-consumer physical-mini verification and retained
+complete native identity before publication. Public result assembly is now released;
+actual application adoption and its complete coupled/full-app gates remain separate.
