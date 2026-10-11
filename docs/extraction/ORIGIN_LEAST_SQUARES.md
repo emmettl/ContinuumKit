@@ -61,3 +61,12 @@ controls. All 94 existing source/test blobs are unchanged from alpha.19.
 This closes the candidate gate. Publishing alpha.20 still requires immutable
 annotated-tag and exact-tag physical-mini verification; no application calibration
 adoption or empirical material accuracy follows from these numerical checks.
+
+
+## Publication
+
+[Alpha.20](https://github.com/emmettl/ContinuumKit/releases/tag/0.1.0-alpha.20) is now public after the complete exact-tag gate.
+The [immutable tag/run/publication proof](alpha20-release-verification.json) and
+[private full release replay](https://github.com/emmettl/edgerton/pull/78) retain
+both physical-host exact-version consumers and every candidate/native/reference
+identity. Edgerton calibration remains a separate application task.
