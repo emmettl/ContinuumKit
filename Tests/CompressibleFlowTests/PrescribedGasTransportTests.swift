@@ -1,7 +1,9 @@
 import CompressibleFlow
 import Foundation
 import Testing
-import simd
+#if canImport(simd)
+  import simd
+#endif
 
 @Suite("Prescribed gas packet conservation")
 struct PrescribedGasTransportTests {

@@ -1,6 +1,8 @@
 import Foundation
 import SceneModel
-import simd
+#if canImport(simd)
+  import simd
+#endif
 
 /// Camera orbiting a target point; z is up.
 public struct OrbitCamera: Sendable, Hashable {

@@ -1,5 +1,7 @@
 import Foundation
-import simd
+#if canImport(simd)
+  import simd
+#endif
 
 /// The polygons of an OBJ or STL file, as written: geometry only, in the file's own units and axes.
 ///

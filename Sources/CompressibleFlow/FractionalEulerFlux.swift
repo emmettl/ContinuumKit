@@ -1,4 +1,8 @@
-import simd
+import Foundation
+
+#if canImport(simd)
+  import simd
+#endif
 
 /// Ideal-gas Rusanov flux for positive fractional volumes, with optional supplied face traces.
 /// Faces are paired internal/periodic interfaces; planar walls use exact local wall pressure.
