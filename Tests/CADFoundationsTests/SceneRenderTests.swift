@@ -7,8 +7,37 @@ import SceneView
 import Testing
 import simd
 
+/// A controller that only keeps a camera, with the default zoom limits.
+private final class PlainController: OrbitControlling {
+    var camera = OrbitCamera(target: .zero, distance: 500, azimuth: 0, elevation: 0.5)
+    func click(ndc: SIMD2<Float>, aspectRatio: Float) {}
+}
+
+/// A controller for a scene kilometres across, which widens them.
+private final class WideController: OrbitControlling {
+    var camera = OrbitCamera(target: .zero, distance: 500, azimuth: 0, elevation: 0.5)
+    var zoomLimits: ClosedRange<Float> { 3...20_000 }
+    func click(ndc: SIMD2<Float>, aspectRatio: Float) {}
+}
+
 @Suite("Scene rendering")
 struct SceneRenderTests {
+    @Test("Zoom keeps to 3–600 unless given limits, and a controller may set its own")
+    @MainActor func zoomLimits() {
+        var camera = OrbitCamera(target: .zero, distance: 500, azimuth: 0, elevation: 0.5)
+        camera.zoom(by: 4)
+        #expect(camera.distance == 600)
+        camera.zoom(by: 1e-6)
+        #expect(camera.distance == 3)
+        camera.distance = 500
+        camera.zoom(by: 4, within: 3...20_000)
+        #expect(camera.distance == 2000)
+        camera.zoom(by: 100, within: 3...20_000)
+        #expect(camera.distance == 20_000)
+        #expect(PlainController().zoomLimits == OrbitCamera.defaultZoomLimits)
+        #expect(WideController().zoomLimits == 3...20_000)
+    }
+
     static let floorColour = SIMD4<Float>(0.2, 0.4, 0.9, 1)
     static let wallColour = SIMD4<Float>(0.9, 0.3, 0.2, 1)
 
