@@ -258,3 +258,10 @@ noise/window/calibration policy, Edgerton's material search and BombCAD's weight
 reconstruction. Exact-native rational references expose raw-moment cancellation.
 A stabilized affine primitive requires its own contract; no source/pin/model is
 moved or released by this audit.
+
+The [through-origin material arithmetic audit](extraction/THROUGH_ORIGIN_PLAN.md)
+now freezes Edgerton's actual shear/bulk projection separately from its specimen,
+positivity and relaxation-search policy. Exact-native rational references expose
+raw-product range loss. No application or numerical product is changed by this
+audit; compare the released single-column QR against a directly scaled projection
+before deciding whether another public primitive is useful.

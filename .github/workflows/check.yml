@@ -8,7 +8,7 @@ on:
       suite:
         description: Complete package verification or bounded CPU execution evidence
         type: choice
-        options: [all, cpu-throughput, metal-throughput, fitting-audit, weighted-qr-audit]
+        options: [all, cpu-throughput, metal-throughput, fitting-audit, weighted-qr-audit, through-origin-audit]
         default: all
 
 permissions:
@@ -296,4 +296,23 @@ jobs:
         with:
           name: weighted-qr-audit-${{ github.run_id }}-${{ github.run_attempt }}
           path: ${{ runner.temp }}/weighted-qr-audit-${{ github.run_id }}-${{ github.run_attempt }}
+          if-no-files-found: error
+
+  through-origin-audit:
+    if: github.event_name == 'workflow_dispatch' && inputs.suite == 'through-origin-audit'
+    runs-on: [self-hosted, macOS, ARM64, metal, continuumkit]
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Verify protected material projection arithmetic and exact native references
+        run: bash Scripts/check-through-origin-audit.sh "${{ runner.temp }}/through-origin-audit-${{ github.run_id }}-${{ github.run_attempt }}"
+      - name: Retain full native projection terms, references and rejecting controls
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: through-origin-audit-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/through-origin-audit-${{ github.run_id }}-${{ github.run_attempt }}
           if-no-files-found: error

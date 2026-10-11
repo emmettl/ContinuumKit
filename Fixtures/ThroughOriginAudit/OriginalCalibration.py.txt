@@ -1,0 +1,68 @@
+#!/usr/bin/env python3
+"""Fit independent small-strain material measurements; standard library only.
+CSV columns: test,strain,stress_pa,time_s (time only for relaxation).
+test = shear | bulk | relaxation. Bulk requires hydrostatic pressure and
+positive volumetric compression, NOT ordinary uniaxial compression.
+Relaxation rows require a fixed, positive applied shear strain. Hold time
+starts at the end of loading. --ramp-duration accounts for a constant-rate
+loading ramp; zero means an instantaneous strain step.
+"""
+import argparse, csv, json, math
+from pathlib import Path
+
+def fit(rows, ramp_duration=0):
+    if not math.isfinite(ramp_duration) or ramp_duration<0: raise ValueError("Invalid ramp duration")
+    out={'status':'measurement fit; not an impact validation','units':'Pa, s', 'fits':{}}
+    for kind in ('shear','bulk'):
+        samples=[(float(r['strain']),float(r['stress_pa'])) for r in rows if r['test']==kind]
+        if not samples: continue
+        if len(samples)<3: raise ValueError(f'{kind}: at least three measurements required')
+        denom=sum(x*x for x,y in samples)
+        if denom<=0: raise ValueError(f'{kind}: no nonzero strain')
+        modulus=sum(x*y for x,y in samples)/denom
+        if modulus<=0: raise ValueError(f'{kind}: fitted modulus must be positive; check signs')
+        out['fits'][kind]={'modulus_pa':modulus,'rmse_pa':math.sqrt(sum((y-modulus*x)**2 for x,y in samples)/len(samples)), 'samples':len(samples),'law':'stress = modulus * strain; zero intercept'}
+    samples=sorted((float(r['time_s']),float(r['strain']),float(r['stress_pa'])) for r in rows if r['test']=='relaxation')
+    if samples:
+        if len(samples)<6: raise ValueError('relaxation: at least six samples required')
+        strain=samples[0][1]
+        if strain<=0 or any(abs(e-strain)>max(1e-8,strain*1e-4) for t,e,y in samples): raise ValueError('relaxation: requires constant positive shear strain')
+        if samples[0][0]<0 or samples[-1][0]<=samples[0][0]: raise ValueError('relaxation: invalid time range')
+        if any(b[0]<=a[0] for a,b in zip(samples,samples[1:])): raise ValueError("relaxation: duplicate times")
+        if any(not all(math.isfinite(value) for value in sample) for sample in samples): raise ValueError("relaxation: non-finite sample")
+        positive=[b[0]-a[0] for a,b in zip(samples,samples[1:]) if b[0]>a[0]]
+        lo=min(positive)/10;hi=(samples[-1][0]-samples[0][0])*10
+        best=None
+        for i in range(601):
+            tau=math.exp(math.log(lo)+(math.log(hi)-math.log(lo))*i/600)
+            xs=[math.exp(-t/tau) for t,e,y in samples];ys=[y/strain for t,e,y in samples];n=len(xs)
+            sx=sum(xs);sxx=sum(x*x for x in xs);sy=sum(ys);sxy=sum(x*y for x,y in zip(xs,ys));det=n*sxx-sx*sx
+            if det<1e-16: continue
+            g0=(sy*sxx-sxy*sx)/det;g1=(n*sxy-sx*sy)/det
+            if g0<=0 or g1<0: continue
+            error=sum((y-g0-g1*x)**2 for x,y in zip(xs,ys))
+            if best is None or error<best[0]: best=(error,g0,g1,tau,i)
+        if best is None: raise ValueError('relaxation: no nonnegative single-branch fit')
+        error,g0,g1,tau,i=best
+        factor=1 if ramp_duration==0 else -math.expm1(-ramp_duration/tau)/(ramp_duration/tau)
+        if factor<=1e-8: raise ValueError("Ramp obscures fitted branch; obtain loading history and faster measurements")
+        g1/=factor
+        out['fits']['relaxation']={'equilibrium_shear_pa':g0,'branch_shear_pa':g1,'relaxation_time_s':tau,'rmse_pa':math.sqrt(error/len(samples))*strain,'samples':len(samples),'ramp_duration_s':ramp_duration,'time_origin':'end of constant-rate loading ramp','law':'stress/strain = G_equilibrium + G_branch * A(T/tau) * exp(-t/tau); A(x)=(1-exp(-x))/x','warning':'Exploratory small-strain fit; native import uses this branch in an objective finite-deformation reference, which still needs independent validation. Extend observation window if tau approaches a fit bound.','at_search_boundary':i in (0,600)}
+    if not out['fits']: raise ValueError('No supported measurements found')
+    return out
+
+def main():
+    p=argparse.ArgumentParser(description=__doc__);p.add_argument('csv',type=Path);p.add_argument('--output',type=Path);p.add_argument('--specimen',required=True,help='Preparation, concentration, temperature, rate and source')
+    p.add_argument('--ramp-duration',type=float,default=0,help='Constant-rate shear loading ramp duration in seconds; hold times start at ramp end')
+    args=p.parse_args()
+    with args.csv.open(newline='') as f: rows=list(csv.DictReader(f))
+    for row in rows:
+        for key in ('strain','stress_pa'):
+            if not math.isfinite(float(row[key])): raise ValueError(f'Non-finite {key}')
+        if row['test']=='relaxation' and not math.isfinite(float(row['time_s'])): raise ValueError('Non-finite time')
+        if row['test'] not in ('shear','bulk','relaxation'): raise ValueError(f"Unknown test {row['test']}")
+    result=fit(rows,args.ramp_duration);result['specimen']=args.specimen;result['source_file']=str(args.csv)
+    text=json.dumps(result,indent=2,allow_nan=False)+'\n'
+    if args.output: args.output.write_text(text)
+    else: print(text,end='')
+if __name__=='__main__': main()
