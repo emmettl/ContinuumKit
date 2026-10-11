@@ -236,3 +236,22 @@ original audit stays unchanged, including its numerical findings.
 annotated/peeled tag, successful verify/publish jobs and actual release timestamp.
 Gas reconstruction/fallback/limiting/EOS adoption and empirical accuracy remain
 separate gates; previous tags are unchanged.
+
+
+## Published exact through-origin projection
+
+Public [alpha.20](https://github.com/emmettl/ContinuumKit/releases/tag/0.1.0-alpha.20) adds `Numerics.OriginLeastSquares`: exact
+native dyadic products/sums and one nearest-even quotient rounding, with checked
+input/rank/allocation/coefficient/query/prediction boundaries. Its mathematical
+count/sign/zero contract remains separate from material interpretation.
+
+The [exact-tag physical-mini workflow](https://github.com/emmettl/ContinuumKit/actions/runs/38104607036) passes 292 tests, ten
+optimized consumers resolving exact alpha.20, actual Metal and all previous model
+suites before publication. Both physical Macs retain identical complete 450-case
+native input/arithmetic/output/reference/control trees, including the actual
+million-sample cap. All 94 existing source/test blobs remain protected.
+
+[Publication proof](extraction/alpha20-release-verification.json) records the
+immutable annotated/peeled tag, successful verify/publish jobs and full private
+network-free candidate/exact-tag replay. No application calibration migration or
+empirical material accuracy claim is included. Earlier tags remain unchanged.
