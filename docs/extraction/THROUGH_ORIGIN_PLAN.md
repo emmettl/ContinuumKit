@@ -42,3 +42,16 @@ native/reference gates on both physical Macs before release. Any later Edgerton
 adoption requires its own bounded calibration task and frozen full CSV/result
 comparison, retaining signs, minimum counts, specimen meanings, positivity and
 relaxation search policy. Active contact/fracture studies remain app-owned.
+
+
+## Existing released primitive comparison candidate
+
+The [single-column comparison](../../Fixtures/ThroughOriginComparison/README.md)
+builds an external exact-alpha.19 Git consumer. Its first local optimized run
+passes 84 representable/nondegenerate generic projections; two zero-strain cases
+reject as rank deficient and four unrepresentable coefficients reject explicitly.
+A separately scaled dot/norm prototype agrees with the selected exact-reference
+budgets. Complete QR/public diagnostics and prototype intermediate terms remain
+visible. Generic negative/zero coefficients and two-row solves intentionally stay
+separate from the source material policy. The local result alone is not a two-host
+publication gate, and no extra API, release or calibration adoption is added.
