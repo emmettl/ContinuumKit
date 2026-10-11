@@ -38,6 +38,11 @@ physical gaps separately from numerical conformance. CI runs on the physical Mac
 see [CI operations](docs/CI.md). The committed candidate is fetched through Git, with
 an exact version requirement at release verification.
 
+Each check script writes its evidence to the folder it is given (an argument or its
+`CONTINUUMKIT_*_OUTPUT` variable, as CI does), which is kept. Given none, it makes one
+under `CONTINUUMKIT_OUTPUT_ROOT` (default `TMPDIR`) and removes it on exit, a few hundred
+megabytes a run; `CONTINUUMKIT_KEEP_OUTPUT=1` keeps it and prints where.
+
 The module implementations and shader are copied byte-for-byte. The rendering test
 now fails on missing Metal instead of returning early. Saved identifiers, including
 `dev.simulationkit.project`, are retained. See [CAD provenance](docs/extraction/CAD_FOUNDATIONS.md) and

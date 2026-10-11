@@ -27,6 +27,13 @@ the device, compiles a kernel, dispatches actual compute, waits for completion a
 verifies every output. A missing device, GPU error or wrong result fails the job.
 This ensures GPU-dependent model checks cannot silently pass on a VM without Metal.
 
+## Output folders
+
+The workflow gives every check script its output folder under `runner.temp`, so the
+evidence is kept for upload. A script run without one removes the folder it made itself
+on exit (`Scripts/output.sh`); set `CONTINUUMKIT_KEEP_OUTPUT=1` to keep it, and
+`CONTINUUMKIT_OUTPUT_ROOT` to make it on another volume than `TMPDIR`.
+
 ## Service operations
 
 On the mini, as `louisemmett`:
