@@ -1,0 +1,10 @@
+{
+  "schemaVersion": 1,
+  "repository": "https://github.com/emmettl/edgerton",
+  "revision": "4956e002125c16aee805f624d13463a02368787f",
+  "path": "Scripts/calibrate-material.py",
+  "gitBlob": "9d963dc0b30bb6672da1055d375a887da0d2e8a0",
+  "sha256": "a6b8bf26cb1279b43234b04679e24e957c14317902b17ed5f0a3c0835b43d837",
+  "snapshot": "OriginalCalibration.py.txt",
+  "scope": "actual fit() shear/bulk branches; relaxation search and CLI policy are retained in source but not extracted or evaluated"
+}
