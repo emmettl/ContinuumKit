@@ -1,8 +1,10 @@
 #!/bin/bash
 set -euo pipefail
 root=$(cd "$(dirname "$0")/.." && pwd)
+. "$root/Scripts/output.sh"
+trap continuumkit_cleanup EXIT
 cd "$root"
-output=${1:-${CONTINUUMKIT_RIGID_3D_OUTPUT:-$(mktemp -d "${TMPDIR:-/tmp}/continuumkit-rigid-3d.XXXXXX")}}
+continuumkit_output rigid-3d "${1:-${CONTINUUMKIT_RIGID_3D_OUTPUT:-}}"
 mkdir -p "$output"
 python3 Scripts/benchmark-metadata.py --root "$root" --repository https://github.com/emmettl/ContinuumKit \
  --output "$output/environment.json" Sources/BenchmarkSupport/RigidModes3D.swift Sources/BenchmarkSupport/RigidModeCommand.swift

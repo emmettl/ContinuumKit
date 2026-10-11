@@ -1,10 +1,11 @@
 #!/bin/bash
 set -euo pipefail
 root=$(cd "$(dirname "$0")/.." && pwd)
+. "$root/Scripts/output.sh"
 test -z "$(git -C "$root" status --porcelain)"
-output=${1:-$(mktemp -d "${TMPDIR:-/tmp}/continuumkit-through-origin-comparison.XXXXXX")}
+continuumkit_output through-origin-comparison "${1:-}"
 scratch=$(mktemp -d "${TMPDIR:-/tmp}/continuumkit-through-origin-build.XXXXXX")
-trap 'rm -rf "$scratch"' EXIT
+trap 'rm -rf "$scratch"; continuumkit_cleanup' EXIT
 mkdir -p "$output"
 python3 -B "$root/Scripts/prepare-through-origin-comparison.py" "$output/inputs.json"
 git -C "$root" archive HEAD Fixtures/ThroughOriginComparison | tar -x -C "$scratch"

@@ -1,11 +1,12 @@
 #!/bin/bash
 set -euo pipefail
 root=$(cd "$(dirname "$0")/.." && pwd)
+. "$root/Scripts/output.sh"
 test -z "$(git -C "$root" status --porcelain)"
 revision=$(git -C "$root" rev-parse HEAD)
-output=${1:-$(mktemp -d "${TMPDIR:-/tmp}/continuumkit-affine-audit-output.XXXXXX")}
+continuumkit_output affine-audit-output "${1:-}"
 scratch=$(mktemp -d "${TMPDIR:-/tmp}/continuumkit-affine-audit-build.XXXXXX")
-trap 'rm -rf "$scratch"' EXIT
+trap 'rm -rf "$scratch"; continuumkit_cleanup' EXIT
 mkdir -p "$output"
 python3 - "$root" "$output" "$revision" <<'PYMETA'
 import hashlib,json,platform,subprocess,sys

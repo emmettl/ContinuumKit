@@ -1,8 +1,10 @@
 #!/bin/bash
 set -euo pipefail
 root=$(cd "$(dirname "$0")/.." && pwd)
+. "$root/Scripts/output.sh"
+trap continuumkit_cleanup EXIT
 cd "$root"
-output=${1:-${CONTINUUMKIT_ABSORBING_CYLINDER_OUTPUT:-$(mktemp -d "${TMPDIR:-/tmp}/continuumkit-absorbing-cylinder.XXXXXX")}}
+continuumkit_output absorbing-cylinder "${1:-${CONTINUUMKIT_ABSORBING_CYLINDER_OUTPUT:-}}"
 mkdir -p "$output"
 python3 Scripts/benchmark-metadata.py --root "$root" --repository https://github.com/emmettl/ContinuumKit \
  --output "$output/environment.json" Sources/BenchmarkSupport/AbsorbingCylinder.swift Sources/BenchmarkSupport/AbsorbingCylinderCommand.swift Sources/BenchmarkSupport/CylinderModes.swift Sources/BenchmarkSupport/ObliqueMode.swift

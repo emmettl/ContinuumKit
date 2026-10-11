@@ -1,13 +1,14 @@
 #!/bin/bash
 set -euo pipefail
 root=$(cd "$(dirname "$0")/.." && pwd)
+. "$root/Scripts/output.sh"
 cd "$root"
-output=${1:-$(mktemp -d "${TMPDIR:-/tmp}/continuumkit-metal-throughput-output.XXXXXX")}
+continuumkit_output metal-throughput-output "${1:-}"
 mkdir -p "$output"
 test -z "$(git status --porcelain)"
 revision=$(git rev-parse HEAD)
 scratch=$(mktemp -d "${TMPDIR:-/tmp}/continuumkit-metal-throughput-build.XXXXXX")
-trap 'task_status=$?; rm -rf "$scratch"; exit "$task_status"' EXIT
+trap 'task_status=$?; rm -rf "$scratch"; continuumkit_cleanup; exit "$task_status"' EXIT
 git clone --no-local --quiet "$root" "$scratch/ContinuumKit"
 test "$(git -C "$scratch/ContinuumKit" rev-parse HEAD)" = "$revision"
 python3 Scripts/prepare-metal-wave-throughput.py --core "$scratch/ContinuumKit" --output "$scratch/consumer"

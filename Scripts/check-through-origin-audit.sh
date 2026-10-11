@@ -1,8 +1,10 @@
 #!/bin/bash
 set -euo pipefail
 root=$(cd "$(dirname "$0")/.." && pwd)
+. "$root/Scripts/output.sh"
+trap continuumkit_cleanup EXIT
 test -z "$(git -C "$root" status --porcelain)"
-output=${1:-$(mktemp -d "${TMPDIR:-/tmp}/continuumkit-through-origin-audit.XXXXXX")}
+continuumkit_output through-origin-audit "${1:-}"
 mkdir -p "$output"
 python3 -B "$root/Scripts/through-origin-audit.py" "$output"
 python3 -B "$root/Scripts/through-origin-audit.py" "$output" --verify

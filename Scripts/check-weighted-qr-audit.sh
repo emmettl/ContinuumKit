@@ -1,11 +1,12 @@
 #!/bin/bash
 set -euo pipefail
 root=$(cd "$(dirname "$0")/.." && pwd)
+. "$root/Scripts/output.sh"
 test -z "$(git -C "$root" status --porcelain)"
 revision=$(git -C "$root" rev-parse HEAD)
-output=${1:-$(mktemp -d "${TMPDIR:-/tmp}/continuumkit-weighted-qr-output.XXXXXX")}
+continuumkit_output weighted-qr-output "${1:-}"
 scratch=$(mktemp -d "${TMPDIR:-/tmp}/continuumkit-weighted-qr-build.XXXXXX")
-trap 'rm -rf "$scratch"' EXIT
+trap 'rm -rf "$scratch"; continuumkit_cleanup' EXIT
 mkdir -p "$output"
 test ! -e "$output/original.json"
 python3 - "$root" "$output" "$revision" <<'PYMETA'

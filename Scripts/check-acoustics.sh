@@ -1,8 +1,10 @@
 #!/bin/bash
 set -euo pipefail
 root=$(cd "$(dirname "$0")/.." && pwd)
+. "$root/Scripts/output.sh"
+trap continuumkit_cleanup EXIT
 cd "$root"
-output=${1:-${CONTINUUMKIT_ACOUSTIC_OUTPUT:-$(mktemp -d "${TMPDIR:-/tmp}/continuumkit-acoustic.XXXXXX")}}
+continuumkit_output acoustic "${1:-${CONTINUUMKIT_ACOUSTIC_OUTPUT:-}}"
 mkdir -p "$output"
 python3 Scripts/benchmark-metadata.py --root "$root" --repository https://github.com/emmettl/ContinuumKit \
  --output "$output/environment.json" Sources/BenchmarkSupport/AcousticCase.swift \
