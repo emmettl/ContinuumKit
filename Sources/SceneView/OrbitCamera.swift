@@ -58,8 +58,17 @@ public struct OrbitCamera: Sendable, Hashable {
         elevation = min(max(elevation + deltaElevation, 0.03), 1.55)
     }
 
+    /// The distances `zoom(by:)` keeps the eye within, in scene units: 3 to 600.
+    public static let defaultZoomLimits: ClosedRange<Float> = 3...600
+
     public mutating func zoom(by factor: Float) {
-        distance = min(max(distance * factor, 3), 600)
+        zoom(by: factor, within: Self.defaultZoomLimits)
+    }
+
+    /// Moves the eye toward the target (`factor` below 1) or away from it, keeping the distance
+    /// within `limits`, as a scene larger or smaller than the default allows asks.
+    public mutating func zoom(by factor: Float, within limits: ClosedRange<Float>) {
+        distance = min(max(distance * factor, limits.lowerBound), limits.upperBound)
     }
 
     /// Slides the target parallel to the ground, in view-relative directions.

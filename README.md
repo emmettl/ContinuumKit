@@ -8,7 +8,7 @@ is the current prerelease; earlier tags remain available for existing consumers.
 | Product / module | Contents | Dependencies |
 | --- | --- | --- |
 | `SceneModel` | Codable bounds and Cartesian grids, metres with z up | Apple simd |
-| `SceneView` | Orbit camera, framing, rays and picking helpers | SceneModel, Foundation, simd |
+| `SceneView` | Orbit camera, framing, rays, picking helpers and zoom limits | SceneModel, Foundation, simd |
 | `SceneRender` | Scene geometry, Metal rendering, snapshots and orbit-control view | SceneModel/View, Metal/MetalKit, AppKit/CoreGraphics |
 | `GeometryImport` | Bounded OBJ and ASCII/binary STL reading | Foundation, simd |
 | `DocumentKit` | Versioned project containers, assets, integrity and bounded readers | Foundation, CryptoKit |

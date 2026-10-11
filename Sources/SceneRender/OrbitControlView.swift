@@ -15,6 +15,9 @@ public protocol OrbitControlling: AnyObject {
     /// The pointer moved during a drag taken by `beginDrag`, with the keys held.
     func drag(ndc: SIMD2<Float>, aspectRatio: Float, modifiers: DragModifiers)
     func endDrag()
+    /// The distances the view's wheel and pinch zoom keep the camera within; by default
+    /// `OrbitCamera.defaultZoomLimits`. A controller whose scene is kilometres across widens them.
+    var zoomLimits: ClosedRange<Float> { get }
 }
 
 /// Keys held during a drag: Option for `vertical`, Command for `resize`.
@@ -33,6 +36,7 @@ public struct DragModifiers: OptionSet, Sendable {
 }
 
 extension OrbitControlling {
+    public var zoomLimits: ClosedRange<Float> { OrbitCamera.defaultZoomLimits }
     public func beginDrag(ndc: SIMD2<Float>, aspectRatio: Float, modifiers: DragModifiers) -> Bool { false }
     public func drag(ndc: SIMD2<Float>, aspectRatio: Float, modifiers: DragModifiers) {}
     public func endDrag() {}
@@ -108,14 +112,20 @@ public final class OrbitControlView: MTKView {
                 deltaAzimuth: -Float(event.scrollingDeltaX) * 0.006,
                 deltaElevation: Float(event.scrollingDeltaY) * 0.006)
         } else {
-            controller?.camera.zoom(by: exp(-Float(event.scrollingDeltaY) * 0.05))
+            zoom(by: exp(-Float(event.scrollingDeltaY) * 0.05))
         }
         changed()
     }
 
     public override func magnify(with event: NSEvent) {
-        controller?.camera.zoom(by: 1 / (1 + Float(event.magnification)))
+        zoom(by: 1 / (1 + Float(event.magnification)))
         changed()
+    }
+
+    /// Zooms within the controller's limits.
+    private func zoom(by factor: Float) {
+        guard let controller else { return }
+        controller.camera.zoom(by: factor, within: controller.zoomLimits)
     }
 
     private func pan(_ event: NSEvent) {
