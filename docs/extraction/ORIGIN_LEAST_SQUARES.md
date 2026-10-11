@@ -43,3 +43,21 @@ package/previous suites and both physical Macs must pass. Complete source/runtim
 native/reference/control receipts and network-free replay precede any release.
 Edgerton's Python calibration requires a separate adoption decision and frozen
 CSV/policy checks; active mechanics and empirical material validation are separate.
+
+## Completed candidate checkpoint
+
+At exact producer `2832182191b66d9a6685df1a57512eae275871b7`, both physical
+M4 Max and M4 mini pass the full package checks, actual Metal, ten optimized clean
+Git consumers and all previous model suites. The [mini workflow](https://github.com/emmettl/ContinuumKit/actions/runs/38103567270)
+completes successfully. All 901 actual native input/arithmetic/output payloads and
+all public/reference/control/binding files match across hosts. The implementation
+is merged through [Core #74](https://github.com/emmettl/ContinuumKit/pull/74).
+
+The complete private archive in [Edgerton #77](https://github.com/emmettl/edgerton/pull/77)
+retains 1,865 payloads and full source/runtime/run receipts. Its network-free
+production/probe/public/rational/query/residual replay passes both captures,
+including nine numerical, four source/producer/pin/coverage and two run rejection
+controls. All 94 existing source/test blobs are unchanged from alpha.19.
+This closes the candidate gate. Publishing alpha.20 still requires immutable
+annotated-tag and exact-tag physical-mini verification; no application calibration
+adoption or empirical material accuracy follows from these numerical checks.
