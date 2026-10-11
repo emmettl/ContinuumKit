@@ -75,3 +75,8 @@ representation contract before any extra API is proposed. Expanded independent
 range/conditioning and two-host exact-consumer gates precede release; a Python
 calibration caller needs a separate integration decision. No current calibration
 or mechanics code is changed, and the published QR tag remains immutable.
+
+The [next direct-projection contract plan](THROUGH_ORIGIN_CONTRACT_PLAN.md) now
+bounds scaling/accumulation and output-support investigation, expanded exact-native
+conditioning cases, coherent controls and complete two-host/network-free gates.
+It adds no implementation or application calibration migration.
