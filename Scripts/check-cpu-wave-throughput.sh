@@ -1,14 +1,15 @@
 #!/bin/bash
 set -euo pipefail
 root=$(cd "$(dirname "$0")/.." && pwd)
+. "$root/Scripts/output.sh"
 cd "$root"
-output=${1:-$(mktemp -d "${TMPDIR:-/tmp}/continuumkit-cpu-throughput-output.XXXXXX")}
+continuumkit_output cpu-throughput-output "${1:-}"
 mkdir -p "$output"
 test -z "$(git status --porcelain)"
 revision=$(git rev-parse HEAD)
 scratch=$(mktemp -d "${TMPDIR:-/tmp}/continuumkit-cpu-throughput-build.XXXXXX")
 task_completed=0
-trap 'task_status=$?; rm -rf "$scratch"; if test "$task_completed" != 1 && test "$task_status" = 0; then exit 1; fi; exit "$task_status"' EXIT
+trap 'task_status=$?; rm -rf "$scratch"; continuumkit_cleanup; if test "$task_completed" != 1 && test "$task_status" = 0; then exit 1; fi; exit "$task_status"' EXIT
 git clone --no-local --quiet "$root" "$scratch/ContinuumKit"
 test "$(git -C "$scratch/ContinuumKit" rev-parse HEAD)" = "$revision"
 python3 Scripts/prepare-cpu-wave-throughput.py --core "$scratch/ContinuumKit" --output "$scratch/consumer"

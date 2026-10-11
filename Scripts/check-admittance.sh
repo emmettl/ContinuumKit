@@ -1,8 +1,10 @@
 #!/bin/bash
 set -euo pipefail
 root=$(cd "$(dirname "$0")/.." && pwd)
+. "$root/Scripts/output.sh"
+trap continuumkit_cleanup EXIT
 cd "$root"
-output=${1:-${CONTINUUMKIT_ADMITTANCE_OUTPUT:-$(mktemp -d "${TMPDIR:-/tmp}/continuumkit-admittance.XXXXXX")}}
+continuumkit_output admittance "${1:-${CONTINUUMKIT_ADMITTANCE_OUTPUT:-}}"
 mkdir -p "$output"
 python3 Scripts/benchmark-metadata.py --root "$root" --repository https://github.com/emmettl/ContinuumKit \
  --output "$output/environment.json" Sources/BenchmarkSupport/AdmittanceAudit.swift Sources/BenchmarkSupport/AdmittanceCommand.swift

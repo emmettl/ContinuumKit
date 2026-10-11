@@ -1,11 +1,12 @@
 #!/bin/bash
 set -euo pipefail
 root=$(cd "$(dirname "$0")/.." && pwd)
+. "$root/Scripts/output.sh"
 python3 "$root/Scripts/verify-gas-wall-source.py"
 revision=$(git -C "$root" rev-parse HEAD)
 candidate_version=${1:-}
 scratch=$(mktemp -d "${TMPDIR:-/tmp}/continuumkit-gas-wall-consumer.XXXXXX")
-trap 'rm -rf "$scratch"' EXIT
+trap 'rm -rf "$scratch"; continuumkit_cleanup' EXIT
 git clone --no-local --quiet "$root" "$scratch/ContinuumKit"
 if test -n "$candidate_version"; then
  tagged_revision=$(git -C "$scratch/ContinuumKit" rev-parse "refs/tags/$candidate_version^{commit}")
@@ -17,7 +18,7 @@ fi
 export CONTINUUMKIT_CONSUMER_VERSION="$candidate_version"
 export CONTINUUMKIT_CONSUMER_SOURCE="$scratch/ContinuumKit"
 export CONTINUUMKIT_CONSUMER_REVISION="$revision"
-output=${2:-${CONTINUUMKIT_GAS_WALL_OUTPUT:-$(mktemp -d "${TMPDIR:-/tmp}/continuumkit-gas-wall-output.XXXXXX")}}
+continuumkit_output gas-wall-output "${2:-${CONTINUUMKIT_GAS_WALL_OUTPUT:-}}"
 mkdir -p "$output"
 export CONTINUUMKIT_GAS_OUTPUT="$output"
 mkdir "$scratch/consumer"

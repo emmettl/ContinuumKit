@@ -1,12 +1,13 @@
 #!/bin/bash
 set -euo pipefail
 root=$(cd "$(dirname "$0")/.." && pwd)
+. "$root/Scripts/output.sh"
 test -z "$(git -C "$root" status --porcelain)"
 revision=$(git -C "$root" rev-parse HEAD)
 version=${1:-}
-output=${2:-${CONTINUUMKIT_ORIGIN_OUTPUT:-$(mktemp -d "${TMPDIR:-/tmp}/continuumkit-origin-output.XXXXXX")}}
+continuumkit_output origin-output "${2:-${CONTINUUMKIT_ORIGIN_OUTPUT:-}}"
 scratch=$(mktemp -d "${TMPDIR:-/tmp}/continuumkit-origin-consumer.XXXXXX")
-trap 'rm -rf "$scratch"' EXIT
+trap 'rm -rf "$scratch"; continuumkit_cleanup' EXIT
 mkdir -p "$output"
 git clone --no-local --quiet "$root" "$scratch/ContinuumKit"
 if test -n "$version"; then test "$(git -C "$scratch/ContinuumKit" rev-parse "refs/tags/$version^{commit}")" = "$revision"; fi

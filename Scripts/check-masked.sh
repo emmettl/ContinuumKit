@@ -1,8 +1,10 @@
 #!/bin/bash
 set -euo pipefail
 root=$(cd "$(dirname "$0")/.." && pwd)
+. "$root/Scripts/output.sh"
+trap continuumkit_cleanup EXIT
 cd "$root"
-output=${1:-${CONTINUUMKIT_MASKED_OUTPUT:-$(mktemp -d "${TMPDIR:-/tmp}/continuumkit-masked.XXXXXX")}}
+continuumkit_output masked "${1:-${CONTINUUMKIT_MASKED_OUTPUT:-}}"
 mkdir -p "$output"
 python3 Scripts/benchmark-metadata.py --root "$root" --repository https://github.com/emmettl/ContinuumKit \
  --output "$output/environment.json" Sources/BenchmarkSupport/MaskedModes.swift Sources/BenchmarkSupport/MaskedModeCommand.swift

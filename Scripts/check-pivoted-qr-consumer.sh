@@ -1,11 +1,12 @@
 #!/bin/bash
 set -euo pipefail
 root=$(cd "$(dirname "$0")/.." && pwd)
+. "$root/Scripts/output.sh"
 test -z "$(git -C "$root" status --porcelain)"
 revision=$(git -C "$root" rev-parse HEAD)
 candidate_version=${1:-}
 scratch=$(mktemp -d "${TMPDIR:-/tmp}/continuumkit-pivoted-qr-consumer.XXXXXX")
-trap 'rm -rf "$scratch"' EXIT
+trap 'rm -rf "$scratch"; continuumkit_cleanup' EXIT
 git clone --no-local --quiet "$root" "$scratch/ContinuumKit"
 if test -n "$candidate_version"; then
   test "$(git -C "$scratch/ContinuumKit" rev-parse "refs/tags/$candidate_version^{commit}")" = "$revision"
@@ -13,7 +14,7 @@ fi
 export CONTINUUMKIT_CONSUMER_VERSION="$candidate_version"
 export CONTINUUMKIT_CONSUMER_SOURCE="$scratch/ContinuumKit"
 export CONTINUUMKIT_CONSUMER_REVISION="$revision"
-output=${2:-${CONTINUUMKIT_QR_OUTPUT:-$(mktemp -d "${TMPDIR:-/tmp}/continuumkit-pivoted-qr-output.XXXXXX")}}
+continuumkit_output pivoted-qr-output "${2:-${CONTINUUMKIT_QR_OUTPUT:-}}"
 mkdir -p "$output"
 test ! -e "$output/results.json"
 export CONTINUUMKIT_QR_OUTPUT="$output"
