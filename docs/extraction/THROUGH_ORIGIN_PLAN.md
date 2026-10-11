@@ -55,3 +55,23 @@ budgets. Complete QR/public diagnostics and prototype intermediate terms remain
 visible. Generic negative/zero coefficients and two-row solves intentionally stay
 separate from the source material policy. The local result alone is not a two-host
 publication gate, and no extra API, release or calibration adoption is added.
+
+### Cancellation finding and adoption decision
+
+At comparison producer `c2a3cc5160995bb99a4a903136a65522189904a4`, the retained
+local native QR output returns negative zero for both orderings of the projection
+of `[2^53, 1, -2^53]` onto `[1, 1, 1]`. The exact-native coefficient is 1/3;
+the directly scaled compensated prototype returns the correctly rounded value.
+These cases satisfy the declared QR absolute budget because the response norm
+is enormous compared with the projected coefficient. A one-column triangular
+condition diagnostic of one does not bound this response cancellation or ensure
+the sign required by a positive-modulus calibration policy.
+
+Keep this finding visible, with complete factors and exact coefficient errors.
+The comparison establishes selected-input range/error behavior, not accurate
+relative/sign recovery in every material fit. The next bounded candidate should
+specify a direct projection's scaling, accumulation, cancellation and output
+representation contract before any extra API is proposed. Expanded independent
+range/conditioning and two-host exact-consumer gates precede release; a Python
+calibration caller needs a separate integration decision. No current calibration
+or mechanics code is changed, and the published QR tag remains immutable.
