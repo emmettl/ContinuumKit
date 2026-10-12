@@ -1,4 +1,6 @@
-import simd
+#if canImport(simd)
+  import simd
+#endif
 
 /// Axis-aligned bounds in metres; z is up.
 public struct Box: Sendable, Hashable, Codable {

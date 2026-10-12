@@ -1,4 +1,6 @@
-import simd
+#if canImport(simd)
+  import simd
+#endif
 
 /// Uniform Cartesian grid. Cell `(i, j, k)` spans `[i, i + 1] * cellSize` along x and so on; z is up.
 public struct Grid: Sendable, Hashable {

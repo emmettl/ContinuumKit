@@ -1,4 +1,6 @@
-import simd
+#if canImport(simd)
+  import simd
+#endif
 
 /// Conservative packet transfer in caller-prescribed gas volumes (SI units).
 /// Authored source: emmettl/bombcad, MIT; see docs/extraction/gas-packet-source.json.

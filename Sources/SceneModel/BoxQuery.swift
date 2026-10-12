@@ -1,4 +1,6 @@
-import simd
+#if canImport(simd)
+  import simd
+#endif
 
 extension Box {
   /// The parameter interval where `origin + t * direction` lies in these closed bounds.

@@ -1,7 +1,9 @@
 import CompressibleFlow
 import Foundation
 import Testing
-import simd
+#if canImport(simd)
+  import simd
+#endif
 
 @Suite("Independent prescribed Euler flux contracts")
 struct FractionalEulerFluxTests {
