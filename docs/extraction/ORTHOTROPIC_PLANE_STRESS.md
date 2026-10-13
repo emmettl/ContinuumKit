@@ -63,3 +63,13 @@ original, then rerun P1 constitutive, assembled/static fixtures without changing
 inputs or acceptance bounds. Edgerton's exhaustive kernel ownership then moves to
 Core; ordinary adapter checks can remain small. This candidate makes no test-speed,
 impact, general panel or empirical plywood accuracy claim.
+
+## Candidate acceptance checkpoint
+
+The [verification receipt](orthotropic-plane-stress-verification.json) records
+294 passing physical-mini Swift tests, including the transferred1,620checks,
+and the passing optimized41sample public/original parity consumer. Full
+`Scripts/check.sh` nevertheless fails the unchanged inherited Euler identity
+checker on current main; that failure is retained. [The adoption handoff](ORTHOTROPIC_ADOPTION_GATE.md)
+identifies the separate Core repair, release and application gates. No tag or
+Edgerton pin was changed by this checkpoint.
