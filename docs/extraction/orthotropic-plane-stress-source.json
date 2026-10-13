@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "sourceRepository": "https://github.com/emmettl/edgerton",
+  "kernelCommit": "d6ccae5a88aaad77a02271c014309edc8f9cd74e",
+  "P1KernelEvidenceRevision": "d057108b7df41a5d7073ba55977ec031e9e63ca0",
+  "assemblyCommit": "17fde5db",
+  "staticCommit": "185bcd2f",
+  "sourceHashes": {
+    "Sources/EdgertonCore/TargetOrthotropicPlaneStress.swift": "b57b2d1ded50df7fe5f3e8f6d8f129fcb939f2e58517d617b16f482579e1eb8f",
+    "Studies/TargetMechanics/PlywoodP1/OrthotropicKernelStudy.swift": "3eccda9d1890cd1256246f73fff722416c6e54359ac55107df6774ae2b605463",
+    "Studies/TargetMechanics/PlywoodP1/input.json": "b5796db865d7ef0bc7ba01593d95531b720c4a901bde2d4fdf73d707812c8ffc",
+    "Studies/TargetMechanics/PlywoodP1/reference.py": "3f694a7bed652ec51f34add1b5aa0b93fb451c9797486ae14410e11f811592f7",
+    "Studies/TargetMechanics/PlywoodP1/evidence/constitutive-reference.csv": "060e966a5384738175d02a17a33463b4f88c21f881bc2136c9d384971f9a6e48",
+    "Studies/TargetMechanics/PlywoodP1/evidence/bending-reference.csv": "08545b21334611c92b894a98aa3be95693970bb0529b90093e546b930ac81aec",
+    "Studies/TargetMechanics/PlywoodP1/evidence/kernel/rotated-reference.csv": "fe3b547239018589cd3d5ec9e38aec7f21649ee9a8985b09463943ae7d09ec2c"
+  },
+  "transformation": "Only public type rename TargetOrthotropicPlaneStress -> OrthotropicPlaneStress in kernel; test harness uses Bundle.module and fresh local temporary output rather than command line. Frozen oracle bytes unchanged.",
+  "license": "MIT, Edgerton authored source; no app imports",
+  "scope": "Infinitesimal linear elastic orthotropic plane stress. No laminate assembler, damage, plasticity or panel solver."
+}

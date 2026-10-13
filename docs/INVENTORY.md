@@ -265,3 +265,10 @@ positivity and relaxation-search policy. Exact-native rational references expose
 raw-product range loss. No application or numerical product is changed by this
 audit; compare the released single-column QR against a directly scaled projection
 before deciding whether another public primitive is useful.
+
+## P1 bounded extraction candidate — 13 October 2026
+
+The authorized [orthotropic elastic candidate](extraction/ORTHOTROPIC_PLANE_STRESS.md)
+transfers Edgerton P1 kernel/frame primitives with frozen independent tests and a
+public consumer. Earlier inventories remain unchanged. Laminate A/B/D, veneer
+damage/plasticity, glue, panel assembly and contact are outside this extraction.

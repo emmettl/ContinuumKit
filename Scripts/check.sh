@@ -22,6 +22,8 @@ bash Scripts/check-real-fft-consumer.sh "${1:-}"
 bash Scripts/check-affine-fit-consumer.sh "${1:-}"
 bash Scripts/check-pivoted-qr-consumer.sh "${1:-}"
 bash Scripts/check-origin-least-squares-consumer.sh "${1:-}"
+
+bash Scripts/check-orthotropic-consumer.sh "${1:-}"
 python3 Scripts/verify-wave-metal-port.py
 
 bash Scripts/check-adiabatic.sh
