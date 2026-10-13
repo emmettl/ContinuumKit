@@ -64,12 +64,22 @@ inputs or acceptance bounds. Edgerton's exhaustive kernel ownership then moves t
 Core; ordinary adapter checks can remain small. This candidate makes no test-speed,
 impact, general panel or empirical plywood accuracy claim.
 
-## Candidate acceptance checkpoint
+## Initial candidate acceptance checkpoint (before prerequisite repair)
 
 The [verification receipt](orthotropic-plane-stress-verification.json) records
 294 passing physical-mini Swift tests, including the transferred1,620checks,
-and the passing optimized41sample public/original parity consumer. Full
+and the passing optimized41 sample public/original parity consumer. Full
 `Scripts/check.sh` nevertheless fails the unchanged inherited Euler identity
 checker on current main; that failure is retained. [The adoption handoff](ORTHOTROPIC_ADOPTION_GATE.md)
 identifies the separate Core repair, release and application gates. No tag or
 Edgerton pin was changed by this checkpoint.
+
+## Published alpha.22
+
+[Alpha.22](https://github.com/emmettl/ContinuumKit/releases/tag/0.1.0-alpha.22)
+publishes this bounded law from commit `57bf1cd` after both supported Macs pass the
+complete exact-version checks. The [release proof](alpha22-release-verification.json)
+records294 Swift tests,1,620 P1 checks,11 optimized exact-version consumers, actual
+Metal and the41 sample original/public bit parity consumer. The separately reviewed
+import-only Euler guard repair is merged; the earlier failures above remain historical
+evidence. Application pinning and coupled acceptance remain deliberate app-owned work.

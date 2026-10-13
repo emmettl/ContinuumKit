@@ -255,3 +255,17 @@ million-sample cap. All 94 existing source/test blobs remain protected.
 immutable annotated/peeled tag, successful verify/publish jobs and full private
 network-free candidate/exact-tag replay. No application calibration migration or
 empirical material accuracy claim is included. Earlier tags remain unchanged.
+
+## Published bounded orthotropic elasticity
+
+Alpha.22 publishes `SolidMechanics.OrthotropicPlaneStress` from verified merge
+`57bf1cd41da99c1ab8d69a7ec0fd82342043db43`. Its
+[exact-tag workflow](https://github.com/emmettl/ContinuumKit/actions/runs/38406192190)
+passed294 Swift tests,1,620 P1 law checks,11 optimized exact-version consumers and
+actual Metal before publication; the M4 Max passes the same full exact-tag scope.
+The public law consumer retains41 frozen samples with exact original/public bits
+and CPU-only linkage. [Publication proof](extraction/alpha22-release-verification.json)
+records immutable tag/commit identity and the separately verified import guard repair.
+This is small-strain numerical verification; laminate assembly, damage, plasticity,
+panel solvers, Edgerton adoption and empirical impact accuracy remain separate gates.
+Earlier tags and failures are unchanged.

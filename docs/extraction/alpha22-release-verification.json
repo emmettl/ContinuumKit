@@ -1,0 +1,66 @@
+{
+  "schemaVersion": 1,
+  "version": "0.1.0-alpha.22",
+  "tagObject": "607bacfb88e5eb2d449c73cab338f14f6a044d93",
+  "commit": "57bf1cd41da99c1ab8d69a7ec0fd82342043db43",
+  "candidate": "8d9c834b9be5fc8c09bc3d1a0a82b9a0c54db076",
+  "sourceTreeIdenticalToVerifiedCandidate": true,
+  "release": {
+    "isPrerelease": true,
+    "publishedAt": "2026-10-13T13:49:53Z",
+    "tagName": "0.1.0-alpha.22",
+    "targetCommitish": "main",
+    "url": "https://github.com/emmettl/ContinuumKit/releases/tag/0.1.0-alpha.22"
+  },
+  "workflow": {
+    "url": "https://github.com/emmettl/ContinuumKit/actions/runs/38406192190",
+    "verify": "success",
+    "publish": "success",
+    "headSha": "57bf1cd41da99c1ab8d69a7ec0fd82342043db43"
+  },
+  "localExactTag": "passed complete Scripts/check.sh alpha22 with actual Metal",
+  "verification": {
+    "SwiftTests": 294,
+    "P1Checks": 1620,
+    "optimizedExactVersionConsumers": 11,
+    "P1PublicSamples": 41,
+    "originalStrainStressWorldStressEnergyDissipationBitParity": true,
+    "CPUOnlyLinkage": true,
+    "previousReferencesAndMutationControls": "passed"
+  },
+  "priorFullCandidate": {
+    "bothHosts": "passed",
+    "mini": "https://github.com/emmettl/ContinuumKit/actions/runs/38404630784"
+  },
+  "prerequisiteRepair": {
+    "PR": "https://github.com/emmettl/ContinuumKit/pull/81",
+    "merge": "8b232111443b39db4e48713bfce5b3b360734f6b",
+    "exactFullMini": "https://github.com/emmettl/ContinuumKit/actions/runs/38402261650",
+    "terminal": "success"
+  },
+  "scope": "P1 infinitesimal elastic plane stress and frame primitives; no laminate assembler, damage, plasticity or panel solver. Numerical verification is not measured plywood/impact validation.",
+  "applicationAdoption": "separate Edgerton pin/adapter/coupled acceptance task",
+  "retainedEvidence": {
+    "root": "/Volumes/StudioData/edgerton-evidence/2026-10-13/ContinuumKitOrthotropicExtraction/alpha22-publication",
+    "files": {
+      "orthotropic-alpha22-full-local.log": {
+        "bytes": 105403,
+        "sha256": "0c1a1d5933fdf3b403cf4a74b6e79b3f4091bf2d025839e3439aa2d68aba0063"
+      },
+      "orthotropic-alpha22-publication.json": {
+        "bytes": 187,
+        "sha256": "cc879682c44cd4d3b758a55f619fb97a78ac406929bd2aa69fbd640b241b665c"
+      },
+      "orthotropic-alpha22-release.json": {
+        "bytes": 3240,
+        "sha256": "c5cc98445bc22341b4990a59a941635c3189b592089e676424509f3f48e0ae2f"
+      },
+      "orthotropic-alpha22-release.log": {
+        "bytes": 252994,
+        "sha256": "76faa1dc98df9b55771e305a2556556273fcc4d3aaf25a77091dd5cafa324677"
+      }
+    },
+    "originalsPreserved": true
+  },
+  "priorHistory": "Initial inherited failures remain unchanged in orthotropic-plane-stress-verification.json and external catalogue; this release proof supersedes their pending publication state."
+}
