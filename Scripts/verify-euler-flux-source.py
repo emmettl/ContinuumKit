@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Protect original source and restrict extraction to access/type-name/documentation changes."""
+"""Protect original source and restrict extraction to access/type-name/documentation and exact import-preamble changes."""
 import hashlib,json,re
 from pathlib import Path
 r=Path(__file__).resolve().parent.parent
@@ -9,6 +9,11 @@ assert hashlib.sha256(original).hexdigest()==m['sha256']=='d80e566a9938f665d71ee
 assert hashlib.sha1(b'blob '+str(len(original)).encode()+b'\0'+original).hexdigest()==m['blob']=='4736724d8bf71dd84ebb8bde48c0b10b7953a474'
 assert m['revision']=='063d6fe818fd78ccbfe46c1c79e035f04de03800'
 def normalized(s):
+ # PR79 portability adaptation: accept only this exact file-leading import block.
+ # Keep every other import, conditional and numerical body in the comparison.
+ portable_imports = 'import Foundation\n\n#if canImport(simd)\n  import simd\n#endif\n'
+ if s.startswith(portable_imports):
+  s = 'import simd\n' + s[len(portable_imports):]
  s=re.sub(r'//[^\n]*','',s)
  s=re.sub(r'\bpublic\s+','',s)
  s=s.replace(': Equatable, Sendable','').replace('Error, Equatable','Error')

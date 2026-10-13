@@ -1,5 +1,6 @@
 {
   "adaptations": [
+    "exact file-leading Foundation plus canImport(simd) import preamble for PR79 portability; numerical bodies and all other conditionals remain compared",
     "public immutable value types, initializers and methods",
     "PrescribedGasTransport replaces application alias; same released wall primitive",
     "documentation only; numerical arithmetic and operation order unchanged",

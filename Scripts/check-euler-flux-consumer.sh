@@ -3,6 +3,7 @@ set -euo pipefail
 root=$(cd "$(dirname "$0")/.." && pwd)
 . "$root/Scripts/output.sh"
 python3 "$root/Scripts/verify-euler-flux-source.py"
+python3 "$root/Scripts/test-euler-flux-source.py"
 test -z "$(git -C "$root" status --porcelain)"
 revision=$(git -C "$root" rev-parse HEAD)
 candidate_version=${1:-}
@@ -27,7 +28,7 @@ import json,hashlib,platform,subprocess,sys
 from pathlib import Path
 r,o=map(Path,sys.argv[1:])
 def git(*args):return subprocess.check_output(['git',*args],cwd=r,text=True).strip()
-paths=git('ls-files','Sources/CompressibleFlow','Tests/CompressibleFlowTests','Fixtures/EulerFluxConsumer','Scripts/check-euler-flux-consumer.sh','Scripts/verify-euler-flux-source.py','Scripts/verify-euler-flux-output.py','Scripts/test-euler-flux-gate.py').splitlines()
+paths=git('ls-files','Sources/CompressibleFlow','Tests/CompressibleFlowTests','Fixtures/EulerFluxConsumer','Scripts/check-euler-flux-consumer.sh','Scripts/verify-euler-flux-source.py','Scripts/verify-euler-flux-output.py','Scripts/test-euler-flux-gate.py','Scripts/test-euler-flux-source.py').splitlines()
 d={'schemaVersion':1,'candidate':git('rev-parse','HEAD'),'workingTreeDirty':bool(git('status','--porcelain')),'sourceHashes':{p:hashlib.sha256((r/p).read_bytes()).hexdigest() for p in paths},'hardware':subprocess.check_output(['sysctl','-n','machdep.cpu.brand_string'],text=True).strip(),'swift':subprocess.check_output(['swift','--version'],text=True).strip(),'os':platform.platform()}
 (o/'environment.json').write_text(json.dumps(d,indent=2,sort_keys=True)+'\n')
 PYMETA

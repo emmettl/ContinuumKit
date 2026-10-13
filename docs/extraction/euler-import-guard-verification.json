@@ -1,0 +1,28 @@
+{
+  "baseRevision": "b7c1e015c53e5fc17b03a8a746900424d640ea06",
+  "checks": {
+    "fullBranchGate": "pending; not run locally or remotely for this checker-only candidate",
+    "gitDiffCheck": "passed",
+    "immutableSourceAndNormalizedImplementation": "passed",
+    "shellSyntax": "passed",
+    "sourceMutationControls": {
+      "accepted": "original and exact portable preambles",
+      "rejected": 10
+    }
+  },
+  "inheritedFailures": [
+    "38400602000",
+    "38400995048",
+    "38275194599"
+  ],
+  "limitations": "No release or Linux numerical equivalence claim. Full committed-candidate Swift/Metal/consumer gate remains required.",
+  "schemaVersion": 1,
+  "scope": "Exact file-leading PR79 import normalization only; numerical source and frozen oracle unchanged",
+  "sourceHashes": {
+    "Fixtures/EulerFluxConsumer/Sources/EulerFluxConsumer/OriginalFlux.swift": "d80e566a9938f665d71ee00bb813e934bb5febff1a112920200fd47560c818c5",
+    "Scripts/test-euler-flux-source.py": "2f8743f6df86fbc8a22b8e53aede611c0214129069886b8e106626ce370810b8",
+    "Scripts/verify-euler-flux-source.py": "15cd96ca6d9e346a51698d1664363fda1947f88a220bc0054356b790eb7391f6",
+    "Sources/CompressibleFlow/FractionalEulerFlux.swift": "b42208fb123609ab26d4ed46c5a7541f5e00a11e7bd6fb3c3ecc5e66d13292b7",
+    "docs/extraction/euler-flux-source.json": "8bbaa5bfbff4de87825b3019079799cf924f9e611ee03c13f7028eafe7c9a30a"
+  }
+}
