@@ -8,6 +8,9 @@ s = json.loads((r/'docs/extraction/orthotropic-plane-stress-source.json').read_t
 def sha(path):
     return hashlib.sha256(path.read_bytes()).hexdigest()
 assert sha(r/'Sources/SolidMechanics/OrthotropicPlaneStress.swift') == s['extractedKernelSHA256'], 'kernel change requires reviewed evidence version'
+original = (r/'Sources/SolidMechanics/OrthotropicPlaneStress.swift').read_bytes().replace(b'OrthotropicPlaneStress', b'TargetOrthotropicPlaneStress')
+assert hashlib.sha256(original).hexdigest() == s['sourceHashes']['Sources/EdgertonCore/TargetOrthotropicPlaneStress.swift'], 'extraction exceeded public type rename'
+assert sha(r/'Fixtures/OrthotropicConsumer/Sources/FrozenP1/TargetOrthotropicPlaneStress.swift') == s['sourceHashes']['Sources/EdgertonCore/TargetOrthotropicPlaneStress.swift'], 'frozen original changed'
 for name in ['input.json', 'reference.py', 'constitutive-reference.csv', 'bending-reference.csv', 'rotated-reference.csv']:
     expected = [v for k,v in s['sourceHashes'].items() if k.endswith('/'+name)]
     assert len(expected) == 1

@@ -47,7 +47,8 @@ fixture acceptance, ply-frame assignment, reactions/work and both layups.
 
 `Scripts/check-orthotropic-consumer.sh` builds an isolated committed Git consumer
 in release mode, optionally pinned to an exact tag. It checks the public product
-against all 41 independent constitutive/off-axis samples plus world-frame and
+against all 41 independent constitutive/off-axis samples, exact original public-call
+strain/stress/world-stress/energy/dissipation bit parity, plus world-frame and
 typed rejection checks, and excludes Metal/UI/Accelerate framework linkage.
 `Scripts/check.sh` includes this consumer and the full package suite. Publication
 requires the existing exact-tag physical-host release workflow. No release or

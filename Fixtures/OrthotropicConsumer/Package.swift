@@ -20,9 +20,10 @@ let package = Package(
   name: "OrthotropicConsumer", platforms: [.macOS(.v15)],
   dependencies: [dependency],
   targets: [
+    .target(name: "FrozenP1"),
     .executableTarget(
       name: "OrthotropicConsumer",
       dependencies: [
-        .product(name: "SolidMechanics", package: "continuumkit")
+        .product(name: "SolidMechanics", package: "continuumkit"), "FrozenP1"
       ], resources: [.copy("Fixtures")])
   ], swiftLanguageModes: [.v6])
