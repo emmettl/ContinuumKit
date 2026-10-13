@@ -126,3 +126,10 @@ reusable RHS solves. Scaled Q/R/permutation and reciprocal triangular condition
 diagnostics are explicit. Row multipliers, basis construction, reconstruction
 fallback and admissibility remain caller-owned. Its declared conditioning-dependent
 contract is documented in [Pivoted QR](extraction/PIVOTED_QR.md).
+
+## Bounded solid mechanics candidate
+
+`SolidMechanics.OrthotropicPlaneStress` transfers only P1 infinitesimal elastic
+plane stress and world frames. [Contract and provenance](extraction/ORTHOTROPIC_PLANE_STRESS.md)
+retain the independent law suite; ply assembly, damage and panel solvers remain
+Edgerton-owned. Release and application adoption are separate gates.

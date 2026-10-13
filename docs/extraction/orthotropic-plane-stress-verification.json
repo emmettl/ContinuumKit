@@ -1,0 +1,112 @@
+{
+  "schemaVersion": 1,
+  "candidateRevision": "65f46fd0450f09b8948a0c8e3ae07add5a83e173",
+  "publicPR": "https://github.com/emmettl/ContinuumKit/pull/80",
+  "sourceBase": "b7c1e015c53e5fc17b03a8a746900424d640ea06",
+  "verification": {
+    "localFocusedP1": {
+      "terminal": "passed",
+      "checks": 1620,
+      "host": "M4 Max",
+      "testDurationSeconds": 0.01
+    },
+    "localPublicConsumer": {
+      "terminal": "passed",
+      "samples": 41,
+      "coldBuildSeconds": 5.11,
+      "cpuOnlyLinkage": true,
+      "exactOriginalBitParity": "added subsequently and verified on physical mini"
+    },
+    "miniFinal": {
+      "run": "https://github.com/emmettl/ContinuumKit/actions/runs/38400995048",
+      "headSha": "65f46fd0450f09b8948a0c8e3ae07add5a83e173",
+      "SwiftTests": 294,
+      "P1Checks": 1620,
+      "extractedLaw": "passed",
+      "publicConsumer": "passed;41independent samples plus exact original strain/stress/worldStress/energy/dissipation bit parity, frame and typed rejection",
+      "cpuOnlyLinkage": true,
+      "fullScriptsCheck": "FAILED unchanged inherited Euler source identity checker"
+    },
+    "miniPrior": {
+      "run": "https://github.com/emmettl/ContinuumKit/actions/runs/38400602000",
+      "headSha": "558fdb1efd0e6452d4a2dd22ee0cfec7e3ee2065",
+      "terminal": "same inherited Euler failure after all294Swift tests passed"
+    }
+  },
+  "inheritedBlocker": {
+    "candidate": "65f46fd",
+    "base": "b7c1e015c53e5fc17b03a8a746900424d640ea06",
+    "unchangedFromBaseSHA256": {
+      "Sources/CompressibleFlow/FractionalEulerFlux.swift": "b42208fb123609ab26d4ed46c5a7541f5e00a11e7bd6fb3c3ecc5e66d13292b7",
+      "Scripts/verify-euler-flux-source.py": "672118e2048fb70211f06c0283151789e547571d667cc6bb2735832527b0af09",
+      "docs/extraction/euler-flux-source.json": "95f5907a21aab187250c49895669ca965827ee0ab4a591cf81bc960deb59f8b2",
+      "Fixtures/EulerFluxConsumer/Sources/EulerFluxConsumer/OriginalFlux.swift": "d80e566a9938f665d71ee00bb813e934bb5febff1a112920200fd47560c818c5"
+    },
+    "priorVerifiedBase": "94733a943a444d10dbf3539d591a405968067e44",
+    "priorVerifiedRun": 38147338128,
+    "publishedAlpha21": "4d32f58001154311217b8b77b95c94858d9a8bc2",
+    "cause": "Core PR79 import portability tokens not permitted by existing immutable Euler source normalizer; no extraction changes to relevant files"
+  },
+  "publication": {
+    "released": false,
+    "adoptedInEdgerton": false,
+    "gate": "Separate Core portability guard repair, rebased full gate, reviewed merge and exact-tag release; then coordinated Edgerton P1 adoption."
+  },
+  "retainedEvidence": {
+    "schemaVersion": 1,
+    "sourceRevision": "65f46fd0450f09b8948a0c8e3ae07add5a83e173",
+    "externalRoot": "/Volumes/StudioData/edgerton-evidence/2026-10-13/ContinuumKitOrthotropicExtraction/candidate-65f46fd",
+    "files": {
+      "candidate-source.tar.gz": {
+        "bytes": 710282,
+        "sha256": "406fde6d24e655122da0bb6319b84a0426cce739f0e032263bd7f8fc0aa4c05c"
+      },
+      "core-main-failure.log": {
+        "bytes": 181510,
+        "sha256": "7df3087018a5686df424fc06e6c3ead52320ceec312e8613914311f9e8bbe317"
+      },
+      "orthotropic-consumer-02.log": {
+        "bytes": 1237,
+        "sha256": "3f3e382750d88fc3fd26d005456d2963c36db7d5dd650e59c2af402dc59d8916"
+      },
+      "orthotropic-consumer.log": {
+        "bytes": 10573,
+        "sha256": "2f15798049f509041015ccc31dc5c9ae53053042b1182b7edecb6db0093eb6d6"
+      },
+      "orthotropic-focused-host.log": {
+        "bytes": 1289,
+        "sha256": "eba3d705fbadbc005a7211751a510dee2e5bc388f10c40e35700d09cfd64620b"
+      },
+      "orthotropic-focused.log": {
+        "bytes": 2271,
+        "sha256": "15c6a7f23fb63311308972c2b19f859b2dab46a5d3c4b13ae60f7925d3b6bb43"
+      },
+      "orthotropic-gate-handoff.md": {
+        "bytes": 2580,
+        "sha256": "8ca1fe987784edf71e7a725c972d9fc442e287c6e508124597b6d7672d753db3"
+      },
+      "orthotropic-inherited-identity.json": {
+        "bytes": 935,
+        "sha256": "9c04552416845987adaaa869846a46c2bea62ed20714bdea718e42934b28a4a6"
+      },
+      "orthotropic-mini-01.json": {
+        "bytes": 8568,
+        "sha256": "1b1c478fabe73306b6ca1e3b87f1a1e286c1d91e9ff7d0f0e1425d04447c5941"
+      },
+      "orthotropic-mini-01.log": {
+        "bytes": 211060,
+        "sha256": "01bbb055329e6bebecc005ede5685cf1bb06ce755d2e00f54486da8f27909aa1"
+      },
+      "orthotropic-mini-02.json": {
+        "bytes": 8568,
+        "sha256": "c617189cdee8498e2ae75ebb7c96fed2bf7ee37e047693d11984a87bfbf5fe25"
+      },
+      "orthotropic-mini-02.log": {
+        "bytes": 215456,
+        "sha256": "1e9954359c4c5a7de1a98c6e819d754a4f0d30f3c332b3fba4a32a0bf96fe558"
+      }
+    },
+    "scope": "Source, logs and terminal receipts. Not empirical plywood validation. Originals preserved locally.",
+    "replication": "StudioData retention is not an independent backup; committed source remains in Core Git and workflow logs remain on GitHub."
+  }
+}
