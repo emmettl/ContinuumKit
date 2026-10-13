@@ -7,7 +7,7 @@ func require(_ value: Bool, _ message: String) throws {
 }
 let fixture = Bundle.module.resourceURL!.appendingPathComponent("Fixtures")
 let data = try JSONSerialization.jsonObject(with: Data(contentsOf: fixture.appendingPathComponent("input.json"))) as! [String: Any]
-func number(_ name: String) -> Double { (data[name] as! NSNumber).doubleValue }
+@MainActor func number(_ name: String) -> Double { (data[name] as! NSNumber).doubleValue }
 let law = try OrthotropicPlaneStress(youngAlong: number("E1_Pa"), youngAcross: number("E2_Pa"),
     shear: number("G12_Pa"), poissonAlongAcross: number("nu12"))
 let frame = try OrthotropicPlaneStress.Frame()

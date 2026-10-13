@@ -16,5 +16,6 @@
   },
   "transformation": "Only public type rename TargetOrthotropicPlaneStress -> OrthotropicPlaneStress in kernel; test harness uses Bundle.module and fresh local temporary output rather than command line. Frozen oracle bytes unchanged.",
   "license": "MIT, Edgerton authored source; no app imports",
-  "scope": "Infinitesimal linear elastic orthotropic plane stress. No laminate assembler, damage, plasticity or panel solver."
+  "scope": "Infinitesimal linear elastic orthotropic plane stress. No laminate assembler, damage, plasticity or panel solver.",
+  "extractedKernelSHA256": "2a65cfdce956239fb5e451a4bbd5deece252f0e5775fce1e813372bc608a071b"
 }

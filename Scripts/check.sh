@@ -5,6 +5,7 @@ cd "$root"
 
 for script in Scripts/*.sh; do bash -n "$script"; done
 git diff --check
+python3 Scripts/verify-orthotropic-source.py
 if test "${CONTINUUMKIT_REQUIRE_METAL:-0}" = 1; then
     swift Scripts/check-metal.swift
 fi

@@ -2,6 +2,7 @@
 set -euo pipefail
 root=$(cd "$(dirname "$0")/.." && pwd)
 test -z "$(git -C "$root" status --porcelain)"
+python3 "$root/Scripts/verify-orthotropic-source.py"
 revision=$(git -C "$root" rev-parse HEAD)
 version=${1:-}
 scratch=$(mktemp -d "${TMPDIR:-/tmp}/continuumkit-orthotropic-consumer.XXXXXX")
