@@ -61,6 +61,15 @@ enum Consumer {
     let savedBounds = Data(#"{"min":[1,2,3],"max":[5,8,10]}"#.utf8)
     let box = try JSONDecoder().decode(Box.self, from: savedBounds)
     try require(box.size == SIMD3<Float>(4, 6, 7), "Saved bounds changed")
+    let base = Double(1 << 30)
+    precondition(
+      BoxQuery.intersection(
+        min: [base, 0, 0], max: [base + 0.125, 1, 1],
+        origin: [base - 0.25, 0.5, 0.5], direction: [1, 0, 0]) == 0.25...0.375)
+    precondition(
+      BoxQuery.intersection(
+        min: [0, 0, 0], max: [1, 1, 1],
+        origin: [-1, 1, 0.5], direction: [1, -1, 0]) == 1...1)
     let roundTrip = try JSONDecoder().decode(Box.self, from: JSONEncoder().encode(box))
     try require(roundTrip == box, "Bounds round trip changed")
     try require(
