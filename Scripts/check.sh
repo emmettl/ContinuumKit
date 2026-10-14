@@ -7,6 +7,7 @@ for script in Scripts/*.sh; do bash -n "$script"; done
 git diff --check
 python3 Scripts/verify-orthotropic-source.py
 python3 Scripts/verify-scalar-material-source.py
+python3 Scripts/verify-normal-contact-source.py
 if test "${CONTINUUMKIT_REQUIRE_METAL:-0}" = 1; then
     swift Scripts/check-metal.swift
 fi
@@ -16,6 +17,7 @@ if test -d Tests; then
 fi
 bash Scripts/check-orthotropic-consumer.sh "${1:-}"
 bash Scripts/check-scalar-material-consumer.sh "${1:-}"
+bash Scripts/check-normal-contact-consumer.sh "${1:-}"
 bash Scripts/check-consumer.sh "${1:-}"
 bash Scripts/check-linear-wave-consumer.sh "${1:-}"
 bash Scripts/check-metal-wave-consumer.sh "${1:-}"
