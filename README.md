@@ -5,6 +5,9 @@ RoomCAD's application-independent response interchange, and a checked adiabatic 
 with independent conformance. [`0.1.0-alpha.23`](https://github.com/emmettl/ContinuumKit/releases/tag/0.1.0-alpha.23)
 is the current prerelease; earlier tags remain available for existing consumers.
 
+The table describes the current source tree. New extraction APIs require their own
+verified release; application adoption remains deferred. See the [handoff](docs/extraction/EDGERTON_ADOPTION_HANDOFF.md).
+
 | Product / module | Contents | Dependencies |
 | --- | --- | --- |
 | `SceneModel` | Codable Float bounds, Cartesian grids and Float/Double closed-box queries, metres with z up | Swift standard library, conditional simd |
@@ -17,9 +20,9 @@ is the current prerelease; earlier tags remain available for existing consumers.
 | `CompressibleFlow` | Planar ideal-gas wall, prescribed gas packets and paired Euler reference | Foundation, simd |
 | `LinearAcoustics` | Checked masked CPU updates, pressure forcing and receiver observation; explicit serial/parallel execution | Swift standard library, Dispatch |
 | `LinearAcousticsMetal` | Resident GPU updates, pressure forcing, receiver sampling and bundled kernels | LinearAcoustics, Foundation, Metal |
-| `Numerics` | Checked affine and exact through-origin fits, reusable pivoted QR | Swift standard library |
+| `Numerics` | Checked affine/origin fits, pivoted QR and bounded restarted GMRES | Swift standard library; Foundation/simd for Apple GMRES |
 | `SpectralTransforms` | Checked real FFT, sampled filtering and linear convolution | Accelerate |
-| `SolidMechanics` | Checked P1 orthotropic plane-stress elastic law | Foundation, simd |
+| `SolidMechanics` | Orthotropic elasticity, scalar veneer compression/damage, exact scalar contact and isotropic tetrahedral laws | Foundation, simd |
 | `BenchmarkSupport` | Versioned adiabatic/acoustic cases, analytic references and complete-field reports | Thermodynamics, Foundation |
 
 Requires Swift 6.4 and macOS 15 or later. CPU products do not depend on SceneRender.

@@ -133,3 +133,15 @@ contract is documented in [Pivoted QR](extraction/PIVOTED_QR.md).
 plane stress and world frames. [Contract and provenance](extraction/ORTHOTROPIC_PLANE_STRESS.md)
 retain the independent law suite; ply assembly, damage and panel solvers remain
 Edgerton-owned. Release and application adoption are separate gates.
+
+## Source-preserving Edgerton primitive extractions
+
+`SolidMechanics` additionally owns the bounded [scalar veneer laws](extraction/SCALAR_VENEER_MATERIALS.md),
+[fixed-direction contact flow](extraction/NORMAL_CONTACT_FLOW.md) and
+[isotropic tetrahedral element](extraction/ISOTROPIC_TETRAHEDRON.md).
+`Numerics` adds [Apple SIMD restarted GMRES](extraction/RESTARTED_GMRES.md) with an
+immutable source engine and checked public residual/domain/operator boundaries.
+Independent references and frozen public-consumer comparisons travel with each.
+Assembly, contact/fracture policy, integration, calibration, rendering and recordings
+stay application-owned. [Adoption is deferred](extraction/EDGERTON_ADOPTION_HANDOFF.md);
+new releases do not change app pins, defaults or acceptance evidence automatically.
