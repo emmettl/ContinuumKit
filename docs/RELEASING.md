@@ -283,3 +283,23 @@ queries and persisted Box are unchanged from the preceding release. The new
 Double query has explicit closed-contact, precision and bounded-arithmetic rules;
 RoomCAD retains acoustic policy and its separate adoption checks. No empirical
 acoustic accuracy, IFC feature or application release is claimed.
+
+## Published Edgerton primitive extractions
+
+[Alpha.24](https://github.com/emmettl/ContinuumKit/releases/tag/0.1.0-alpha.24)
+publishes scalar veneer compression/damage, exact normal contact flow, bounded
+restarted GMRES and the three-law isotropic tetrahedral element, including inline
+paths. The immutable tag points to `eba599518d16f6860cd0873c69a56b4910430f65`.
+The [exact-tag physical-mini gate](https://github.com/emmettl/ContinuumKit/actions/runs/38611473274)
+passed 316 package tests, fifteen optimized fetched consumers, actual Metal work
+and all inherited reference/benchmark gates before publication. Checks ran at
+low priority with serialized builds. Large evidence was retained on the host,
+copied to StudioData and hash-verified; no workflow artifacts or release assets
+were uploaded. [Publication proof](extraction/alpha24-release-verification.json)
+records the identities and archive hash.
+
+Edgerton's implementations and alpha.22 dependency pin remain in place. Follow
+the [deferred adoption handoff](extraction/EDGERTON_ADOPTION_HANDOFF.md) in a bounded
+integration window, including GMRES's extra final operator evaluation and explicit
+error adaptation. These numerical checks do not establish empirical impact
+accuracy or a measured application build-time gain.
