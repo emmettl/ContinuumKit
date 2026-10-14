@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "candidate": "fd366f7812358deb7bf2466b81953d36536ee544",
+  "adoption": "deferred; no application writes",
+  "fullMini": {
+    "command": "nice -n 15 bash Scripts/check-low-impact.sh",
+    "exitStatus": 0,
+    "serialCompileAndTests": true,
+    "requiredMetal": true,
+    "toolPreflight": true,
+    "SwiftTests": 316,
+    "retainedRemote": "scrimply-ci-tb:/private/tmp/core-isotropic-evidence-fd366f7",
+    "startedUTC": "2026-10-14T17:34:06Z",
+    "finishedUTC": "2026-10-14T17:45:09Z"
+  },
+  "publicFrozenSamples": 18,
+  "exactBits": [
+    "energy",
+    "J",
+    "forces",
+    "Cauchy stress",
+    "force tangent",
+    "norm bound",
+    "array work gradient",
+    "inline response",
+    "inline work gradient"
+  ],
+  "independentReference": "12 three-law diagonal energy/J/stress cases from 45-digit Decimal; force/tangent/objectivity/work/domain and directional bound checks",
+  "sourceParity": "declared names/visibility only; original kernel and corrected-gradient arithmetic immutable",
+  "scope": "chosen element numerical verification only; no assembled target convergence or empirical material/impact claim",
+  "deferredHandoff": "docs/extraction/EDGERTON_ADOPTION_HANDOFF.md"
+}
