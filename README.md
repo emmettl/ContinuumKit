@@ -2,11 +2,14 @@
 
 Shared Swift foundations for RoomCAD, BombCAD and Edgerton. The package contains the existing CAD foundations from BombCAD's SimulationKit and
 RoomCAD's application-independent response interchange, and a checked adiabatic reservoir
-with independent conformance. [`0.1.0-alpha.23`](https://github.com/emmettl/ContinuumKit/releases/tag/0.1.0-alpha.23)
+with independent conformance. [`0.1.0-alpha.24`](https://github.com/emmettl/ContinuumKit/releases/tag/0.1.0-alpha.24)
 is the current prerelease; earlier tags remain available for existing consumers.
 
-The table describes the current source tree. New extraction APIs require their own
-verified release; application adoption remains deferred. See the [handoff](docs/extraction/EDGERTON_ADOPTION_HANDOFF.md).
+Alpha.24 publishes the scalar veneer material laws, exact normal contact flow,
+bounded restarted GMRES and three-law isotropic tetrahedral element after exact-tag
+verification. [Publication proof](docs/extraction/alpha24-release-verification.json)
+records the gate and external evidence. Edgerton adoption remains deferred; see the
+[handoff](docs/extraction/EDGERTON_ADOPTION_HANDOFF.md).
 
 | Product / module | Contents | Dependencies |
 | --- | --- | --- |
@@ -59,7 +62,7 @@ The rendering test fails on missing Metal instead of returning early. Saved iden
 Consumers use an exact tag, add only needed products, and commit resolved dependencies:
 
 ```swift
-.package(url: "https://github.com/emmettl/ContinuumKit.git", exact: "0.1.0-alpha.23")
+.package(url: "https://github.com/emmettl/ContinuumKit.git", exact: "0.1.0-alpha.24")
 // In an application target's dependencies:
 .product(name: "SceneModel", package: "continuumkit")
 ```
