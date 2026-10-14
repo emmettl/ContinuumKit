@@ -112,3 +112,11 @@ check pivot policy, full Q/R, triangular condition, conditioning-dependent
 coefficients, normal-equation and optimal residuals. Complete input/factor/output/
 RHS/source/pin corruption controls are required. Numerical and physical-model
 acceptance remain separate under [the QR contract](extraction/PIVOTED_QR.md).
+
+The unreleased [contact search candidate](extraction/CONTACT_SEARCH.md) adds nine CPU tests
+against an independent brute-force pair search (crowded and aliased entries, search order,
+the still-pair skip and a negative control showing its premise is needed) and six required
+device tests: tables and candidate lists equal to the CPU reference bit for bit, identical
+across repeats, thread groupings and instances, and the shared Metal functions compiled into
+a test's own kernel. Its source check hashes the frozen BombCAD blocks and their thirteen
+adapted statements, and its fetched optimized consumers cover CPU-only linkage and the device.

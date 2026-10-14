@@ -10,6 +10,7 @@ python3 Scripts/verify-isotropic-tet-source.py
 python3 Scripts/verify-gmres-source.py
 python3 Scripts/verify-scalar-material-source.py
 python3 Scripts/verify-normal-contact-source.py
+python3 Scripts/verify-contact-search-source.py
 if test "${CONTINUUMKIT_REQUIRE_METAL:-0}" = 1; then
     swift Scripts/check-metal.swift
 fi
@@ -22,6 +23,7 @@ bash Scripts/check-isotropic-tet-consumer.sh "${1:-}"
 bash Scripts/check-gmres-consumer.sh "${1:-}"
 bash Scripts/check-scalar-material-consumer.sh "${1:-}"
 bash Scripts/check-normal-contact-consumer.sh "${1:-}"
+bash Scripts/check-contact-search-consumer.sh "${1:-}"
 bash Scripts/check-consumer.sh "${1:-}"
 bash Scripts/check-linear-wave-consumer.sh "${1:-}"
 bash Scripts/check-metal-wave-consumer.sh "${1:-}"

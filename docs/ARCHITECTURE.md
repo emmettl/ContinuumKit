@@ -145,3 +145,10 @@ Independent references and frozen public-consumer comparisons travel with each.
 Assembly, contact/fracture policy, integration, calibration, rendering and recordings
 stay application-owned. [Adoption is deferred](extraction/EDGERTON_ADOPTION_HANDOFF.md);
 new releases do not change app pins, defaults or acceptance evidence automatically.
+
+## Contact search candidate
+
+`ContactSearch` and `ContactSearchMetal` hold BombCAD's deterministic contact broad phase: the
+wrapped cell table, its ordered slots, listing, the 27-cell search and the exact still-pair
+skip ([contract and provenance](extraction/CONTACT_SEARCH.md)). Pair forces, exclusions and
+contact policy stay in the applications; release and adoption are separate gates.

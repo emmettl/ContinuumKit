@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "application": "BombCAD",
+  "repository": "https://github.com/emmettl/bombcad",
+  "applicationRevisionAtFreeze": "659091b336eb750e07286419558d067180c3b27a",
+  "skipIntroducedIn": "afa5c84f878934edd948423b68ea909d7e0ccc80",
+  "path": "Sources/BlastCore/Shaders/Structure.metal",
+  "fileSHA256": "26fc11905674a10599967f686029b41eb7af770c91277fc70bf8332970aac24d",
+  "lineRanges": [[296, 297], [2283, 2374], [2462, 2577]],
+  "blockSHA256": [
+    "148b9e0e01ea2067de4621f0e81d52a97eca8fad511bc370e48bcf473cf1d6fa",
+    "90b7ee4123992cc6d9ec716bbb67ec2746408100ddcc740342fb878808e55d5f",
+    "395999546fb8a89b1c4fcb74442f38c547c00d5994d1bd54a86d2af8fc43d397"
+  ],
+  "fixture": "Fixtures/ContactSearchSource/BombCADStructureContact.metal",
+  "fixtureSHA256": "0887ef14811106654e0d71a443f2288540f2900ce2bdf9f63b77b74ee533ddac",
+  "licence": "MIT, Louis Emmett (both repositories)",
+  "extraction": "adapted: application uniforms become arguments; pair forces and contact policy stay in the application",
+  "adoption": "deferred until a release is authorized; BombCAD then requires blastbench digest bit-identical",
+  "secondConsumer": "Edgerton (owned by Codex), not adopted"
+}

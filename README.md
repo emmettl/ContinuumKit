@@ -26,6 +26,8 @@ records the gate and external evidence. Edgerton adoption remains deferred; see 
 | `Numerics` | Checked affine/origin fits, pivoted QR and bounded restarted GMRES | Swift standard library; Foundation/simd for Apple GMRES |
 | `SpectralTransforms` | Checked real FFT, sampled filtering and linear convolution | Accelerate |
 | `SolidMechanics` | Orthotropic elasticity, scalar veneer compression/damage, exact scalar contact and isotropic tetrahedral laws | Foundation, simd |
+| `ContactSearch` | Deterministic wrapped cell table for contact: entries, listing, search order and the still-pair skip (unreleased candidate) | Swift standard library |
+| `ContactSearchMetal` | The same table built and searched on the GPU, and its Metal functions for application kernels (unreleased candidate) | ContactSearch, Foundation, Metal |
 | `BenchmarkSupport` | Versioned adiabatic/acoustic cases, analytic references and complete-field reports | Thermodynamics, Foundation |
 
 Requires Swift 6.4 and macOS 15 or later. CPU products do not depend on SceneRender.
