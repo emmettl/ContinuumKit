@@ -64,3 +64,13 @@ four rounds) retained identical aggregate lengths. Checked queries took
 is measurable; this extraction claims reuse/precision and no end-to-end speedup.
 Existing Float callers and mesh acceleration are unchanged. Exact-tag application
 checks remain required after publication.
+
+## Accepted two-host candidate
+
+The M4 Max and [physical M4 mini](https://github.com/emmettl/ContinuumKit/actions/runs/38537085474)
+pass the complete committed-candidate `Scripts/check.sh`: 303 package tests,
+all fetched optimized consumers, actual Metal and every inherited numerical and
+geometry reference gate. [Scope and source identities](double-box-query-verification.json)
+bind these results to `f2c8a5a`. This acceptance record changes documentation only;
+Sources/Tests/Fixtures/Scripts/Package bytes remain identical. Alpha.23 publication
+still requires the separate exact-tag release workflow.
