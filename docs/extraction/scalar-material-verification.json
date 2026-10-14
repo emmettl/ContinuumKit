@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "candidate": "962f9a0c16ee11bb42790906aca9fedbe0ad7567",
+  "applicationAdoption": "deferred; no application writes",
+  "focusedLocal": {
+    "buildSeconds": 46.74,
+    "testSeconds": 0.238,
+    "compressionChecks": 30257,
+    "damageChecks": 77524
+  },
+  "publicConsumer": {
+    "buildSeconds": 5.5,
+    "samples": 52,
+    "exactStateBits": true,
+    "CPUOnlyLinkage": true
+  },
+  "fullMini": {
+    "command": "bash Scripts/check.sh",
+    "serialCompileAndTests": true,
+    "nice": 15,
+    "requiredMetal": true,
+    "exitStatus": 0,
+    "startedUTC": "2026-10-14T12:12:02Z",
+    "finishedUTC": "2026-10-14T12:18:59Z",
+    "retainedRemote": "scrimply-ci-tb:/private/tmp/core-scalar-evidence-962f9a0-pathfixed",
+    "toolPreflight": true
+  },
+  "retainedInvalidAttempt": {
+    "remote": "scrimply-ci-tb:/private/tmp/core-scalar-evidence-962f9a0",
+    "reason": "missing rg in noninteractive PATH invalidated an inherited linkage guard; stopped extraction-only process group; not accepted"
+  },
+  "scope": "chosen scalar P2 laws; no coupled tensor/panel/impact/physical validation"
+}

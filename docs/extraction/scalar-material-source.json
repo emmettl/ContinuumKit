@@ -1,0 +1,47 @@
+{
+  "schemaVersion": 1,
+  "applicationRevisionAtFreeze": "831053cc7d955622d6aad28dba4f2e386be67cf3",
+  "adoption": "deferred; application sources and dependency pin untouched",
+  "files": {
+    "Studies/TargetMechanics/PlywoodP2Compression/input.json": {
+      "sha256": "b358c254eaefb7f149e027760a2bce516875c25114fe2102c9e93fda1e6f8cc0",
+      "bytes": 911
+    },
+    "Studies/TargetMechanics/PlywoodP2Compression/reference.py": {
+      "sha256": "d20eaf54140f250e5dc5a4275890f20030db963743d299362ba51b0891ddc80c",
+      "bytes": 2785
+    },
+    "Studies/TargetMechanics/PlywoodP2Compression/evidence/reference.csv": {
+      "sha256": "d4624d75e5fda9480c05095dac0965a5f24c82fad504af2893083b02bb18977b",
+      "bytes": 291439
+    },
+    "Sources/EdgertonCore/TargetVeneerCompression.swift": {
+      "sha256": "fe58f32302eba3eb81656becee568f0a0039f4992207484265e106ba6a397f6e",
+      "bytes": 4030
+    },
+    "Studies/TargetMechanics/PlywoodP2Compression/CompressionStudy.swift": {
+      "sha256": "eb37f9c6203b9f7fff408b9a317ba34037092010b4ad94f764d5e440ffc2eed4",
+      "bytes": 7293
+    },
+    "Studies/TargetMechanics/PlywoodP2Damage/input.json": {
+      "sha256": "be427c8de928cb09216f9f3f10856fc7c43c3b23fbd3e5cff929ea64e5003efe",
+      "bytes": 916
+    },
+    "Studies/TargetMechanics/PlywoodP2Damage/reference.py": {
+      "sha256": "72b96be5bf4c7bcb4e97ae9490d7d0eb9d1ce44154767f95860a6540a7a533fd",
+      "bytes": 2689
+    },
+    "Studies/TargetMechanics/PlywoodP2Damage/evidence/reference.csv": {
+      "sha256": "94b01c8b612901478107583978703aa0bd7cee513306770380d9466388d2548b",
+      "bytes": 290409
+    },
+    "Sources/EdgertonCore/TargetVeneerDamage.swift": {
+      "sha256": "c835790af710707a5272b8a9dc559f83c37000dc490414b01b52c02ca8ca24fe",
+      "bytes": 4765
+    },
+    "Studies/TargetMechanics/PlywoodP2Damage/DamageStudy.swift": {
+      "sha256": "0616f741c66dba4d3bfe77e5df634c1ef0fdbcaf69471c526d4e96742784e609",
+      "bytes": 12979
+    }
+  }
+}
