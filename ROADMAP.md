@@ -558,3 +558,11 @@ source and exact alpha.19 target. Complete actual Stencil reuse, means/frame/
 component-threshold/limiter/backoff/EOS histories and affected coupled references
 must pass independently before migration. Application tests and packaging are
 required separately; original inaccuracies and prior source pins remain retained.
+
+Double spatial candidate: `SceneModel.BoxQuery.intersection` provides explicit
+Double bounds without changing persisted Float `Box` or existing BombCAD queries.
+The [contract](docs/extraction/DOUBLE_BOX_QUERIES.md) bounds closed contact and
+floating arithmetic; RoomCAD owns positive-path attenuation and stationary points.
+Independent face-plane/precision controls precede full package and application gates.
+IFC metadata/conversion, mesh acceleration and remote scheduling remain separate
+extractions requiring concrete consumers and their own acceptance policies.

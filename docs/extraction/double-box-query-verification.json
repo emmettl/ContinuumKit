@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "scope": "bounded Double closed-box query; unchanged existing Float and persisted Box contracts",
+  "verifiedCandidate": "f2c8a5ab4501ed8ec17e8dbcf5f917744d1ee690",
+  "baseline": "37d6550417652937412bfc81882ab42a07982e41",
+  "tests": 303,
+  "independentObliqueCases": 400,
+  "sourceSHA256": {
+    "Sources/SceneModel/DoubleBoxQuery.swift": "0d882377e4097245d12108a4eeec1d383edafaeefe3ca672acc9c105117a9650",
+    "Tests/CADFoundationsTests/DoubleBoxQueryTests.swift": "c23ef0b8dce301fa6057e07c1c11a0e9fbce09611d2c462561df3976580fd238",
+    "Fixtures/Consumer/Sources/Consumer/Consumer.swift": "281b20a80b96a95a4e29b9e335fd77a597c185be1af58adc947c77a3eb7ab6ed"
+  },
+  "hosts": [
+    {
+      "device": "Apple M4 Max",
+      "check": "CONTINUUMKIT_REQUIRE_METAL=1 bash Scripts/check.sh",
+      "exitCode": 0,
+      "logSHA256": "6257c1efd40e2f34d3fc221de5571301b1f0c6cdc39def296d58a574d2b7d4b6"
+    },
+    {
+      "device": "Apple M4",
+      "workflow": "https://github.com/emmettl/ContinuumKit/actions/runs/38537085474",
+      "conclusion": "success",
+      "logSHA256": "8d1f0e97ddcddb6019be01b840ab769536f68f8bae49246ab8dd39a6cb025437"
+    }
+  ],
+  "publication": "Separate immutable alpha23 exact-tag workflow required before application adoption",
+  "limitations": [
+    "bounded native Double arithmetic, including subtraction",
+    "no exact predicate or overflow-safe large-coordinate guarantee",
+    "no empirical acoustic or end-to-end performance claim"
+  ]
+}
