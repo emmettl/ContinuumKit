@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 1,
+  "candidate": "d35227da297118f512fc42873f78b83d4ca8cc24",
+  "adoption": "deferred; application untouched",
+  "fullMini": {
+    "command": "bash Scripts/check.sh",
+    "exitStatus": 0,
+    "nice": 15,
+    "serialCompileAndTests": true,
+    "requiredMetal": true,
+    "toolPreflight": true,
+    "SwiftTests": 309,
+    "startedUTC": "2026-10-14T12:26:45Z",
+    "finishedUTC": "2026-10-14T12:34:45Z",
+    "retainedRemote": "scrimply-ci-tb:/private/tmp/core-contact-evidence-d35227d"
+  },
+  "focused": {
+    "buildSeconds": 46.86,
+    "testsSeconds": 0.001,
+    "optimizedConsumerBuildSeconds": 4.71,
+    "publicFrozenSamples": 135,
+    "exactBits": true,
+    "CPUOnlyLinkage": true
+  },
+  "scope": "fixed-direction/effective-mass scalar penalty flow; no general contact or empirical impact claim"
+}
