@@ -2,12 +2,12 @@
 
 Shared Swift foundations for RoomCAD, BombCAD and Edgerton. The package contains the existing CAD foundations from BombCAD's SimulationKit and
 RoomCAD's application-independent response interchange, and a checked adiabatic reservoir
-with independent conformance. [`0.1.0-alpha.16`](https://github.com/emmettl/ContinuumKit/releases/tag/0.1.0-alpha.16)
+with independent conformance. [`0.1.0-alpha.23`](https://github.com/emmettl/ContinuumKit/releases/tag/0.1.0-alpha.23)
 is the current prerelease; earlier tags remain available for existing consumers.
 
 | Product / module | Contents | Dependencies |
 | --- | --- | --- |
-| `SceneModel` | Codable bounds and Cartesian grids, metres with z up | Apple simd |
+| `SceneModel` | Codable Float bounds, Cartesian grids and Float/Double closed-box queries, metres with z up | Swift standard library, conditional simd |
 | `SceneView` | Orbit camera, framing, rays, picking helpers and zoom limits | SceneModel, Foundation, simd |
 | `SceneRender` | Scene geometry, Metal rendering, snapshots and orbit-control view | SceneModel/View, Metal/MetalKit, AppKit/CoreGraphics |
 | `GeometryImport` | Bounded OBJ and ASCII/binary STL reading | Foundation, simd |
@@ -17,6 +17,9 @@ is the current prerelease; earlier tags remain available for existing consumers.
 | `CompressibleFlow` | Planar ideal-gas wall, prescribed gas packets and paired Euler reference | Foundation, simd |
 | `LinearAcoustics` | Checked masked CPU updates, pressure forcing and receiver observation; explicit serial/parallel execution | Swift standard library, Dispatch |
 | `LinearAcousticsMetal` | Resident GPU updates, pressure forcing, receiver sampling and bundled kernels | LinearAcoustics, Foundation, Metal |
+| `Numerics` | Checked affine and exact through-origin fits, reusable pivoted QR | Swift standard library |
+| `SpectralTransforms` | Checked real FFT, sampled filtering and linear convolution | Accelerate |
+| `SolidMechanics` | Checked P1 orthotropic plane-stress elastic law | Foundation, simd |
 | `BenchmarkSupport` | Versioned adiabatic/acoustic cases, analytic references and complete-field reports | Thermodynamics, Foundation |
 
 Requires Swift 6.4 and macOS 15 or later. CPU products do not depend on SceneRender.
@@ -30,9 +33,10 @@ From a clean committed candidate:
 CONTINUUMKIT_REQUIRE_METAL=1 bash Scripts/check.sh
 ```
 
-The complete package gate builds and tests all eleven public libraries, then verifies
-six clean optimized Git consumers: all-library CAD/model smoke, CPU waves, resident
-Metal waves, ideal-gas wall reference, prescribed gas packets and paired Euler flux. CPU-only consumers
+The complete package gate builds and tests all fourteen public libraries, then verifies
+eleven clean optimized Git consumers: all-library CAD/model smoke, CPU waves, resident
+Metal waves, ideal-gas wall reference, prescribed gas packets, paired Euler flux, real FFT, affine fitting, pivoted QR, exact
+through-origin fitting and orthotropic elasticity. CPU-only consumers
 reject Metal/UI framework linkage. Complete reference/source/geometry reports retain
 physical gaps separately from numerical conformance. CI runs on the physical Mac mini;
 see [CI operations](docs/CI.md). The committed candidate is fetched through Git, with
@@ -43,8 +47,7 @@ Each check script writes its evidence to the folder it is given (an argument or 
 under `CONTINUUMKIT_OUTPUT_ROOT` (default `TMPDIR`) and removes it on exit, a few hundred
 megabytes a run; `CONTINUUMKIT_KEEP_OUTPUT=1` keeps it and prints where.
 
-The module implementations and shader are copied byte-for-byte. The rendering test
-now fails on missing Metal instead of returning early. Saved identifiers, including
+The rendering test fails on missing Metal instead of returning early. Saved identifiers, including
 `dev.simulationkit.project`, are retained. See [CAD provenance](docs/extraction/CAD_FOUNDATIONS.md) and
 [response provenance](docs/extraction/IMPULSE_RESPONSE.md).
 
@@ -53,7 +56,7 @@ now fails on missing Metal instead of returning early. Saved identifiers, includ
 Consumers use an exact tag, add only needed products, and commit resolved dependencies:
 
 ```swift
-.package(url: "https://github.com/emmettl/ContinuumKit.git", exact: "0.1.0-alpha.3")
+.package(url: "https://github.com/emmettl/ContinuumKit.git", exact: "0.1.0-alpha.23")
 // In an application target's dependencies:
 .product(name: "SceneModel", package: "continuumkit")
 ```
