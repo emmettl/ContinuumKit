@@ -7,6 +7,11 @@ on:
         description: Existing semantic-version tag, such as 0.1.0-alpha.1
         required: true
         type: string
+      retain_on_host:
+        description: Retain complete raw evidence on the verification host for external archival instead of GitHub uploads
+        required: false
+        type: boolean
+        default: false
 
 permissions:
   contents: read
@@ -38,16 +43,21 @@ jobs:
       - name: Verify exact tagged package
         env:
           VERSION: ${{ inputs.version }}
+          RETAIN_ON_HOST: ${{ inputs.retain_on_host }}
           CONTINUUMKIT_REQUIRE_METAL: "1"
           CONTINUUMKIT_AFFINE_OUTPUT: ${{ runner.temp }}/affine-fit-${{ github.run_id }}-${{ github.run_attempt }}
           CONTINUUMKIT_QR_OUTPUT: ${{ runner.temp }}/pivoted-qr-${{ github.run_id }}-${{ github.run_attempt }}
           CONTINUUMKIT_ORIGIN_OUTPUT: ${{ runner.temp }}/origin-least-squares-${{ github.run_id }}-${{ github.run_attempt }}
           CONTINUUMKIT_REAL_FFT_OUTPUT: ${{ runner.temp }}/real-fft-${{ github.run_id }}-${{ github.run_attempt }}
           CONTINUUMKIT_EULER_FLUX_OUTPUT: ${{ runner.temp }}/euler-flux-${{ github.run_id }}-${{ github.run_attempt }}
-        run: bash Scripts/check.sh "$VERSION"
+        run: |
+          if test "$RETAIN_ON_HOST" = true; then
+            export CONTINUUMKIT_EVIDENCE_DIR="${HOME}/Library/Caches/ContinuumKitReleaseEvidence/${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}"
+          fi
+          nice -n 15 bash Scripts/check-low-impact.sh "$VERSION"
 
       - name: Retain exact-tag pivoted QR factors, reusable RHS and independent references
-        if: always()
+        if: always() && !inputs.retain_on_host
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: pivoted-qr-${{ github.run_id }}-${{ github.run_attempt }}
@@ -55,7 +65,7 @@ jobs:
           if-no-files-found: error
 
       - name: Retain exact through-origin inputs, integer witnesses and references
-        if: always()
+        if: always() && !inputs.retain_on_host
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: origin-least-squares-${{ github.run_id }}-${{ github.run_attempt }}
@@ -63,7 +73,7 @@ jobs:
           if-no-files-found: error
 
       - name: Retain complete affine fits and exact native reference evidence
-        if: always()
+        if: always() && !inputs.retain_on_host
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: affine-fit-${{ github.run_id }}-${{ github.run_attempt }}
@@ -71,7 +81,7 @@ jobs:
           if-no-files-found: error
 
       - name: Retain complete packed real FFT and independent reference evidence
-        if: always()
+        if: always() && !inputs.retain_on_host
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: real-fft-${{ github.run_id }}-${{ github.run_attempt }}
@@ -79,7 +89,7 @@ jobs:
           if-no-files-found: error
 
       - name: Retain exact-tag Euler native states and independent refinement evidence
-        if: always()
+        if: always() && !inputs.retain_on_host
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: euler-flux-${{ github.run_id }}-${{ github.run_attempt }}
