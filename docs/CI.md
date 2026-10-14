@@ -62,3 +62,26 @@ Self-hosted checks do not automatically execute pull-request code. Review and me
 trusted changes before running them on the mini. If the repository becomes public,
 configure approval for all external fork workflow runs and retain this trigger policy.
 Only explicitly authorized, reviewed tags go through the manual release workflow.
+
+## Low-impact package verification and external release evidence
+
+The complete package and release gates use `Scripts/check-low-impact.sh` at nice
+15. Swift builds use one compiler job and tests run without parallel execution;
+all original checks, consumers, actual Metal work and exact-tag arguments remain.
+A required-tool preflight fails before an inherited linkage guard can skip missing
+ripgrep. Other manually selected throughput/audit jobs retain their own contracts.
+Operators still schedule GPU work around active feature workloads; CPU priority
+alone does not establish a GPU resource reservation.
+
+Release dispatch may select `retain_on_host: true`. This suppresses only raw-data
+artifact uploads, not verification or the dependent publication gate. Complete
+outputs/log/status/source identity remain in the host's temporary evidence staging
+at `~/Library/Caches/ContinuumKitReleaseEvidence/<run-id>-<attempt>` until copied
+and hash-verified onto StudioData. Do not discard staging before external archival.
+The default false option preserves prior GitHub upload behavior. No binary payload
+is added to a GitHub release. Small provenance/acceptance receipts belong in Git;
+large numerical fields belong in retained external evidence.
+
+For manual runs, set `CONTINUUMKIT_EVIDENCE_DIR` to a fresh absolute directory outside
+the checkout. The wrapper refuses existing destinations and checkout-contained
+paths; without that variable, prior cleanup/retention semantics are preserved.
