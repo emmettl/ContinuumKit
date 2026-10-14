@@ -15,6 +15,7 @@ public enum BoxQuery {
   /// The upper endpoint may be infinite. Arithmetic is Double, including subtraction;
   /// this is a bounded floating-point query, not an exact predicate or an overflow-safe
   /// large-coordinate geometry solver. Callers must not infer robust geometry from nil.
+  @inlinable
   public static func intersection(
     min: SIMD3<Double>, max: SIMD3<Double>, origin: SIMD3<Double>, direction: SIMD3<Double>,
     parameters: ClosedRange<Double> = 0...Double.infinity, parallelTolerance: Double = 0

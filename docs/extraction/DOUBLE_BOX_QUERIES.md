@@ -49,3 +49,18 @@ original and retains existing direct/image-source/ray attenuation checks.
 Candidate package, fetched-consumer, actual-Metal and application acceptance must
 pass before publication/adoption; numerical query verification does not establish
 empirical acoustic accuracy.
+
+## Local adoption checkpoint
+
+RoomCAD's 13,500 valid ray/segment/stationary cases match the protected original's
+complete endpoint bits. Its two adoption tests and full `make check` pass on the
+M4 Max with the candidate supplied through a temporary SwiftPM edit; this is
+pre-publication integration evidence, not an exact-version acceptance claim.
+
+The public Double function is inlinable across the package boundary. A standalone
+optimized microbenchmark (2 million varying bounded queries, alternating old/new,
+four rounds) retained identical aggregate lengths. Checked queries took
+14–24 ms versus 6–11 ms for the unchecked original on the M4 Max. Extra validation
+is measurable; this extraction claims reuse/precision and no end-to-end speedup.
+Existing Float callers and mesh acceleration are unchanged. Exact-tag application
+checks remain required after publication.
