@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 1,
+  "candidate": "67abaa1259fd1b341d5942e9f5057d6e70110c47",
+  "adoption": "deferred",
+  "fullMini": {
+    "command": "nice -n 15 bash Scripts/check-low-impact.sh",
+    "exitStatus": 0,
+    "serialCompileAndTests": true,
+    "requiredMetal": true,
+    "toolPreflight": true,
+    "SwiftTests": 313,
+    "retainedRemote": "scrimply-ci-tb:/private/tmp/core-gmres-evidence-67abaa1",
+    "startedUTC": "2026-10-14T17:16:37Z",
+    "finishedUTC": "2026-10-14T17:27:07Z"
+  },
+  "contract": "immutable original engine; checked allocation/operator/domain; extra final robust-hypot residual evaluation rejects squared-norm underflow false convergence",
+  "focusedFinalTests": 4,
+  "publicFrozenParity": "four restart widths, exact solution bits and iteration counts; final revised consumer included in full run",
+  "supersededFullRun": {
+    "candidate": "19dc511e21c41b50fb0f00bdbcfa79b5afc04ec2",
+    "remote": "scrimply-ci-tb:/private/tmp/core-gmres-evidence-19dc511",
+    "exitStatus": 0,
+    "scope": "preceding wrapper only; not proof of final residual validation"
+  },
+  "scope": "Apple SIMD numerical solver only; no application Newton/preconditioning/dynamics or empirical impact acceptance"
+}
