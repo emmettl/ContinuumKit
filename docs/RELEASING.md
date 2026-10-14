@@ -269,3 +269,17 @@ records immutable tag/commit identity and the separately verified import guard r
 This is small-strain numerical verification; laminate assembly, damage, plasticity,
 panel solvers, Edgerton adoption and empirical impact accuracy remain separate gates.
 Earlier tags and failures are unchanged.
+
+## Published Double closed-box queries
+
+Alpha.23 publishes `SceneModel.BoxQuery.intersection` from reviewed merge
+`b5a317486f1f87dd28ddeb9733587a41061d882c` after the
+[exact-tag physical-mini release](https://github.com/emmettl/ContinuumKit/actions/runs/38538476731)
+passes 303 tests, actual Metal, eleven fetched optimized consumers and every
+inherited reference gate. The M4 Max passes the same complete exact-tag scope.
+[Publication proof](extraction/alpha23-release-verification.json) records immutable
+annotated/peeled tag identity and successful verify/publish jobs. Existing Float
+queries and persisted Box are unchanged from the preceding release. The new
+Double query has explicit closed-contact, precision and bounded-arithmetic rules;
+RoomCAD retains acoustic policy and its separate adoption checks. No empirical
+acoustic accuracy, IFC feature or application release is claimed.

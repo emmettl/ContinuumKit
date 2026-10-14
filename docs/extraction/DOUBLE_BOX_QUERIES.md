@@ -74,3 +74,8 @@ geometry reference gate. [Scope and source identities](double-box-query-verifica
 bind these results to `f2c8a5a`. This acceptance record changes documentation only;
 Sources/Tests/Fixtures/Scripts/Package bytes remain identical. Alpha.23 publication
 still requires the separate exact-tag release workflow.
+
+Published: [alpha.23](https://github.com/emmettl/ContinuumKit/releases/tag/0.1.0-alpha.23),
+after both hosts pass complete exact-tag verification. [Publication proof](alpha23-release-verification.json)
+retains the immutable tag, commit and release workflow. RoomCAD adoption remains
+separately source-bound and verified.

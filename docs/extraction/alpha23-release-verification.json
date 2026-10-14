@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "version": "0.1.0-alpha.23",
+  "tagObject": "56c620859fa1673ec7f94d146cb71b84f6784ed0",
+  "commit": "b5a317486f1f87dd28ddeb9733587a41061d882c",
+  "publishedAt": "2026-10-14T09:01:58Z",
+  "release": "https://github.com/emmettl/ContinuumKit/releases/tag/0.1.0-alpha.23",
+  "workflow": "https://github.com/emmettl/ContinuumKit/actions/runs/38538476731",
+  "conclusion": "success",
+  "scope": "Double closed-box spatial queries; all prior model contracts and Float consumers preserved",
+  "tests": 303,
+  "exactTagHosts": [
+    {
+      "device": "Apple M4 Max",
+      "command": "CONTINUUMKIT_REQUIRE_METAL=1 bash Scripts/check.sh 0.1.0-alpha.23",
+      "exitCode": 0,
+      "logSHA256": "ece517bf1e72f4ff32cc9a25d65c670a9e40dcbfe1d1598176992b69c69ce4cd"
+    },
+    {
+      "device": "Apple M4",
+      "workflowJobs": {
+        "verify": "success",
+        "publish": "success"
+      },
+      "logSHA256": "8d0d1fb4c5284667c8860c3d98c9296721e8d4866c538eeca14d3c7887b81c71"
+    }
+  ],
+  "applicationAdoption": "Separate RoomCAD PR #39; no application release or empirical acoustic accuracy claim"
+}
