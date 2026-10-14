@@ -1,0 +1,19 @@
+{
+  "fixture_id": "p2-prescribed-single-band-tension-shear-v1",
+  "provenance": "invented effective surrogate; no species calibration or measured validation",
+  "units": "SI; engineering shear strain; total work of separation Gf includes pre-peak elasticity",
+  "length_m": 0.02,
+  "width_m": 0.01,
+  "thickness_m": 0.001,
+  "mesh_cells": [4, 8],
+  "grain_orientations_deg": [0, 90],
+  "increments_per_leg": [1, 20],
+  "tension": [
+    {"grain_deg": 0, "K_Pa": 10000000000, "strength_Pa": 20000000, "Gf_J_m2": 600},
+    {"grain_deg": 90, "K_Pa": 1000000000, "strength_Pa": 2000000, "Gf_J_m2": 100}
+  ],
+  "shear": {"K_Pa": 500000000, "strength_Pa": 2000000, "Gf_J_m2": 150},
+  "maximum_strain": 0.1,
+  "relative_tolerance": 0.000001,
+  "scope": "1D series-cell strip; prescribed one-cell localization at mid-gauge; tension and scalar shear slip separately, no coupled tensor damage or spontaneous crack selection"
+}
