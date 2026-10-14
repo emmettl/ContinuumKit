@@ -1,0 +1,70 @@
+{
+  "schemaVersion": 1,
+  "applicationRevisionAtFreeze": "c90a6269801d1abe604d311a046238590842aa84",
+  "sourceSHA256": "0bbef033cf3274ea8a536ec4e8e4a4d3265712bb060a571f669ba9ab3e63c1e9",
+  "helperSourceSHA256": "99ee060765fdad67a7ac933f5f33f0ad2f0076bbefa537c8e182ebc0b1a77200",
+  "helperBlockSHA256": "bf43cd2118f8a40c10578d93acdeccf1f2bdf9ea003acac35773ae2176c0e8bc",
+  "transformations": [
+    [
+      "TargetIsotropicTet",
+      "IsotropicTetrahedron"
+    ],
+    [
+      "TargetGeometryError.invalidDefinition",
+      "ElementError.invalidDefinition"
+    ],
+    [
+      "TargetImplicitFaceContact.correctedGradient",
+      "TetWorkCorrection.correctedGradient"
+    ],
+    [
+      "public struct IsotropicTetrahedron:Sendable {",
+      "public struct IsotropicTetrahedron:Sendable {\n    public enum ElementError: Error { case invalidDefinition }"
+    ],
+    [
+      "    struct FixedResponse:Sendable {",
+      "    public struct FixedResponse:Sendable {"
+    ],
+    [
+      "        let energy:Double,jacobian:Double",
+      "        public let energy:Double,jacobian:Double"
+    ],
+    [
+      "        let forces:(SIMD3",
+      "        public let forces:(SIMD3"
+    ],
+    [
+      "    struct Corners:Sendable {",
+      "    public struct Corners:Sendable {"
+    ],
+    [
+      "        var a:SIMD3",
+      "        public var a:SIMD3"
+    ],
+    [
+      "        init(_ a:",
+      "        public init(_ a:"
+    ],
+    [
+      "        subscript(_ i:",
+      "        public subscript(_ i:"
+    ],
+    [
+      "    var restGradients:",
+      "    public var restGradients:"
+    ],
+    [
+      "    func discreteGradient(old:Corners",
+      "    public func discreteGradient(old:Corners"
+    ],
+    [
+      "    func evaluate(_ p0:",
+      "    public func evaluate(_ p0:"
+    ]
+  ],
+  "adoption": "deferred",
+  "independentReferenceFiles": {
+    "Tests/SolidMechanicsTests/Fixtures/IsotropicTet/reference.py": "234c504371847e8e6f31dd5c282dd59bfccce7671b01067e5b1df56f95410f02",
+    "Tests/SolidMechanicsTests/Fixtures/IsotropicTet/reference.csv": "396b630cd406aaa7feb40e12fba51352c2e8453658ae395b92d8f32a8a9165aa"
+  }
+}
