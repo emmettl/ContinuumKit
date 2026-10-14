@@ -1,0 +1,7 @@
+{
+  "schemaVersion": 1,
+  "applicationRevisionAtFreeze": "831053cc7d955622d6aad28dba4f2e386be67cf3",
+  "sourceSHA256": "9152284a840ce0d55153e867dbd0b86e6a589a8e85a835f932c3689e34b12c4f",
+  "consumerVisibilityAdaptation": "public enum, Vector alias and solve only",
+  "adoption": "deferred"
+}
