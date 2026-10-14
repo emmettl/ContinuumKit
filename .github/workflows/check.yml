@@ -52,7 +52,7 @@ jobs:
           CONTINUUMKIT_BOUNDARY_OUTPUT: ${{ runner.temp }}/boundary-${{ github.run_id }}-${{ github.run_attempt }}
           CONTINUUMKIT_ACOUSTIC_OUTPUT: ${{ runner.temp }}/acoustic-${{ github.run_id }}-${{ github.run_attempt }}
           CONTINUUMKIT_BENCHMARK_OUTPUT: ${{ runner.temp }}/adiabatic-${{ github.run_id }}-${{ github.run_attempt }}
-        run: bash Scripts/check.sh
+        run: nice -n 15 bash Scripts/check-low-impact.sh
       - name: Retain exact through-origin inputs, integer witnesses and references
         if: always()
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
