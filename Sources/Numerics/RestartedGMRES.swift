@@ -1,8 +1,9 @@
 #if canImport(simd)
 import simd
+import Foundation
 
 /// Bounded restarted GMRES using arrays of three-component Double vectors.
-/// The supplied action is the complete operator (including any caller preconditioning).
+/// The action must be deterministic and linear, with RHS in the same preconditioned system.
 /// Apple SIMD arithmetic is preserved from the independently checked source algorithm.
 public enum RestartedGMRES {
     public typealias Vector = [SIMD3<Double>]
@@ -34,8 +35,20 @@ public enum RestartedGMRES {
             return result
         }
         do {
-            return try GMRESImplementation.solve(rhs: rhs, tolerance: tolerance, restart: restart,
-                                                 cycles: cycles, action: checkedAction)
+            let result = try GMRESImplementation.solve(rhs: rhs, tolerance: tolerance, restart: restart,
+                                                      cycles: cycles, action: checkedAction)
+            // Native squared norms can underflow for a nonzero tiny residual. Validate
+            // the declared returned-solution contract independently with scaled hypot.
+            let actual = try checkedAction(result.0)
+            var residual = 0.0
+            for i in rhs.indices {
+                let difference = rhs[i] - actual[i]
+                residual = hypot(residual, difference.x)
+                residual = hypot(residual, difference.y)
+                residual = hypot(residual, difference.z)
+            }
+            guard residual.isFinite, residual <= 5 * tolerance else { throw SolverError.notConverged }
+            return result
         } catch GMRESImplementation.Error.breakdown { throw SolverError.numericalBreakdown }
         catch GMRESImplementation.Error.notConverged { throw SolverError.notConverged }
     }

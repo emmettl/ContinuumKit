@@ -6,7 +6,8 @@ public wrapper defines input/operator errors, finite-norm requirements and bound
 allocation. App code, Newton/preconditioning policy, dependency pin and defaults
 remain unchanged. Adoption is deliberately deferred.
 
-Vectors are arrays of `SIMD3<Double>`; the callback is the complete operator,
+Vectors are arrays of `SIMD3<Double>`; the callback must be deterministic and linear,
+with RHS in the same preconditioned system. The callback is the complete operator,
 including any caller-chosen preconditioning. The library does not compute a
 preconditioner or require symmetry. Tolerance is an absolute Euclidean residual
 in the caller's vector units. The inherited explicit post-restart acceptance is
@@ -21,7 +22,10 @@ Empty RHS is supported with a compatible empty callback result. Input components
 and norm must be finite. Wrong-size/nonfinite or overflowing-norm callback results
 reject. Nonrepresentable internal vectors and source breakdown map to numerical
 breakdown; exhausted iterations map to nonconvergence. Callback errors propagate
-unchanged. The result is (solution, iteration count), preserving the source shape.
+unchanged. One additional final operator evaluation validates returned residual
+with scaled `hypot`, rejecting false convergence from underflow of the source
+squared norm. This changes callback counts, not source iteration arithmetic;
+future application diagnostic counters must account for it. The result is (solution, iteration count), preserving the source shape.
 No universal ill-conditioned-system accuracy or runtime guarantee is inferred.
 
 Independent tests transfer the known 12-component nonsymmetric restarted-solve

@@ -29,6 +29,13 @@ import Numerics
         let empty=try RestartedGMRES.solve(rhs:[],tolerance:1e-12,action:{$0})
         #expect(empty.0.isEmpty && empty.1==0)
     }
+    @Test func tinyNonzeroResidualCannotReportFalseConvergence() throws {
+        #expect(throws: RestartedGMRES.SolverError.notConverged) {
+            try RestartedGMRES.solve(rhs:[SIMD3(1e-250,0,0)],tolerance:1e-270,action:{$0})
+        }
+        let result=try RestartedGMRES.solve(rhs:[SIMD3(1e-250,0,0)],tolerance:1e-240,action:{$0})
+        #expect(result.0==[.zero] && result.1==0)
+    }
     @Test func inputOperatorAllocationAndFailureContracts() throws {
         for tolerance in [0.0,-1,.nan,.infinity,Double.greatestFiniteMagnitude] {
             #expect(throws: RestartedGMRES.SolverError.invalidInput) {
