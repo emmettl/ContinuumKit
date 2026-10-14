@@ -6,6 +6,7 @@ cd "$root"
 for script in Scripts/*.sh; do bash -n "$script"; done
 git diff --check
 python3 Scripts/verify-orthotropic-source.py
+python3 Scripts/verify-gmres-source.py
 python3 Scripts/verify-scalar-material-source.py
 python3 Scripts/verify-normal-contact-source.py
 if test "${CONTINUUMKIT_REQUIRE_METAL:-0}" = 1; then
@@ -16,6 +17,7 @@ if test -d Tests; then
     swift test -Xswiftc -warnings-as-errors
 fi
 bash Scripts/check-orthotropic-consumer.sh "${1:-}"
+bash Scripts/check-gmres-consumer.sh "${1:-}"
 bash Scripts/check-scalar-material-consumer.sh "${1:-}"
 bash Scripts/check-normal-contact-consumer.sh "${1:-}"
 bash Scripts/check-consumer.sh "${1:-}"
