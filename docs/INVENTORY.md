@@ -272,3 +272,9 @@ The authorized [orthotropic elastic candidate](extraction/ORTHOTROPIC_PLANE_STRE
 transfers Edgerton P1 kernel/frame primitives with frozen independent tests and a
 public consumer. Earlier inventories remain unchanged. Laminate A/B/D, veneer
 damage/plasticity, glue, panel assembly and contact are outside this extraction.
+
+## P2 scalar material extraction — 14 October 2026
+
+The [bounded scalar laws](extraction/SCALAR_VENEER_MATERIALS.md) preserve Edgerton
+compression/damage arithmetic and independent fixtures. Application adoption is
+deferred; no panel/contact/fracture system or application dependency is moved.
