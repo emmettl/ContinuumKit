@@ -303,3 +303,22 @@ the [deferred adoption handoff](extraction/EDGERTON_ADOPTION_HANDOFF.md) in a bo
 integration window, including GMRES's extra final operator evaluation and explicit
 error adaptation. These numerical checks do not establish empirical impact
 accuracy or a measured application build-time gain.
+
+## Published deterministic contact search
+
+[Alpha.25](https://github.com/emmettl/ContinuumKit/releases/tag/0.1.0-alpha.25) publishes
+`ContactSearch` and `ContactSearchMetal`, BombCAD's contact broad phase: the wrapped cell table
+with ordered slots, listing, the 27-cell search and the exact still-pair skip. The immutable
+annotated tag points to `c3f5d0876f0fae685c73640b0c22b0b69dd666ec`.
+
+- The [exact-tag physical-mini workflow](https://github.com/emmettl/ContinuumKit/actions/runs/38661607184)
+  passed before publication: 331 package tests (15 new), sixteen optimized fetched consumers,
+  actual Metal work and every inherited reference and benchmark gate.
+- The M4 Max passed the same complete exact-tag scope from a clean clone. Its device consumer
+  found the same 35,088 candidates as the mini's.
+- [Publication proof](extraction/alpha25-release-verification.json) records the identities.
+- BombCAD adopted it with `blastbench digest` and its contact hashes bit-identical. Edgerton's
+  adoption is Codex's.
+
+This is numerical verification of a search; it makes no claim about contact forces or physical
+accuracy. Earlier tags are unchanged.
