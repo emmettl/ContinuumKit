@@ -113,7 +113,7 @@ coefficients, normal-equation and optimal residuals. Complete input/factor/outpu
 RHS/source/pin corruption controls are required. Numerical and physical-model
 acceptance remain separate under [the QR contract](extraction/PIVOTED_QR.md).
 
-The unreleased [contact search candidate](extraction/CONTACT_SEARCH.md) adds nine CPU tests
+The [contact search](extraction/CONTACT_SEARCH.md), published in alpha.25, adds nine CPU tests
 against an independent brute-force pair search (crowded and aliased entries, search order,
 the still-pair skip and a negative control showing its premise is needed) and six required
 device tests: tables and candidate lists equal to the CPU reference bit for bit, identical

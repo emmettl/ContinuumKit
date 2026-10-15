@@ -1,4 +1,4 @@
-# Deterministic contact search — unreleased candidate
+# Deterministic contact search — published in 0.1.0-alpha.25
 
 `ContactSearch` (CPU) and `ContactSearchMetal` (GPU) carry the broad phase of BombCAD's
 structure contact.
@@ -116,17 +116,19 @@ Both run in `Scripts/check.sh` with the source verification.
 This is numerical verification of a search. It says nothing about contact forces or physical
 contact accuracy.
 
+## Release and adoption
+
+- **Published** in [0.1.0-alpha.25](https://github.com/emmettl/ContinuumKit/releases/tag/0.1.0-alpha.25)
+  ([publication proof](alpha25-release-verification.json)).
+- **BombCAD** adopted it at `4d58022` (on its main as `a361ae9`).
+  - It compiles `functionSource()` into its shader library.
+  - Its structure and shell contact now call `cksCell`, `cksEntry`, `cksClearEntry`,
+    `cksInsert`, `cksListed` and `cksSearches`.
+  - All seven `blastbench digest` cases and the contact-profile node hashes are bit-identical
+    to the same tree without the shared functions.
+
 ## Remaining gates
 
-- **Release:** needs explicit authorization.
-- **BombCAD adoption,** after a release:
-  - re-pin;
-  - compile `functionSource()` into its shader library;
-  - replace its own cell, entry, clear, insert, listing and visited-entry code with these
-    functions;
-  - require `blastbench digest` and the contact-profile node hashes to be bit-identical.
-- **Shells:** BombCAD's shell contact uses the same table with its own spacing, and would follow
-  in a second step.
 - **Edgerton:** its GPU node-sphere hash is separate. Adopting this one is Codex's decision and
   work.
 - **Out of scope:** a CPU-parallel build, other slot counts and sort-based broad phases.

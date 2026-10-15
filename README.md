@@ -2,10 +2,12 @@
 
 Shared Swift foundations for RoomCAD, BombCAD and Edgerton. The package contains the existing CAD foundations from BombCAD's SimulationKit and
 RoomCAD's application-independent response interchange, and a checked adiabatic reservoir
-with independent conformance. [`0.1.0-alpha.24`](https://github.com/emmettl/ContinuumKit/releases/tag/0.1.0-alpha.24)
+with independent conformance. [`0.1.0-alpha.25`](https://github.com/emmettl/ContinuumKit/releases/tag/0.1.0-alpha.25)
 is the current prerelease; earlier tags remain available for existing consumers.
 
-Alpha.24 publishes the scalar veneer material laws, exact normal contact flow,
+Alpha.25 publishes BombCAD's deterministic contact search (`ContactSearch`,
+`ContactSearchMetal`) after exact-tag verification on both physical Macs;
+[publication proof](docs/extraction/alpha25-release-verification.json). Alpha.24 publishes the scalar veneer material laws, exact normal contact flow,
 bounded restarted GMRES and three-law isotropic tetrahedral element after exact-tag
 verification. [Publication proof](docs/extraction/alpha24-release-verification.json)
 records the gate and external evidence. Edgerton adoption remains deferred; see the
@@ -26,8 +28,8 @@ records the gate and external evidence. Edgerton adoption remains deferred; see 
 | `Numerics` | Checked affine/origin fits, pivoted QR and bounded restarted GMRES | Swift standard library; Foundation/simd for Apple GMRES |
 | `SpectralTransforms` | Checked real FFT, sampled filtering and linear convolution | Accelerate |
 | `SolidMechanics` | Orthotropic elasticity, scalar veneer compression/damage, exact scalar contact and isotropic tetrahedral laws | Foundation, simd |
-| `ContactSearch` | Deterministic wrapped cell table for contact: entries, listing, search order and the still-pair skip (unreleased candidate) | Swift standard library |
-| `ContactSearchMetal` | The same table built and searched on the GPU, and its Metal functions for application kernels (unreleased candidate) | ContactSearch, Foundation, Metal |
+| `ContactSearch` | Deterministic wrapped cell table for contact: entries, listing, search order and the still-pair skip | Swift standard library |
+| `ContactSearchMetal` | The same table built and searched on the GPU, and its Metal functions for application kernels | ContactSearch, Foundation, Metal |
 | `BenchmarkSupport` | Versioned adiabatic/acoustic cases, analytic references and complete-field reports | Thermodynamics, Foundation |
 
 Requires Swift 6.4 and macOS 15 or later. CPU products do not depend on SceneRender.
@@ -64,7 +66,7 @@ The rendering test fails on missing Metal instead of returning early. Saved iden
 Consumers use an exact tag, add only needed products, and commit resolved dependencies:
 
 ```swift
-.package(url: "https://github.com/emmettl/ContinuumKit.git", exact: "0.1.0-alpha.24")
+.package(url: "https://github.com/emmettl/ContinuumKit.git", exact: "0.1.0-alpha.25")
 // In an application target's dependencies:
 .product(name: "SceneModel", package: "continuumkit")
 ```
