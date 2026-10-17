@@ -278,3 +278,10 @@ damage/plasticity, glue, panel assembly and contact are outside this extraction.
 The [bounded scalar laws](extraction/SCALAR_VENEER_MATERIALS.md) preserve Edgerton
 compression/damage arithmetic and independent fixtures. Application adoption is
 deferred; no panel/contact/fracture system or application dependency is moved.
+
+## Timber failure candidate — 17 October 2026
+
+[Timber failure](extraction/TIMBER_FAILURE.md) is a new orthotropic damage and crushing point
+for timber (fibre, splitting and rolling-shear modes with crack-band softening; plastic
+compression), proposed by BombCAD for its GPU shells and verified here against closed forms.
+It is not moved from an application, and no release or adoption is implied.
