@@ -88,4 +88,6 @@ coupling. The plastic strain stays on unloading.
 the peaks, separation energies and crushing plateau through the public API, and excludes
 Metal/UI/Accelerate linkage. `Scripts/check.sh` runs both.
 
-No release, and no application adoption, is implied by this candidate.
+Published in [alpha.26](https://github.com/emmettl/ContinuumKit/releases/tag/0.1.0-alpha.26)
+([proof](alpha26-release-verification.json)). BombCAD runs a single-precision copy in its GPU
+shells and beams and tests it against the released law.
