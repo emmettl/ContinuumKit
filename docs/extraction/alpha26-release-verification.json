@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "version": "0.1.0-alpha.26",
+  "tagObject": "c6a8d888f5c78639a9ba15aa4869dbc5f1ed63d2",
+  "commit": "c855423f07acd7c61cb90d1cba240f00dbbb2801",
+  "sourceTree": "d4017e94f01c426c6d149f2a201e993d3370ec03",
+  "publishedAt": "2026-10-17T15:44:27Z",
+  "release": "https://github.com/emmettl/ContinuumKit/releases/tag/0.1.0-alpha.26",
+  "workflow": "https://github.com/emmettl/ContinuumKit/actions/runs/39045536537",
+  "conclusion": "success",
+  "workflowJobs": {
+    "verify": "success",
+    "publish": "success"
+  },
+  "scope": "TimberFailure (SolidMechanics): orthotropic damage and crushing for timber, contributed by BombCAD",
+  "tests": 338,
+  "newTests": 7,
+  "optimizedExactVersionConsumers": 17,
+  "actualMetal": true,
+  "inheritedReferenceAndBenchmarkGates": "complete; passed",
+  "host": "Apple M4 physical Mac mini",
+  "command": "CONTINUUMKIT_REQUIRE_METAL=1 nice -n 15 bash Scripts/check-low-impact.sh 0.1.0-alpha.26",
+  "startedAt": "2026-10-17T15:33:05Z",
+  "finishedAt": "2026-10-17T15:44:19Z",
+  "secondHost": {
+    "host": "Apple M4 Max Mac Studio",
+    "command": "CONTINUUMKIT_REQUIRE_METAL=1 nice -n 15 bash Scripts/check.sh 0.1.0-alpha.26",
+    "checkout": "clean clone at the annotated tag",
+    "tests": 338,
+    "exitCode": 0,
+    "log": "/Volumes/StudioData/bombcad/continuumkit/alpha26/m4max-exact-tag-check.log",
+    "logSHA256": "95aaba8d01fe740605d680397f1045384551bd8da04de96f8fac92f3f85ca2b0"
+  },
+  "applicationAdoption": "BombCAD 1ed56b733d742523b8e770c4e895f6f5c8d39fe2 (main 8e028048): its shells' single-precision TimberFailure copy follows the released law within 3% of each strength along the grain, across it and in shear (TimberTests); blastbench digest (7 cases) bit-identical across the re-pin. Edgerton has not adopted it. No empirical timber accuracy claimed here (BombCAD's validation: the Ottawa shock-tube tests)."
+}

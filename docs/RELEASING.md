@@ -322,3 +322,22 @@ annotated tag points to `c3f5d0876f0fae685c73640b0c22b0b69dd666ec`.
 
 This is numerical verification of a search; it makes no claim about contact forces or physical
 accuracy. Earlier tags are unchanged.
+
+## Published timber failure
+
+[Alpha.26](https://github.com/emmettl/ContinuumKit/releases/tag/0.1.0-alpha.26) publishes
+`TimberFailure` in `SolidMechanics`: orthotropic damage (fibre, splitting, rolling shear, each
+softening over its fracture energy per band) and crushing for timber, contributed by BombCAD
+([#93](https://github.com/emmettl/ContinuumKit/pull/93)). The immutable annotated tag points to
+`c855423f07acd7c61cb90d1cba240f00dbbb2801`.
+
+- The [exact-tag physical-mini workflow](https://github.com/emmettl/ContinuumKit/actions/runs/39045536537)
+  passed before publication: 338 package tests (7 new), seventeen optimized fetched consumers
+  (one new, the timber law's), actual Metal work and every inherited reference and benchmark gate.
+- The M4 Max passed the same complete exact-tag scope from a clean clone.
+- [Publication proof](extraction/alpha26-release-verification.json) records the identities.
+- BombCAD adopted it: its shells' single-precision copy follows the released law within 3% of
+  each strength, and `blastbench digest` is bit-identical across the re-pin.
+
+This is verification against closed forms; empirical timber accuracy is BombCAD's to judge (its
+validation against the Ottawa shock-tube tests). Earlier tags are unchanged.
