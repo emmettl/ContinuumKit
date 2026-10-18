@@ -62,3 +62,31 @@ let package = Package(
   ],
   swiftLanguageModes: [.v6]
 )
+
+// Apple's simd and Accelerate modules do not exist on Linux. There, Sources/LinuxSIMD and
+// Sources/LinuxAccelerate stand in under the same module names, so the frozen SolidMechanics
+// and SpectralTransforms sources build unchanged. Apple platforms never build either.
+// Every target that imports simd or tests `canImport(simd)` depends on the stand-in, so that
+// test gives the same answer whatever order the targets are built in.
+#if os(Linux)
+  package.targets += [
+    .target(name: "simd", path: "Sources/LinuxSIMD"),
+    .target(name: "Accelerate", path: "Sources/LinuxAccelerate"),
+  ]
+  let simdUsers: Set<String> = [
+    "SceneModel", "SceneView", "GeometryImport", "CompressibleFlow", "CompressibleFlowTests",
+    "Numerics", "NumericsTests", "SolidMechanics", "SolidMechanicsTests",
+  ]
+  for target in package.targets {
+    if simdUsers.contains(target.name) { target.dependencies.append("simd") }
+    if target.name == "SpectralTransforms" { target.dependencies.append("Accelerate") }
+  }
+  // Metal and AppKit cannot build on Linux, so `swift test` there covers the CPU libraries only.
+  // CADFoundationsTests goes too, because it tests SceneRender alongside the portable targets.
+  let appleOnly: Set<String> = [
+    "SceneRender", "ContactSearchMetal", "ContactSearchMetalTests", "LinearAcousticsMetal",
+    "LinearAcousticsMetalTests", "CADFoundationsTests",
+  ]
+  package.targets.removeAll { appleOnly.contains($0.name) }
+  package.products.removeAll { appleOnly.contains($0.name) }
+#endif

@@ -1,4 +1,6 @@
-import CryptoKit
+#if canImport(CryptoKit)
+    import CryptoKit
+#endif
 import Foundation
 
 public enum ProjectFileError: LocalizedError {
@@ -111,6 +113,8 @@ public struct ProjectArchive: Sendable, Equatable {
         }
     }
 
+    // FileWrapper is part of Foundation on Apple platforms only; Linux uses the URL reader.
+    #if canImport(Darwin)
     /// Called by FileDocument; SwiftUI owns the coordinated save and replacement.
     public func fileWrapper() throws -> FileWrapper {
         try validate()
@@ -173,6 +177,7 @@ public struct ProjectArchive: Sendable, Equatable {
         try visit(fileWrapper, prefix: "", depth: 0)
         try self.init(allFiles: files)
     }
+    #endif
 
     /// Bounded URL reader: reject links and oversized files before loading their contents.
     public static func read(from url: URL) throws -> Self {
