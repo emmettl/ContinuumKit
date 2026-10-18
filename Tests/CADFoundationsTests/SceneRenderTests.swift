@@ -22,6 +22,13 @@ private final class WideController: OrbitControlling {
 
 @Suite("Scene rendering")
 struct SceneRenderTests {
+    @Test("The orbit view takes a click's focus but is no stop in the Tab loop")
+    @MainActor func keyViewLoop() {
+        let view = OrbitControlView(frame: CGRect(x: 0, y: 0, width: 64, height: 64), device: nil)
+        #expect(view.acceptsFirstResponder)
+        #expect(!view.canBecomeKeyView)
+    }
+
     @Test("Zoom keeps to 3–600 unless given limits, and a controller may set its own")
     @MainActor func zoomLimits() {
         var camera = OrbitCamera(target: .zero, distance: 500, azimuth: 0, elevation: 0.5)
