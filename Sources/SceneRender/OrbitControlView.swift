@@ -50,6 +50,9 @@ public final class OrbitControlView: MTKView {
     public weak var controller: (any OrbitControlling)?
 
     public override var acceptsFirstResponder: Bool { true }
+    /// Out of the window's Tab loop: the view takes no keys, so a stop on it would show nothing
+    /// focused. A click still makes it first responder, ending a field's editing.
+    public override var canBecomeKeyView: Bool { false }
 
     private var dragged = false
     /// Whether the controller took the current drag.
