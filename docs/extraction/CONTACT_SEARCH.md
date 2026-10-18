@@ -10,8 +10,8 @@ structure contact.
 
 Pair forces, which pairs to exclude (BombCAD's lattice neighbours), buried or retired points,
 rubble and every other contact policy stay in the applications. Edgerton is the intended second
-consumer: Codex reviews and owns its adoption. Neither application has adopted this candidate,
-and no release includes it.
+consumer: Codex reviews and owns its adoption. Alpha.25 publishes it, and BombCAD adopted it
+with its contact hashes bit-identical; Edgerton has not adopted it yet.
 
 ## Source and attribution
 

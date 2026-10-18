@@ -566,3 +566,51 @@ floating arithmetic; RoomCAD owns positive-path attenuation and stationary point
 Independent face-plane/precision controls precede full package and application gates.
 IFC metadata/conversion, mesh acceleration and remote scheduling remain separate
 extractions requiring concrete consumers and their own acceptance policies.
+
+The Double box query above was published in alpha.23.
+
+## Published since alpha.19
+
+Updated 18 October 2026. Each release's evidence is in its publication proof and in the
+[release procedure](docs/RELEASING.md); this list only records where the roadmap stands.
+
+- Alpha.20 (11 October) publishes `Numerics.OriginLeastSquares`, exact through-origin
+  fitting. [Proof](docs/extraction/alpha20-release-verification.json).
+- Alpha.21 (11 October) lets the controller set the orbit view's zoom limits
+  ([#77](https://github.com/emmettl/ContinuumKit/pull/77)). It adds no numerical model.
+- Alpha.22 (13 October) publishes `SolidMechanics.OrthotropicPlaneStress`, small-strain
+  orthotropic elasticity. [Proof](docs/extraction/alpha22-release-verification.json).
+- Alpha.23 (14 October) publishes the Double closed-box query,
+  `SceneModel.BoxQuery.intersection`. [Proof](docs/extraction/alpha23-release-verification.json).
+- Alpha.24 (14 October) publishes four Edgerton primitives: scalar veneer compression and
+  damage, exact normal contact flow, bounded restarted GMRES and the isotropic tetrahedral
+  element. [Proof](docs/extraction/alpha24-release-verification.json).
+- Alpha.25 (15 October) publishes `ContactSearch` and `ContactSearchMetal`, BombCAD's contact
+  broad phase. [Proof](docs/extraction/alpha25-release-verification.json).
+- Alpha.26 (17 October) publishes `SolidMechanics.TimberFailure`, contributed by BombCAD.
+  [Proof](docs/extraction/alpha26-release-verification.json).
+- Alpha.27 was tagged but never published: its release runs failed on the Mac mini's new
+  Homebrew Python.
+- Alpha.28 (18 October) keeps `SceneRender`'s orbit view out of the window's Tab loop and runs
+  the release gate on the system's Python. [Proof](docs/extraction/alpha28-release-verification.json).
+
+### Adoption
+
+- BombCAD pins alpha.28. It uses `PivotedQR` for its pressure fit and conserved gas
+  reconstruction, following the [adoption plan](docs/extraction/BOMBCAD_QR_ADOPTION_PLAN.md),
+  `ContactSearchMetal` for contact, and a single-precision copy of `TimberFailure` in its
+  shell shader, which its tests check against the shared law. The
+  [weighted QR plan](docs/extraction/WEIGHTED_QR_PLAN.md) ended in `PivotedQR`, for which the caller
+  weights the rows before factoring, so that plan has no separate solver left to deliver.
+- RoomCAD's adoption of the Double box query is its own task (RoomCAD #39).
+- When alpha.24 was published, Edgerton was still pinned to alpha.22. Its adoption of the
+  alpha.24 primitives is deferred; see the
+  [handoff](docs/extraction/EDGERTON_ADOPTION_HANDOFF.md). Until it adopts, those four
+  primitives have no application consumer.
+
+### Open
+
+- Edgerton's adoption of the alpha.24 primitives, and the second consumer for contact search.
+- The model gaps listed above remain open: heterogeneous and 2D waves, absorbing masked walls,
+  isolated oblique pulses, changing coupled mechanics, IFC metadata, mesh acceleration and
+  remote scheduling.
