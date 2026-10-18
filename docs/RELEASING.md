@@ -341,3 +341,28 @@ softening over its fracture energy per band) and crushing for timber, contribute
 
 This is verification against closed forms; empirical timber accuracy is BombCAD's to judge (its
 validation against the Ottawa shock-tube tests). Earlier tags are unchanged.
+
+## Published orbit view key loop
+
+[Alpha.28](https://github.com/emmettl/ContinuumKit/releases/tag/0.1.0-alpha.28) keeps
+`SceneRender`'s `OrbitControlView` out of the window's Tab loop: it takes no keys, so as a key view
+it was an empty stop, found by BombCAD's real-screen review
+([#94](https://github.com/emmettl/ContinuumKit/pull/94)). A click still makes it first responder.
+The immutable annotated tag points to `872b204d377a53f3d4eaf5d48cf5f847e5867897`.
+
+- Alpha.27 points to the same change without the gate's fixes, and was never published. Its three
+  exact-tag runs met Homebrew's Python 3.15, first on the Mac mini's PATH from 18 October. A
+  loaded script's bytecode dirtied the checkout, and compensated float sums failed the weighted QR
+  audit's 64-ulp predictions. The workflows write no bytecode and put `/usr/bin` first
+  ([#95](https://github.com/emmettl/ContinuumKit/pull/95),
+  [#96](https://github.com/emmettl/ContinuumKit/pull/96)). `Scripts/check-low-impact.sh`, which
+  puts Homebrew first for `rg`, now links `python3` to the system's
+  ([#97](https://github.com/emmettl/ContinuumKit/pull/97)).
+- The [exact-tag physical-mini workflow](https://github.com/emmettl/ContinuumKit/actions/runs/39161367512)
+  passed before publication: 339 package tests (1 new), the optimized fetched consumers, actual
+  Metal work and every inherited reference and benchmark gate.
+- The M4 Max passed the same complete exact-tag scope from a clean clone.
+- [Publication proof](extraction/alpha28-release-verification.json) records the identities.
+- BombCAD adopted it (`023c84c7`): its full check passes on the re-pin.
+
+No numerical model changed. Earlier tags are unchanged.

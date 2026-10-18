@@ -2,10 +2,13 @@
 
 Shared Swift foundations for RoomCAD, BombCAD and Edgerton. The package contains the existing CAD foundations from BombCAD's SimulationKit and
 RoomCAD's application-independent response interchange, and a checked adiabatic reservoir
-with independent conformance. [`0.1.0-alpha.26`](https://github.com/emmettl/ContinuumKit/releases/tag/0.1.0-alpha.26)
+with independent conformance. [`0.1.0-alpha.28`](https://github.com/emmettl/ContinuumKit/releases/tag/0.1.0-alpha.28)
 is the current prerelease; earlier tags remain available for existing consumers.
 
-Alpha.26 publishes `TimberFailure`, orthotropic damage and crushing for timber contributed by
+Alpha.28 keeps `SceneRender`'s orbit view out of the window's Tab loop, and runs the release gate
+on the system's Python, after exact-tag verification on both physical Macs;
+[publication proof](docs/extraction/alpha28-release-verification.json). Alpha.27 was tagged but
+never published. Alpha.26 publishes `TimberFailure`, orthotropic damage and crushing for timber contributed by
 BombCAD, after exact-tag verification on both physical Macs;
 [publication proof](docs/extraction/alpha26-release-verification.json). Alpha.25 publishes BombCAD's deterministic contact search (`ContactSearch`,
 `ContactSearchMetal`) after exact-tag verification on both physical Macs;
@@ -68,7 +71,7 @@ The rendering test fails on missing Metal instead of returning early. Saved iden
 Consumers use an exact tag, add only needed products, and commit resolved dependencies:
 
 ```swift
-.package(url: "https://github.com/emmettl/ContinuumKit.git", exact: "0.1.0-alpha.26")
+.package(url: "https://github.com/emmettl/ContinuumKit.git", exact: "0.1.0-alpha.28")
 // In an application target's dependencies:
 .product(name: "SceneModel", package: "continuumkit")
 ```
