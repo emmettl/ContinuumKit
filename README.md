@@ -48,10 +48,12 @@ From a clean committed candidate:
 CONTINUUMKIT_REQUIRE_METAL=1 bash Scripts/check.sh
 ```
 
-The complete package gate builds and tests all fourteen public libraries, then verifies
-eleven clean optimized Git consumers: all-library CAD/model smoke, CPU waves, resident
-Metal waves, ideal-gas wall reference, prescribed gas packets, paired Euler flux, real FFT, affine fitting, pivoted QR, exact
-through-origin fitting and orthotropic elasticity. CPU-only consumers
+The complete package gate builds and tests all sixteen public libraries, then verifies
+seventeen clean optimized Git consumers: all-library CAD/model smoke, CPU waves, resident
+Metal waves, ideal-gas wall reference, prescribed gas packets, paired Euler flux, real FFT,
+affine fitting, pivoted QR, exact through-origin fitting, orthotropic elasticity, isotropic
+tetrahedron, restarted GMRES, scalar veneer materials, timber failure, normal contact flow
+and contact search (`Scripts/check.sh`). CPU-only consumers
 reject Metal/UI framework linkage. Complete reference/source/geometry reports retain
 physical gaps separately from numerical conformance. CI runs on the physical Mac mini;
 see [CI operations](docs/CI.md). The committed candidate is fetched through Git, with
