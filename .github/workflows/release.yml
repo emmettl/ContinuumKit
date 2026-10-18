@@ -31,6 +31,11 @@ jobs:
     runs-on: [self-hosted, macOS, ARM64, metal, continuumkit]
     timeout-minutes: 30
     steps:
+      # The evidence was produced and is audited with the system Python (3.9). Homebrew's 3.15,
+      # on the Mac mini since 18 October 2026, sums floats with compensation and fails the
+      # weighted QR audit's 64-ulp predictions; keep python3 the system's.
+      - name: Use the system Python
+        run: echo /usr/bin >> "$GITHUB_PATH"
       - name: Validate version
         env:
           VERSION: ${{ inputs.version }}
@@ -109,6 +114,11 @@ jobs:
     permissions:
       contents: write
     steps:
+      # The evidence was produced and is audited with the system Python (3.9). Homebrew's 3.15,
+      # on the Mac mini since 18 October 2026, sums floats with compensation and fails the
+      # weighted QR audit's 64-ulp predictions; keep python3 the system's.
+      - name: Use the system Python
+        run: echo /usr/bin >> "$GITHUB_PATH"
       - name: Create release for verified tag
         env:
           GH_TOKEN: ${{ github.token }}
