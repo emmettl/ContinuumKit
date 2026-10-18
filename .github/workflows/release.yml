@@ -20,6 +20,12 @@ concurrency:
   group: continuumkit-metal
   cancel-in-progress: false
 
+# The checks load some scripts as modules, and a Python that writes bytecode (Homebrew's 3.15 on
+# the runner since 18 October 2026) leaves Scripts/__pycache__ in the checkout, which the clean
+# tree tests then refuse.
+env:
+  PYTHONDONTWRITEBYTECODE: "1"
+
 jobs:
   verify:
     runs-on: [self-hosted, macOS, ARM64, metal, continuumkit]
