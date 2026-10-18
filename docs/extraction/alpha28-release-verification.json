@@ -1,0 +1,45 @@
+{
+  "schemaVersion": 1,
+  "version": "0.1.0-alpha.28",
+  "tagObject": "72ea9f88dc3b3fd49b5afb3073a3d45d5a46c054",
+  "commit": "872b204d377a53f3d4eaf5d48cf5f847e5867897",
+  "sourceTree": "9634be8445d3827756f22716de9532f82cf3c87f",
+  "publishedAt": "2026-10-18T20:31:05Z",
+  "release": "https://github.com/emmettl/ContinuumKit/releases/tag/0.1.0-alpha.28",
+  "workflow": "https://github.com/emmettl/ContinuumKit/actions/runs/39161367512",
+  "conclusion": "success",
+  "workflowJobs": {
+    "verify": "success",
+    "publish": "success"
+  },
+  "scope": "SceneRender: OrbitControlView.canBecomeKeyView false (#94); release gate on the system Python (#95-#97)",
+  "tests": 339,
+  "newTests": 1,
+  "actualMetal": true,
+  "inheritedReferenceAndBenchmarkGates": "complete; passed",
+  "host": "Apple M4 physical Mac mini",
+  "command": "CONTINUUMKIT_REQUIRE_METAL=1 nice -n 15 bash Scripts/check-low-impact.sh 0.1.0-alpha.28",
+  "startedAt": "2026-10-18T20:17:23Z",
+  "finishedAt": "2026-10-18T20:30:58Z",
+  "unpublishedPredecessor": {
+    "version": "0.1.0-alpha.27",
+    "tagObject": "2042427f22b91de524fa2b525175b7a66a14d959",
+    "commit": "bc9a8820818dad54b53c146e2ccfa7ae09bc66bd",
+    "failedRuns": [
+      "https://github.com/emmettl/ContinuumKit/actions/runs/39151940182",
+      "https://github.com/emmettl/ContinuumKit/actions/runs/39152932884",
+      "https://github.com/emmettl/ContinuumKit/actions/runs/39154435906"
+    ],
+    "cause": "Homebrew Python 3.15 first on the runner's PATH: bytecode in the checkout, then the weighted QR audit's predictions"
+  },
+  "secondHost": {
+    "host": "Apple M4 Max Mac Studio",
+    "command": "CONTINUUMKIT_REQUIRE_METAL=1 nice -n 15 bash Scripts/check.sh 0.1.0-alpha.28",
+    "checkout": "clean clone at the annotated tag",
+    "tests": 339,
+    "exitCode": 0,
+    "log": "/Volumes/StudioData/bombcad/continuumkit/alpha28/m4max-exact-tag-check.log",
+    "logSHA256": "c794a68a0a8f9a0a7a660a59d94e455d6140652039c1fad328bb80dc282a9df4"
+  },
+  "applicationAdoption": "BombCAD 023c84c7d33ba034f6a78310f28a2167c43cfe08 (main): pinned exactly; its full check (1205 core and 353 app tests) passes on the re-pin. The change is the orbit view's place in the Tab loop; no numerical code changed. Edgerton has not adopted it."
+}
