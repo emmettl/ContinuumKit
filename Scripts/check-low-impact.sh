@@ -4,6 +4,15 @@ set -euo pipefail
 task_root=$(cd "$(dirname "$0")/.." && pwd)
 cd "$task_root"
 export PATH="/opt/homebrew/bin:/usr/local/bin:$PATH"
+# Homebrew's tools first (rg), but the system's Python, which the evidence was made and is audited
+# with: Homebrew's 3.15 sums floats with compensation and leaves the weighted QR audit's 64-ulp
+# predictions (alpha.27's release runs, 18 October 2026).
+if test -x /usr/bin/python3; then
+    task_python=$(mktemp -d "${TMPDIR:-/tmp}/continuumkit-python.XXXXXX")
+    trap 'rm -rf "$task_python"' EXIT
+    ln -s /usr/bin/python3 "$task_python/python3"
+    export PATH="$task_python:$PATH"
+fi
 for task_tool in swift python3 rg otool git; do command -v "$task_tool" >/dev/null; done
 swift() {
     case "${1:-}" in
