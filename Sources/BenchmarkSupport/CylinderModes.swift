@@ -1,4 +1,9 @@
-import Darwin
+// Bessel functions come from the C library: Darwin on Apple platforms, Glibc on Linux.
+#if canImport(Darwin)
+  import Darwin
+#else
+  import Glibc
+#endif
 import Foundation
 
 /// A Neumann radial mode with nonzero axial variation; pressures in Pa and velocities in m/s.

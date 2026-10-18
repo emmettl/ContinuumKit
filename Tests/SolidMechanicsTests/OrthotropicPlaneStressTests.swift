@@ -1,6 +1,11 @@
 import Foundation
 import simd
-import Darwin
+// Maths functions come from the C library: Darwin on Apple platforms, Glibc on Linux.
+#if canImport(Darwin)
+  import Darwin
+#else
+  import Glibc
+#endif
 
 private enum StudyError: Error { case failed(String) }
 
