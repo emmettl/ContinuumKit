@@ -1,0 +1,34 @@
+name: Linux
+
+# Builds the CPU libraries and runs their tests on Linux. Metal and AppKit cannot build there, so
+# Package.swift drops those targets on Linux, and the Mac mini's Check workflow stays the reference.
+# This job runs on a GitHub-hosted runner, so pull requests may run it.
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: linux-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    container:
+      image: swift:6.4.1-noble@sha256:19cbe56bdaec1918f7cf5fdeba42b9bd55bdd8a6149c9990d0e0e3a89a127d63
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Toolchain
+        run: swift --version
+      - name: Build
+        run: swift build --build-tests -Xswiftc -warnings-as-errors
+      - name: Test
+        run: swift test --skip-build

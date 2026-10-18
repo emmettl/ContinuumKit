@@ -26,12 +26,22 @@ DocumentKit is not frozen, so it is changed directly:
 - `ProjectArchive.swift` imports CryptoKit only where it exists. The new `SHA256Fallback.swift` provides SHA-256 (FIPS 180-4) elsewhere.
 - The `FileWrapper` bridge (`fileWrapper()` and `init(fileWrapper:)`) is compiled on Apple platforms only, because Linux Foundation has no `FileWrapper`. On Linux, DocumentKit keeps validation, hashing and the URL reader `read(from:)`, but it has no way to write a project package.
 
+### Commit 3: Linux CI
+
+- **New workflow:** `.github/workflows/linux.yml` builds and tests on GitHub's hosted `ubuntu-24.04` runner, inside the official `swift:6.4.1-noble` image pinned by digest.
+  - It runs on pull requests, on pushes to main and by hand.
+  - It runs `swift build --build-tests -Xswiftc -warnings-as-errors`, then `swift test --skip-build`.
+  - The existing Check workflow stays on the self-hosted Mac mini, which never runs unreviewed pull-request code.
+- **Manifest:** on Linux, `Package.swift` now drops the targets that cannot build there: SceneRender, ContactSearchMetal, LinearAcousticsMetal, their tests, and CADFoundationsTests. Plain `swift test` therefore works on Linux without a trimmed copy of the manifest.
+
 ## Test results
+
+- Both of the workflow's commands were run locally in this container with Swift 6.4. The build finished with no warnings, and 258 tests passed. The workflow itself had not yet run on GitHub when this report was written.
 
 All runs used Swift 6.4 (swift-6.4-RELEASE) on x86_64 Linux.
 
 - `swift build --target` succeeds for SolidMechanics, SpectralTransforms, DocumentKit, BenchmarkSupport and `continuumbench` in the real package.
-- `swift test` was run in a scratch copy of this commit. The copy appends lines to the manifest that remove the targets that cannot build on Linux: SceneRender, ContactSearchMetal, LinearAcousticsMetal, their tests, and CADFoundationsTests, which mixes SceneRender into its tests. **258 tests passed with no failures.** By target: BenchmarkSupportTests 93, LinearAcousticsTests 46, CompressibleFlowTests 39, NumericsTests 25 (including the 4 GMRES tests), SolidMechanicsTests 17, ImpulseResponseKitTests 12, SpectralTransformsTests 10, ContactSearchTests 9 and ThermodynamicsTests 7. Main gave 88 tests on Linux, and commit 1 alone gave 227.
+- For commit 2, `swift test` was run in a scratch copy whose manifest removed the same targets. Commit 3 now removes them on Linux itself. **258 tests passed with no failures.** By target: BenchmarkSupportTests 93, LinearAcousticsTests 46, CompressibleFlowTests 39, NumericsTests 25 (including the 4 GMRES tests), SolidMechanicsTests 17, ImpulseResponseKitTests 12, SpectralTransformsTests 10, ContactSearchTests 9 and ThermodynamicsTests 7. Main gave 88 tests on Linux, and commit 1 alone gave 227.
 - The RealFFTConsumer fixture was built and run on Linux against this commit, following `Scripts/check-real-fft-consumer.sh` by hand. The script's `sysctl` and `otool` steps are macOS-only, so `environment.json` was written with the same fields from `/proc/cpuinfo`. `verify-real-fft-output.py` passed: 437 FFT cases and 4,953 output values agree with its independent scalar DFT, inverse, Parseval, gain, circular-filtering and direct-convolution references. `test-real-fft-gate.py` passed its 13 corruption controls.
 - DocumentKit's own tests are in CADFoundationsTests, which cannot build on Linux. Instead, `ProjectManifest.Asset` digests from the fallback were compared with Python's `hashlib.sha256` for 13 input lengths from 0 to 1 MiB, covering every padding boundary. All 13 matched.
 - These verifiers pass: `verify-real-fft-source.py`, `verify-isotropic-tet-source.py`, `verify-orthotropic-source.py`, `verify-scalar-material-source.py`, `verify-gmres-source.py`, `verify-normal-contact-source.py` and `test-inventory.py`.
