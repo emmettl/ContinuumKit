@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 1,
+  "version": "0.1.0-alpha.29",
+  "tagObject": "cfdc75da8fdb69890f28bf01b6e41d600af3b0a3",
+  "commit": "eae6589985e5ab8e096d595f352d36447e4573eb",
+  "sourceTree": "f01093e4da50ed0256182326efcfd3067ae50efe",
+  "publishedAt": "2026-10-19T00:01:55Z",
+  "prerelease": true,
+  "release": "https://github.com/emmettl/ContinuumKit/releases/tag/0.1.0-alpha.29",
+  "workflow": "https://github.com/emmettl/ContinuumKit/actions/runs/39178117878",
+  "conclusion": "success",
+  "workflowJobs": {
+    "verify": "success",
+    "publish": "success"
+  },
+  "scope": "CPU libraries build on Linux: Linux-only simd and Accelerate stand-ins, DocumentKit SHA-256 fallback, Metal/UI targets dropped on Linux, Linux CI workflow (#101); Glibc import guards (#100); roadmap and README counts (#99)",
+  "tests": 339,
+  "newTests": 0,
+  "actualMetal": true,
+  "inheritedReferenceAndBenchmarkGates": "complete; passed",
+  "host": "Apple M4 physical Mac mini",
+  "command": "CONTINUUMKIT_REQUIRE_METAL=1 nice -n 15 bash Scripts/check-low-impact.sh 0.1.0-alpha.29",
+  "startedAt": "2026-10-18T23:49:48Z",
+  "finishedAt": "2026-10-19T00:01:24Z",
+  "linux": {
+    "workflow": "https://github.com/emmettl/ContinuumKit/actions/runs/39177043683",
+    "conclusion": "success",
+    "host": "GitHub-hosted ubuntu-24.04, swift:6.4.1-noble pinned by digest",
+    "tests": 258,
+    "scope": "swift build --build-tests -Xswiftc -warnings-as-errors, then swift test --skip-build; libraries without Metal only"
+  },
+  "secondHost": {
+    "host": "Apple M4 Max Mac Studio",
+    "command": "CONTINUUMKIT_REQUIRE_METAL=1 ~/.local/bin/gpu-slot --mem 4 nice -n 15 bash Scripts/check.sh 0.1.0-alpha.29",
+    "checkout": "clean clone at the annotated tag",
+    "queuedAt": "2026-10-19T00:03:09Z",
+    "finishedAt": "2026-10-19T01:00:36Z",
+    "tests": 339,
+    "exitCode": 0,
+    "log": "/Volumes/StudioData/bombcad/continuumkit/alpha29/m4max-exact-tag-check.log",
+    "logSHA256": "523987be649644035ab33da766e4a6cbcb7f3b859d64ba26cf42042e0a7967bc"
+  },
+  "applicationAdoption": "BombCAD still pins 0.1.0-alpha.28 (872b204d, main 8a92799c). Adoption of alpha.29 is deferred until after BombCAD 0.5.1, when BombCAD splits out a CPU-only module that will use the Linux builds. Edgerton has not adopted it."
+}

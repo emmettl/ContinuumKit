@@ -366,3 +366,28 @@ The immutable annotated tag points to `872b204d377a53f3d4eaf5d48cf5f847e5867897`
 - BombCAD adopted it (`023c84c7`): its full check passes on the re-pin.
 
 No numerical model changed. Earlier tags are unchanged.
+
+## Published Linux builds of the CPU libraries
+
+[Alpha.29](https://github.com/emmettl/ContinuumKit/releases/tag/0.1.0-alpha.29) builds every
+library that does not use Metal on Linux
+([#100](https://github.com/emmettl/ContinuumKit/pull/100),
+[#101](https://github.com/emmettl/ContinuumKit/pull/101)). On Linux only, the manifest adds
+stand-in `simd` and `Accelerate` modules under the names the frozen sources import, DocumentKit
+gains a SHA-256 fallback and reads but cannot write projects, and the Metal and UI targets are
+left out. A [Linux workflow](https://github.com/emmettl/ContinuumKit/actions/runs/39177043683) runs
+258 tests on GitHub's hosted Ubuntu runner. Frozen sources are byte-for-byte unchanged and Apple
+builds take none of the Linux paths. The immutable annotated tag points to
+`eae6589985e5ab8e096d595f352d36447e4573eb`.
+
+- The [exact-tag physical-mini workflow](https://github.com/emmettl/ContinuumKit/actions/runs/39178117878)
+  passed before publication: 339 package tests (none new), the optimized fetched consumers, actual
+  Metal work and every inherited reference and benchmark gate.
+- The M4 Max passed the same complete exact-tag scope from a clean clone: 339 package tests.
+- [Publication proof](extraction/alpha29-release-verification.json) records the identities.
+- BombCAD still pins alpha.28. It adopts alpha.29 after its 0.5.1 release, when it splits out a
+  CPU-only module that will use the Linux builds.
+
+No numerical model changed on Apple platforms. On Linux, results come from the stand-ins and may
+differ from Apple's simd and vDSP in the last bits; a macOS run remains the reference. Earlier tags
+are unchanged.
