@@ -391,3 +391,25 @@ builds take none of the Linux paths. The immutable annotated tag points to
 No numerical model changed on Apple platforms. On Linux, results come from the stand-ins and may
 differ from Apple's simd and vDSP in the last bits; a macOS run remains the reference. Earlier tags
 are unchanged.
+
+## An Apple-exact Linux simd stand-in
+
+[Alpha.30](https://github.com/emmettl/ContinuumKit/releases/tag/0.1.0-alpha.30) makes the Linux
+`simd` stand-in follow the operation order and fusing of Apple's simd on arm64
+([#103](https://github.com/emmettl/ContinuumKit/pull/103)), taking its arithmetic from BombCAD's
+BlastModel shim. `SIMDParityTests` digests 70 functions over fixed inputs against one record: on
+Linux it checks the stand-in, on the Mac Apple's simd, so Linux gives the Mac's results bit for
+bit, except the 3 × 3 matrix inverse and the sines, cosines and arc tangents of quaternion angles,
+which are printed, not failed. The immutable annotated tag points to
+`2f14a4a23341452f8e4e3a925dcf011f18516078`.
+
+- The [exact-tag physical-mini workflow](https://github.com/emmettl/ContinuumKit/actions/runs/39307325370)
+  passed before publication: 341 package tests (2 new), the optimized fetched consumers, actual
+  Metal work and every inherited reference and benchmark gate.
+- The [Linux workflow](https://github.com/emmettl/ContinuumKit/actions/runs/39296595417) ran 260 tests.
+- The M4 Max passed the same complete exact-tag scope from a clean clone: 341 package tests.
+- [Publication proof](extraction/alpha30-release-verification.json) records the identities.
+- BombCAD adopted it (`9f57c3d2`) and dropped its own shim: its full check passes on the re-pin,
+  and its Linux CI passes 748 tests on the stand-in.
+
+No numerical model changed on Apple platforms. Earlier tags are unchanged.
