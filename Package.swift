@@ -54,6 +54,8 @@ let package = Package(
     .testTarget(name: "LinearAcousticsTests", dependencies: ["LinearAcoustics", "BenchmarkSupport"]),
     .testTarget(name: "ThermodynamicsTests", dependencies: ["Thermodynamics"]),
     .testTarget(name: "BenchmarkSupportTests", dependencies: ["BenchmarkSupport"]),
+    // Apple's simd on Apple platforms, Sources/LinuxSIMD on Linux, checked against one record.
+    .testTarget(name: "SIMDParityTests"),
     .testTarget(name: "ImpulseResponseKitTests", dependencies: ["ImpulseResponseKit"]),
     .testTarget(
       name: "CADFoundationsTests",
@@ -75,7 +77,7 @@ let package = Package(
   ]
   let simdUsers: Set<String> = [
     "SceneModel", "SceneView", "GeometryImport", "CompressibleFlow", "CompressibleFlowTests",
-    "Numerics", "NumericsTests", "SolidMechanics", "SolidMechanicsTests",
+    "Numerics", "NumericsTests", "SolidMechanics", "SolidMechanicsTests", "SIMDParityTests",
   ]
   for target in package.targets {
     if simdUsers.contains(target.name) { target.dependencies.append("simd") }

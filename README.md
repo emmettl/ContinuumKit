@@ -67,6 +67,14 @@ Each check script writes its evidence to the folder it is given (an argument or 
 under `CONTINUUMKIT_OUTPUT_ROOT` (default `TMPDIR`) and removes it on exit, a few hundred
 megabytes a run; `CONTINUUMKIT_KEEP_OUTPUT=1` keeps it and prints where.
 
+On Linux, the manifest builds the CPU libraries against stand-in `simd` and `Accelerate` modules
+(`Sources/LinuxSIMD`, `Sources/LinuxAccelerate`), and the [Linux workflow](.github/workflows/linux.yml)
+tests them on GitHub's hosted runner. The simd stand-in follows Apple's operation order and
+fusing. `SIMDParityTests` checks digests of its results against one record, and Apple's simd
+matches that record on the Mac, so Linux gives the Mac's results bit for bit. The exceptions are
+the 3 × 3 matrix inverse and the sines, cosines and arc tangents of quaternion angles. The
+Accelerate stand-in's FFT may still differ from vDSP in the last bits.
+
 The rendering test fails on missing Metal instead of returning early. Saved identifiers, including
 `dev.simulationkit.project`, are retained. See [CAD provenance](docs/extraction/CAD_FOUNDATIONS.md) and
 [response provenance](docs/extraction/IMPULSE_RESPONSE.md).
