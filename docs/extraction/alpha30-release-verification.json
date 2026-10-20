@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 1,
+  "version": "0.1.0-alpha.30",
+  "tagObject": "1b7d101af26f207c724c45cae27f306f1ba43f19",
+  "commit": "2f14a4a23341452f8e4e3a925dcf011f18516078",
+  "sourceTree": "cab21fd4dfd5d3df39fbc8bf0efcaf45a8eea57b",
+  "publishedAt": "2026-10-19T19:11:00Z",
+  "prerelease": true,
+  "release": "https://github.com/emmettl/ContinuumKit/releases/tag/0.1.0-alpha.30",
+  "workflow": "https://github.com/emmettl/ContinuumKit/actions/runs/39307325370",
+  "conclusion": "success",
+  "workflowJobs": {
+    "verify": "success",
+    "publish": "success"
+  },
+  "scope": "The Linux simd stand-in follows Apple's operation order and fusing, from BombCAD's BlastModel shim, with SIMDParityTests digesting 70 functions against one record (#103)",
+  "tests": 341,
+  "newTests": 2,
+  "actualMetal": true,
+  "inheritedReferenceAndBenchmarkGates": "complete; passed",
+  "host": "Apple M4 physical Mac mini",
+  "command": "CONTINUUMKIT_REQUIRE_METAL=1 nice -n 15 bash Scripts/check-low-impact.sh 0.1.0-alpha.30",
+  "startedAt": "2026-10-19T19:00:35Z",
+  "finishedAt": "2026-10-19T19:10:55Z",
+  "linux": {
+    "workflow": "https://github.com/emmettl/ContinuumKit/actions/runs/39296595417",
+    "conclusion": "success",
+    "host": "GitHub-hosted ubuntu-24.04, swift:6.4.1-noble pinned by digest",
+    "tests": 260,
+    "scope": "swift build --build-tests -Xswiftc -warnings-as-errors, then swift test --skip-build; libraries without Metal only"
+  },
+  "secondHost": {
+    "host": "Apple M4 Max Mac Studio",
+    "command": "CONTINUUMKIT_REQUIRE_METAL=1 ~/.local/bin/gpu-slot --mem 4 nice -n 15 bash Scripts/check.sh 0.1.0-alpha.30",
+    "checkout": "clean clone at the annotated tag",
+    "queuedAt": "2026-10-19T23:33:48Z",
+    "finishedAt": "2026-10-19T23:58:03Z",
+    "tests": 341,
+    "exitCode": 0,
+    "log": "/Volumes/StudioData/bombcad/continuumkit/alpha30/m4max-exact-tag-check.log",
+    "logSHA256": "b85dcd18c03c1dec849bc90ebad0cb6e230e8b5a0c86caa2060f0729da460f8d"
+  },
+  "applicationAdoption": "BombCAD adopted alpha.30 in 9f57c3d2 and dropped its own Linux simd shim: its full check passed on the Studio, and its Linux CI (run 39342258566) passed 748 tests on the stand-in. Edgerton has not adopted it."
+}
